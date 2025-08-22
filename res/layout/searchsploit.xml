@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/searchSploit_searchbar"
-            android:hint="Filter exploits"
+            android:hint="过滤漏洞利用"
             android:queryHint="@string/searchsploit_searchbar"
             android:iconifiedByDefault="false"
             android:baselineAligned="false"
@@ -26,12 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_listItem_LR"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="numex"
+            android:text="数量"
             android:id="@+id/numex"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +53,7 @@
             android:id="@+id/exdb_platform_spinner"
             android:layout_gravity="center_horizontal"
             android:layout_toEndOf="@+id/textView17" />
+
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Platform"
+            android:text="平台"
             android:id="@+id/textView17"
             android:layout_alignParentStart="true"
             android:layout_alignBottom="@+id/exdb_platform_spinner"
@@ -76,20 +77,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Type"
+            android:text="类型"
             android:layout_alignTop="@+id/exdb_type_spinner"
             android:layout_alignParentStart="true"
             android:layout_alignBottom="@+id/exdb_type_spinner"
             android:layout_toStartOf="@+id/exdb_type_spinner"
             android:gravity="center_vertical" />
     </RelativeLayout>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LOAD DB (1st run only)"
+        android:text="加载数据库（首次运行）"
         android:id="@+id/serchsploit_loadDB"
         android:textAlignment="center" />
-
 
     <ListView
         android:layout_width="fill_parent"

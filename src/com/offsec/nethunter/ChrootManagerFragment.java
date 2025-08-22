@@ -104,62 +104,62 @@ public class ChrootManagerFragment extends Fragment {
         if (activity != null) {
             sharedPreferences = activity.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
         } else {
-            throw new IllegalStateException("Activity is null. Cannot initialize sharedPreferences.");
+            throw new IllegalStateException("Activity 为空. 无法初始化 sharedPreferences. ");
         }
 
         baseChrootPathTextView = rootView.findViewById(R.id.f_chrootmanager_base_path_tv);
         if (baseChrootPathTextView == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_base_path_tv not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_base_path_tv 的视图. ");
         }
 
         mountStatsTextView = rootView.findViewById(R.id.f_chrootmanager_mountresult_tv);
         if (mountStatsTextView == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_mountresult_tv not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_mountresult_tv 的视图. ");
         }
 
         resultViewerLoggerTextView = rootView.findViewById(R.id.f_chrootmanager_viewlogger);
         if (resultViewerLoggerTextView == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_viewlogger not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_viewlogger 的视图. ");
         }
 
         kaliFolderTextView = rootView.findViewById(R.id.f_chrootmanager_kalifolder_tv);
         if (kaliFolderTextView == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_kalifolder_tv not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_kalifolder_tv 的视图. ");
         }
 
         kaliFolderEditButton = rootView.findViewById(R.id.f_chrootmanager_edit_btn);
         if (kaliFolderEditButton == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_edit_btn not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_edit_btn 的视图. ");
         }
 
         mountChrootButton = rootView.findViewById(R.id.f_chrootmanager_mount_btn);
         if (mountChrootButton == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_mount_btn not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_mount_btn 的视图. ");
         }
 
         unmountChrootButton = rootView.findViewById(R.id.f_chrootmanager_unmount_btn);
         if (unmountChrootButton == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_unmount_btn not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_unmount_btn 的视图. ");
         }
 
         installChrootButton = rootView.findViewById(R.id.f_chrootmanager_install_btn);
         if (installChrootButton == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_install_btn not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_install_btn 的视图. ");
         }
 
         addMetaPkgButton = rootView.findViewById(R.id.f_chrootmanager_addmetapkg_btn);
         if (addMetaPkgButton == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_addmetapkg_btn not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_addmetapkg_btn 的视图. ");
         }
 
         removeChrootButton = rootView.findViewById(R.id.f_chrootmanager_removechroot_btn);
         if (removeChrootButton == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_removechroot_btn not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_removechroot_btn 的视图. ");
         }
 
         backupChrootButton = rootView.findViewById(R.id.f_chrootmanager_backupchroot_btn);
         if (backupChrootButton == null) {
-            throw new IllegalStateException("View with ID f_chrootmanager_backupchroot_btn not found in layout.");
+            throw new IllegalStateException("布局中未找到 ID 为 f_chrootmanager_backupchroot_btn 的视图. ");
         }
 
         return rootView;
@@ -186,7 +186,7 @@ public class ChrootManagerFragment extends Fragment {
         setAddMetaPkgButton();
         setBackupChrootButton();
 
-        // WearOS optimisation
+        // WearOS 优化
         if (activity != null) {
             SharedPreferences sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
             Boolean iswatch = sharedpreferences.getBoolean("running_on_wearos", false);
@@ -195,7 +195,7 @@ public class ChrootManagerFragment extends Fragment {
             }
         }
 
-        // Register ActivityResultLauncher for file picking
+        // 注册文件选择器
         ActivityResultLauncher<Intent> filePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -217,14 +217,14 @@ public class ChrootManagerFragment extends Fragment {
                                     }
                                     out.flush();
                                     if (outFile.length() == 0 || totalBytes == 0) {
-                                        NhPaths.showMessage(context, "Copied file is empty. Please select a valid backup.");
+                                        NhPaths.showMessage(context, "复制的文件为空. 请选择有效的备份文件. ");
                                         return;
                                     }
                                     try (InputStream checkIn = new FileInputStream(outFile)) {
                                         byte[] magic = new byte[6];
                                         if (checkIn.read(magic) == 6) {
                                             if (!(magic[0] == (byte) 0xFD && magic[1] == '7' && magic[2] == 'z' && magic[3] == 'X' && magic[4] == 'Z' && magic[5] == 0x00)) {
-                                                NhPaths.showMessage(context, "File does not appear to be a valid .xz archive.");
+                                                NhPaths.showMessage(context, "文件似乎不是有效的 .xz 归档文件. ");
                                                 return;
                                             }
                                         }
@@ -257,11 +257,11 @@ public class ChrootManagerFragment extends Fragment {
                                     resultViewerLoggerTextView.setText("");
                                     chrootManagerExecutor.execute(resultViewerLoggerTextView, outFile.getAbsolutePath(), NhPaths.CHROOT_PATH());
                                 } catch (IOException e) {
-                                    NhPaths.showMessage(context, "Failed to copy file: " + e.getMessage());
+                                    NhPaths.showMessage(context, "复制文件失败:  " + e.getMessage());
                                 }
                             }
                         } else {
-                            NhPaths.showMessage(context, "No file selected.");
+                            NhPaths.showMessage(context, "未选择文件. ");
                         }
                     }
                 }
@@ -295,7 +295,7 @@ public class ChrootManagerFragment extends Fragment {
 
     private void setEditButton() {
         if (activity == null || sharedPreferences == null) {
-            throw new IllegalStateException("Activity or SharedPreferences is null. Cannot proceed.");
+            throw new IllegalStateException("Activity 或 SharedPreferences 为空. 无法继续. ");
         }
 
         kaliFolderEditButton.setOnClickListener(view -> {
@@ -331,21 +331,21 @@ public class ChrootManagerFragment extends Fragment {
                     }
                 }
             } else {
-                availableChrootPathextview.append("No directories found.");
+                availableChrootPathextview.append("未找到目录. ");
             }
 
             ll.addView(chrootPathEditText);
             ll.addView(availableChrootPathextview);
 
             ad.setCancelable(true);
-            ad.setTitle("Setup Chroot Path");
-            ad.setMessage("The Chroot Path is prefixed to \n\"/data/local/nhsystem/\"\n\n" +
-                    "Just put the basename of your Kali Chroot Folder:");
+            ad.setTitle("设置 Chroot 路径");
+            ad.setMessage("Chroot 路径会添加到 \n\"/data/local/nhsystem/\"\n\n" +
+                    "只需输入 Kali Chroot 文件夹的基本名称: ");
             ad.setView(ll);
 
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, "Apply", (dialogInterface, i) -> {
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, "应用", (dialogInterface, i) -> {
                 if (chrootPathEditText.getText().toString().matches(INVALID_PATH_REGEX)) {
-                    NhPaths.showMessage(activity, "Invalid Name, please try again.");
+                    NhPaths.showMessage(activity, "无效名称, 请重试. ");
                 } else {
                     NhPaths.ARCH_FOLDER = chrootPathEditText.getText().toString();
                     kaliFolderTextView.setText(NhPaths.ARCH_FOLDER);
@@ -418,9 +418,9 @@ public class ChrootManagerFragment extends Fragment {
 
     private void setInstallChrootButton() {
         installChrootButton.setOnClickListener(view -> {
-            String[] options = {"Minimal", "Full"};
+            String[] options = {"最小化", "完整"};
             new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat)
-                    .setTitle("Select Kali Image")
+                    .setTitle("选择 Kali 镜像")
                     .setItems(options, (dialog, which) -> {
                         String arch = getDeviceArch();
                         String type = (which == 0) ? "minimal" : "full";
@@ -430,7 +430,7 @@ public class ChrootManagerFragment extends Fragment {
                         try {
                             targetFile = new File(downloadDir, fileName);
                         } catch (Exception e) {
-                            NhPaths.showMessage(context, "Error accessing file: " + e.getMessage());
+                            NhPaths.showMessage(context, "访问文件时出错:  " + e.getMessage());
                             return;
                         }
 
@@ -438,10 +438,10 @@ public class ChrootManagerFragment extends Fragment {
 
                         if (targetFile.exists()) {
                             new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat)
-                                    .setTitle("Overwrite File?")
-                                    .setMessage("The image file already exists. Do you want to overwrite it?")
-                                    .setPositiveButton("Overwrite", (d, w) -> startProcess.run())
-                                    .setNegativeButton("Cancel", null)
+                                    .setTitle("覆盖文件？")
+                                    .setMessage("镜像文件已存在. 是否要覆盖它？")
+                                    .setPositiveButton("覆盖", (d, w) -> startProcess.run())
+                                    .setNegativeButton("取消", null)
                                     .show();
                         } else {
                             startProcess.run();
@@ -469,7 +469,7 @@ public class ChrootManagerFragment extends Fragment {
                 if (resultCode == 0) {
                     restoreChrootImage(new File(downloadDir, fileName).getAbsolutePath());
                 } else {
-                    NhPaths.showMessage(context, "Download failed.");
+                    NhPaths.showMessage(context, "下载失败. ");
                 }
             }
         });
@@ -484,19 +484,19 @@ public class ChrootManagerFragment extends Fragment {
                     new File(downloadDir, fileName).getAbsolutePath()
             );
         } catch (Exception e) {
-            NhPaths.showMessage(context, "Error during execution: " + e.getMessage());
+            NhPaths.showMessage(context, "执行期间出错:  " + e.getMessage());
         }
     }
 
     @NonNull
     public MaterialAlertDialogBuilder getMaterialAlertDialogBuilder(File downloadDir, String targetDownloadFileName) {
         MaterialAlertDialogBuilder adb3 = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-        adb3.setMessage(downloadDir.getAbsoluteFile() + "/" + targetDownloadFileName + " exists. Do you want to overwrite it?");
-        adb3.setPositiveButton("YES", (dialogInterface1, i1) -> {
+        adb3.setMessage(downloadDir.getAbsoluteFile() + "/" + targetDownloadFileName + " 已存在. 是否要覆盖它？");
+        adb3.setPositiveButton("是", (dialogInterface1, i1) -> {
             context.startService(new Intent(context, NotificationChannelService.class).setAction(NotificationChannelService.DOWNLOADING));
             startDownloadChroot(targetDownloadFileName, downloadDir);
         });
-        adb3.setNegativeButton("NO", (dialogInterface12, i12) -> dialogInterface12.dismiss());
+        adb3.setNegativeButton("否", (dialogInterface12, i12) -> dialogInterface12.dismiss());
         return adb3;
     }
 
@@ -513,16 +513,16 @@ public class ChrootManagerFragment extends Fragment {
             public void onExecutorFinished(int resultCode, ArrayList<String> resultString) {
                 setAllButtonEnable(true);
                 if (resultCode == 0) {
-                    NhPaths.showMessage(context, "Chroot image restored successfully.");
+                    NhPaths.showMessage(context, "Chroot 镜像已成功恢复. ");
                     compatCheck();
                 } else {
-                    NhPaths.showMessage(context, "Failed to restore chroot image.");
+                    NhPaths.showMessage(context, "恢复 Chroot 镜像失败. ");
                 }
             }
         });
 
         resultViewerLoggerTextView.setText("");
-        // Assuming NhPaths.CHROOT_PATH() returns the target extraction directory
+        // 假设 NhPaths.CHROOT_PATH() 返回目标提取目录
         chrootManagerExecutor.execute(
                 resultViewerLoggerTextView,
                 imagePath,
@@ -533,42 +533,42 @@ public class ChrootManagerFragment extends Fragment {
     private void setRemoveChrootButton(){
         removeChrootButton.setOnClickListener(view -> {
             MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat)
-                    .setTitle("Warning!")
-                    .setMessage("Are you sure to remove the below Kali Chroot folder?\n" + NhPaths.CHROOT_PATH())
-                    .setPositiveButton("I'm sure.", (dialogInterface, i) -> {
+                    .setTitle("警告！")
+                    .setMessage("您确定要删除以下 Kali Chroot 文件夹吗？\n" + NhPaths.CHROOT_PATH())
+                    .setPositiveButton("我确定. ", (dialogInterface, i) -> {
                         MaterialAlertDialogBuilder adb1 = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat)
-                            .setTitle("Warning!")
-                            .setMessage("This is your last chance!")
-                            .setPositiveButton("Just do it.", (dialogInterface1, i1) -> {
-                                chrootManagerExecutor = new ChrootManagerExecutor(ChrootManagerExecutor.REMOVE_CHROOT);
-                                chrootManagerExecutor.setListener(new ChrootManagerExecutor.ChrootManagerExecutorListener() {
-                                    @Override
-                                    public void onExecutorPrepare() {
-                                        broadcastBackPressedIntent(false);
-                                        setAllButtonEnable(false);
-                                    }
+                                .setTitle("警告！")
+                                .setMessage("这是您的最后机会！")
+                                .setPositiveButton("就这样吧. ", (dialogInterface1, i1) -> {
+                                    chrootManagerExecutor = new ChrootManagerExecutor(ChrootManagerExecutor.REMOVE_CHROOT);
+                                    chrootManagerExecutor.setListener(new ChrootManagerExecutor.ChrootManagerExecutorListener() {
+                                        @Override
+                                        public void onExecutorPrepare() {
+                                            broadcastBackPressedIntent(false);
+                                            setAllButtonEnable(false);
+                                        }
 
-                                    @Override
-                                    public void onExecutorProgressUpdate(int progress) {
-                                        // Do nothing
-                                    }
+                                        @Override
+                                        public void onExecutorProgressUpdate(int progress) {
+                                            // 无操作
+                                        }
 
-                                    @Override
-                                    public void onExecutorFinished(int resultCode, ArrayList<String> resultString) {
-                                        broadcastBackPressedIntent(true);
-                                        setAllButtonEnable(true);
-                                        compatCheck();
-                                    }
+                                        @Override
+                                        public void onExecutorFinished(int resultCode, ArrayList<String> resultString) {
+                                            broadcastBackPressedIntent(true);
+                                            setAllButtonEnable(true);
+                                            compatCheck();
+                                        }
+                                    });
+                                    resultViewerLoggerTextView.setText("");
+                                    chrootManagerExecutor.execute(resultViewerLoggerTextView);
+                                })
+                                .setNegativeButton("好吧, 我错了. ", (dialogInterface12, i12) -> {
+
                                 });
-                                resultViewerLoggerTextView.setText("");
-                                chrootManagerExecutor.execute(resultViewerLoggerTextView);
-                            })
-                            .setNegativeButton("Okay, I'm sorry.", (dialogInterface12, i12) -> {
-
-                            });
                         adb1.create().show();
                     })
-                    .setNegativeButton("Forget it.", (dialogInterface, i) -> { });
+                    .setNegativeButton("算了吧. ", (dialogInterface, i) -> { });
             adb.create().show();
         });
     }
@@ -578,8 +578,8 @@ public class ChrootManagerFragment extends Fragment {
 
         ProgressBar progressBar = new ProgressBar(activity, null, android.R.attr.progressBarStyleHorizontal);
         AlertDialog progressDialog = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat)
-                .setTitle("Downloading " + targetDownloadFileName)
-                .setMessage("Please do NOT kill the app or clear recent apps..")
+                .setTitle("正在下载 " + targetDownloadFileName)
+                .setMessage("请不要关闭应用或清除最近应用...")
                 .setCancelable(false)
                 .setView(progressBar)
                 .create();
@@ -616,9 +616,9 @@ public class ChrootManagerFragment extends Fragment {
                 if (activity != null) {
                     activity.runOnUiThread(() -> {
                         if (resultCode == 0) {
-                            NhPaths.showMessage(context, "Download completed successfully.");
+                            NhPaths.showMessage(context, "下载完成. ");
                         } else {
-                            NhPaths.showMessage(context, "Download failed. Please try again.");
+                            NhPaths.showMessage(context, "下载失败. 请重试. ");
                         }
                     });
                 }
@@ -643,24 +643,24 @@ public class ChrootManagerFragment extends Fragment {
                 : Build.CPU_ABI;
         if (abi.contains("arm64")) return "arm64";
         if (abi.contains("armeabi")) return "armhf";
-        // Default fallback
+        // 默认回退
         return "arm64";
     }
 
     private ProgressBar createProgressBar() {
         if (activity == null) {
-            throw new IllegalStateException("Activity is null. Cannot create ProgressBar.");
+            throw new IllegalStateException("Activity 为空. 无法创建 ProgressBar. ");
         }
         return new ProgressBar(activity, null, android.R.attr.progressBarStyleHorizontal);
     }
 
     private AlertDialog createProgressDialog(String fileName, ProgressBar progressBar) {
         if (activity == null) {
-            throw new IllegalStateException("Activity is null. Cannot create ProgressDialog.");
+            throw new IllegalStateException("Activity 为空. 无法创建 ProgressDialog. ");
         }
         return new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat)
-                .setTitle("Downloading " + fileName)
-                .setMessage("Please do NOT kill the app or clear recent apps..")
+                .setTitle("正在下载 " + fileName)
+                .setMessage("请不要关闭应用或清除最近应用...")
                 .setCancelable(false)
                 .setView(progressBar)
                 .create();
@@ -670,15 +670,15 @@ public class ChrootManagerFragment extends Fragment {
         if (activity != null) {
             activity.runOnUiThread(action);
         } else {
-            throw new IllegalStateException("Activity is null. Cannot run on UI thread.");
+            throw new IllegalStateException("Activity 为空. 无法在 UI 线程上运行. ");
         }
     }
 
     private void setAddMetaPkgButton() {
         addMetaPkgButton.setOnClickListener(view -> {
-            //for now, we'll hardcode packages in the dialog view.  At some point we'll want to grab them automatically.
+            // 目前, 我们将在对话框视图中硬编码包. 稍后我们将自动获取它们. 
             MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-            adb.setTitle("Metapackage Install & Upgrade");
+            adb.setTitle("元包安装与升级");
             LayoutInflater inflater = activity.getLayoutInflater();
             @SuppressLint("InflateParams") final ScrollView sv = (ScrollView) inflater.inflate(R.layout.metapackagechooser, null);
             adb.setView(sv);
@@ -691,8 +691,8 @@ public class ChrootManagerFragment extends Fragment {
             adb.setPositiveButton(R.string.InstallAndUpdateButtonText, (dialog, which) -> {
                 StringBuilder sb = new StringBuilder();
                 CheckBox cb;
-                // now grab all the checkboxes in the dialog and check their status
-                // thanks to "user2" for a 2-line sample of how to get the dialog's view:  https://stackoverflow.com/a/13959585/3035127
+                // 现在获取对话框中的所有复选框并检查其状态
+                // 感谢 "user2" 提供了一个如何获取对话框视图的 2 行示例: https://stackoverflow.com/a/13959585/3035127
                 final AlertDialog d = (AlertDialog) dialog;
                 final LinearLayout ll = d.findViewById(R.id.metapackageLinearLayout);
                 int children = Objects.requireNonNull(ll).getChildCount();
@@ -705,7 +705,7 @@ public class ChrootManagerFragment extends Fragment {
                     }
                 }
                 try {
-                    run_cmd("apt update && apt install " + sb + " -y && echo \"(You can close the terminal now)\n\"");
+                    run_cmd("apt update && apt install " + sb + " -y && echo \"(现在可以关闭终端了)\n\" ");
                 } catch (Exception e) {
                     NhPaths.showMessage(context, getString(R.string.toast_install_terminal));
                 }
@@ -729,16 +729,16 @@ public class ChrootManagerFragment extends Fragment {
             backupFullPathEditText.setLayoutParams(editTextParams);
             ll.addView(backupFullPathEditText);
             ad.setView(ll);
-            ad.setTitle("Backup Chroot");
-            ad.setMessage("* It is strongly suggested to create your backup chroot as tar.gz format just for faster process but bigger file size.\n\nbackup \"" + NhPaths.CHROOT_PATH() + "\" to:" );
+            ad.setTitle("备份 Chroot");
+            ad.setMessage("* 强烈建议将备份的 Chroot 创建为 tar.gz 格式, 以便更快地处理, 但文件大小会更大. \n\n备份 \"" + NhPaths.CHROOT_PATH() + "\" 到: ");
             backupFullPathEditText.setText(sharedPreferences.getString(SharePrefTag.CHROOT_DEFAULT_BACKUP_SHAREPREF_TAG, ""));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialogInterface, i) -> {
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, "确定", (dialogInterface, i) -> {
                 sharedPreferences.edit().putString(SharePrefTag.CHROOT_DEFAULT_BACKUP_SHAREPREF_TAG, backupFullPathEditText.getText().toString()).apply();
                 if (new File(backupFullPathEditText.getText().toString()).exists()){
                     ad.dismiss();
                     AlertDialog ad2 = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat).create();
-                    ad2.setMessage("File exists already, do you want to overwrite it anyway?");
-                    ad2.setButton(DialogInterface.BUTTON_POSITIVE, "YES", (dialogInterface1, i1) -> {
+                    ad2.setMessage("文件已存在, 是否要覆盖它？");
+                    ad2.setButton(DialogInterface.BUTTON_POSITIVE, "是", (dialogInterface1, i1) -> {
                         chrootManagerExecutor = new ChrootManagerExecutor(ChrootManagerExecutor.BACKUP_CHROOT);
                         chrootManagerExecutor.setListener(new ChrootManagerExecutor.ChrootManagerExecutorListener() {
                             @Override
@@ -750,7 +750,7 @@ public class ChrootManagerFragment extends Fragment {
 
                             @Override
                             public void onExecutorProgressUpdate(int progress) {
-                                // Do nothing
+                                // 无操作
                             }
 
                             @Override
@@ -775,7 +775,7 @@ public class ChrootManagerFragment extends Fragment {
 
                         @Override
                         public void onExecutorProgressUpdate(int progress) {
-                            // Do nothing
+                            // 无操作
                         }
 
                         @Override
@@ -829,7 +829,7 @@ public class ChrootManagerFragment extends Fragment {
             mountStatsTextView.setTextColor(Color.RED);
             mountStatsTextView.setText(R.string.stopped);
         } else if  (MODE == NEED_TO_INSTALL) {
-            // Only show about banner if chroot is not installed + clear old logs when showing banner for new peeps
+            // 如果 Chroot 未安装, 仅显示关于横幅并清除旧日志（以便为新用户显示横幅）
             resultViewerLoggerTextView.setText("");
             showBanner();
 
@@ -907,7 +907,7 @@ public class ChrootManagerFragment extends Fragment {
 
     ////
     // Bridge side functions
-    ////
+    /////
 
     public void run_cmd(String cmd) {
         Intent intent = Bridge.createExecuteIntent("/data/data/com.offsec.nhterm/files/usr/bin/kali", cmd);

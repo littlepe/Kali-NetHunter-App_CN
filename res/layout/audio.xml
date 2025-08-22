@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="CONFIG CONNECTION"
+                android:text="连接配置"
                 android:textStyle="bold"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -143,7 +143,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="LOGS"
+            android:text="日志"
             android:textStyle="bold"
             android:textSize="20sp" />
 
@@ -158,7 +158,7 @@
             android:elevation="2dp"
             android:layout_marginBottom="20dp">
 
-            <!-- NestedScrollView to make errorText scrollable within a fixed height -->
+            <!-- NestedScrollView 让 errorText 在固定高度内可滚动 -->
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -181,7 +181,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="ABOUT MODULE"
+            android:text="关于模块"
             android:textStyle="bold"
             android:textSize="20sp" />
 

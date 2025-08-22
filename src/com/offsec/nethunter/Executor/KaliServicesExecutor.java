@@ -92,18 +92,18 @@ public class KaliServicesExecutor {
 			case GETITEMSTATUS:
 				if (kaliServicesModelList != null) {
 					for (KaliServicesModel model : kaliServicesModelList) {
-						model.setStatus(new ShellExecuter().RunAsRootReturnValue(NhPaths.BUSYBOX + " ps | grep -v grep | grep -w '" + model.getCommandforCheckServiceStatus() + "'") == 0 ? "[+] Service is running" : "[-] Service is NOT running");
+						model.setStatus(new ShellExecuter().RunAsRootReturnValue(NhPaths.BUSYBOX + " ps | grep -v grep | grep -w '" + model.getCommandforCheckServiceStatus() + "'") == 0 ? "[+] 服务正在运行" : "[-] 服务未运行");
 					}
 				}
 				break;
 			case START_SERVICE_FOR_ITEM:
 				if (kaliServicesModelList != null) {
-					kaliServicesModelList.get(position).setStatus(new ShellExecuter().RunAsChrootReturnValue(kaliServicesModelList.get(position).getCommandforStartService()) == 0 ? "[+] Service is running" : "[-] Service is NOT running");
+					kaliServicesModelList.get(position).setStatus(new ShellExecuter().RunAsChrootReturnValue(kaliServicesModelList.get(position).getCommandforStartService()) == 0 ? "[+] 服务正在运行" : "[-] 服务未运行");
 				}
 				break;
 			case STOP_SERVICE_FOR_ITEM:
 				if (kaliServicesModelList != null) {
-					kaliServicesModelList.get(position).setStatus(new ShellExecuter().RunAsChrootReturnValue(kaliServicesModelList.get(position).getCommandforStopService()) == 0 ? "[-] Service is NOT running" : "[+] Service is running");
+					kaliServicesModelList.get(position).setStatus(new ShellExecuter().RunAsChrootReturnValue(kaliServicesModelList.get(position).getCommandforStopService()) == 0 ? "[-] 服务未运行" : "[+] 服务正在运行");
 				}
 				break;
 			case EDITDATA:

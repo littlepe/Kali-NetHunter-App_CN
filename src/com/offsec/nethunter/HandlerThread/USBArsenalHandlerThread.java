@@ -39,25 +39,25 @@ public class USBArsenalHandlerThread extends HandlerThread {
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 switch (msg.what) {
-                    case IS_INIT_EXIST:
-                    case SETUSBIFACE:
-                    case MOUNT_IMAGE:
-                    case UNMOUNT_IMAGE:
-                    case CHANGE_INQUIRY_STRING:
+                    case IS_INIT_EXIST: // 检查初始化是否存在
+                    case SETUSBIFACE: // 设置USB接口
+                    case MOUNT_IMAGE: // 挂载镜像
+                    case UNMOUNT_IMAGE: // 卸载镜像
+                    case CHANGE_INQUIRY_STRING: // 更改查询字符串
                         resultObject = exe.RunAsRootReturnValue(msg.obj.toString());
                         break;
-                    case RETRIEVE_USB_FUNCS:
-                    case RELOAD_USBIFACE:
-                    case GET_STORAGE_FUNC_FOLDER_NAME:
-                    case RELOAD_MOUNTSTATUS:
+                    case RETRIEVE_USB_FUNCS: // 检索USB功能
+                    case RELOAD_USBIFACE: // 重新加载USB接口
+                    case GET_STORAGE_FUNC_FOLDER_NAME: // 获取存储功能文件夹名称
+                    case RELOAD_MOUNTSTATUS: // 重新加载挂载状态
                         resultObject = exe.RunAsRootOutput(msg.obj.toString());
                         break;
-                    case GET_USBSWITCH_SQL_DATA:
+                    case GET_USBSWITCH_SQL_DATA: // 获取USB切换SQL数据
                         resultObject = USBArsenalSQL.getInstance((Context) msg.obj)
                                 .getUSBSwitchColumnData(msg.getData().getString("targetOSName"),
                                         msg.getData().getString("functionName"));
                         break;
-                    case GET_USBNETWORK_SQL_DATA:
+                    case GET_USBNETWORK_SQL_DATA: // 获取USB网络SQL数据
                         resultObject = USBArsenalSQL.getInstance((Context) msg.obj).getUSBNetworkColumnData(msg.arg1);
                         break;
                     default:

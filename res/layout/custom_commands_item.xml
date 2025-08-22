@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:longClickable="true"
     android:paddingBottom="5dp">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="CommandTag"
+        android:text="命令标签"
         android:id="@+id/command_tag"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:paddingRight="@dimen/base_listItem_LR"
@@ -22,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Exec mode:"
+        android:text="执行方式:"
         android:id="@+id/textView8"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:paddingRight="@dimen/base_listItem_LR"
@@ -34,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Send to:"
+        android:text="发送至:"
         android:id="@+id/textView4"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:layout_marginTop="-7dp"
@@ -51,12 +52,12 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/base_listItem_LR"
         android:layout_marginRight="@dimen/base_listItem_LR"
-        android:text="Run" />
+        android:text="运行" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="system"
+        android:text="系统"
         android:id="@+id/sendtocmd"
         android:textColor="@color/accent_material_light"
         android:layout_above="@+id/textView8"
@@ -66,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="mode"
+        android:text="模式"
         android:id="@+id/execmode"
         android:textColor="@color/accent_material_light"
         android:layout_below="@+id/sendtocmd"
@@ -76,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Run at boot:"
+        android:text="开机自启:"
         android:id="@+id/textView9"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:textColor="@color/accent_material_dark"
@@ -88,11 +89,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="YES/NO"
+        android:text="是/否"
         android:id="@+id/custom_comands_runAtBoot_text"
         android:textColor="@color/accent_material_light"
         android:layout_alignTop="@+id/textView9"
         android:layout_alignStart="@+id/runCommand" />
-
 
 </RelativeLayout>

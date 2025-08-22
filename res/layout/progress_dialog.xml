@@ -8,7 +8,7 @@
         android:id="@+id/progress_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Progress Title"
+        android:text="程序标题"
         android:textSize="18sp"
         android:layout_marginBottom="8dp" />
 
@@ -16,6 +16,6 @@
         android:id="@+id/progress_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Progress Message"
+        android:text="程序消息"
         android:textSize="16sp" />
 </LinearLayout>

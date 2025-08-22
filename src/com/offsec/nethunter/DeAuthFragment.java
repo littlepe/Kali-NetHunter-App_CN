@@ -33,8 +33,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-
-public class DeAuthFragment  extends Fragment {
+public class DeAuthFragment extends Fragment {
     private final ShellExecuter exe = new ShellExecuter();
     private Context context;
     private Activity activity;
@@ -55,29 +54,29 @@ public class DeAuthFragment  extends Fragment {
         activity = getActivity();
     }
 
-        @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.deauth, container, false);
         SharedPreferences sharedpreferences = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
         setHasOptionsMenu(true);
         final Button scan = rootView.findViewById(R.id.scan_networks);
-            Spinner wlan = (Spinner) rootView.findViewById(R.id.wlan_interface);
+        Spinner wlan = (Spinner) rootView.findViewById(R.id.wlan_interface);
 
-            try {
-                List<String> wifiAdapters = new ArrayList<>();
-                Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
-                while (interfaces.hasMoreElements()) {
-                    NetworkInterface networkInterface = interfaces.nextElement();
-                    if (networkInterface.isUp() && !networkInterface.isLoopback() && networkInterface.getName().startsWith("wlan")) {
-                        wifiAdapters.add(networkInterface.getName());
-                    }
+        try {
+            List<String> wifiAdapters = new ArrayList<>();
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = interfaces.nextElement();
+                if (networkInterface.isUp() && !networkInterface.isLoopback() && networkInterface.getName().startsWith("wlan")) {
+                    wifiAdapters.add(networkInterface.getName());
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, wifiAdapters);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                wlan.setAdapter(adapter);
-            } catch (SocketException e) {
-                e.printStackTrace();
             }
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, wifiAdapters);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            wlan.setAdapter(adapter);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
 
         final EditText term = rootView.findViewById(R.id.TerminalOutputDeAuth);
         final Button start = rootView.findViewById(R.id.StartDeAuth);
@@ -85,21 +84,21 @@ public class DeAuthFragment  extends Fragment {
         final CheckBox white_me = rootView.findViewById(R.id.deauth_me);
         final EditText channel = rootView.findViewById(R.id.channel);
 
-            channel.setFilters(new InputFilter[]{
-                    (source, start1, end, dest, dstart, dend) -> {
-                        try {
-                            int input = Integer.parseInt(dest.toString() + source.toString());
-                            if (isInRange(1, 250, input))
-                                return null;
-                        } catch (NumberFormatException ignored) { }
-                        return "";
-                    }
-            });
+        channel.setFilters(new InputFilter[]{
+                (source, start1, end, dest, dstart, dend) -> {
+                    try {
+                        int input = Integer.parseInt(dest.toString() + source.toString());
+                        if (isInRange(1, 250, input))
+                            return null;
+                    } catch (NumberFormatException ignored) { }
+                    return "";
+                }
+        });
 
         whitelist.setChecked(false);
         start.setOnClickListener(v -> {
             String whitelist_command;
-            new BootKali("ip link set " + wlan.getSelectedItem()+ " up");
+            new BootKali("ip link set " + wlan.getSelectedItem() + " up");
             try {
                 Thread.sleep(1000);
                 new BootKali("airmon-ng start  " + wlan.getSelectedItem()).run_bg();
@@ -130,7 +129,7 @@ public class DeAuthFragment  extends Fragment {
             new BootKali(cmd).run_bg();
             try {
                 Thread.sleep(5000);
-                String output = exe.RunAsRootOutput("cat " + NhPaths.APP_SD_FILES_PATH + "/deauth/output.txt").replace("Channel:","\n Channel:");
+                String output = exe.RunAsRootOutput("cat " + NhPaths.APP_SD_FILES_PATH + "/deauth/output.txt").replace("Channel:", "\n Channel:");
                 term.setText(output);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -179,7 +178,7 @@ public class DeAuthFragment  extends Fragment {
         inflater.inflate(R.menu.deauth, menu);
     }
 
-        @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.deauth_modify) {
             Intent i = new Intent(activity, DeAuthWhitelistActivity.class);
@@ -195,12 +194,12 @@ public class DeAuthFragment  extends Fragment {
         return mac;
     }
 
-        ////
-        // Bridge side functions
-        ////
+    ////
+    // Bridge side functions
+    ////
 
-        public void run_cmd(String cmd) {
-            Intent intent = Bridge.createExecuteIntent("/data/data/com.offsec.nhterm/files/usr/bin/kali", cmd);
-            activity.startActivity(intent);
-        }
+    public void run_cmd(String cmd) {
+        Intent intent = Bridge.createExecuteIntent("/data/data/com.offsec.nhterm/files/usr/bin/kali", cmd);
+        activity.startActivity(intent);
+    }
 }

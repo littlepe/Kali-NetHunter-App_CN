@@ -86,14 +86,14 @@ public class ChrootManagerExecutor {
                 break;
             case DOWNLOAD_CHROOT:
                 try {
-                    exe.RunAsRootOutput("echo \"[!] The Download has been started...Please wait.\"", ((TextView) objects[0]));
+                    exe.RunAsRootOutput("echo \"[!] 已开始下载, 请稍候……\"", ((TextView) objects[0]));
                     int count;
                     String[] servers = {ChrootManagerFragment.PRIMARY_IMAGE_SERVER, ChrootManagerFragment.SECONDARY_IMAGE_SERVER};
                     boolean success = false;
                     Exception lastException = null;
 
                     for (String server : servers) {
-                        exe.RunAsRootOutput("echo \"[!] Trying to download from: " + server + "\"", ((TextView) objects[0]));
+                        exe.RunAsRootOutput("echo \"[!] 正在从服务器下载: " + server + "\"", ((TextView) objects[0]));
                         BufferedInputStream reader = null;
                         BufferedOutputStream writer = null;
 
@@ -124,35 +124,35 @@ public class ChrootManagerExecutor {
                                 }
                             }
 
-                            exe.RunAsRootOutput("echo \"[+] Download completed. It's time to install from storage.\"", ((TextView) objects[0]));
+                            exe.RunAsRootOutput("echo \"[+] 下载完成, 准备从存储安装. \"", ((TextView) objects[0]));
                             success = true;
                             break;
 
                         } catch (MalformedURLException e) {
-                            exe.RunAsRootOutput("echo \"[-] Invalid URL: " + e.getMessage() + "\"", ((TextView) objects[0]));
+                            exe.RunAsRootOutput("echo \"[-] 无效 URL: " + e.getMessage() + "\"", ((TextView) objects[0]));
                             lastException = e;
                         } catch (IOException e) {
-                            exe.RunAsRootOutput("echo \"[-] I/O Error: " + e.getMessage() + "\"", ((TextView) objects[0]));
+                            exe.RunAsRootOutput("echo \"[-] I/O 错误: " + e.getMessage() + "\"", ((TextView) objects[0]));
                             lastException = e;
                         } catch (SecurityException e) {
-                            exe.RunAsRootOutput("echo \"[-] Security Error: " + e.getMessage() + "\"", ((TextView) objects[0]));
+                            exe.RunAsRootOutput("echo \"[-] 安全错误: " + e.getMessage() + "\"", ((TextView) objects[0]));
                             lastException = e;
                         } finally {
                             try {
                                 if (reader != null) reader.close();
                                 if (writer != null) writer.close();
                             } catch (IOException e) {
-                                exe.RunAsRootOutput("echo \"[-] Error closing streams: " + e.getMessage() + "\"", ((TextView) objects[0]));
+                                exe.RunAsRootOutput("echo \"[-] 关闭流时出错: " + e.getMessage() + "\"", ((TextView) objects[0]));
                             }
                         }
                     }
 
                     if (!success) {
-                        exe.RunAsRootOutput("echo \"[-] Download failed: " + lastException.getMessage() + "\"", ((TextView) objects[0]));
+                        exe.RunAsRootOutput("echo \"[-] 下载失败: " + lastException.getMessage() + "\"", ((TextView) objects[0]));
                         resultCode = 1;
                     }
                 } catch (Exception e) {
-                    exe.RunAsRootOutput("echo \"[-] Unexpected error: " + e.getMessage() + "\"", ((TextView) objects[0]));
+                    exe.RunAsRootOutput("echo \"[-] 意外错误: " + e.getMessage() + "\"", ((TextView) objects[0]));
                     resultCode = 1;
                 }
                 break;

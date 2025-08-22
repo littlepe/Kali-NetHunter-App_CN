@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- USB interface switch -->
+        <!-- USB 接口切换 -->
         <LinearLayout
             android:id="@+id/f_usbarsenal_ll_usbswitch"
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Target"
+                        android:text="目标"
                         android:layout_weight="0.4"
                         android:textSize="18sp" />
 
@@ -74,7 +74,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="USB Function"
+                        android:text="USB 功能"
                         android:layout_weight="0.4"
                         android:textSize="18sp" />
 
@@ -116,7 +116,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="idVendor"
+                        android:text="厂商ID"
                         android:layout_weight="0.4"
                         android:textSize="18sp" />
 
@@ -136,7 +136,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="idProduct"
+                        android:text="产品ID"
                         android:layout_weight="0.4"
                         android:textSize="18sp" />
 
@@ -157,7 +157,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="manufacturer"
+                        android:text="制造商"
                         android:layout_weight="0.4"
                         android:textSize="18sp" />
 
@@ -178,7 +178,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="product"
+                        android:text="产品名称"
                         android:layout_weight="0.4"
                         android:textSize="18sp" />
 
@@ -198,7 +198,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="serialnumber"
+                        android:text="序列号"
                         android:layout_weight="0.4"
                         android:textSize="18sp" />
 
@@ -215,7 +215,7 @@
                     android:id="@+id/f_usbarsenal_btn_setusbinterface"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Set USB Function"
+                    android:text="设置 USB 功能"
                     style="?android:attr/buttonStyleSmall"/>
 
                 <Button
@@ -223,7 +223,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="4dp"
-                    android:text="SAVE CONFIG TO DATABASE"/>
+                    android:text="保存配置到数据库"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -254,7 +254,7 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="false"
                         android:baselineAlignBottom="false"
-                        android:contentDescription="none"
+                        android:contentDescription="刷新"
                         android:cropToPadding="false"
                         android:layout_weight="0.2"
                         android:src="@drawable/ic_action_refresh" />
@@ -262,7 +262,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Image Mounter -->
+        <!-- 镜像挂载 -->
         <LinearLayout
             android:id="@+id/f_usbarsenal_ll_imageMounter"
             android:layout_width="match_parent"
@@ -317,7 +317,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Select an .img or .iso file to mount"
+                    android:text="选择要挂载的 .img 或 .iso 文件"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -337,7 +337,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:text="Mount Image" />
+                        android:text="挂载镜像" />
 
                     <Button
                         android:id="@+id/f_usbarsenal_btn_unmountImage"
@@ -345,7 +345,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:text="Unmount Image" />
+                        android:text="卸载镜像" />
 
                     <CheckBox
                         android:id="@+id/f_usbarsenal_chkbox_ReadOrWrite"
@@ -354,7 +354,7 @@
                         android:layout_weight="0.4"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="Read Only" />
+                        android:text="只读" />
                 </LinearLayout>
 
                 <androidx.legacy.widget.Space
@@ -375,14 +375,14 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Mounted Image:"
+                            android:text="已挂载镜像:"
                             android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/f_usbarsenal_tv_mount_state"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No image is mounted."
+                            android:text="未挂载任何镜像"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -394,7 +394,8 @@
                         android:adjustViewBounds="false"
                         android:baselineAlignBottom="false"
                         android:cropToPadding="false"
-                        android:src="@drawable/ic_action_refresh" />
+                        android:src="@drawable/ic_action_refresh"
+                        android:contentDescription="刷新" />
                 </LinearLayout>
 
                 <androidx.legacy.widget.Space
@@ -411,14 +412,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Inquiry string:"
+                        android:text="查询字符串:"
                         android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="(empty to reset)" />
+                        android:text="(留空以重置)" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -440,7 +441,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
-                            android:text="Change" />
+                            android:text="更改" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -448,18 +449,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Current inquiry string:"
+                    android:text="当前查询字符串:"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/f_usbarsenal_tv_current_inquiry_string"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Linux File-CD/Stor gadget (kernel default)" />
+                    android:text="Linux File-CD/Stor gadget (内核默认)" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- USB Network Tethering -->
+        <!-- USB 网络共享 -->
         <LinearLayout
             android:id="@+id/f_usbarsenal_ll_usbnetworktethering"
             android:layout_width="match_parent"
@@ -513,7 +514,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:text="Attack Mode:"
+                        android:text="攻击模式:"
                         android:textSize="18sp" />
                     <Spinner
                         android:id="@+id/f_usbarsenal_spr_networkattackmode"
@@ -534,7 +535,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:text="Upstream Interface\n(e.g. wlan0, rmnet_data0):"
+                        android:text="上游接口\n(例如 wlan0、rmnet_data0):"
                         android:textSize="18sp" />
 
                     <EditText
@@ -554,7 +555,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:text="USB network interface\n(e.g. rndis0, usb0):"
+                        android:text="USB 网络接口\n(例如 rndis0、usb0):"
                         android:textSize="18sp" />
 
                     <EditText
@@ -575,7 +576,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:text="IP address to be assigned for target:"
+                        android:text="分配给目标的 IP 地址:"
                         android:textSize="18sp" />
 
                     <EditText
@@ -595,7 +596,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="IP address for your USB Network Interface:"
+                        android:text="USB 网络接口本机 IP 地址:"
                         android:textSize="18sp" />
 
                     <EditText
@@ -615,7 +616,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="IP Subnet Mask (in Octet format):"
+                        android:text="IP 子网掩码 (点分格式):"
                         android:textSize="18sp" />
 
                     <EditText
@@ -631,13 +632,13 @@
                     android:id="@+id/f_usbarsenal_btn_runusbnetworktethering"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RUN IN NETHUNTER TERMINAL"/>
+                    android:text="在 NetHunter 终端中运行"/>
 
                 <Button
                     android:id="@+id/f_usbarsenal_btn_saveusbnetworktethering"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SAVE CONFIG TO DATABASE"/>
+                    android:text="保存配置到数据库"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

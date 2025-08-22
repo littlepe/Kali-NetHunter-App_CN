@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -30,7 +31,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Setup Local Server"
+                android:text="设置本地服务器"
                 android:textColor="#ffffffff" />
 
             <LinearLayout
@@ -52,44 +53,44 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:checked="false"
-                        android:text="Localhost Only" />
+                        android:text="仅本地回环" />
 
-                <CheckBox
-                    android:id="@+id/vnc_serviceCheckBox"
-                    android:layout_width="wrap_content"
+                    <CheckBox
+                        android:id="@+id/vnc_serviceCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="开机自启" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="Enable at boot" />
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/delay_checkBox"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="启动延迟" />
+
+                    <EditText
+                        android:id="@+id/delay_time"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:autofillHints="none"
+                        android:text="20"
+                        android:inputType="number"
+                        android:enabled="false"
+                        android:textColor="#40FFFFFF"/>
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/delay_checkBox"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="Start Delay" />
-
-                <EditText
-                    android:id="@+id/delay_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:autofillHints="none"
-                    android:text="20"
-                    android:inputType="number"
-                    android:enabled="false"
-                    android:textColor="#40FFFFFF"/>
-            </LinearLayout>
-        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,7 +105,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="USER:"
+                    android:text="用户:"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -131,7 +132,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="DISPLAY:"
+                    android:text="显示:"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -150,7 +151,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Enable audio"
+                android:text="启用音频"
                 android:textColor="#ffffffff" />
 
             <LinearLayout
@@ -164,7 +165,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Start Server"
+                    android:text="启动服务器"
                     android:textColor="#ffffffff" />
 
                 <Button
@@ -172,7 +173,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Stop Server"
+                    android:text="停止服务器"
                     android:textColor="#ffffffff" />
             </LinearLayout>
 
@@ -190,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="11dp"
-                    android:text="KeX Server Status:"
+                    android:text="KeX 服务器状态:"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_1" />
@@ -211,7 +212,7 @@
                     android:id="@+id/refreshKeX"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="none"
+                    android:contentDescription="刷新"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/ic_action_refresh" />
@@ -241,7 +242,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="0dp"
-                    android:text="Active Sessions:"
+                    android:text="活动会话:"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_2" />
@@ -275,14 +276,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="OPEN KEX CLIENT" />
+                android:text="打开 KeX 客户端" />
 
             <Button
                 android:id="@+id/AdvancedButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="SHOW ADVANCED SETTINGS" />
+                android:text="显示高级设置" />
 
             <LinearLayout
                 android:id="@+id/AdvancedView"
@@ -297,7 +298,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
-                    android:text="KEX SERVER RESOLUTION (OPTIONAL)"
+                    android:text="KeX 服务器分辨率（可选）"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -313,7 +314,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Remove selected resolution"
+                    android:text="移除所选分辨率"
                     android:textColor="#ffffffff" />
 
                 <Button
@@ -321,7 +322,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="New resolution"
+                    android:text="新建分辨率"
                     android:textColor="#ffffffff" />
 
                 <LinearLayout
@@ -335,7 +336,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Backup"
+                        android:text="备份"
                         android:textColor="#ffffffff"
                         android:textSize="13sp" />
 
@@ -344,7 +345,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Restore"
+                        android:text="还原"
                         android:textColor="#ffffffff"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -361,7 +362,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:paddingTop="10dp"
-                    android:text="MANAGE KALI USERS"
+                    android:text="管理 Kali 用户"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
@@ -369,7 +370,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Add new Kali user"
+                    android:text="添加新 Kali 用户"
                     android:textColor="#ffffffff" />
 
                 <Button
@@ -377,7 +378,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Remove selected Kali user"
+                    android:text="移除所选 Kali 用户"
                     android:textColor="#ffffffff" />
 
                 <androidx.appcompat.widget.SwitchCompat
@@ -386,7 +387,7 @@
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:text="IMMERSIVE MODE"
+                    android:text="沉浸模式"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <View
@@ -401,7 +402,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
-                    android:text="DEVICE RESOLUTION FOR HDMI"
+                    android:text="设备 HDMI 分辨率"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <LinearLayout
@@ -421,7 +422,7 @@
                         android:id="@+id/ApplyResolutionButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Apply"
+                        android:text="应用"
                         android:textColor="#ffffffff" />
                 </LinearLayout>
 
@@ -430,7 +431,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Remove selected resolution"
+                    android:text="移除所选分辨率"
                     android:textColor="#ffffffff" />
 
                 <LinearLayout
@@ -444,7 +445,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="New resolution"
+                        android:text="新建分辨率"
                         android:textColor="#ffffffff"
                         android:textSize="13sp" />
 
@@ -453,7 +454,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Reset"
+                        android:text="重置"
                         android:textColor="#ffffffff"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -470,7 +471,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Backup"
+                        android:text="备份"
                         android:textColor="#ffffffff"
                         android:textSize="13sp" />
 
@@ -479,7 +480,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Restore"
+                        android:text="还原"
                         android:textColor="#ffffffff"
                         android:textSize="13sp" />
                 </LinearLayout>

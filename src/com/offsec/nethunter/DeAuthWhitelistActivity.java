@@ -15,7 +15,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-
 public class DeAuthWhitelistActivity extends AppCompatActivity {
     private Activity activity;
     private final ShellExecuter exe = new ShellExecuter();
@@ -36,7 +35,7 @@ public class DeAuthWhitelistActivity extends AppCompatActivity {
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
-        NhPaths.showMessage(activity, "File Loaded");
+        NhPaths.showMessage(activity, "文件已加载");
     }
 
     public void updatewhitelist(View view) {
@@ -44,9 +43,9 @@ public class DeAuthWhitelistActivity extends AppCompatActivity {
         String newSource = source.getText().toString();
         @SuppressLint("SdCardPath") boolean isSaved = exe.SaveFileContents(newSource, "/sdcard/nh_files/deauth/whitelist.txt");
         if (isSaved) {
-            NhPaths.showMessage(activity,"Source updated");
+            NhPaths.showMessage(activity,"源代码已更新");
         } else {
-            NhPaths.showMessage(activity,"Source not updated");
+            NhPaths.showMessage(activity,"源代码未更新");
         }
     }
 }

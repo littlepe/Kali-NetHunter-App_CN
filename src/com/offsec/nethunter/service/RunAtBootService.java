@@ -21,6 +21,9 @@ import androidx.core.app.NotificationCompat;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 启动时运行的服务, 用于检查启动时的环境并执行必要的初始化操作
+ */
 public class RunAtBootService extends JobIntentService {
     private static final String TAG = "Nethunter: Startup";
     static final int SERVICE_JOB_ID = 1;
@@ -31,9 +34,9 @@ public class RunAtBootService extends JobIntentService {
     public void onCreate() {
         super.onCreate();
         NhPaths.getInstance(getApplicationContext());
-        // Create notification channel first.
+        // 创建通知渠道
         createNotificationChannel();
-        sharedPreferences = getApplicationContext().getSharedPreferences(BuildConfig.APPLICATION_ID, MODE_PRIVATE);
+        sharedPreferences = getApplicationContext().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
     }
 
     private void doNotification(String contents) {
@@ -41,11 +44,11 @@ public class RunAtBootService extends JobIntentService {
             n = new NotificationCompat.Builder(getApplicationContext(), AppNavHomeActivity.BOOT_CHANNEL_ID);
         }
         n.setStyle(new NotificationCompat.BigTextStyle().bigText(contents))
-                .setContentTitle(RunAtBootService.TAG)
+                .setContentTitle(TAG)
                 .setSmallIcon(R.drawable.ic_stat_ic_nh_notification)
                 .setAutoCancel(true);
         NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (notificationManager != null) {
             notificationManager.notify(999, n.build());
@@ -62,48 +65,53 @@ public class RunAtBootService extends JobIntentService {
     }
 
     protected void onHandleIntent() {
-        //1. Check root -> 2. Check Busybox -> 3. run nethunter init.d files. -> Push notifications.
-        String isOK = "OK.";
-        doNotification("Doing boot checks...");
+        // 1. 检查 Root 权限
+        // 2. 检查 Busybox 是否安装
+        // 3. 执行 NetHunter 的 init.d 脚本
+        // 4. 推送通知
+
+        doNotification("正在执行启动检查...");
 
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("ROOT", "No root access is granted.");
-        hashMap.put("BUSYBOX", "No busybox is found.");
-        hashMap.put("CHROOT", "Chroot is not yet installed.");
+        hashMap.put("ROOT", "未授予 Root 权限");
+        hashMap.put("BUSYBOX", "未找到 Busybox");
+        hashMap.put("CHROOT", "Chroot 尚未安装");
 
         if (CheckForRoot.isRoot()) {
-            hashMap.put("ROOT", isOK);
+            hashMap.put("ROOT", "OK");
         }
 
         if (CheckForRoot.isBusyboxInstalled()) {
-            hashMap.put("BUSYBOX", isOK);
+            hashMap.put("BUSYBOX", "OK");
         }
 
         ShellExecuter exe = new ShellExecuter();
 
-        // Check if selinux is in permissive mode, if not, set it to permissive mode, unless it was manually disabled in settings.
-        if (sharedPreferences.getBoolean("SELinuxOnBoot", true)) new ShellExecuter().RunAsRootOutput("[ ! \"$(getenforce | grep Permissive)\" ] && setenforce 0");
-
-        exe.RunAsRootOutput(NhPaths.BUSYBOX + " run-parts " + NhPaths.APP_INITD_PATH);
-        if (exe.RunAsRootReturnValue(NhPaths.APP_SCRIPTS_PATH + "/chrootmgr -c \"status\"") == 0){
-            // remove possible vnc locks (if the phone is rebooted with the vnc server running)
-            exe.RunAsRootOutput("rm -rf " + NhPaths.CHROOT_PATH() + "/tmp/.X1*");
-            hashMap.put("CHROOT", isOK);
+        // 检查 SELinux 是否处于宽容模式, 如果不是, 则将其设置为宽容模式, 除非用户已在设置中手动禁用. 
+        if (sharedPreferences.getBoolean("SELinuxOnBoot", true)) {
+            exe.RunAsRootOutput("[ ! \"$(getenforce | grep Permissive)\" ] && setenforce 0");
         }
 
-        String resultMsg = "Boot completed.\nEveryting is fine and Chroot has been started!";
-        for(Map.Entry<String, String> entry: hashMap.entrySet()){
-            if (!entry.getValue().equals(isOK)){
-                resultMsg = "Make sure the above requirements are met.";
+        exe.RunAsRootOutput(NhPaths.BUSYBOX + " run-parts " + NhPaths.APP_INITD_PATH);
+        if (exe.RunAsRootReturnValue(NhPaths.APP_SCRIPTS_PATH + "/chrootmgr -c \"status\"") == 0) {
+            // 移除可能的 VNC 锁（如果手机在运行 VNC 服务器时重启）
+            exe.RunAsRootOutput("rm -rf " + NhPaths.CHROOT_PATH() + "/tmp/.X1*");
+            hashMap.put("CHROOT", "OK");
+        }
+
+        String resultMsg = "启动完成. \n所有检查均通过, Chroot 已启动！";
+        for (Map.Entry<String, String> entry : hashMap.entrySet()) {
+            if (!entry.getValue().equals("OK")) {
+                resultMsg = "请确保满足上述所有要求. ";
                 break;
             }
         }
 
         doNotification(
                 "Root: " + hashMap.get("ROOT") + "\n" +
-                "Busybox: " + hashMap.get("BUSYBOX") + "\n" +
-                "Chroot: " + hashMap.get("CHROOT") + "\n" +
-                resultMsg);
+                        "Busybox: " + hashMap.get("BUSYBOX") + "\n" +
+                        "Chroot: " + hashMap.get("CHROOT") + "\n" +
+                        resultMsg);
     }
 
     @Override
@@ -115,7 +123,7 @@ public class RunAtBootService extends JobIntentService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel serviceChannel = new NotificationChannel(
                     AppNavHomeActivity.BOOT_CHANNEL_ID,
-                    "Nethunter Boot Check Service",
+                    "Nethunter 启动检查服务",
                     NotificationManager.IMPORTANCE_HIGH
             );
 

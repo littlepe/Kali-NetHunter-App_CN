@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="Settings"
+                    android:text="设置"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"/>
 
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="CAN Interface (e.g., can0 or vcan1 or slcan0)"
+                    android:hint="CAN 接口（如 can0、vcan1 或 slcan0）"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     tools:ignore="MissingConstraints,TouchTargetSizeCheck"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="MAC Address (e.g., 0A:1B:2C:3D:4E:5F:6A:7B)"
+                    android:hint="MAC 地址（如 0A:1B:2C:3D:4E:5F:6A:7B）"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     tools:ignore="MissingConstraints,TouchTargetSizeCheck"
@@ -119,7 +119,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="txqueuelen"
+                        android:text="发送队列长度"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/holo_red_light"
                         tools:ignore="TextContrastCheck" />
@@ -129,7 +129,7 @@
                     android:id="@+id/mtu_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="MTU Value (e.g., 16)"
+                    android:hint="MTU 值（如 16）"
                     android:visibility="gone"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -138,7 +138,7 @@
                     android:id="@+id/txqueuelen_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="txqueuelen Value (e.g., 1000)"
+                    android:hint="发送队列长度值（如 1000）"
                     android:visibility="gone"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -165,7 +165,7 @@
                     android:layout_weight="3"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="Interface"
+                    android:text="接口"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"/>
 
@@ -181,7 +181,7 @@
                     android:id="@+id/can_type_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CAN Type :"
+                    android:text="CAN 类型: "
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -212,7 +212,7 @@
                         android:id="@+id/start_caniface"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="▶ CAN"
+                        android:text="▶ 启动 CAN"
                         android:layout_weight="1"
                         android:minWidth="100dp" />
 
@@ -220,7 +220,7 @@
                         android:id="@+id/reset_iface"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Reset"
+                        android:text="重置"
                         android:layout_weight="1"
                         android:minWidth="100dp"
                         tools:ignore="VisualLintButtonSize" />
@@ -305,7 +305,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
-                android:text="🟧 = Long press to edit command"
+                android:text="🟧 = 长按编辑命令"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <View
@@ -329,7 +329,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="VIN Info"
+                    android:text="VIN 信息"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"/>
 
@@ -345,7 +345,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="VIN identifier (e.g., 4F2CU08102KM50866)"
+                    android:hint="VIN 标识符（如 4F2CU08102KM50866）"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     tools:ignore="MissingConstraints,TextFields,TouchTargetSizeCheck"
@@ -370,7 +370,7 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_column="0"
-                    android:text="show" />
+                    android:text="显示" />
 
                 <Button
                     android:id="@+id/vin_check"
@@ -379,7 +379,7 @@
                     android:layout_columnWeight="1"
                     android:layout_row="0"
                     android:layout_column="1"
-                    android:text="check" />
+                    android:text="检查" />
 
             </GridLayout>
 

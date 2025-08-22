@@ -59,10 +59,10 @@ public class LocationUpdateService extends Service {
     public static final String CHANNEL_ID = "NethunterLocationUpdateChannel";
     public static final int NOTIFY_ID = 1004;
     private static final String TAG = "LocationUpdateService";
-    private static final String notificationTitle = "GPS Provider running";
-    private static final String notificationText = "Sending GPS data to udp://127.0.0.1:" + NhPaths.GPS_PORT;
-    private String lastLocationSourceReceived = "None";
-    private String lastLocationSourcePublished = "None";
+    private static final String notificationTitle = "GPS 提供程序正在运行";
+    private static final String notificationText = "正在发送 GPS 数据到 udp://127.0.0.1:" + NhPaths.GPS_PORT;
+    private String lastLocationSourceReceived = "无";
+    private String lastLocationSourcePublished = "无";
     private String lastNotificationText = null;
     private double lastLocationLatitude = 0.0;
     private double lastLocationLongitude = 0.0;
@@ -75,16 +75,16 @@ public class LocationUpdateService extends Service {
     private Handler resetListenersTimerTaskHandler = null;
     private final IBinder binder = new ServiceBinder();
 
-    // this allows us to check if there is already a LocationUpdateService running without actually attaching to it
+    // 这允许我们检查是否已有 LocationUpdateService 在运行, 而无需实际附加到它
     public static boolean isInstanceCreated() {
         return (instance != null);
     }
 
-    // this gets called if we launch via an Intent or from the command line, instead of the app
+    // 如果我们通过 Intent 或命令行启动, 而不是通过应用程序启动, 则会调用此方法
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "onStartCommand");
-        requestUpdates(null); // request updates, but no widget to receive them as we don't have the app running
+        requestUpdates(null); // 请求更新, 但没有小部件接收它们, 因为应用程序没有运行
         return Service.START_NOT_STICKY;
     }
 
@@ -97,7 +97,7 @@ public class LocationUpdateService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel serviceChannel = new NotificationChannel(
                     CHANNEL_ID,
-                    "NethunterPersistentChannelService",
+                    "Nethunter 持久通道服务",
                     NotificationManager.IMPORTANCE_LOW
             );
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -106,10 +106,9 @@ public class LocationUpdateService extends Service {
     }
 
     /**
-     * Formats the number of satellites from the #Location into a
-     * string.  In case #LocationManager.NETWORK_PROVIDER is used, it
-     * returns the faked value "1", because some software refuses to
-     * work with a "0" or an empty value.
+     * 将 #Location 中的卫星数量格式化为字符串. 
+     * 如果使用 #LocationManager.NETWORK_PROVIDER, 则返回伪造值 "1", 
+     * 因为某些软件拒绝使用 "0" 或空值. 
      */
     public String formatSatellites(Location location) {
         int satellites = 0;
@@ -126,14 +125,13 @@ public class LocationUpdateService extends Service {
             return satellites == 0 ? "" : String.valueOf(satellites);
         }
 
-        // Fallback for non-GPS providers
+        // 非 GPS 提供程序的回退值
         return "4";
     }
 
     /**
-     * Formats the altitude from the #Location into a string, with a
-     * second unit field ("M" for meters).  If the altitude is
-     * unknown, it returns two empty fields.
+     * 将 #Location 中的海拔高度格式化为字符串, 带有第二个单位字段（"M" 表示米）. 
+     * 如果海拔高度未知, 则返回两个空字段. 
      */
     public String formatAltitude(Location location) {
         StringBuilder s = new StringBuilder();
@@ -145,8 +143,8 @@ public class LocationUpdateService extends Service {
     }
 
     /**
-     * Calculates the NMEA checksum of the specified string.  Pass the
-     * portion of the line between '$' and '*' here.
+     * 计算指定字符串的 NMEA 校验和. 
+     * 在此处传递 '$' 和 '*' 之间的行部分. 
      */
     private String checksum(String s) {
         int checksum = 0;
@@ -161,7 +159,7 @@ public class LocationUpdateService extends Service {
     }
 
     /**
-     * Formats the time from the #Location into a string.
+     * 将 #Location 中的时间格式化为字符串. 
      */
     @SuppressLint("DefaultLocale")
     public static String formatTime(Location location) {
@@ -170,8 +168,7 @@ public class LocationUpdateService extends Service {
     }
 
     /**
-     * Formats the surface position (latitude and longitude) from the
-     * #Location into a string.
+     * 将 #Location 中的表面位置（纬度和经度）格式化为字符串. 
      */
     public static String formatPosition(Location location) {
         double latitude = location.getLatitude();
@@ -208,7 +205,7 @@ public class LocationUpdateService extends Service {
     }
 
     public void requestUpdates(KaliGPSUpdates.Receiver receiver) {
-        Log.d(TAG, "In requestUpdates");
+        Log.d(TAG, "在 requestUpdates 中");
         if (receiver != null)
             this.updateReceiver = receiver;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -217,7 +214,7 @@ public class LocationUpdateService extends Service {
     }
 
     public void stopUpdates() {
-        Log.d(TAG, "In stopUpdates");
+        Log.d(TAG, "在 stopUpdates 中");
         stopSelf();
     }
 
@@ -227,7 +224,7 @@ public class LocationUpdateService extends Service {
         if (locationUpdatesStarted)
             return;
         locationUpdatesStarted = true;
-        Log.d(TAG, "In startLocationUpdates");
+        Log.d(TAG, "在 startLocationUpdates 中");
 
         final LocationRequest lr = new LocationRequest.Builder(LocationRequest.PRIORITY_HIGH_ACCURACY, 1000L / 2L)
                 .setMinUpdateIntervalMillis(100L)
@@ -235,34 +232,34 @@ public class LocationUpdateService extends Service {
                 .setDurationMillis(1000 * 3600 * 2)
                 .build();
 
-        Log.d(TAG, "Requesting permissions marshmallow");
+        Log.d(TAG, "请求 Marshmallow 权限");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
-            // Initialize fusedLocationClient if not already initialized
+            // 如果尚未初始化, 则初始化 fusedLocationClient
             if (fusedLocationClient == null) {
                 fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
             }
 
-            // Register with Location services, so we can construct fake NMEA data
+            // 注册位置服务, 以便我们可以构造伪造的 NMEA 数据
             fusedLocationClient.requestLocationUpdates(lr, locationListener, null);
 
-            // Try to register for actual NMEA data straight from the GPS
+            // 尝试注册直接从 GPS 获取的实际 NMEA 数据
             LocationManager locationManager = (LocationManager) getSystemService(Service.LOCATION_SERVICE);
             try {
                 Method addNmeaListener =
                         LocationManager.class.getMethod("addNmeaListener", GpsStatus.NmeaListener.class);
                 addNmeaListener.invoke(locationManager, nmeaListener);
-                Log.d(TAG, "addNmeaListener success");
+                Log.d(TAG, "addNmeaListener 成功");
             } catch (Exception exception) {
-                Log.d(TAG, "Failed to add NMEA listener: " + exception.getMessage());
+                Log.d(TAG, "添加 NMEA 监听器失败: " + exception.getMessage());
             }
         }
 
-        // turn on a Persistent Notification so we can continue to get location updates even when backgrounded
+        // 开启持久通知, 以便即使在后天也能继续获取位置更新
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-        // TODO have this result intent open the NH app
+        // TODO 使此结果意图打开 NH 应用程序
         Intent resultIntent = new Intent(this, AppNavHomeActivity.class);
         resultIntent.putExtra("menuFragment", R.id.gps_item);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
@@ -281,8 +278,8 @@ public class LocationUpdateService extends Service {
         notificationManagerCompat.notify(NOTIFY_ID, notification);
 
         this.startForeground(NOTIFY_ID, notification);
-        // start a timer that will update our Notification every second
-        Log.d(TAG, "starting Notification Update Timer");
+        // 启动一个定时器, 每秒更新我们的通知
+        Log.d(TAG, "启动通知更新定时器");
         startTimers();
     }
 
@@ -293,8 +290,8 @@ public class LocationUpdateService extends Service {
 
     private void startTimers() {
         timerTask.run();
-        // Android will stop sending us updates two hours after the request.
-        // So, every hour, we will make a new request
+        // Android 将在请求后两小时停止向我们发送更新. 
+        // 因此, 每小时我们将发出一个新请求
         resetListenersTimerTaskHandler.postDelayed(resetListenersTimerTask, 3600*1000);
         // resetListenersTimerTask.run();
     }
@@ -305,8 +302,8 @@ public class LocationUpdateService extends Service {
     }
 
     private final Runnable resetListenersTimerTask = () -> {
-        // reset our listeners
-        Log.d(TAG, "Restarting listeners");
+        // 重置我们的监听器
+        Log.d(TAG, "重新启动监听器");
         stopLocationUpdates();
         requestUpdates(null);
     };
@@ -321,10 +318,10 @@ public class LocationUpdateService extends Service {
                     }
                 // Log.d(TAG, "TimerTask: " + lastLocationLatitude + ", " + lastLocationLongitude);
             } catch (Exception e) {
-                Log.d(TAG, "TimerTask Exception: " + e);
+                Log.d(TAG, "TimerTask 异常: " + e);
                 // e.printStackTrace();
             } finally {
-                // once per second
+                // 每秒一次
                 timerTaskHandler.postDelayed(timerTask, 1000);
             }
         }
@@ -336,14 +333,14 @@ public class LocationUpdateService extends Service {
         long age = (now.getTime() - lastLocationTime.getTime()) / 1000;
         String ageStr;
         if (age <= 10)
-            ageStr = "current";
+            ageStr = "当前";
         else if (age < 60)
-            ageStr = age + "s";
+            ageStr = age + "秒";
         else if (age < 3600)
-            ageStr = (age / 60) + "m";
+            ageStr = (age / 60) + "分钟";
         else
-            ageStr = (age / 3600) + "h";
-        String updatedText = String.format("Latitude: %1.5f  Longitude: %1.5f  +/- %1.1fm  Source: %s  Age: %s  Satellites: %d",
+            ageStr = (age / 3600) + "小时";
+        String updatedText = String.format("纬度: %1.5f  经度: %1.5f  +/- %1.1f米  来源: %s  时间: %s  卫星: %d",
                 lastLocationLatitude, lastLocationLongitude, lastLocationAccuracy,
                 lastLocationSourcePublished, ageStr, lastLocationSats);
 
@@ -361,7 +358,7 @@ public class LocationUpdateService extends Service {
         RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.gps_notification);
         contentView.setTextViewText(R.id.gps_notification_latitude, String.format("%1.5f", lastLocationLatitude));
         contentView.setTextViewText(R.id.gps_notification_longitude, String.format("%1.5f", lastLocationLongitude));
-        contentView.setTextViewText(R.id.gps_notification_accuracy, String.format("%1.1fm", lastLocationAccuracy));
+        contentView.setTextViewText(R.id.gps_notification_accuracy, String.format("%1.1f米", lastLocationAccuracy));
         contentView.setTextViewText(R.id.gps_notification_source, lastLocationSourcePublished);
         contentView.setTextViewText(R.id.gps_notification_age, ageStr);
         if (lastLocationSourcePublished.equals("GPS"))
@@ -380,16 +377,16 @@ public class LocationUpdateService extends Service {
                 .setContentIntent(resultPendingIntent);
         Notification notification = builder.build();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "POST_NOTIFICATIONS permission not granted. Notification not sent.");
+            Log.d(TAG, "POST_NOTIFICATIONS 权限未授予. 通知未发送. ");
             return;
         }
         notificationManagerCompat.notify(NOTIFY_ID, notification);
-        Log.d(TAG, "Notification Sent: " + updatedText);
+        Log.d(TAG, "通知已发送: " + updatedText);
     }
 
     private final GpsStatus.NmeaListener nmeaListener = (l, s) -> {
         if(!s.startsWith("$GPGGA")) {
-            // if we're using the real GPS as our source, go ahead and send these extra information strings to gpsd
+            // 如果我们使用真实 GPS 作为来源, 则将这些额外信息字符串发送到 gpsd
             if("GPS".equals(lastLocationSourcePublished))
                 sendUdpPacket(s);
             return;
@@ -405,7 +402,7 @@ public class LocationUpdateService extends Service {
         if (fixType == 0)
             return;
         // Log.d(TAG, "sats = " + sats);
-        Log.d(TAG, "Real NMEA: " + s);
+        Log.d(TAG, "真实 NMEA: " + s);
         lastLocationSourceReceived = "NmeaListener";
         publishLocation(s, "GPS");
     };
@@ -414,15 +411,15 @@ public class LocationUpdateService extends Service {
     private final LocationListener locationListener = location -> {
         String nmeaSentence = nmeaSentenceFromLocation(location);
 
-        Log.d(TAG, "Constructed NMEA: "+nmeaSentence);
-        // we will only publish these constructed sentences if we aren't currently getting real ones from the NmeaListener
+        Log.d(TAG, "构造的 NMEA: "+nmeaSentence);
+        // 如果我们当前没有从 NmeaListener 获取真实的句子, 我们将只发布这些构造的句子
         if(lastLocationSourceReceived.equals("LocationListener"))
-            publishLocation(nmeaSentence, "Network");
+            publishLocation(nmeaSentence, "网络");
         lastLocationSourceReceived = "LocationListener";
     };
 
     private void publishLocation(String nmeaSentence, String source) {
-        // Workaround to allow network operations in main thread
+        // 允许在主线程中进行网络操作的变通方法
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         try {
@@ -432,7 +429,7 @@ public class LocationUpdateService extends Service {
             String lonStr = fields[4];
             String ew = fields[5];
             int sats = Integer.parseInt(fields[7]);
-            double accuracy = Float.parseFloat(fields[8]) * 19.0; // why 19.0?  see https://gitlab.com/gpsd/gpsd/-/blob/master/libgpsd_core.c, P_UERE_NO_DGPS
+            double accuracy = Float.parseFloat(fields[8]) * 19.0; // 为什么是 19.0？参见 https://gitlab.com/gpsd/gpsd/-/blob/master/libgpsd_core.c, P_UERE_NO_DGPS
 
             int latDeg = Integer.parseInt(latStr.substring(0, 2));
             double latMin = Float.parseFloat(latStr.substring(2));
@@ -490,7 +487,7 @@ public class LocationUpdateService extends Service {
         initializeUdpComponents();
 
         if (udpDestAddr == null || dSock == null) {
-            Log.d(TAG, "UDP destination address or socket is null. Packet not sent.");
+            Log.d(TAG, "UDP 目标地址或套接字为空. 数据包未发送. ");
             return;
         }
 
@@ -507,14 +504,14 @@ public class LocationUpdateService extends Service {
     }
 
     private String nmeaSentenceFromLocation(Location location) {
-        // from: https://github.com/ya-isakov/blue-nmea-mirror/blob/master/src/Source.java
+        // 来自: https://github.com/ya-isakov/blue-nmea-mirror/blob/master/src/Source.java
         String time = formatTime(location);
         String position = formatPosition(location);
-        String accuracy = String.format("%.4f", location.getAccuracy()/19.0); // why 19.0?  see https://gitlab.com/gpsd/gpsd/-/blob/master/libgpsd_core.c, P_UERE_NO_DGPS
+        String accuracy = String.format("%.4f", location.getAccuracy()/19.0); // 为什么是 19.0？参见 https://gitlab.com/gpsd/gpsd/-/blob/master/libgpsd_core.c, P_UERE_NO_DGPS
         String innerSentence = String.format("GPGGA,%s,%s,1,%s,%s,%s,,,,", time, position, formatSatellites(location),
                 accuracy, formatAltitude(location));
 
-        // Adds checksum and initial $
+        // 添加校验和和初始 $
         String checksum = checksum(innerSentence);
         return "$" + innerSentence + checksum;
     }
@@ -526,9 +523,9 @@ public class LocationUpdateService extends Service {
             Method removeNmeaListener =
                     LocationManager.class.getMethod("removeNmeaListener", GpsStatus.NmeaListener.class);
             removeNmeaListener.invoke(locationManager, nmeaListener);
-            Log.d(TAG, "removeNmeaListener success");
+            Log.d(TAG, "removeNmeaListener 成功");
         } catch (Exception exception) {
-            // ignore
+            // 忽略
         }
         fusedLocationClient.removeLocationUpdates(locationListener);
     }
@@ -549,7 +546,7 @@ public class LocationUpdateService extends Service {
         instance = null;
         firstupdate = true;
 
-        // stop our Notification update timer
+        // 停止我们的通知更新定时器
         stopTimers();
         stopLocationUpdates();
         super.onDestroy();

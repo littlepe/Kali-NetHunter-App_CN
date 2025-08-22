@@ -2,6 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/rawSearch_ON"
-        android:title="Enable Raw search"
+        android:title="启用原始搜索"
         app:showAsAction="never" />
 </menu>

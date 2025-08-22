@@ -14,38 +14,38 @@ import java.util.ArrayList;
 /**
  * Created by jmingov on 11/15/15.
  *
- * BootKali
+ * BootKali 类
  * *********
  *
- * This class has 2 main functions:
+ * 该类有两个主要功能: 
 
  **********
- * 1.- Send commands to kali:
+ * 1. 向 Kali 系统发送命令: 
  **********
  *
- *    - new BootKali(CMD).run() and new BootKali(CMD).run_bg()
- * EX:
+ *    - 使用 new BootKali(CMD).run() 和 new BootKali(CMD).run_bg()
+ * 示例: 
  * String response = new BootKali("ls -l;uname -a;id;whoami").run()
- *        // Response is a string. :p
- * EX:
+ *        // 响应结果为字符串格式
+ * 示例: 
  * new BootKali("ls -l;uname -a;id;whoami").run_bg()
- *        // This has no output, is runned in the background
+ *        // 无输出, 在后台运行
  *
  **********
- * 2.- Generate commands to pass to the term apk as intent (only generate)
+ * 2. 生成可传递给终端应用的命令（仅生成命令）
  **********
  *
- * EX:
- *  OPEN KALI TERMINAL :: GET_KALI_SHELL_CMD()
+ * 示例: 
+ *  打开 Kali 终端: 调用 GET_KALI_SHELL_CMD()
  *
- *     String cmd = new BootKali("").GET_KALI_SHELL_CMD() // returns the cmd.
- *     // launck intent
+ *     String cmd = new BootKali("").GET_KALI_SHELL_CMD() // 返回终端命令
+ *     // 启动 intent
  *
- * EX:
- *  pass comands to fenerate the terminal equivalent :: GET_KALI_SHELL_CMD()
+ * 示例: 
+ *  生成终端可执行的命令: 调用 GET_TERM_CMD()
  *
- *     String cmd = new BootKali("ls -l;uname -a;id;whoami").GET_TERM_CMD() // returns the cmd.
- *     // launck intent
+ *     String cmd = new BootKali("ls -l;uname -a;id;whoami").GET_TERM_CMD() // 返回终端命令
+ *     // 启动 intent
  *
  *
  */

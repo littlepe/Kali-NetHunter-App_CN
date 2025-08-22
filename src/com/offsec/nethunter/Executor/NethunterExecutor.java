@@ -94,7 +94,7 @@ public class NethunterExecutor {
                     for (NethunterModel model : nethunterModelList) {
                         model.setResult(model.getRunOnCreate().equals("1")
                                 ? new ShellExecuter().RunAsRootOutput(model.getCommand()).split("\\n")
-                                : "Please click RUN button manually.".split("\\n"));
+                                : "请手动点击运行按钮. ".split("\\n"));
                     }
                 }
                 break;

@@ -148,7 +148,7 @@ public class MacchangerFragment extends Fragment {
         SecureRandom random = new SecureRandom();
         byte[] macAddr = new byte[6];
         random.nextBytes(macAddr);
-        //the second-least-significant bit and the least-significant bit of the first octet of the address must be 1 and 0 respectively
+        // 第一个字节的次低有效位和最低有效位必须分别为 1 和 0
         mac1.setText(String.format("%02x", ((macAddr[0] & 0xfc) | 0x2)));
         mac2.setText(String.format("%02x", macAddr[1]));
         mac3.setText(String.format("%02x", macAddr[2]));
@@ -182,7 +182,7 @@ public class MacchangerFragment extends Fragment {
             executeTask(() -> {
                 new ShellExecuter().RunAsRootOutput("setprop net.hostname " + newHostName);
                 mainHandler.post(() -> {
-                    showToast("net.hostname is set to " + newHostName);
+                    showToast("net.hostname 已设置为 " + newHostName);
                     setHostNameEditText();
                 });
             });
@@ -286,12 +286,12 @@ public class MacchangerFragment extends Fragment {
             String iface = interfaceSpinner.getSelectedItem().toString().toLowerCase();
             String originalMac = new ShellExecuter().RunAsRootOutput("cat /sys/class/net/" + iface + "/address");
             if (originalMac == null || originalMac.isEmpty()) {
-                Log.e(TAG, "Failed to retrieve the original MAC address for interface: " + iface);
-                mainHandler.post(() -> showToast("Failed to retrieve the original MAC address for " + iface));
+                Log.e(TAG, "获取接口 " + iface + " 的原始 MAC 地址失败");
+                mainHandler.post(() -> showToast("获取接口 " + iface + " 的原始 MAC 地址失败"));
                 return;
             }
             mainHandler.post(() -> {
-                showToast("Restoring original MAC for " + iface + ": " + originalMac);
+                showToast("正在恢复 " + iface + " 的原始 MAC: " + originalMac);
                 executeTask(() -> {
                     int result = new ShellExecuter().RunAsRootReturnValue(
                             "ip link set " + iface + " down && " +
@@ -300,9 +300,9 @@ public class MacchangerFragment extends Fragment {
                     );
                     mainHandler.post(() -> {
                         if (result == 0) {
-                            showToast("MAC address of " + iface + " restored to " + originalMac);
+                            showToast("接口 " + iface + " 的 MAC 已恢复为 " + originalMac);
                         } else {
-                            showToast("Failed to restore MAC address on " + iface);
+                            showToast("恢复接口 " + iface + " 的 MAC 失败");
                         }
                         reloadImageButton.performClick();
                     });
@@ -314,7 +314,7 @@ public class MacchangerFragment extends Fragment {
     private void setChangeMacButton() {
         changeMacButton.setOnClickListener(v -> {
             String macAddress = getMacAddress();
-            showToast("Changing MAC address on " + interfaceSpinner.getSelectedItem().toString().toLowerCase() + "...");
+            showToast("正在修改 " + interfaceSpinner.getSelectedItem().toString().toLowerCase() + " 的 MAC 地址...");
             executeTask(() -> {
                 String iface = interfaceSpinner.getSelectedItem().toString().toLowerCase();
                 int result = new ShellExecuter().RunAsRootReturnValue(
@@ -324,9 +324,9 @@ public class MacchangerFragment extends Fragment {
                 );
                 mainHandler.post(() -> {
                     if (result == 0) {
-                        showToast("MAC address of " + iface + " changed to " + macAddress);
+                        showToast("接口 " + iface + " 的 MAC 已更改为 " + macAddress);
                     } else {
-                        showToast("Failed to change MAC address on " + iface + ". Try another MAC.");
+                        showToast("更改接口 " + iface + " 的 MAC 失败, 请尝试其他 MAC");
                     }
                     reloadImageButton.performClick();
                 });
@@ -334,7 +334,7 @@ public class MacchangerFragment extends Fragment {
         });
     }
 
-    // --- Helper Methods ---
+    // --- 辅助方法 ---
     private String getMacAddress() {
         return mac1.getText().toString().toLowerCase() + ":" +
                 mac2.getText().toString().toLowerCase() + ":" +

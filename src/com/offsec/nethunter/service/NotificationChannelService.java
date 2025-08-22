@@ -25,6 +25,10 @@ import com.offsec.nethunter.Executor.CustomCommandsExecutor;
 import com.offsec.nethunter.BuildConfig;
 import com.offsec.nethunter.R;
 
+/**
+ * 通知渠道服务, 用于在应用后台时向用户推送通知
+ * 通知类型包括提醒挂载 Chroot、使用 NetHunter、下载、安装、备份以及自定义命令的执行结果
+ */
 public class NotificationChannelService extends JobIntentService {
     public static final String CHANNEL_ID = "NethunterNotifyChannel";
     public static final int NOTIFY_ID = 1002;
@@ -32,6 +36,8 @@ public class NotificationChannelService extends JobIntentService {
     public Intent resultIntent = null;
     public PendingIntent resultPendingIntent = null;
     public TaskStackBuilder stackBuilder = null;
+
+    // 通知相关动作
     public static final String REMINDMOUNTCHROOT = BuildConfig.APPLICATION_ID + ".REMINDMOUNTCHROOT";
     public static final String USENETHUNTER = BuildConfig.APPLICATION_ID + ".USENETHUNTER";
     public static final String DOWNLOADING = BuildConfig.APPLICATION_ID + ".DOWNLOADING";
@@ -40,6 +46,11 @@ public class NotificationChannelService extends JobIntentService {
     public static final String CUSTOMCOMMAND_START = BuildConfig.APPLICATION_ID + ".CUSTOMCOMMAND_START";
     public static final String CUSTOMCOMMAND_FINISH = BuildConfig.APPLICATION_ID + ".CUSTOMCOMMAND_FINISH";
 
+    /**
+     * 将工作排队到此服务
+     * @param context 应用上下文
+     * @param intent 包含工作内容的 Intent
+     */
     public static void enqueueWork(Context context, Intent intent) {
         enqueueWork(context, NotificationChannelService.class, JOB_ID, intent);
     }
@@ -47,6 +58,7 @@ public class NotificationChannelService extends JobIntentService {
     @Override
     public void onCreate() {
         super.onCreate();
+        // 创建通知渠道（Android O 及以上版本）
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel serviceChannel = new NotificationChannel(
                     CHANNEL_ID,
@@ -62,10 +74,11 @@ public class NotificationChannelService extends JobIntentService {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
+        // 根据 Intent 的 Action 类型展示不同通知
         if (intent.getAction() != null) {
             NotificationCompat.Builder builder;
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-            notificationManagerCompat.cancelAll();
+            notificationManagerCompat.cancelAll(); // 清除旧通知
             resultIntent = new Intent();
             stackBuilder = TaskStackBuilder.create(this);
             stackBuilder.addNextIntentWithParentStack(resultIntent);
@@ -76,9 +89,9 @@ public class NotificationChannelService extends JobIntentService {
                     builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                             .setAutoCancel(true)
                             .setSmallIcon(R.drawable.ic_stat_ic_nh_notification)
-                            .setStyle(new NotificationCompat.BigTextStyle().bigText("Please open nethunter app and navigate to ChrootManager to setup your KaliChroot."))
-                            .setContentTitle("KaliChroot is not up or installed")
-                            .setContentText("Please navigate to ChrootManager to setup your KaliChroot.")
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText("请打开 NetHunter 应用并导航至 ChrootManager 以设置您的 KaliChroot. "))
+                            .setContentTitle("KaliChroot 未启动或未安装")
+                            .setContentText("请导航至 ChrootManager 以设置您的 KaliChroot. ")
                             .setPriority(NotificationCompat.PRIORITY_MAX)
                             .setContentIntent(resultPendingIntent);
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -93,7 +106,7 @@ public class NotificationChannelService extends JobIntentService {
                             .setSmallIcon(R.drawable.ic_stat_ic_nh_notification)
                             .setTimeoutAfter(10000)
                             .setStyle(new NotificationCompat.BigTextStyle().bigText("Happy hunting!"))
-                            .setContentTitle("KaliChroot is UP!")
+                            .setContentTitle("KaliChroot 已启动！")
                             .setContentText("Happy hunting!")
                             .setPriority(NotificationCompat.PRIORITY_MAX)
                             .setContentIntent(resultPendingIntent);
@@ -108,9 +121,9 @@ public class NotificationChannelService extends JobIntentService {
                             .setAutoCancel(true)
                             .setSmallIcon(R.drawable.ic_stat_ic_nh_notification)
                             .setTimeoutAfter(15000)
-                            .setStyle(new NotificationCompat.BigTextStyle().bigText("Please don't kill the app or the download will be cancelled!"))
-                            .setContentTitle("Downloading Chroot!")
-                            .setContentText("Please don't kill the app or the download will be cancelled!")
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText("请勿关闭应用, 否则下载将被取消！"))
+                            .setContentTitle("正在下载 Chroot！")
+                            .setContentText("请勿关闭应用, 否则下载将被取消！")
                             .setPriority(NotificationCompat.PRIORITY_MAX)
                             .setContentIntent(resultPendingIntent);
                     notificationManagerCompat.notify(NOTIFY_ID, builder.build());
@@ -120,9 +133,9 @@ public class NotificationChannelService extends JobIntentService {
                             .setAutoCancel(true)
                             .setSmallIcon(R.drawable.ic_stat_ic_nh_notification)
                             .setTimeoutAfter(15000)
-                            .setStyle(new NotificationCompat.BigTextStyle().bigText("Please don't kill the app as it will still keep running on the background! Otherwise you'll need to kill the tar process by yourself."))
-                            .setContentTitle("Installing Chroot")
-                            .setContentText("Please don't kill the app as it will still keep running on the background! Otherwise you'll need to kill the tar process by yourself.")
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText("请勿关闭应用, 因为它仍然会在后台运行！否则您需要手动终止 tar 进程. "))
+                            .setContentTitle("正在安装 Chroot")
+                            .setContentText("请勿关闭应用, 因为它仍然会在后台运行！否则您需要手动终止 tar 进程. ")
                             .setPriority(NotificationCompat.PRIORITY_MAX)
                             .setContentIntent(resultPendingIntent);
                     notificationManagerCompat.notify(NOTIFY_ID, builder.build());
@@ -132,9 +145,9 @@ public class NotificationChannelService extends JobIntentService {
                             .setAutoCancel(true)
                             .setSmallIcon(R.drawable.ic_stat_ic_nh_notification)
                             .setTimeoutAfter(15000)
-                            .setStyle(new NotificationCompat.BigTextStyle().bigText("Please don't kill the app as it will still keep running on the background! Otherwise you'll need to kill the tar process by yourself."))
-                            .setContentTitle("Creating KaliChroot backup to local storage.")
-                            .setContentText("Please don't kill the app as it will still keep running on the background! Otherwise you'll need to kill the tar process by yourself.")
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText("请勿关闭应用, 因为它仍然会在后台运行！否则您需要手动终止 tar 进程. "))
+                            .setContentTitle("正在创建 KaliChroot 备份到本地存储. ")
+                            .setContentText("请勿关闭应用, 因为它仍然会在后台运行！否则您需要手动终止 tar 进程. ")
                             .setPriority(NotificationCompat.PRIORITY_MAX)
                             .setContentIntent(resultPendingIntent);
                     notificationManagerCompat.notify(NOTIFY_ID, builder.build());
@@ -144,14 +157,14 @@ public class NotificationChannelService extends JobIntentService {
                             .setAutoCancel(false)
                             .setSmallIcon(R.drawable.ic_stat_ic_nh_notification)
                             .setStyle(new NotificationCompat.BigTextStyle().bigText(
-                                    "Command: \"" + intent.getStringExtra("CMD") +
-                                            "\" is being run in background and in " +
-                                            intent.getStringExtra("ENV") + " environment."))
-                            .setContentTitle("Custom Commands")
+                                    "命令: \"" + intent.getStringExtra("CMD") +
+                                            "\" 正在 " +
+                                            intent.getStringExtra("ENV") + " 环境中后台运行. "))
+                            .setContentTitle("自定义命令")
                             .setContentText(
-                                    "Command: \"" + intent.getStringExtra("CMD") +
-                                            "\" is being run in background and in " +
-                                            intent.getStringExtra("ENV") + " environment.")
+                                    "命令: \"" + intent.getStringExtra("CMD") +
+                                            "\" 正在 " +
+                                            intent.getStringExtra("ENV") + " 环境中后台运行. ")
                             .setPriority(NotificationCompat.PRIORITY_MAX)
                             .setContentIntent(resultPendingIntent);
                     notificationManagerCompat.notify(NOTIFY_ID, builder.build());
@@ -164,7 +177,7 @@ public class NotificationChannelService extends JobIntentService {
                             .setAutoCancel(false)
                             .setSmallIcon(R.drawable.ic_stat_ic_nh_notification)
                             .setStyle(new NotificationCompat.BigTextStyle().bigText(resultString))
-                            .setContentTitle("Custom Commands")
+                            .setContentTitle("自定义命令")
                             .setContentText(resultString)
                             .setPriority(NotificationCompat.PRIORITY_MAX)
                             .setContentIntent(resultPendingIntent);
@@ -174,6 +187,10 @@ public class NotificationChannelService extends JobIntentService {
         }
     }
 
+    /**
+     * 请求通知权限（Android 13 及以上版本）
+     * @param context 应用上下文
+     */
     private void requestPostNotificationsPermission(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && context instanceof Activity) {
             ActivityCompat.requestPermissions(
@@ -184,17 +201,23 @@ public class NotificationChannelService extends JobIntentService {
         }
     }
 
+    /**
+     * 根据返回码和命令生成执行结果字符串
+     * @param returnCode 返回码
+     * @param CMD 执行的命令
+     * @return 执行结果字符串
+     */
     @NonNull
     private static String getResultString(int returnCode, String CMD) {
         String resultString = "";
         if (returnCode == CustomCommandsExecutor.ANDROID_CMD_SUCCESS) {
-            resultString = "Return success.\nCommand: \"" + CMD + "\" has been executed in android environment.";
+            resultString = "返回成功. \n命令: \"" + CMD + "\" 已在 Android 环境中执行. ";
         } else if (returnCode == CustomCommandsExecutor.ANDROID_CMD_FAIL) {
-            resultString = "Return error.\nCommand: \"" + CMD + "\" has been executed in android environment.";
+            resultString = "返回错误. \n命令: \"" + CMD + "\" 已在 Android 环境中执行. ";
         } else if (returnCode == CustomCommandsExecutor.KALI_CMD_SUCCESS) {
-            resultString = "Return success.\nCommand: \"" + CMD + "\" has been executed in Kali chroot environment.";
+            resultString = "返回成功. \n命令: \"" + CMD + "\" 已在 Kali Chroot 环境中执行. ";
         } else if (returnCode == CustomCommandsExecutor.KALI_CMD_FAIL) {
-            resultString = "Return error.\nCommand: \"" + CMD + "\" has been executed in Kali chroot environment.";
+            resultString = "返回错误. \n命令: \"" + CMD + "\" 已在 Kali Chroot 环境中执行. ";
         }
         return resultString;
     }

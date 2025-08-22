@@ -1,7 +1,7 @@
 package com.offsec.nethunter.models;
 
 /*
-    CustomCommands Model class, each model object represent the data of each recyclerview item.
+    USBArsenalUSBNetwork 模型类, 每个模型对象代表 RecyclerView 中一项的数据. 
  */
 public class USBArsenalUSBNetworkModel {
     private String upstream_iface;

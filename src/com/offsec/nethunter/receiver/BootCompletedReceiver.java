@@ -20,7 +20,7 @@ public class BootCompletedReceiver extends BroadcastReceiver{
                 RunAtBootService.enqueueWork(context, (intent.setComponent(comp)));
                 //Intent serviceIntent = new Intent(context, RunAtBootService.class);
                 //context.startService(serviceIntent);
-                Log.d(TAG, "NetHunter receive boot_completed intent!!");
+                Log.d(TAG, "NetHunter 已收到开机完成广播！");
             }
         }
     }

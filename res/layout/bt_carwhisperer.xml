@@ -19,55 +19,35 @@
             android:gravity="center"
             android:padding="4dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bluetooth interface"
-            android:padding="4dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/hci_interface"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="none"
-            android:inputType="text"
-            android:text="hci0" />
-    </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蓝牙接口"
+                android:padding="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/hci_interface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:inputType="text"
+                android:text="hci0" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/set_target"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Use selected target"
+            android:text="使用选中的目标"
             android:textColor="#ffffffff" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address"
-            android:padding="4dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/hci_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="00:11:22:33:44:55" />
-    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,7 +58,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Channel"
+                android:text="地址"
+                android:padding="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/hci_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="00:11:22:33:44:55" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="通道"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -98,24 +98,24 @@
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mode"
-            android:padding="4dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="模式"
+                android:padding="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Spinner
-            android:id="@+id/cwmode"
+            <Spinner
+                android:id="@+id/cwmode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/payload_select" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/payload_select" />
-    </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save recorded sound to /sdcard/"
+            android:text="将录制的声音保存到 /sdcard/"
             android:padding="4dp" />
 
         <EditText
@@ -130,7 +130,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sound file to inject"
+            android:text="要注入的音频文件"
             android:padding="4dp" />
 
         <LinearLayout
@@ -153,47 +153,47 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:text="..."
+                android:text="…"
                 android:textColor="#ffffffff" />
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/start_cw"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="Launch"
-            android:textColor="#ffffffff" />
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/stop_cw"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="Kill"
-            android:textColor="#ffffffff" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_cw"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="启动"
+                android:textColor="#ffffffff" />
 
-        <ImageButton
-            android:id="@+id/play_audio"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="4"
-            android:contentDescription="none"
-            android:src="@drawable/ic_action_play" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/stop_cw"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="停止"
+                android:textColor="#ffffffff" />
 
-        <ImageButton
-            android:id="@+id/stop_audio"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="4"
-            android:contentDescription="none"
-            android:src="@drawable/ic_action_stop" />
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/play_audio"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:contentDescription="无"
+                android:src="@drawable/ic_action_play" />
+
+            <ImageButton
+                android:id="@+id/stop_audio"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:contentDescription="无"
+                android:src="@drawable/ic_action_stop" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

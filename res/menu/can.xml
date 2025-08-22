@@ -2,14 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/documentation"
-        android:title="Documentation"/>
+        android:title="文档"/>
 	<item
         android:id="@+id/setup"
-        android:title="Setup"/>
+        android:title="安装"/>
     <item
         android:id="@+id/update"
-        android:title="Update"/>
+        android:title="更新"/>
     <item
         android:id="@+id/about"
-        android:title="About"/>
+        android:title="关于"/>
 </menu>

@@ -19,88 +19,48 @@
             android:gravity="center"
             android:padding="4dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bluetooth interface"
-            android:paddingStart="4dp"
-            android:paddingLeft="4dp"
-            android:paddingTop="20dp"
-            android:paddingEnd="4dp"
-            android:paddingRight="4dp"
-            android:paddingBottom="4dp"
-            android:padding="4dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/spoof_interface"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="none"
-            android:inputType="text"
-            android:text="hci0" />
-    </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蓝牙接口"
+                android:paddingStart="4dp"
+                android:paddingLeft="4dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="4dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:padding="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/spoof_interface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:inputType="text"
+                android:text="hci0" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/set_target"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Use selected target"
+            android:text="使用选中的目标"
             android:textColor="#ffffffff" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Spoof settings"
+            android:text="欺骗设置"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="Address" />
-
-        <EditText
-            android:id="@+id/targetAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="none"
-            android:hint="00:11:22:33:44:55" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Class"
-                android:padding="4dp"/>
-
-            <EditText
-                android:id="@+id/targetClass"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="none"
-                android:hint="0x123456" />
-    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,7 +71,47 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:padding="4dp"
+                android:text="地址" />
+
+            <EditText
+                android:id="@+id/targetAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:hint="00:11:22:33:44:55" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="类别"
+                android:padding="4dp"/>
+
+            <EditText
+                android:id="@+id/targetClass"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:hint="0x123456" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="名称"
                 android:padding="4dp"/>
 
             <EditText
@@ -120,30 +120,30 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="none"
                 android:hint="OffSec" />
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/apply_spoof"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Apply"
-            android:textColor="#ffffffff" />
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/refreshSpoof"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Check"
-            android:textColor="#ffffffff" />
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/apply_spoof"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="应用"
+                android:textColor="#ffffffff" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/refreshSpoof"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="检查"
+                android:textColor="#ffffffff" />
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:text="Current Address:"
+                android:text="当前地址: "
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_1"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -187,7 +187,6 @@
                 app:layout_constraintGuide_percent="0.5013193"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -202,7 +201,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:text="Current Class:"
+                android:text="当前类别: "
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_2"
@@ -233,37 +232,37 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/currentClassType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="11dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:hint="-"
-                android:maxLength="50"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/guideline_4" />
+        <TextView
+            android:id="@+id/currentClassType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="11dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:hint="-"
+            android:maxLength="50"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline_4" />
 
-         <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center_horizontal">
 
-             <TextView
-                 android:id="@+id/textView3"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginEnd="10dp"
-                 android:text="Current Name:"
-                 android:layout_weight="1"
-                 android:textAppearance="?android:attr/textAppearanceMedium"
-                 app:layout_constraintEnd_toStartOf="@+id/guideline_3"
-                 app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="当前名称: "
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_3"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/currentName"

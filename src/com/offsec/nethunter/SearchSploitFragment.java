@@ -52,7 +52,7 @@ public class SearchSploitFragment extends Fragment {
     private Boolean isLoaded = false;
     private ListView searchSploitListView;
     private List<SearchSploit> full_exploitList;
-    // Create and handle database
+    /* 创建并处理数据库 */
     private SearchSploitSQL database;
     private Context context;
     private Activity activity;
@@ -80,13 +80,13 @@ public class SearchSploitFragment extends Fragment {
         setHasOptionsMenu(true);
         database = new SearchSploitSQL(context);
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-        builder.setTitle("Exploit Database Archive");
-        builder.setMessage("Loading...wait");
+        builder.setTitle("漏洞数据库归档");
+        builder.setMessage("加载中…请稍候");
 
         adi = builder.create();
         adi.setCancelable(false);
         adi.show();
-        // Search Bar
+        /* 搜索栏 */
         numex = rootView.findViewById(R.id.numex);
         final SearchView searchStr = rootView.findViewById(R.id.searchSploit_searchbar);
         searchStr.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -111,7 +111,7 @@ public class SearchSploitFragment extends Fragment {
                 return false;
             }
         });
-        // Load/reload database button
+        /* 加载/重新加载数据库按钮 */
         final Button searchSearchSploit = rootView.findViewById(R.id.serchsploit_loadDB);
         final ProgressBar progressBar = rootView.findViewById(R.id.progressBar);
         searchSearchSploit.setOnClickListener(v -> {
@@ -120,14 +120,14 @@ public class SearchSploitFragment extends Fragment {
                 final Boolean isFeeded = database.doDbFeed();
                 searchSearchSploit.post(() -> {
                     if (isFeeded) {
-                        NhPaths.showMessage_long(context, "DB FEED DONE");
+                        NhPaths.showMessage_long(context, "数据库加载完成");
                         try {
-                            // Search List
+                            /* 复制数据库 */
                             String sd = Environment.getExternalStorageDirectory().getPath();
                             String data = NhPaths.APP_PATH + "/";
                             String DATABASE_NAME = "SearchSploit";
                             String currentDBPath = "databases/" + DATABASE_NAME;
-                            String backupDBPath = "/nh_files/" + DATABASE_NAME; // From SD directory.
+                            String backupDBPath = "/nh_files/" + DATABASE_NAME; // 从 SD 目录
 
                             File backupDB = new File(data, currentDBPath);
                             File currentDB = new File(sd, backupDBPath);
@@ -138,20 +138,20 @@ public class SearchSploitFragment extends Fragment {
 
                             src.close();
                             dst.close();
-                            Log.d("importDB", "Successfully imported " + DATABASE_NAME);
+                            Log.d("importDB", "成功导入 " + DATABASE_NAME);
                             main(rootView);
                         } catch (Exception e) {
                             Log.d("importDB", e.toString());
                         }
                     } else {
                         NhPaths.showMessage_long(context,
-                                "Unable to find Searchsploit files.csv database. Install exploitdb in chroot");
+                                "无法找到 Searchsploit 的 files.csv 数据库, 请在 chroot 中安装 exploitdb");
                     }
                     progressBar.setVisibility(View.GONE);
                 });
             }).start();
         });
-        //prevents menu stuck
+        /* 防止菜单卡住 */
         new android.os.Handler().postDelayed(
                 () -> main(rootView), 250);
 
@@ -172,18 +172,18 @@ public class SearchSploitFragment extends Fragment {
                 assert getView() != null;
                 requireView().findViewById(R.id.search_filters).setVisibility(View.VISIBLE);
                 withFilters = true;
-                item.setTitle("Enable Raw search");
+                item.setTitle("启用原始搜索");
                 loadExploits();
                 hideSoftKeyboard(getView());
             } else {
                 MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-                builder.setTitle("Raw search warning");
+                builder.setTitle("原始搜索警告");
 
-                builder.setMessage("The exploit db is pretty big (+30K exploits), activating raw search will make the search slow.\nIs useful to do global searches when you don't find a exploit.")
-                        .setNegativeButton("Cancel", (dialog, id) -> dialog.dismiss())
-                        .setPositiveButton("Enable", (dialog, id) -> {
+                builder.setMessage("漏洞数据库非常大（超过 3 万条）, 启用原始搜索将降低搜索速度. \n当您找不到漏洞时, 可用于全局搜索. ")
+                        .setNegativeButton("取消", (dialog, id) -> dialog.dismiss())
+                        .setPositiveButton("启用", (dialog, id) -> {
                             getView().findViewById(R.id.search_filters).setVisibility(View.GONE);
-                            item.setTitle("Disable Raw search");
+                            item.setTitle("禁用原始搜索");
                             withFilters = false;
                             loadExploits();
                             hideSoftKeyboard(getView());
@@ -273,12 +273,12 @@ public class SearchSploitFragment extends Fragment {
                         this::loadExploits, 1500);
                 return;
             }
-            numex.setText(String.format("%d results", exploitList.size()));
+            numex.setText(String.format("%d 条结果", exploitList.size()));
             ExploitLoader exploitAdapter = new ExploitLoader(context, exploitList);
             searchSploitListView.setAdapter(exploitAdapter);
             if (!isLoaded) {
-                // preloading the long list lets see if is more performant
-                // preload in the background.
+                /* 预加载长列表, 看是否更流畅 */
+                /* 在后台预加载 */
                 new Thread(() -> full_exploitList = database.getAllExploitsRaw("")).start();
 
                 adi.dismiss();
@@ -299,23 +299,26 @@ class ExploitLoader extends BaseAdapter {
     }
 
     static class ViewHolderItem {
-        // The switch
-        //Switch sw;
-        // the msg holder
+        /* 类型 */
         TextView type;
+        /* 平台 */
         TextView platform;
+        /* 作者 */
         TextView author;
+        /* 日期 */
         TextView date;
-        // the service title
+        /* 描述 */
         TextView description;
-        // run at boot checkbox
+        /* 查看源码按钮 */
         Button viewSource;
+        /* 打开网页按钮 */
         Button openWeb;
+        /* 发送到 HID 按钮 */
         Button sendHid;
     }
 
     public int getCount() {
-        // return the number of services
+        /* 返回服务数量 */
         return _exploitList.size();
     }
 
@@ -324,14 +327,14 @@ class ExploitLoader extends BaseAdapter {
         String nhpath = NhPaths.APP_PATH;
         command[0] = "su -mm -c " + nhpath + "/scripts/bootkali file2hid-file " + file;
         String test = "su -mm -c " + nhpath + "/scripts/bootkali file2hid-file " + file;
-        Log.d("Exe:", test);
+        Log.d("执行:", test);
         ShellExecuter exe = new ShellExecuter();
         exe.RunAsRoot(command);
     }
 
-    // getView method is called for each item of ListView
+    /* 为 ListView 的每一项生成视图 */
     public View getView(final int position, View convertView, ViewGroup parent) {
-        // inflate the layout for each item of listView (our services)
+        /* 为每一项加载布局（服务） */
 
         ViewHolderItem vH;
 
@@ -339,11 +342,9 @@ class ExploitLoader extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) _mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.searchsploit_item, parent, false);
 
-            // set up the ViewHolder
+            /* 设置 ViewHolder */
             vH = new ViewHolderItem();
-            // get the reference of switch and the text view
             vH.description = convertView.findViewById(R.id.description);
-            // vH.cwSwich = (Switch) convertView.findViewById(R.id.switch1);
             vH.type = convertView.findViewById(R.id.type);
             vH.platform = convertView.findViewById(R.id.platform);
             vH.author = convertView.findViewById(R.id.author);
@@ -352,13 +353,12 @@ class ExploitLoader extends BaseAdapter {
             vH.openWeb = convertView.findViewById(R.id.openWeb);
             vH.sendHid = convertView.findViewById(R.id.searchsploit_sendhid_button);
             convertView.setTag(vH);
-            //System.out.println ("created row");
         } else {
-            // recycle the items in the list if already exists
+            /* 复用已存在的视图 */
             vH = (ViewHolderItem) convertView.getTag();
         }
 
-        // remove listeners
+        /* 移除监听器 */
         final SearchSploit exploitItem = getItem(position);
 
         final String _file = exploitItem.getFile();
@@ -371,10 +371,10 @@ class ExploitLoader extends BaseAdapter {
 
         vH.viewSource.setOnClickListener(null);
         vH.openWeb.setOnClickListener(null);
-        // set service name
+        /* 设置服务名称 */
         vH.description.setText(_desc);
         vH.type.setText(_type);
-	    vH.platform.setText(_platform);
+        vH.platform.setText(_platform);
         vH.author.setText(_author);
         vH.date.setText(_date);
         vH.viewSource.setOnClickListener(v -> {
@@ -386,8 +386,6 @@ class ExploitLoader extends BaseAdapter {
         });
         vH.sendHid.setOnClickListener(v -> {
             start("/usr/share/exploitdb/" + _file);
-            //_mContext.startActivity(i);
-
         });
         vH.openWeb.setOnClickListener(v -> {
             Intent i = new Intent(Intent.ACTION_VIEW);

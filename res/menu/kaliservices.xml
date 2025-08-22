@@ -13,17 +13,17 @@
     <item
         android:id="@+id/f_kaliservices_menu_backupDB"
         android:orderInCategory="100"
-        android:title="Backup DB"
+        android:title="备份数据库"
         app:showAsAction="never" />
     <item
         android:id="@+id/f_kaliservices_menu_restoreDB"
         android:orderInCategory="100"
-        android:title="Restore DB"
+        android:title="恢复数据库"
         app:showAsAction="never" />
     <item
         android:id="@+id/f_kaliservices_menu_ResetToDefault"
         android:orderInCategory="100"
-        android:title="Reset to Default"
+        android:title="重置为默认值"
         app:showAsAction="never" />
     </group>
 </menu>

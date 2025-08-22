@@ -18,34 +18,34 @@
             android:gravity="center"
             android:padding="4dp" />
 
-       <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bluetooth interface"
-            android:padding="4dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/hci_interface"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="none"
-            android:inputType="text"
-            android:text="hci0" />
-    </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蓝牙接口"
+                android:padding="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/hci_interface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:inputType="text"
+                android:text="hci0" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/set_target"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Use selected target"
+            android:text="使用选中的目标"
             android:textColor="#ffffffff" />
 
         <LinearLayout
@@ -54,19 +54,19 @@
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Target address"
-            android:padding="4dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="目标地址"
+                android:padding="4dp" />
 
-        <EditText
-            android:id="@+id/sdp_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="none"
-            android:ems="10"
-            android:hint="00:11:22:33:44:55" />
+            <EditText
+                android:id="@+id/sdp_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:ems="10"
+                android:hint="00:11:22:33:44:55" />
         </LinearLayout>
 
         <View
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Size"
+                android:text="大小"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Count"
+                android:text="次数"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -141,38 +141,38 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="false"
-                android:text="Flood ping" />
+                android:text="洪泛 ping" />
 
             <CheckBox
                 android:id="@+id/l2ping_reverse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Reverse ping" />
+                android:text="反向 ping" />
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/start_l2ping"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="l2ping"
-            android:textColor="#ffffffff" />
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/start_rfcommscan"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="rfcomm scan"
-            android:textColor="#ffffffff" />
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_l2ping"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="l2ping"
+                android:textColor="#ffffffff" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start_rfcommscan"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="rfcomm 扫描"
+                android:textColor="#ffffffff" />
+        </LinearLayout>
 
         <View
             android:id="@+id/divider2"
@@ -196,7 +196,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Range"
+                android:text="范围"
                 android:padding="4dp" />
 
             <EditText
@@ -207,33 +207,33 @@
                 android:hint="00803789EE76-00803789EEff" />
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logfile path"
-            android:padding="4dp" />
-
-        <EditText
-            android:id="@+id/redfang_log"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="none"
-            android:inputType="text"
-            android:text="/root/redfang.log" />
-    </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日志文件路径"
+                android:padding="4dp" />
+
+            <EditText
+                android:id="@+id/redfang_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:inputType="text"
+                android:text="/root/redfang.log" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_redfang"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Hunt for devices"
+            android:text="搜索设备"
             android:textColor="#ffffffff" />
 
         <View
@@ -241,7 +241,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -255,7 +254,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Check proximity"
+            android:text="检查距离"
             android:textColor="#ffffffff" />
 
         <View
@@ -267,7 +266,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SDP Tool"
+            android:text="SDP 工具"
             android:padding="4dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -276,7 +275,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Discover services"
+            android:text="发现服务"
             android:textColor="#ffffffff" />
 
         <TextView

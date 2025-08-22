@@ -91,7 +91,7 @@ public class BadusbFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.badusb, menu);
-        // WearOS optimisation
+        // WearOS 优化
         final MenuItem sourceItem = menu.findItem(R.id.source_button);
         boolean iswatch = requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
         if (iswatch) {
@@ -122,11 +122,11 @@ public class BadusbFragment extends Fragment {
         String sourceFile = exe.ReadFile_SYNC(sourcePath);
         EditText ifc = activity.findViewById(R.id.ifc);
         sourceFile = sourceFile.replaceAll("(?m)^INTERFACE=(.*)$", "INTERFACE=" + ifc.getText().toString());
-        boolean r = exe.SaveFileContents(sourceFile, sourcePath);// 1st arg contents, 2nd arg filepath
+        boolean r = exe.SaveFileContents(sourceFile, sourcePath);// 第一个参数是内容, 第二个参数是文件路径
         if (r) {
-            NhPaths.showMessage(context,"Options updated!");
+            NhPaths.showMessage(context,"选项已更新！");
         } else {
-            NhPaths.showMessage(context,"Options not updated!");
+            NhPaths.showMessage(context,"选项未更新！");
         }
     }
 
@@ -136,7 +136,7 @@ public class BadusbFragment extends Fragment {
             command[0] = NhPaths.APP_SCRIPTS_PATH + "/start-badusb-lollipop &> " + NhPaths.APP_SD_FILES_PATH + "/badusb.log &";
         }
         exe.RunAsRoot(command);
-        NhPaths.showMessage(context,"BadUSB attack started! Check /sdcard/nh_files/badusb.log");
+        NhPaths.showMessage(context,"BadUSB 攻击已启动！请查看 /sdcard/nh_files/badusb.log");
     }
 
     private void stop() {
@@ -145,6 +145,6 @@ public class BadusbFragment extends Fragment {
             command[0] = NhPaths.APP_SCRIPTS_PATH + "/stop-badusb-lollipop";
         }
         exe.RunAsRoot(command);
-        NhPaths.showMessage(context,"BadUSB attack stopped!");
+        NhPaths.showMessage(context,"BadUSB 攻击已停止！");
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,20 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
-            android:text="Loading.."
+            android:text="加载中…"
             android:textColor="@android:color/background_light"
             android:textSize="20sp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"/>
-
-        <!--Button
-            android:id="@+id/f_customcommands_recyclerview_btn_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@android:color/holo_blue_dark"
-            android:layout_weight="0.8"
-            android:text="EDIT"/-->
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:textColor="@color/accent_material_dark"
-                    android:text="Send to:"/>
+                    android:text="发送至: "/>
 
                 <TextView
                     android:id="@+id/f_customcommands_recyclerview_tv_execenvironment"
@@ -68,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:textColor="@color/accent_material_light"
-                    android:text="system"/>
+                    android:text="系统"/>
             </LinearLayout>
 
             <LinearLayout
@@ -83,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:textColor="@color/accent_material_dark"
-                    android:text="Exec Mode:"/>
+                    android:text="执行方式: "/>
 
                 <TextView
                     android:id="@+id/f_customcommands_recyclerview_tv_execmode"
@@ -91,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:textColor="@color/accent_material_light"
-                    android:text="mode"/>
+                    android:text="模式"/>
             </LinearLayout>
 
             <LinearLayout
@@ -101,20 +94,20 @@
                 android:layout_marginEnd="8dp"
                 android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:textColor="@color/accent_material_dark"
-                android:text="RunOnBoot:"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textColor="@color/accent_material_dark"
+                    android:text="开机自启: "/>
 
-            <TextView
-                android:id="@+id/f_customcommands_recyclerview_tv_runonboot"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
-                android:textColor="@color/accent_material_light"
-                android:text="no"/>
+                <TextView
+                    android:id="@+id/f_customcommands_recyclerview_tv_runonboot"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:textColor="@color/accent_material_light"
+                    android:text="否"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -124,6 +117,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:layout_gravity="bottom"
-            android:text="EXECUTE"/>
+            android:text="执行"/>
     </LinearLayout>
 </LinearLayout>

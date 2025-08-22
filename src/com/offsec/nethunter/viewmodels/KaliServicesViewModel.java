@@ -7,23 +7,26 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.offsec.nethunter.RecyclerViewData.KaliServicesData;
-import com.offsec.nethunter.RecyclerViewData.NethunterData;
 import com.offsec.nethunter.models.KaliServicesModel;
-import com.offsec.nethunter.models.NethunterModel;
 
 import java.util.List;
 
 
-/*
-    ViewModel class for kaliservices model, this is to be observed the List of KaliServicesModel class.
-    This class should be initiated every time the KaliServicesFragment is created.
-    After the KaliServicesData singleton is created, it will live until the app dies.
+/**
+ * Kali 服务视图模型类
+ * 用于观察 KaliServicesModel 类的列表
+ * 每次创建 KaliServicesFragment 时都应初始化此类
+ * 在应用生命周期内, KaliServicesData 单例将始终保持活动状态
  */
 public class KaliServicesViewModel extends ViewModel {
     private MutableLiveData<List<KaliServicesModel>> mutableLiveDataKaliServicesModelList;
 
-    public void init(Context context){
-        if (mutableLiveDataKaliServicesModelList != null){
+    /**
+     * 初始化方法
+     * @param context 应用上下文
+     */
+    public void init(Context context) {
+        if (mutableLiveDataKaliServicesModelList != null) {
             return;
         }
         KaliServicesData kaliServicesData = KaliServicesData.getInstance();
@@ -34,7 +37,11 @@ public class KaliServicesViewModel extends ViewModel {
         }
     }
 
-    public LiveData<List<KaliServicesModel>> getLiveDataKaliServicesModelList(){
+    /**
+     * 获取 Kali 服务模型列表的 LiveData
+     * @return 包含 Kali 服务模型列表的 LiveData
+     */
+    public LiveData<List<KaliServicesModel>> getLiveDataKaliServicesModelList() {
         return mutableLiveDataKaliServicesModelList;
     }
 }

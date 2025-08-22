@@ -56,25 +56,25 @@
                 android:id="@+id/f_kaliservices_refreshButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Refresh" />
+                android:text="刷新" />
 
             <Button
                 android:id="@+id/f_kaliservices_addItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add" />
+                android:text="添加" />
 
             <Button
                 android:id="@+id/f_kaliservices_deleteItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete" />
+                android:text="删除" />
 
             <Button
                 android:id="@+id/f_kaliservices_moveItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Move" />
+                android:text="移动" />
 
         </LinearLayout>
     </HorizontalScrollView>

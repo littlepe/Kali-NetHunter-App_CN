@@ -95,7 +95,7 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
         CheckBox sdradsbcheckbox = view.findViewById(R.id.rtladsb);
         CheckBox mousejackcheckbox = view.findViewById(R.id.mousejack);
 
-        // TODO: make this text dynamic so we can launch other apps besides Kismet
+        // TODO: 使此文本动态化, 以便可以启动其他应用, 而不仅仅是 Kismet
         button_launch_app.setText(R.string.launch_kismet);
         if (!wantHelpView)
             gpsHelpView.setVisibility(View.GONE);
@@ -105,7 +105,7 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
             setCheckedQuietly(switch_gps_provider, true);
         }
 
-        // check if gpsd is already running
+        // 检查 gpsd 是否正在运行
         check_gpsd();
 
         switch_gps_provider.setOnCheckedChangeListener((compoundButton, isChecked) -> {
@@ -132,38 +132,38 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
 
         button_launch_app.setOnClickListener(view1 -> {
             if (!switch_gps_provider.isChecked()) {
-                gpsTextView.append("Android GPS Provider not running!\n");
+                gpsTextView.append("Android GPS Provider 未运行！\n");
                 switch_gps_provider.setChecked(true);
                 startGpsProvider();
             }
             if (!switch_gpsd.isChecked()) {
-                gpsTextView.append("chroot gpsd not running!\n");
+                gpsTextView.append("chroot gpsd 未运行！\n");
                 switch_gpsd.setChecked(true);
                 startChrootGpsd();
             }
-            // WLAN interface
+            // WLAN 接口
             String wlaniface = wlan_interface.getText().toString() ;
             if (!wlaniface.isEmpty()) wlaniface = "source=" + wlaniface + "\n";
             else wlaniface = "";
 
-            // BT interface
+            // BT 接口
             String btiface = bt_interface.getText().toString();
             if (!btiface.isEmpty()) btiface = "source=" + btiface + "\n";
             else btiface = "";
 
-            // SDR sensors interface
+            // SDR 传感器接口
             if (sdrcheckbox.isChecked()) rtlsdr = "source=rtl433-0\n";
             else rtlsdr = "";
 
-            // SDR AMR interface
+            // SDR AMR 接口
             if (sdramrcheckbox.isChecked()) rtlamr = "source=rtlamr-0\n";
             else rtlamr = "";
 
-            // SDR ADSB interface
+            // SDR ADSB 接口
             if (sdradsbcheckbox.isChecked()) rtladsb = "source=rtladsb-0\n";
             else rtladsb = "";
 
-            // Mousejack interface
+            // Mousejack 接口
             if (mousejackcheckbox.isChecked()) mousejack = "source=mousejack:name=nRF,channel_hoprate=100/sec\n";
             else mousejack = "";
 
@@ -175,30 +175,30 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
                 exe.RunAsRoot(new String[]{"bootkali custom_cmd mv /sdcard/kismet_site.conf /etc/kismet/"});
             });
             executor.shutdown();
-            Toast.makeText(requireActivity().getApplicationContext(), "Starting Kismet.. Web UI will be available at localhost:2501\"", Toast.LENGTH_LONG).show();
+            Toast.makeText(requireActivity().getApplicationContext(), "正在启动 Kismet.. Web UI 将在 localhost:2501 上可用", Toast.LENGTH_LONG).show();
             wantKismet = true;
-            gpsTextView.append("Kismet will launch after next position received.  Waiting...\n");
+            gpsTextView.append("收到下一个位置后将启动 Kismet. 正在等待...\n");
         });
     }
 
     private void startGpsProvider() {
         if (gpsProvider != null) {
-            gpsTextView.append("Starting Android GPS Publisher\n");
-            gpsTextView.append("GPS NMEA messages will be sent to udp://127.0.0.1:" + NhPaths.GPS_PORT + "\n");
+            gpsTextView.append("正在启动 Android GPS 发布器\n");
+            gpsTextView.append("GPS NMEA 消息将发送到 udp://127.0.0.1:" + NhPaths.GPS_PORT + "\n");
             gpsProvider.onLocationUpdatesRequested(KaliGpsServiceFragment.this);
         }
     }
 
     private void stopGpsProvider() {
         if (gpsProvider != null) {
-            gpsTextView.append("Stopping Android GPS Publisher\n");
+            gpsTextView.append("正在停止 Android GPS 发布器\n");
             gpsProvider.onStopRequested();
         }
     }
 
     private void startChrootGpsd() {
-        gpsTextView.append("Starting gpsd in Kali chroot\n");
-        // do this in a thread because it takes a second or two and lags the UI
+        gpsTextView.append("正在 Kali chroot 中启动 gpsd\n");
+        // 在线程中执行, 因为它需要一两秒, 会拖慢 UI
         new Thread(() -> {
             ShellExecuter exe = new ShellExecuter();
             String command = "su -c '" + NhPaths.APP_SCRIPTS_PATH + File.separator + "bootkali start_gpsd " + NhPaths.GPS_PORT + "'";
@@ -209,8 +209,8 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
     }
 
     private void stopChrootGpsd() {
-        gpsTextView.append("Stopping gpsd in Kali chroot\n");
-        // do this in a thread because it takes a second or two and lags the UI
+        gpsTextView.append("正在 Kali chroot 中停止 gpsd\n");
+        // 在线程中执行, 因为它需要一两秒, 会拖慢 UI
         new Thread(() -> {
             ShellExecuter exe = new ShellExecuter();
             String command = "su -c '" + NhPaths.APP_SCRIPTS_PATH + File.separator + "stop-gpsd'";
@@ -224,9 +224,9 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
         super.onResume();
         Log.d(TAG, "onResume");
         if (LocationUpdateService.isInstanceCreated()) {
-            // a LocationUpdateService is already running
+            // LocationUpdateService 已经在运行
             setCheckedQuietly(switch_gps_provider, true);
-            // make sure it has a handle to this fragment so it can display updates
+            // 确保它有这个 Fragment 的句柄, 以便可以显示更新
             if (this.gpsProvider != null) {
                 reattachedToRunningService = this.gpsProvider.onReceiverReattach(this);
             }
@@ -234,7 +234,7 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
             setCheckedQuietly(switch_gps_provider, false);
         }
 
-        // check if gpsd is already running
+        // 检查 gpsd 是否正在运行
         check_gpsd();
     }
 
@@ -254,7 +254,7 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
             reattachedToRunningService = this.gpsProvider.onReceiverReattach(this);
         }
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // we've already granted permissions, make the nag message go away
+            // 我们已经授予了权限, 让提示信息消失
             wantHelpView = false;
         }
         super.onAttach(context);
@@ -271,7 +271,7 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
             if (lineCnt >= 20)
                 break;
         }
-        // delete anything more than X lines previous so this doesn't get huge
+        // 删除之前的 X 行以上的内容, 以免变得太大
         if (i > 0) {
             gpsTextView.getEditableText().delete(0, i);
         }
@@ -279,7 +279,7 @@ public class KaliGpsServiceFragment extends Fragment implements KaliGPSUpdates.R
         gpsTextView.append(nmeaSentences + "\n");
         if (wantKismet) {
             wantKismet = false;
-            gpsTextView.append("Launching kismet in NetHunter Terminal\n");
+            gpsTextView.append("在 NetHunter 终端中启动 Kismet\n");
             startKismet();
         }
     }

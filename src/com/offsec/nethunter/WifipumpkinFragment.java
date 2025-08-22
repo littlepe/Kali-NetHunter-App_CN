@@ -98,20 +98,20 @@ public class WifipumpkinFragment extends Fragment {
         boolean iswatch = requireContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
         CheckBox PreviewCheckbox = rootView.findViewById(R.id.preview_checkbox);
 
-        // First run
+        // 首次运行检查
         Boolean setupwp3done = sharedpreferences.getBoolean("set_setup_done", false);
         String packages = exe.RunAsChrootOutput("if [[ -f /usr/bin/wifipumpkin3 || -f /usr/bin/dnschef ]];then echo Good;else echo Nope;fi");
 
         // if (!setupwp3done.equals(true))
         if (packages.equals("Nope")) SetupDialog();
 
-        // Watch optimisation
+        // 手表界面优化
         final TextView Wp3desc = rootView.findViewById(R.id.wp3_desc);
         if (iswatch) {
             Wp3desc.setVisibility(View.GONE);
         }
 
-        // Selected iface, name, ssid, bssid, channel, wlan0to1
+        // 选定的接口、名称、SSID、BSSID、频道、wlan0to1
         final EditText APinterface = rootView.findViewById(R.id.ap_interface);
         final EditText NETinterface = rootView.findViewById(R.id.net_interface);
         final EditText SSID = rootView.findViewById(R.id.ssid);
@@ -119,11 +119,11 @@ public class WifipumpkinFragment extends Fragment {
         final EditText Channel = rootView.findViewById(R.id.channel);
         final CheckBox Wlan0to1Checkbox = rootView.findViewById(R.id.wlan0to1_checkbox);
 
-        // Templates spinner
+        // 模板下拉列表
         refresh_wp3_templates(rootView);
         Spinner TemplatesSpinner = rootView.findViewById(R.id.templates);
 
-        // Select Template
+        // 选择模板
         WebView myBrowser = rootView.findViewById(R.id.mybrowser);
         final String[] TemplateString = {""};
         TemplatesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -137,16 +137,16 @@ public class WifipumpkinFragment extends Fragment {
                 } else {
                     PreviewCheckbox.setEnabled(true);
                     if (selected_template.equals("FlaskDemo")) {
-                    template_src = NhPaths.CHROOT_PATH() + NhPaths.SD_PATH + "/nh_files/templates/" + selected_template + "/templates/En/templates/login.html";
+                        template_src = NhPaths.CHROOT_PATH() + NhPaths.SD_PATH + "/nh_files/templates/" + selected_template + "/templates/En/templates/login.html";
                     } else {
-                    template_src = NhPaths.CHROOT_PATH() + NhPaths.SD_PATH + "/nh_files/templates/" + selected_template + "/templates/login.html";
+                        template_src = NhPaths.CHROOT_PATH() + NhPaths.SD_PATH + "/nh_files/templates/" + selected_template + "/templates/login.html";
                     }
                     myBrowser.clearCache(true);
                     myBrowser.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
                     myBrowser.getSettings().setDomStorageEnabled(true);
                     myBrowser.getSettings().setLoadsImagesAutomatically(true);
                     //myBrowser.setInitialScale(200);
-                    myBrowser.getSettings().setJavaScriptEnabled(true); // Enable JavaScript Support
+                    myBrowser.getSettings().setJavaScriptEnabled(true); // 启用 JavaScript 支持
                     myBrowser.setWebViewClient(new WebViewClient());
                     myBrowser.getSettings().setAllowFileAccess(true);
                     myBrowser.loadDataWithBaseURL("file:///sdcard/nh_files/templates/" + selected_template + "/static", template_src, "text/html", "UTF-8", null);
@@ -159,21 +159,21 @@ public class WifipumpkinFragment extends Fragment {
             }
         });
 
-        // Check iptables version
+        // 检查 iptables 版本
         checkiptables();
 
-        // Check wlan0 AP mode
+        // 检查 wlan0 AP 模式支持
         TextView APmode = rootView.findViewById(R.id.wlan0ap);
         String Wlan0AP = exe.RunAsRootOutput("iw list | grep '* AP'");
-        if (Wlan0AP.contains("* AP")) APmode.setText("Supported");
-        else APmode.setText("Not supported");
+        if (Wlan0AP.contains("* AP")) APmode.setText("支持");
+        else APmode.setText("不支持");
 
-        // Refresh
+        // 刷新
         refresh_wp3_templates(rootView);
         ImageButton RefreshTemplates = rootView.findViewById(R.id.refreshTemplates);
         RefreshTemplates.setOnClickListener(v -> refresh_wp3_templates(rootView));
 
-        // Load Settings
+        // 加载设置
         String PrevAPiface = exe.RunAsRootOutput("grep ^APIFACE= " + NhPaths.APP_SD_FILES_PATH + "/modules/start-wp3.sh | awk -F'=' '{print $2}'");
         APinterface.setText(PrevAPiface);
         String PrevNETiface = exe.RunAsRootOutput("grep ^NETIFACE= " + NhPaths.APP_SD_FILES_PATH + "/modules/start-wp3.sh | awk -F'=' '{print $2}'");
@@ -187,10 +187,10 @@ public class WifipumpkinFragment extends Fragment {
         String PrevWlan0to1 = exe.RunAsRootOutput("grep ^WLAN0TO1= " + NhPaths.APP_SD_FILES_PATH + "/modules/start-wp3.sh | awk -F'=' '{print $2}'");
         Wlan0to1Checkbox.setChecked(PrevWlan0to1.equals("1"));
 
-        // Wlan0to1 Checkbox
+        // Wlan0to1 复选框
         final String[] Wlan0to1_string = {""};
 
-        // Preview Checkbox
+        // 预览复选框
         View PreView = rootView.findViewById(R.id.pre_view);
         PreviewCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -200,9 +200,9 @@ public class WifipumpkinFragment extends Fragment {
             }
         });
 
-        // Start
+        // 启动/停止
         StartButton.setOnClickListener( v -> {
-            if (StartButton.getText().equals("Start")) {
+            if (StartButton.getText().equals("启动")) {
                 String APiface_string = APinterface.getText().toString();
                 String NETiface_string = NETinterface.getText().toString();
                 String SSID_string = SSID.getText().toString();
@@ -213,7 +213,7 @@ public class WifipumpkinFragment extends Fragment {
                 } else {
                     Wlan0to1_string[0] = "0";
                 }
-                Toast.makeText(requireActivity().getApplicationContext(), "Starting.. type 'exit' into the terminal to stop Wifipumpkin3", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireActivity().getApplicationContext(), "正在启动.. 在终端中输入 'exit' 来停止 Wifipumpkin3", Toast.LENGTH_LONG).show();
 
                 exe.RunAsRoot(new String[]{"sed -i '/^APIFACE=/c\\APIFACE=" + APiface_string + "' " + NhPaths.APP_SD_FILES_PATH + "/modules/start-wp3.sh"});
                 exe.RunAsRoot(new String[]{"sed -i '/^NETIFACE=/c\\NETIFACE=" + NETiface_string + "' " + NhPaths.APP_SD_FILES_PATH + "/modules/start-wp3.sh"});
@@ -224,21 +224,21 @@ public class WifipumpkinFragment extends Fragment {
                 exe.RunAsRoot(new String[]{"sed -i '/^TEMPLATE=/c\\TEMPLATE=" + TemplateString[0] + "' " + NhPaths.APP_SD_FILES_PATH + "/modules/start-wp3.sh"});
                 run_cmd("echo -ne \"\\033]0;Wifipumpkin3\\007\" && clear;bash /sdcard/nh_files/modules/start-wp3.sh");
 
-            } else if (StartButton.getText().equals("Stop")) {
+            } else if (StartButton.getText().equals("停止")) {
                 exe.RunAsRoot(new String[]{"kill `ps -ef | grep '[btk]_server' | awk {'print $2'}`"});
                 exe.RunAsRoot(new String[]{"pkill python3"});
                 refresh_wp3_templates(rootView);
             }
         });
 
-        // Load from file
+        // 从文件加载模板
         final Button injectStringButton = rootView.findViewById(R.id.templatebrowse);
         injectStringButton.setOnClickListener( v -> {
             Intent intent = new Intent();
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setType("application/zip");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select zip file"),1001);
+            startActivityForResult(Intent.createChooser(intent, "选择 zip 文件"),1001);
         });
         return rootView;
     }
@@ -261,7 +261,7 @@ public class WifipumpkinFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
+        // 处理操作栏项目的点击
         switch (item.getItemId()) {
             case R.id.start_service:
                 startWP3();
@@ -282,13 +282,13 @@ public class WifipumpkinFragment extends Fragment {
         }
     }*/
 
-    // First setup
+    // 首次设置对话框
     public void SetupDialog() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.DialogStyleCompat);
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
-        builder.setTitle("Welcome to Wifipumpkin3!");
-        builder.setMessage("You have missing packages. Install them now?");
-        builder.setPositiveButton("Install", (dialog, which) -> {
+        builder.setTitle("欢迎使用 Wifipumpkin3！");
+        builder.setMessage("您缺少必要的软件包. 现在安装吗？");
+        builder.setPositiveButton("安装", (dialog, which) -> {
             RunSetup();
             sharedpreferences.edit().putBoolean("wp3_setup_done", true).apply();
         });
@@ -297,14 +297,14 @@ public class WifipumpkinFragment extends Fragment {
 
     public void RunSetup() {
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
-        run_cmd("echo -ne \"\\033]0;Wifipumpkin3 Setup\\007\" && clear;apt update && apt install wifipumpkin3 dnschef -y;" +
-                "echo 'Done!'; echo 'Closing in 3secs..'; sleep 3 && exit ");
+        run_cmd("echo -ne \"\\033]0;Wifipumpkin3 设置\\007\" && clear;apt update && apt install wifipumpkin3 dnschef -y;" +
+                "echo '完成！'; echo '窗口将在 3 秒后关闭..'; sleep 3 && exit ");
         sharedpreferences.edit().putBoolean("set_setup_done", true).apply();
     }
 
     public void LinkTemplates() {
         String cmd =
-                "echo -ne \"\\033]0;Wifipumpkin3 Templates\\007\" && clear;" +
+                "echo -ne \"\\033]0;Wifipumpkin3 模板\\007\" && clear;" +
                         "TEMPL_DIR='/root/.config/wifipumpkin3/config/templates';" +
                         "TARGET='/sdcard/nh_files/templates';" +
                         "if [ -L \"$TEMPL_DIR\" ]; then " +
@@ -318,12 +318,12 @@ public class WifipumpkinFragment extends Fragment {
                         "elif [ ! -e \"$TEMPL_DIR\" ]; then " +
                         "ln -s \"$TARGET\" \"$TEMPL_DIR\"; " +
                         "fi; " +
-                        "echo 'Done!'; echo 'Closing in 3secs..'; sleep 3 && exit";
+                        "echo '完成！'; echo '窗口将在 3 秒后关闭..'; sleep 3 && exit";
         run_cmd(cmd);
         sharedpreferences.edit().putBoolean("set_setup_done", true).apply();
     }
 
-    // Refresh templates
+    // 刷新模板列表
     private void refresh_wp3_templates(View WifipumpkinFragment) {
         Spinner TemplatesSpinner = WifipumpkinFragment.findViewById(R.id.templates);
         final String outputTemplates = "None\n" + exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd ls /root/.config/wifipumpkin3/config/templates | tail -n +10");
@@ -336,14 +336,14 @@ public class WifipumpkinFragment extends Fragment {
         String old_kali = "https://old.kali.org/kali/pool/main/i/iptables/";
         if (iptables_ver.equals("iptables v1.6.2")) {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-            builder.setTitle("You need to upgrade iptables!");
-            builder.setMessage("We appreciate your patience for using Mana with old iptables. It can be finally upgraded.");
-            builder.setPositiveButton("Upgrade", (dialog, which) -> run_cmd("echo -ne \"\\033]0;Upgrading iptables\\007\" && clear;" +
+            builder.setTitle("您需要升级 iptables！");
+            builder.setMessage("感谢您耐心使用旧版 iptables 的 Mana. 现在终于可以升级了. ");
+            builder.setPositiveButton("升级", (dialog, which) -> run_cmd("echo -ne \"\\033]0;正在升级 iptables\\007\" && clear;" +
                     "apt-mark unhold libip* > /dev/null 2>&1 ; " +
                     "apt-mark unhold libxtables* > /dev/null 2>&1 ; " +
                     "apt-mark unhold iptables* > /dev/null 2>&1 ; " +
-                    "apt install iptables -y && sleep 2 && echo 'Done! Closing window..' && exit"));
-            builder.setNegativeButton("Close", (dialog, which) -> {
+                    "apt install iptables -y && sleep 2 && echo '完成！正在关闭窗口..' && exit"));
+            builder.setNegativeButton("关闭", (dialog, which) -> {
             });
             builder.show();
         }
@@ -351,12 +351,12 @@ public class WifipumpkinFragment extends Fragment {
 
     private void startWP3() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-        builder.setTitle("Script to execute:");
-        builder.setPositiveButton("Start", (dialog, which) -> {
+        builder.setTitle("要执行的脚本:");
+        builder.setPositiveButton("启动", (dialog, which) -> {
             switch (selectedScriptIndex) {
-                // launching mana on the terminal so it doesn't die suddenly
+                // 在终端中启动 mana 以免其突然终止
                 case 0:
-                    NhPaths.showMessage(context, "Starting MANA NAT FULL");
+                    NhPaths.showMessage(context, "正在启动 MANA NAT 完整模式");
                     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
                         run_cmd(NhPaths.makeTermTitle("MANA-FULL") + "/usr/share/mana-toolkit/run-mana/start-nat-full-lollipop.sh");
                     } else {
@@ -364,7 +364,7 @@ public class WifipumpkinFragment extends Fragment {
                     }
                     break;
                 case 1:
-                    NhPaths.showMessage(context, "Starting MANA NAT SIMPLE");
+                    NhPaths.showMessage(context, "正在启动 MANA NAT 简单模式");
                     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
                         run_cmd(NhPaths.makeTermTitle("MANA-SIMPLE") + "/usr/share/mana-toolkit/run-mana/start-nat-simple-lollipop.sh");
                     } else {
@@ -372,38 +372,38 @@ public class WifipumpkinFragment extends Fragment {
                     }
                     break;
                 case 2:
-                    NhPaths.showMessage(context, "Starting MANA Bettercap");
+                    NhPaths.showMessage(context, "正在启动 MANA Bettercap");
                     run_cmd(NhPaths.makeTermTitle("MANA-BETTERCAP") + "/usr/bin/start-nat-transproxy-lollipop.sh");
                     break;
                 case 3:
-                    NhPaths.showMessage(context, "Starting MANA NAT SIMPLE && BDF");
+                    NhPaths.showMessage(context, "正在启动 MANA NAT 简单模式 && BDF");
                     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
                         run_cmd(NhPaths.makeTermTitle("MANA-BDF") + "/usr/share/mana-toolkit/run-mana/start-nat-simple-bdf-lollipop.sh");
                     } else {
                         run_cmd(NhPaths.makeTermTitle("MANA-BDF") + "/usr/share/mana-toolkit/run-mana/start-nat-simple-bdf-kitkat.sh");
                     }
-                    // we wait ~10 secs before launching msf
+                    // 在启动 msf 前等待约 10 秒
                     new android.os.Handler().postDelayed(
                             () -> {
-                                NhPaths.showMessage(context, "Starting MSF with BDF resource.rc");
+                                NhPaths.showMessage(context, "正在使用 BDF resource.rc 启动 MSF");
                                 run_cmd(NhPaths.makeTermTitle("MSF") + "msfconsole -q -r /usr/share/bdfproxy/bdfproxy_msf_resource.rc");
                             }, 10000);
                     break;
                 case 4:
-                    NhPaths.showMessage(context, "Starting HOSTAPD-WPE");
+                    NhPaths.showMessage(context, "正在启动 HOSTAPD-WPE");
                     run_cmd(NhPaths.makeTermTitle("HOSTAPD-WPE") + "ip link set wlan1 up && /usr/sbin/hostapd-wpe /sdcard/nh_files/configs/hostapd-wpe.conf");
                     break;
                 case 5:
-                    NhPaths.showMessage(context, "Starting HOSTAPD-WPE with Karma");
+                    NhPaths.showMessage(context, "正在启动带 Karma 的 HOSTAPD-WPE");
                     run_cmd(NhPaths.makeTermTitle("HOSTAPD-WPE-KARMA") + "ip link set wlan1 up && /usr/sbin/hostapd-wpe -k /sdcard/nh_files/configs/hostapd-wpe.conf");
                     break;
                 default:
-                    NhPaths.showMessage(context, "Invalid script!");
+                    NhPaths.showMessage(context, "无效的脚本！");
                     return;
             }
             NhPaths.showMessage(context, getString(R.string.attack_launched));
         });
-        builder.setNegativeButton("Quit", (dialog, which) -> {
+        builder.setNegativeButton("退出", (dialog, which) -> {
         });
         builder.setSingleChoiceItems(scripts, selectedScriptIndex, (dialog, which) -> selectedScriptIndex = which);
         builder.show();
@@ -412,7 +412,7 @@ public class WifipumpkinFragment extends Fragment {
 
     public void Firstrun() {
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
-        run_cmd("echo -ne \"\\033]0;Mana first setup\\007\"" +
+        run_cmd("echo -ne \"\\033]0;Mana 首次设置\\007\"" +
                 "apt update && apt install mana-toolkit hostapd hostapd-wpe");
         sharedpreferences.edit().putBoolean("setup_done", true).apply();
     }
@@ -426,7 +426,7 @@ public class WifipumpkinFragment extends Fragment {
             command[0] = NhPaths.APP_SCRIPTS_PATH + "/bootkali mana-kitkat stop'";
         }
         exe.RunAsRoot(command);
-        NhPaths.showMessage(context, "Mana Stopped");
+        NhPaths.showMessage(context, "Mana 已停止");
     } */
 
     public class HostapdFragmentWPE extends Fragment {
@@ -449,7 +449,7 @@ public class WifipumpkinFragment extends Fragment {
             Button gencerts = rootView.findViewById(R.id.wpe_generate_certs);
             loadOptions(rootView);
 
-            // Extracted command as a constant
+            // 提取的命令作为常量
             final String GENERATE_CERTS_CMD = "cd /etc/hostapd-wpe/certs && ./bootstrap";
 
             gencerts.setOnClickListener(v -> run_cmd(GENERATE_CERTS_CMD));
@@ -461,7 +461,7 @@ public class WifipumpkinFragment extends Fragment {
                 try {
                     source = Files.asCharSource(file, Charsets.UTF_8).read();
                 } catch (IOException e) {
-                    NhPaths.showMessage(context, "Failed to read the configuration file.");
+                    NhPaths.showMessage(context, "读取配置文件失败. ");
                     e.printStackTrace();
                     return;
                 }
@@ -485,7 +485,7 @@ public class WifipumpkinFragment extends Fragment {
                     source = updateConfig(source, "private_key_passwd", privatekey.getText().toString());
 
                     exe.SaveFileContents(source, configFilePath);
-                    NhPaths.showMessage(context, "Source updated");
+                    NhPaths.showMessage(context, "配置已更新");
                 }
             });
             return rootView;
@@ -528,37 +528,37 @@ public class WifipumpkinFragment extends Fragment {
                 final Matcher matcherPrivateKey = patternEnablePrivateKey.matcher(text);
 
                 ifc.post(() -> {
-                /*
-                 * Interface
-                 */
+                    /*
+                     * 接口
+                     */
                     if (matcherIfc.find()) {
                         String ifcValue = matcherIfc.group(1);
                         ifc.setText(ifcValue);
                     }
-                /*
-                 * bssid
-                 */
+                    /*
+                     * bssid
+                     */
                     if (matcherBssid.find()) {
                         String bssidVal = matcherBssid.group(1);
                         bssid.setText(bssidVal);
                     }
-                /*
-                 * ssid
-                 */
+                    /*
+                     * ssid
+                     */
                     if (matcherSsid.find()) {
                         String ssidVal = matcherSsid.group(1);
                         ssid.setText(ssidVal);
                     }
-                /*
-                 * channel
-                 */
+                    /*
+                     * 频道
+                     */
                     if (matcherChannel.find()) {
                         String channelVal = matcherChannel.group(1);
                         channel.setText(channelVal);
                     }
-                /*
-                 * Private Key File
-                 */
+                    /*
+                     * 私钥文件
+                     */
                     if (matcherPrivateKey.find()) {
                         String PrivateKeyVal = matcherPrivateKey.group(1);
                         privatekey.setText(PrivateKeyVal);
@@ -595,9 +595,9 @@ public class WifipumpkinFragment extends Fragment {
             button.setOnClickListener(v -> {
                 Boolean isSaved = exe.SaveFileContents(source.getText().toString(), configFilePath);
                 if (isSaved) {
-                    NhPaths.showMessage(context, "Source updated");
+                    NhPaths.showMessage(context, "配置已更新");
                 } else {
-                    NhPaths.showMessage(context, "Source not updated");
+                    NhPaths.showMessage(context, "配置未更新");
                 }
             });
             return rootView;
@@ -635,7 +635,7 @@ public class WifipumpkinFragment extends Fragment {
                 EditText source1 = getView().findViewById(R.id.source);
                 String newSource = source1.getText().toString();
                 exe.SaveFileContents(newSource, configFilePath);
-                NhPaths.showMessage(context, "Source updated");
+                NhPaths.showMessage(context, "配置已更新");
             });
             return rootView;
         }
@@ -676,7 +676,7 @@ public class WifipumpkinFragment extends Fragment {
                 String newSource = source1.getText().toString();
                 ShellExecuter exe1 = new ShellExecuter();
                 exe1.SaveFileContents(newSource, configFilePath);
-                NhPaths.showMessage(context, "Source updated");
+                NhPaths.showMessage(context, "配置已更新");
             });
             return rootView;
         }
@@ -719,7 +719,7 @@ public class WifipumpkinFragment extends Fragment {
                 String newSource = source1.getText().toString();
                 ShellExecuter exe1 = new ShellExecuter();
                 exe1.SaveFileContents(newSource, configFilePath);
-                NhPaths.showMessage(context, "Source updated");
+                NhPaths.showMessage(context, "配置已更新");
             });
             return rootView;
         }
@@ -758,7 +758,7 @@ public class WifipumpkinFragment extends Fragment {
                 String newSource = source1.getText().toString();
                 ShellExecuter exe1 = new ShellExecuter();
                 exe1.SaveFileContents(newSource, configFilePath);
-                NhPaths.showMessage(context, "Source updated");
+                NhPaths.showMessage(context, "配置已更新");
             });
             return rootView;
         }
@@ -783,7 +783,7 @@ public class WifipumpkinFragment extends Fragment {
             String description = getResources().getString(R.string.bdfproxy_cfg);
             TextView desc = rootView.findViewById(R.id.description);
             desc.setText(description);
-            // use the good one?
+            // 使用正确的那个？
             Log.d("BDFPATH", configFilePath);
             EditText source = rootView.findViewById(R.id.source);
             ShellExecuter exe = new ShellExecuter();
@@ -798,7 +798,7 @@ public class WifipumpkinFragment extends Fragment {
                 String newSource = source1.getText().toString();
                 ShellExecuter exe1 = new ShellExecuter();
                 exe1.SaveFileContents(newSource, configFilePath);
-                NhPaths.showMessage(context, "Source updated");
+                NhPaths.showMessage(context, "配置已更新");
             });
             return rootView;
         }
@@ -806,7 +806,7 @@ public class WifipumpkinFragment extends Fragment {
 
     public static class ManaStartNatSimpleBdfFragment extends Fragment {
         private Context context;
-        private String configFilePath;
+        String configFilePath;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -839,14 +839,14 @@ public class WifipumpkinFragment extends Fragment {
                 String newSource = source1.getText().toString();
                 ShellExecuter exe1 = new ShellExecuter();
                 exe1.SaveFileContents(newSource, configFilePath);
-                NhPaths.showMessage(context, "Source updated");
+                NhPaths.showMessage(context, "配置已更新");
             });
             return rootView;
         }
     }
 
     ////
-    // Bridge side functions
+    // Bridge 端函数
     ////
 
     public void run_cmd(String cmd) {

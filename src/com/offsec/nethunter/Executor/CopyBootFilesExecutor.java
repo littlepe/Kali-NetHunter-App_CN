@@ -75,22 +75,22 @@ public class CopyBootFilesExecutor {
                 !sdCardDir.isDirectory() ||
                 !scriptsDir.isDirectory() ||
                 !etcDir.isDirectory()) {
-            Log.d(TAG, "COPYING NEW FILES");
+            Log.d(TAG, "正在复制新文件");
             AlertDialog progressDialog = progressDialogRef.get();
             if (progressDialog != null) {
                 TextView titleView = progressDialog.findViewById(R.id.progress_title);
                 TextView messageView = progressDialog.findViewById(R.id.progress_message);
                 if (titleView != null) {
-                    titleView.setText("New app build detected:");
+                    titleView.setText("检测到新的应用版本: ");
                 }
                 if (messageView != null) {
-                    messageView.setText("Copying new files...");
+                    messageView.setText("正在复制新文件...");
                 }
                 progressDialog.setCancelable(false);
                 progressDialog.show();
             }
         } else {
-            Log.d(TAG, "FILES NOT COPIED");
+            Log.d(TAG, "文件未复制");
             shouldRun = false;
         }
         if (listener != null) {
@@ -102,18 +102,18 @@ public class CopyBootFilesExecutor {
         if (shouldRun) {
             if (!CheckForRoot.isRoot()) {
                 prefs.edit().putBoolean(AppNavHomeActivity.CHROOT_INSTALLED_TAG, false).apply();
-                return "Root permission is required!!";
+                return "需要Root权限！！";
             }
-            Log.d(TAG, "COPYING FILES....");
-            updateProgress("Doing app files update. (init.d and filesDir).");
+            Log.d(TAG, "正在复制文件....");
+            updateProgress("正在更新应用文件. (init.d 和 filesDir). ");
             assetsToFiles(NhPaths.APP_PATH, "", "data");
-            updateProgress("Doing sdcard files update. (nh_files).");
+            updateProgress("正在更新SD卡文件. (nh_files). ");
             assetsToFiles(NhPaths.SD_PATH, "", "sdcard");
-            updateProgress("Fixing permissions for new files");
+            updateProgress("正在为新文件修复权限");
             exe.RunAsRoot(new String[]{"chmod -R 700 " + NhPaths.APP_SCRIPTS_PATH + "/*", "chmod -R 700 " + NhPaths.APP_INITD_PATH + "/*"});
-            updateProgress("Checking for encrypted /data....");
+            updateProgress("检查/data是否加密....");
             CheckEncrypted();
-            updateProgress("Checking for bootkali symlinks....");
+            updateProgress("检查bootkali符号链接....");
             Symlink("bootkali");
             Symlink("bootkali_bash");
             Symlink("bootkali_init");
@@ -124,19 +124,19 @@ public class CopyBootFilesExecutor {
             ed.putString(TAG, buildTime);
             ed.putInt(SharePrefTag.VERSION_CODE_TAG, BuildConfig.VERSION_CODE);
             ed.apply();
-            updateProgress("Checking for chroot....");
+            updateProgress("检查chroot....");
             String command = "if [ -d " + NhPaths.CHROOT_PATH() + " ];then echo 1; fi";
             final String _res = exe.RunAsRootOutput(command);
             if (_res.equals("1")) {
                 ed.putBoolean(AppNavHomeActivity.CHROOT_INSTALLED_TAG, true).apply();
-                updateProgress("Chroot Found!");
+                updateProgress("找到Chroot！");
                 updateProgress(exe.RunAsRootOutput(NhPaths.BUSYBOX + " mount -o remount,suid /data && chmod +s " +
                         NhPaths.CHROOT_PATH() + "/usr/bin/sudo" +
-                        " && echo \"Initial setup done!\""));
+                        " && echo \"初始设置完成！\""));
             } else {
-                updateProgress("Chroot not Found, install it in Chroot Manager");
+                updateProgress("未找到Chroot, 请在Chroot管理器中安装");
             }
-            updateProgress("Installing additional apps....");
+            updateProgress("正在安装附加应用....");
             String ApkCachePath = NhPaths.APP_SD_FILES_PATH + "/cache/apk/";
             ArrayList<String> filenames = FetchFiles(ApkCachePath);
             for (String object : filenames) {
@@ -183,7 +183,7 @@ public class CopyBootFilesExecutor {
     }
 
     private Boolean pathIsAllowed(String path, String copyType) {
-        // never copy images, sounds or webkit
+        // 从不复制 images、sounds 或 webkit
         if (!path.startsWith("images") && !path.startsWith("sounds") && !path.startsWith("webkit")) {
             if (copyType.equals("sdcard")) {
                 if (path.isEmpty()) {
@@ -204,7 +204,7 @@ public class CopyBootFilesExecutor {
         return false;
     }
 
-    // now this only copies the folders: scripts, etc , wallpapers to /data/data...
+    // 现在这只复制文件夹: scripts、etc、wallpapers 到 /data/data...
     private void assetsToFiles(String TARGET_BASE_PATH, String path, String copyType) {
         AssetManager assetManager = context.get().getAssets();
         String[] assets;
@@ -223,7 +223,7 @@ public class CopyBootFilesExecutor {
                     ShellExecuter create = new ShellExecuter();
                     create.RunAsRoot(new String[]{"mkdir " + fullPath});
                     if (!dir.exists()) {
-                        Log.i(TAG, "could not create dir " + fullPath);
+                        Log.i(TAG, "无法创建目录 " + fullPath);
                     }
                 }
 
@@ -241,7 +241,7 @@ public class CopyBootFilesExecutor {
 
             }
         } catch (IOException ex) {
-            Log.e(TAG, "I/O Exception", ex);
+            Log.e(TAG, "I/O 异常", ex);
         }
     }
 
@@ -257,7 +257,7 @@ public class CopyBootFilesExecutor {
             // Log.i("tag", "copyFile() "+filename);
             in = assetManager.open(filename);
             newFileName = TARGET_BASE_PATH + "/" + filename;
-            /* rename the file name if its suffix is either -arm64 or -armhf before copying the file.*/
+            /* 如果文件后缀是 -arm64 或 -armhf, 则在复制文件前重命名文件名. */
             out = new FileOutputStream(renameAssetIfneeded(newFileName));
             byte[] buffer = new byte[8092];
             int read;
@@ -268,21 +268,21 @@ public class CopyBootFilesExecutor {
             out.flush();
             out.close();
         } catch (Exception e) {
-            Log.e(TAG, "Exception in copyFile() of " + newFileName);
-            Log.e(TAG, "Exception in copyFile() " + e);
-            Log.e(TAG, "Trying to copy as root next");
-            // Trying runasroot
+            Log.e(TAG, "copyFile() 中的异常: " + newFileName);
+            Log.e(TAG, "copyFile() 中的异常: " + e);
+            Log.e(TAG, "接下来尝试以 root 权限复制");
+            // 尝试以 root 权限运行
             ShellExecuter copy = new ShellExecuter();
             copy.RunAsRoot(new String[]{"cp " + filename + " " + TARGET_BASE_PATH});
         }
 
     }
 
-    // Check for symlink for bootkali
+    // 检查 bootkali 的符号链接
     // https://stackoverflow.com/questions/813710/java-1-6-determine-symbolic-links/813730#813730
     private boolean isSymlink(File file) throws IOException {
         if (file == null)
-            throw new NullPointerException("File must not be null");
+            throw new NullPointerException("文件不能为空");
         File canon;
         if (file.getParent() == null) {
             canon = file;
@@ -294,21 +294,21 @@ public class CopyBootFilesExecutor {
     }
 
     private void MakeSYSWriteable() {
-        Log.d(TAG, "Making /system writeable for symlink");
+        Log.d(TAG, "使 /system 可写以创建符号链接");
         exe.RunAsRoot(new String[]{"if [ \"$(getprop ro.build.system_root_image)\" == \"true\" ]; then export SYSTEM=/; else export SYSTEM=/system;fi;mount -o rw,remount,rw $SYSTEM"});
     }
 
     private void MakeSYSReadOnly() {
-        Log.d(TAG, "Making /system readonly for symlink");
+        Log.d(TAG, "使 /system 只读以创建符号链接");
         exe.RunAsRoot(new String[]{"if [ \"$(getprop ro.build.system_root_image)\" == \"true\" ]; then export SYSTEM=/; else export SYSTEM=/system;fi;mount -o ro,remount,ro $SYSTEM"});
     }
 
     private void CheckEncrypted() {
-        Log.d(TAG, "Checking if /data is encrypted...");
+        Log.d(TAG, "检查 /data 是否加密...");
         String encrypted = exe.RunAsRootOutput("getprop ro.crypto.state");
-        Log.d(TAG, "/data is " + encrypted);
+        Log.d(TAG, "/data 是 " + encrypted);
         if (encrypted.equals("encrypted")) {
-            Log.d(TAG, "Fixing pam.d and inet in chroot");
+            Log.d(TAG, "修复 chroot 中的 pam.d 和 inet");
             exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd sed -i \"s/pam_keyinit.so/pam_keyinit.so #/\" /etc/pam.d/*"});
             exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd echo 'APT::Sandbox::User \"root\";' > /etc/apt/apt.conf.d/01-android-nosandbox"});
             exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd groupadd -g 3003 aid_inet;usermod -G nogroup -g aid_inet _apt"});
@@ -317,17 +317,17 @@ public class CopyBootFilesExecutor {
 
     private void Symlink(String filename) {
         File checkfile = new File("/system/bin/" + filename);
-        Log.d(TAG, "Checking for " + filename + " symlink....");
+        Log.d(TAG, "检查 " + filename + " 符号链接....");
         if (!checkfile.exists()) {
-            Log.d(TAG, "Symlinking " + filename);
-            Log.d(TAG, "command output: ln -s " + NhPaths.APP_SCRIPTS_PATH + "/" + filename + " /system/bin/" + filename);
+            Log.d(TAG, "正在创建符号链接 " + filename);
+            Log.d(TAG, "命令输出: ln -s " + NhPaths.APP_SCRIPTS_PATH + "/" + filename + " /system/bin/" + filename);
             MakeSYSWriteable();
             exe.RunAsRoot(new String[]{"ln -s " + NhPaths.APP_SCRIPTS_PATH + "/" + filename + " /system/bin/" + filename});
             MakeSYSReadOnly();
         }
     }
 
-    // Get a list of files from a directory
+    // 从目录获取文件列表
     private ArrayList<String> FetchFiles(String folder) {
 
         ArrayList<String> filenames = new ArrayList<>();
@@ -342,14 +342,14 @@ public class CopyBootFilesExecutor {
                     filenames.add(file_name);
                 }
             } catch (NullPointerException e) {
-                Log.e(TAG, folder + " is an empty folder, filenames is returned as a empty String ArrayList.");
+                Log.e(TAG, folder + " 是一个空文件夹, filenames 返回为一个空的字符串 ArrayList. ");
                 e.printStackTrace();
             }
         }
         return filenames;
     }
 
-    // This rename the filename which suffix is either [name]-arm64 or [name]-armhf to [name] according to the user's CPU ABI.
+    // 这将根据用户的 CPU ABI 重命名后缀为 [name]-arm64 或 [name]-armhf 的文件名为 [name]. 
     private String renameAssetIfneeded(String asset) {
         String cpuAbi;
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
@@ -371,14 +371,14 @@ public class CopyBootFilesExecutor {
 
     private void disableMagiskNotification() {
         if (exe.RunAsRootReturnValue("[ -f " + NhPaths.MAGISK_DB_PATH + " ]") == 0) {
-            Log.d(TAG, "Disabling magisk notification and log for nethunter app.");
+            Log.d(TAG, "为 nethunter 应用禁用 magisk 通知和日志. ");
             if (exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_BIN_PATH +
                     "/sqlite3 " + NhPaths.MAGISK_DB_PATH + " \"SELECT * from policies\" | grep " +
                     BuildConfig.APPLICATION_ID).startsWith(BuildConfig.APPLICATION_ID)) {
                 exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_BIN_PATH +
                         "/sqlite3 " + NhPaths.MAGISK_DB_PATH + " \"UPDATE policies SET logging='0',notification='0' WHERE package_name='" +
                         BuildConfig.APPLICATION_ID + "';\"");
-                Log.d(TAG, "Updated magisk db successfully.");
+                Log.d(TAG, "成功更新 magisk 数据库. ");
             } else {
                 exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_BIN_PATH + "/sqlite3 " +
                         NhPaths.MAGISK_DB_PATH + " \"UPDATE policies SET logging='0',notification='0' WHERE uid='$(stat -c %u /data/data/" +

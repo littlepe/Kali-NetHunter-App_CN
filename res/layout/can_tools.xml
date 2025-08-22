@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Settings"
+                    android:text="设置"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"/>
 
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="Interface :"
+                    android:text="接口 :"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -100,7 +100,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:hint="RHOST"
+                    android:hint="目标主机"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:inputType="text"
@@ -111,7 +111,7 @@
                     android:id="@+id/cannelloni_rport"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:hint="RPORT"
+                    android:hint="目标端口"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:inputType="text"
@@ -122,7 +122,7 @@
                     android:id="@+id/cannelloni_lport"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:hint="LPORT"
+                    android:hint="本地端口"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:inputType="text"
@@ -140,23 +140,23 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp">
 
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sequence :"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="序列 :"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_marginEnd="8dp" />
 
-                    <EditText
-                        android:id="@+id/cansend_sequence"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:hint="01a#11223344AABBCCDD"
-                        android:inputType="text"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        tools:ignore="MissingConstraints,TouchTargetSizeCheck"/>
+                <EditText
+                    android:id="@+id/cansend_sequence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:hint="01a#11223344AABBCCDD"
+                    android:inputType="text"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    tools:ignore="MissingConstraints,TouchTargetSizeCheck"/>
             </GridLayout>
 
             <LinearLayout
@@ -172,7 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Input :"
+                    android:text="输入 :"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
 
@@ -190,7 +190,7 @@
                     android:id="@+id/inputfilebrowse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Browse"
+                    android:text="浏览"
                     android:textColor="#ffffffff"
                     tools:ignore="DuplicateSpeakableTextCheck" />
 
@@ -209,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:text="Output :"
+                    android:text="输出 :"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
@@ -226,7 +226,7 @@
                     android:id="@+id/outputfilebrowse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Browse"
+                    android:text="浏览"
                     android:textColor="#ffffffff" />
 
 
@@ -238,7 +238,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Advanced Options" />
+                android:text="高级选项" />
 
             <LinearLayout
                 android:id="@+id/tools_advanced_options"
@@ -262,7 +262,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Interactive"
+                        android:text="交互模式"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -271,7 +271,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Verbose"
+                        android:text="详细模式"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -289,7 +289,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Disable Local Loopback"
+                        android:text="禁用本地回环"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </LinearLayout>
@@ -315,7 +315,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Tools"
+                    android:text="工具"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"/>
 
@@ -414,7 +414,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Seq.Finder" />
+                    android:text="序列查找" />
 
                 <Button
                     android:id="@+id/start_cannelloni"
@@ -446,7 +446,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Custom Command"
+                    android:text="自定义命令"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"/>
 
@@ -477,7 +477,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="Run"
+                    android:text="运行"
                     android:textColor="#ffffffff" />
 
             </LinearLayout>

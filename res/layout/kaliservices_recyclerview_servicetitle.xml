@@ -5,13 +5,14 @@
     android:background="@color/cardview_shadow_start_color"
     android:orientation="vertical">
 
+    <!-- 顶部留白 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:orientation="horizontal"
-        android:background="@color/cardview_shadow_start_color">
-    </LinearLayout>
+        android:background="@color/cardview_shadow_start_color" />
 
+    <!-- 标题行 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,23 +24,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:text="Loading.."
+            android:text="加载中…"
             android:textColor="@android:color/background_light"
             android:textSize="20sp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
-            android:focusable="true"/>
-
-        <!--Button
-            android:id="@+id/f_kaliservices_recyclerview_edit_btn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="0.8"
-            android:text="EDIT"
-            android:textColor="@color/accent_material_dark" /-->
+            android:focusable="true" />
     </LinearLayout>
 
+    <!-- 状态/操作行 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -49,16 +42,16 @@
             android:id="@+id/f_kaliservices_recyclerview_serviceresult_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Service is NOT running."
+            android:text="服务未运行. "
             android:layout_weight="0.35"
-            android:layout_marginStart="12dp"/>
+            android:layout_marginStart="12dp" />
 
         <CheckBox
             android:id="@+id/f_kaliservices_recyclerview_runonchrootstart_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.35"
-            android:text="RunOnChrootStart"/>
+            android:text="Chroot 启动时自动运行" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/f_kaliservices_recyclerview_switch_toggle"

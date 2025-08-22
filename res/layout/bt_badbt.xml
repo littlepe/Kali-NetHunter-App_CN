@@ -20,26 +20,26 @@
             android:gravity="center"
             android:padding="4dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bluetooth interface"
-            android:padding="4dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/badbt_interface"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="hci0" />
-    </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蓝牙接口"
+                android:padding="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/badbt_interface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="hci0" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bluetooth address"
+                android:text="蓝牙地址"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bluetooth class"
+            android:text="蓝牙类别"
             android:padding="4dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -100,7 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="名称"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="Server:"
+                android:text="服务器: "
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_1"/>
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:hint="Loading.."
+                android:hint="加载中.."
                 android:maxLength="50"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -170,7 +170,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/badbtserver_button"
-            android:text="Start"
+            android:text="启动"
             android:textColor="#ffffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mode"
+                android:text="模式"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -202,113 +202,112 @@
                 android:prompt="@string/payload_select" />
         </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/badbtsettings_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <LinearLayout
-            android:id="@+id/badbtprefix_layout"
+            android:id="@+id/badbtsettings_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Prefix"
-                android:padding="4dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <Spinner
-                android:id="@+id/badbtprefix"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:prompt="@string/payload_select" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/badbtpreset_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Preset"
-                android:padding="4dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <Spinner
-                android:id="@+id/badbtpresets"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:prompt="@string/payload_select" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/badbtuac_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="4dp">
-
-            <CheckBox
-                android:id="@+id/uac_bypass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="UAC Bypass" />
-
-            <Spinner
-                android:id="@+id/badbtpresets_uac"
+            <LinearLayout
+                android:id="@+id/badbtprefix_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"/>
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="前缀"
+                    android:padding="4dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/badbtprefix"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/payload_select" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/badbtpreset_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预设"
+                    android:padding="4dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/badbtpresets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/payload_select" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/badbtuac_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <CheckBox
+                    android:id="@+id/uac_bypass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="UAC 绕过" />
+
+                <Spinner
+                    android:id="@+id/badbtpresets_uac"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/injectstringbrowse"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="从文件加载"
+                android:textColor="#ffffffff" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="待注入字符串"
+                android:padding="4dp" />
+
+            <EditText
+                android:id="@+id/editBadBT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:includeFontPadding="false"
+                android:inputType="textMultiLine"
+                android:hint="Hello friend"/>
         </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/injectstringbrowse"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Load from file"
-            android:textColor="#ffffffff" />
-
-        <View
-            android:id="@+id/divider4"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="String to inject"
-            android:padding="4dp" />
-
-        <EditText
-            android:id="@+id/editBadBT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="none"
-            android:includeFontPadding="false"
-            android:inputType="textMultiLine"
-            android:hint="Hello friend"/>
-    </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_badbt"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Send"
+            android:text="发送"
             android:textColor="#ffffffff" />
-
     </LinearLayout>
 </ScrollView>

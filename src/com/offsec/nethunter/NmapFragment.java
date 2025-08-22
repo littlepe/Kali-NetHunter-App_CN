@@ -29,9 +29,9 @@ import androidx.fragment.app.Fragment;
 public class NmapFragment extends Fragment {
     private static final String TAG = "NMAPFragment";
     private static final String ARG_SECTION_NUMBER = "section_number";
-    // Building command line
+    // 构建命令行
     private static final ArrayList<String> CommandComposed = new ArrayList<>();
-    // Nmap switches
+    // Nmap 开关
     private String net_interface;
     private String time_template;
     private String searchall;
@@ -68,20 +68,20 @@ public class NmapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.nmap, container, false);
-        // Default advanced options as invisible
+        // 默认隐藏高级选项
         final LinearLayout AdvLayout = rootView.findViewById(R.id.nmap_adv_layout);
         AdvLayout.setVisibility(View.GONE);
         SharedPreferences sharedpreferences = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
 
-        // Switch to activate open/close of advanced options
+        // 开关: 展开/收起高级选项
         SwitchCompat advswitch = rootView.findViewById(R.id.nmap_adv_switch);
         advswitch.setChecked(false);
         advswitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                Log.d(TAG, "Advanced Options Open");
+                Log.d(TAG, "高级选项已打开");
                 AdvLayout.setVisibility(View.VISIBLE);
             } else {
-                Log.d(TAG, "Advanced Options Closed");
+                Log.d(TAG, "高级选项已关闭");
                 AdvLayout.setVisibility(View.GONE);
             }
         });
@@ -90,7 +90,7 @@ public class NmapFragment extends Fragment {
         searchButton.setOnClickListener(
                 view -> getCmd());
 
-        // NMAP Interface Spinner
+        /* NMAP 接口下拉框 */
         Spinner typeSpinner = rootView.findViewById(R.id.nmap_int_spinner);
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(context,
                 R.array.nmap_interface_array, android.R.layout.simple_spinner_item);
@@ -132,11 +132,11 @@ public class NmapFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //Another interface callback
+                // 接口选择的另一个回调
             }
         });
 
-        // NMAP Technique Spinner
+        /* NMAP 扫描技术下拉框 */
         Spinner techSpinner = rootView.findViewById(R.id.nmap_scan_tech_spinner);
         ArrayAdapter<CharSequence> techAdapter = ArrayAdapter.createFromResource(context,
                 R.array.nmap_scantechnique_array, android.R.layout.simple_spinner_item);
@@ -197,14 +197,14 @@ public class NmapFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //Another interface callback
+                // 接口选择的另一个回调
             }
         });
 
-        // Search button
+        /* 搜索按钮 */
         addClickListener(v -> run_cmd("nmap " + getCmd()), rootView);
 
-        // NMAP Timing Spinner
+        /* NMAP 时间模板下拉框 */
         Spinner timeSpinner = rootView.findViewById(R.id.nmap_timing_spinner);
         ArrayAdapter<CharSequence> timeAdapter = ArrayAdapter.createFromResource(context,
                 R.array.nmap_timing_array, android.R.layout.simple_spinner_item);
@@ -255,10 +255,11 @@ public class NmapFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //Another interface callback
+                // 接口选择的另一个回调
             }
         });
 
+        /* 全功能扫描复选框 */
         final CheckBox allCheckbox = rootView.findViewById(R.id.nmap_all_check);
         allCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (buttonView.isChecked()) {
@@ -272,7 +273,7 @@ public class NmapFragment extends Fragment {
 
         });
 
-        // Checkbox for Fastmode
+        /* 快速模式复选框 */
         final CheckBox fastmodeCheckbox = rootView.findViewById(R.id.nmap_fastmode_check);
         View.OnClickListener checkBoxListener = v -> {
             if (fastmodeCheckbox.isChecked()) {
@@ -284,7 +285,7 @@ public class NmapFragment extends Fragment {
         };
         fastmodeCheckbox.setOnClickListener(checkBoxListener);
 
-        // Checkbox for Ping Scan only
+        /* 仅 Ping 扫描复选框 */
         final CheckBox pingCheckbox = rootView.findViewById(R.id.nmap_ping_check);
         checkBoxListener = v -> {
             if (pingCheckbox.isChecked()) {
@@ -296,7 +297,7 @@ public class NmapFragment extends Fragment {
         };
         pingCheckbox.setOnClickListener(checkBoxListener);
 
-        // Checkbox for Top Ports
+        /* 常用端口复选框 */
         final CheckBox topportsCheckbox = rootView.findViewById(R.id.nmap_top_ports_check);
         checkBoxListener = v -> {
             if (topportsCheckbox.isChecked()) {
@@ -308,7 +309,7 @@ public class NmapFragment extends Fragment {
         };
         topportsCheckbox.setOnClickListener(checkBoxListener);
 
-        // Checkbox for UDP Scan
+        /* UDP 扫描复选框 */
         final CheckBox udpCheckbox = rootView.findViewById(R.id.nmap_udp_checkbox);
         checkBoxListener = v -> {
             if (udpCheckbox.isChecked()) {
@@ -320,8 +321,7 @@ public class NmapFragment extends Fragment {
         };
         allCheckbox.setOnClickListener(checkBoxListener);
 
-
-        // Checkbox for IPv6
+        /* IPv6 扫描复选框 */
         final CheckBox ipv6box = rootView.findViewById(R.id.nmap_ipv6_check);
         checkBoxListener = v -> {
             if (ipv6box.isChecked()) {
@@ -333,7 +333,7 @@ public class NmapFragment extends Fragment {
         };
         ipv6box.setOnClickListener(checkBoxListener);
 
-        // Checkbox for Service Version
+        /* 服务版本检测复选框 */
         final CheckBox svbox = rootView.findViewById(R.id.nmap_SV_checkbox);
         checkBoxListener = v -> {
             if (svbox.isChecked()) {
@@ -345,7 +345,7 @@ public class NmapFragment extends Fragment {
         };
         svbox.setOnClickListener(checkBoxListener);
 
-        // Checkbox for OS Detect
+        /* 操作系统检测复选框 */
         final CheckBox osdetectbox = rootView.findViewById(R.id.nmap_osonly_check);
         checkBoxListener = v -> {
             if (osdetectbox.isChecked()) {
@@ -357,6 +357,7 @@ public class NmapFragment extends Fragment {
         };
         osdetectbox.setOnClickListener(checkBoxListener);
 
+        /* 搜索字段 */
         searchBar = rootView.findViewById(R.id.nmap_searchbar);
         searchBar.addTextChangedListener(new TextWatcher() {
 
@@ -376,7 +377,7 @@ public class NmapFragment extends Fragment {
             }
         });
 
-        // Ports text field
+        /* 端口文本框 */
         portsBar = rootView.findViewById(R.id.nmap_ports);
         portsBar.addTextChangedListener(new TextWatcher() {
 
@@ -405,21 +406,24 @@ public class NmapFragment extends Fragment {
             genCmd.append(CommandComposed.get(j));
         }
         //Log.d("NMAP SQL:", "nmap --script sqlite-output --script-args=dbname=/tmp/scan.sqlite,dbtable=scandata " + genCmd);
-        Log.d("NMAP CMD OUTPUT: ", "nmap " + genCmd);
+        Log.d("NMAP 命令输出: ", "nmap " + genCmd);
 
         return genCmd.toString();
     }
 
+    /* 清空命令列表 */
     private static void cleanCmd() {
         if (!CommandComposed.isEmpty()) {
             CommandComposed.subList(0, CommandComposed.size()).clear();
         }
     }
 
+    /* 添加参数到命令列表 */
     private static void addToCmd(String opt) {
         CommandComposed.add(opt);
     }
 
+    /* 从命令列表移除参数 */
     private static void removeFromCmd(String opt) {
         for (int j = CommandComposed.size() - 1; j >= 0; j--) {
             if (CommandComposed.get(j).equals(opt))
@@ -427,13 +431,12 @@ public class NmapFragment extends Fragment {
         }
     }
 
+    /* 为按钮添加点击监听 */
     private void addClickListener(View.OnClickListener onClickListener, View rootView) {
         rootView.findViewById(R.id.nmap_scan_button).setOnClickListener(onClickListener);
     }
 
-    ////
-    // Bridge side functions
-    ////
+    /* Bridge 端函数 */
 
     public void run_cmd(String cmd) {
         Intent intent = Bridge.createExecuteIntent("/data/data/com.offsec.nhterm/files/usr/bin/kali", cmd);

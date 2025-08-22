@@ -1,7 +1,7 @@
 package com.offsec.nethunter.models;
 
 /*
-    CustomCommands Model class, each model object represent the data of each recyclerview item.
+    CustomCommands 模型类, 每个模型对象代表 RecyclerView 中一项的数据. 
  */
 public class CustomCommandsModel {
     private String CommandLabel;

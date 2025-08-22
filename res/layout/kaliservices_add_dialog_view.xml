@@ -24,7 +24,7 @@
                 android:layout_marginStart="4dp"
                 android:textSize="18sp"
                 android:textColor="@color/accent_material_dark"
-                android:text="Title:"/>
+                android:text="标题:"/>
 
             <EditText
                 android:id="@+id/f_kaliservices_add_adb_et_title"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:inputType="text"
-                android:hint="Enter your title name here"/>
+                android:hint="在此输入标题"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                     android:layout_weight="0.9"
                     android:textSize="18sp"
                     android:textColor="@color/accent_material_dark"
-                    android:text="Command for starting the service:"/>
+                    android:text="启动服务的命令:"/>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/f_kaliservices_add_btn_info_fab1"
@@ -79,7 +79,7 @@
                     android:layout_weight="0.9"
                     android:textSize="18sp"
                     android:textColor="@color/accent_material_dark"
-                    android:text="Command for stopping the service:"/>
+                    android:text="停止服务的命令:"/>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/f_kaliservices_add_btn_info_fab2"
@@ -112,7 +112,7 @@
                     android:layout_weight="0.9"
                     android:textSize="18sp"
                     android:textColor="@color/accent_material_dark"
-                    android:text="String for checking the service:"/>
+                    android:text="用于检查服务状态的字符串:"/>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/f_kaliservices_add_btn_info_fab3"
@@ -144,7 +144,7 @@
                     android:id="@+id/f_kaliservices_add_adb_checkbox_runonboot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="RunOnChrootStart"
+                    android:text="Chroot 启动时自动运行"
                     android:textSize="18sp"
                     android:textColor="@color/accent_material_dark"
                     android:layout_marginStart="4dp"/>
@@ -169,7 +169,7 @@
                 android:layout_marginStart="4dp"
                 android:textSize="18sp"
                 android:textColor="@color/accent_material_dark"
-                android:text="Position to insert:">
+                android:text="插入位置:">
 
             </TextView>
             <LinearLayout

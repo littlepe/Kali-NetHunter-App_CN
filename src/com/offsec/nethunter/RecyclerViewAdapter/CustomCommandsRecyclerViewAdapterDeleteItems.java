@@ -33,6 +33,7 @@ public class CustomCommandsRecyclerViewAdapterDeleteItems extends RecyclerView.A
 
 	@Override
 	public void onBindViewHolder(@NonNull final ItemViewHolder itemViewHolder, int i) {
+		// 用命令标签作为复选框文字
 		itemViewHolder.runOnChrootStartCheckBox.setText(customCommandsModelList.get(i).getCommandLabel());
 	}
 

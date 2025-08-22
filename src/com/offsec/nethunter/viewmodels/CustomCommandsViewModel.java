@@ -12,9 +12,9 @@ import com.offsec.nethunter.models.CustomCommandsModel;
 import java.util.List;
 
 /*
-    ViewModel class for CustomCommands model, this is to be observed the List of CustomCommandsModel class.
-    This class should be initiated every time the CustomCommandsFragment is created.
-    After the CustomCommandsData singleton is created, it will live until the app dies.
+    CustomCommands 模型的 ViewModel 类, 用于观察 CustomCommandsModel 类的列表. 
+    每次创建 CustomCommandsFragment 时都应初始化此类. 
+    CustomCommandsData 单例创建后, 将一直存在直到应用程序终止. 
  */
 public class CustomCommandsViewModel extends ViewModel {
     private MutableLiveData<List<CustomCommandsModel>> mutableLiveDataCustomCommandsModelList;

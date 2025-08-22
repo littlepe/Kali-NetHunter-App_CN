@@ -31,7 +31,7 @@ import static com.offsec.nethunter.AudioPlayState.STARTING;
 
 public class AudioPlaybackService extends Service implements AudioPlaybackWorker.Listener {
     /**
-     * Unique ID for the Notification.
+     * 通知的唯一 ID. 
      */
     private static final int NOTIFICATION = R.string.playback_service_status;
     private static final String ACTION_TOGGLE = AudioPlaybackService.class.getName() + ".TOGGLE";
@@ -104,27 +104,27 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
     public void onDestroy() {
         super.onDestroy();
 
-        // Stop playback and nullify worker references
+        // 停止播放并使工作线程引用为空
         stop();
         stopWorker();
 
-        // Release the WakeLock if it is held
+        // 如果持有 WakeLock, 则释放它
         if (wakeLock != null && wakeLock.isHeld()) {
             wakeLock.release();
             wakeLock = null;
-            Log.d("AudioFragment", "WakeLock released.");
+            Log.d("AudioFragment", "WakeLock 已释放. ");
         }
         wakeLock = null;
 
-        // Remove all callbacks and messages from the Handler to avoid memory leaks
+        // 从 Handler 中移除所有回调和消息以避免内存泄漏
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);
             handler = null;
-            Log.d("AudioFragment", "Handler callbacks removed.");
+            Log.d("AudioFragment", "Handler 回调已移除. ");
         }
         handler = null;
 
-        // Cancel notifications to release resources in the NotificationManager
+        // 取消通知以释放 NotificationManager 中的资源
         if (notifManager != null) {
             notifManager.cancel(NOTIFICATION);
             notifManager = null;
@@ -132,10 +132,10 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
 
         togglePendingIntent = null;
 
-        // Ensure that the play state LiveData is cleared to release observers
+        // 确保清除播放状态 LiveData 以释放观察者
         playState.setValue(AudioPlayState.STOPPED);
 
-        Log.d("AudioFragment", "AudioPlaybackService destroyed and cleaned up.");
+        Log.d("AudioFragment", "AudioPlaybackService 已销毁并清理完毕. ");
     }
 
     @SuppressLint("InlinedApi")
@@ -174,7 +174,7 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
     @MainThread
     public void play(@NonNull String server, int port) {
         if (!isStartable()) {
-            throw new IllegalStateException("Cannot start with playState == " + getPlayState());
+            throw new IllegalStateException("无法在 playState == " + getPlayState() + " 时启动");
         }
         if (playWorker != null) {
             stopWorker();
@@ -187,7 +187,7 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
         notifyState(STARTING);
         playWorkerThread.start();
 
-        // allow running in the background when service gets unbound
+        // 允许服务在解绑定时在后台运行
         startService(new Intent(this, AudioPlaybackService.class));
     }
 
@@ -202,7 +202,7 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
 
     @MainThread
     private void stopWorker() {
-        // Nullify references to help with garbage collection
+        // 使引用为空以帮助垃圾回收
         if (playWorker != null) {
             playWorker.stop();
             playWorker = null;
@@ -258,7 +258,7 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
             return sharedPrefs.getLong(key, defaultValue);
         } catch (ClassCastException ignored) {
         }
-        // old buffer value saved as int
+        // 旧的缓冲值保存为 int
         int compatValue;
         try {
             compatValue = sharedPrefs.getInt(key, -1000);
@@ -268,7 +268,7 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
         if (compatValue == -1000) {
             return defaultValue;
         }
-        // convert ms to us
+        // 将毫秒转换为微秒
         return compatValue * 1000L;
     }
 
@@ -299,7 +299,7 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
     }
 
     private Notification createNotification(@NonNull AudioPlayState state) {
-        // The PendingIntent to launch our activity if the user selects this notification
+        // 用户选择此通知时启动我们的活动的 PendingIntent
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, AudioFragment.class), PendingIntent.FLAG_IMMUTABLE);
 
@@ -343,9 +343,7 @@ public class AudioPlaybackService extends Service implements AudioPlaybackWorker
     }
 
     /**
-     * Class for clients to access.  Because we know this service always
-     * runs in the same process as its clients, we don't need to deal with
-     * IPC.
+     * 供客户端访问的类. 因为我们知道此服务始终与其客户端在同一进程中运行, 所以不需要处理 IPC. 
      */
     public static class LocalBinder extends Binder {
         private final AudioPlaybackService service;

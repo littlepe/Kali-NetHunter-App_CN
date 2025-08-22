@@ -17,7 +17,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:paddingRight="@dimen/base_listItem_LR"
-        android:text="description"
+        android:text="描述"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
 
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="PLATFORM"
+        android:text="平台"
         android:id="@+id/textView8"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:paddingRight="@dimen/base_listItem_LR"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="TYPE"
+        android:text="类型"
         android:id="@+id/textView4"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:layout_marginTop="-7dp"
@@ -45,11 +45,12 @@
         android:paddingRight="@dimen/base_listItem_LR"
         android:layout_below="@+id/description"
         android:layout_alignParentStart="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="DATE"
+        android:text="日期"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:textColor="@color/accent_material_dark"
         android:paddingRight="@dimen/base_listItem_LR"
@@ -63,12 +64,12 @@
         android:layout_below="@+id/searchsploit_sendhid_button"
         android:layout_alignStart="@+id/openWeb"
         android:layout_marginEnd="@dimen/base_listItem_LR"
-        android:text="View Source" />
+        android:text="查看源码" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="type"
+        android:text="类型"
         android:id="@+id/type"
         android:textColor="@color/accent_material_light"
         android:layout_above="@+id/textView8"
@@ -78,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="platform"
+        android:text="平台"
         android:id="@+id/platform"
         android:textColor="@color/accent_material_light"
         android:layout_alignTop="@+id/textView8"
@@ -88,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="AUTHOR"
+        android:text="作者"
         android:id="@+id/textView9"
         android:paddingLeft="@dimen/base_listItem_LR"
         android:textColor="@color/accent_material_dark"
@@ -100,16 +101,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="YES/NO"
+        android:text="是/否"
         android:id="@+id/author"
         android:textColor="@color/accent_material_light"
         android:layout_below="@+id/textView8"
         android:layout_toEndOf="@+id/textView8" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="date"
+        android:text="日期"
         android:id="@+id/exploit_date"
         android:textColor="@color/accent_material_light"
         android:layout_below="@+id/author"
@@ -122,7 +124,7 @@
         android:layout_below="@+id/viewSource"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/base_listItem_LR"
-        android:text="View in www" />
+        android:text="网页查看" />
 
     <Button
         android:id="@+id/searchsploit_sendhid_button"
@@ -131,5 +133,5 @@
         android:layout_alignStart="@+id/viewSource"
         android:layout_alignEnd="@+id/viewSource"
         android:layout_alignParentTop="true"
-        android:text="SEND HID" />
+        android:text="发送 HID" />
 </RelativeLayout>

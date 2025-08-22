@@ -48,7 +48,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import static com.offsec.nethunter.R.id.f_nethunter_action_search;
 import static com.offsec.nethunter.R.id.f_nethunter_action_snowfall;
 
-
 public class NetHunterFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private Context context;
@@ -108,13 +107,13 @@ public class NetHunterFragment extends Fragment {
         onDeleteItemSetup();
         onMoveItemSetup();
 
-        //WearOS optimisation
+        /* WearOS 优化 */
         TextView NHDesc = view.findViewById(R.id.f_nethunter_banner2);
         LinearLayout NHButtons = view.findViewById(R.id.f_nethunter_linearlayoutBtn);
         Boolean iswatch = requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
         sharedpreferences.edit().putBoolean("running_on_wearos", iswatch).apply();
-        if(iswatch) {
+        if (iswatch) {
             NHDesc.setVisibility(View.GONE);
             NHButtons.setVisibility(View.GONE);
         }
@@ -128,7 +127,7 @@ public class NetHunterFragment extends Fragment {
 
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
 
-        //WearOS optimisation
+        /* WearOS 优化 */
         Boolean iswatch = requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
         Boolean snowfall;
         if (iswatch) {
@@ -145,7 +144,7 @@ public class NetHunterFragment extends Fragment {
             return false;
         });
 
-        //Snowfall
+        /* 雪花开关 */
         snowfallButton = menu.findItem(f_nethunter_action_snowfall);
         if (snowfall) snowfallButton.setIcon(R.drawable.snowflake_trigger);
         else snowfallButton.setIcon(R.drawable.snowflake_trigger_bw);
@@ -174,22 +173,22 @@ public class NetHunterFragment extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.f_nethunter_menu_backupDB:
-                titleTextView.setText("Full path to where you want to save the database:");
+                titleTextView.setText("请输入要保存数据库的完整路径: ");
                 storedpathEditText.setText(NhPaths.APP_SD_SQLBACKUP_PATH + "/FragmentNethunter");
                 MaterialAlertDialogBuilder adbBackup = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
                 adbBackup.setView(promptView);
-                adbBackup.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-                adbBackup.setPositiveButton("OK", (dialog, which) -> { });
+                adbBackup.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+                adbBackup.setPositiveButton("确定", (dialog, which) -> { });
                 final androidx.appcompat.app.AlertDialog adBackup = adbBackup.create();
                 adBackup.setOnShowListener(dialog -> {
                     final Button buttonOK = adBackup.getButton(DialogInterface.BUTTON_POSITIVE);
                     buttonOK.setOnClickListener(v -> {
                         String returnedResult = NethunterData.getInstance().backupData(NethunterSQL.getInstance(context), storedpathEditText.getText().toString());
-                        if (returnedResult == null){
-                            NhPaths.showMessage(context, "db is successfully backup to " + storedpathEditText.getText().toString());
+                        if (returnedResult == null) {
+                            NhPaths.showMessage(context, "数据库已成功备份到 " + storedpathEditText.getText().toString());
                         } else {
                             dialog.dismiss();
-                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Failed to backup the DB.").setMessage(returnedResult).create().show();
+                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("备份失败").setMessage(returnedResult).create().show();
                         }
                         dialog.dismiss();
                     });
@@ -197,22 +196,22 @@ public class NetHunterFragment extends Fragment {
                 adBackup.show();
                 break;
             case R.id.f_nethunter_menu_restoreDB:
-                titleTextView.setText("Full path of the db file from where you want to restore:");
+                titleTextView.setText("请输入要还原的数据库文件完整路径: ");
                 storedpathEditText.setText(NhPaths.APP_SD_SQLBACKUP_PATH + "/FragmentNethunter");
                 MaterialAlertDialogBuilder adbRestore = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
                 adbRestore.setView(promptView);
-                adbRestore.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-                adbRestore.setPositiveButton("OK", (dialog, which) -> { });
+                adbRestore.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+                adbRestore.setPositiveButton("确定", (dialog, which) -> { });
                 final androidx.appcompat.app.AlertDialog adRestore = adbRestore.create();
                 adRestore.setOnShowListener(dialog -> {
                     final Button buttonOK = adRestore.getButton(DialogInterface.BUTTON_POSITIVE);
                     buttonOK.setOnClickListener(v -> {
                         String returnedResult = NethunterData.getInstance().restoreData(NethunterSQL.getInstance(context), storedpathEditText.getText().toString());
                         if (returnedResult == null) {
-                            NhPaths.showMessage(context, "db is successfully restored to " + storedpathEditText.getText().toString());
+                            NhPaths.showMessage(context, "数据库已成功还原到 " + storedpathEditText.getText().toString());
                         } else {
                             dialog.dismiss();
-                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Failed to restore the DB.").setMessage(returnedResult).create().show();
+                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("还原失败").setMessage(returnedResult).create().show();
                         }
                         dialog.dismiss();
                     });
@@ -222,7 +221,7 @@ public class NetHunterFragment extends Fragment {
             case R.id.f_nethunter_menu_ResetToDefault:
                 NethunterData.getInstance().resetData(NethunterSQL.getInstance(context));
                 break;
-            //Snowfall Trigger
+            /* 雪花开关 */
             case f_nethunter_action_snowfall:
                 trigger_snowfall();
                 break;
@@ -246,11 +245,11 @@ public class NetHunterFragment extends Fragment {
         nethunterRecyclerViewAdapter = null;
     }
 
-    private void onRefreshItemSetup(){
+    private void onRefreshItemSetup() {
         refreshButton.setOnClickListener(v -> NethunterData.getInstance().refreshData());
     }
 
-    private void trigger_snowfall(){
+    private void trigger_snowfall() {
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
         Boolean iswatch = requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
         Boolean snowfall;
@@ -262,15 +261,15 @@ public class NetHunterFragment extends Fragment {
         if (snowfall) {
             sharedpreferences.edit().putBoolean("snowfall_enabled", false).apply();
             snowfallButton.setIcon(R.drawable.snowflake_trigger_bw);
-            Toast.makeText(requireActivity().getApplicationContext(), "Snowfall disabled. Restart app to take effect.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity().getApplicationContext(), "雪花已禁用, 重启应用后生效. ", Toast.LENGTH_SHORT).show();
         } else {
             sharedpreferences.edit().putBoolean("snowfall_enabled", true).apply();
             snowfallButton.setIcon(R.drawable.snowflake_trigger);
-            Toast.makeText(requireActivity().getApplicationContext(), "Snowfall enabled. Restart app to take effect.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity().getApplicationContext(), "雪花已启用, 重启应用后生效. ", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void onAddItemSetup(){
+    private void onAddItemSetup() {
         addButton.setOnClickListener(v -> {
             List<NethunterModel> nethunterModelList = NethunterData.getInstance().nethunterModelListFull;
             if (nethunterModelList == null) return;
@@ -283,7 +282,7 @@ public class NetHunterFragment extends Fragment {
             final Spinner insertPositions = promptView.findViewById(R.id.f_nethunter_add_adb_spr_positions);
             final Spinner insertTitles = promptView.findViewById(R.id.f_nethunter_add_adb_spr_titles);
             ArrayList<String> titleArrayList = new ArrayList<>();
-            for (NethunterModel nethunterModel: nethunterModelList){
+            for (NethunterModel nethunterModel : nethunterModelList) {
                 titleArrayList.add(nethunterModel.getTitle());
             }
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, titleArrayList);
@@ -295,9 +294,9 @@ public class NetHunterFragment extends Fragment {
 
             readmeButton1.setOnClickListener(view -> {
                 MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-                adb.setTitle("HOW TO USE:")
+                adb.setTitle("使用方法: ")
                         .setMessage(activity.getString(R.string.nethunter_howtouse_cmd))
-                        .setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+                        .setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
                 final AlertDialog ad = adb.create();
                 ad.setCancelable(true);
                 ad.show();
@@ -305,9 +304,9 @@ public class NetHunterFragment extends Fragment {
 
             readmeButton2.setOnClickListener(view -> {
                 MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-                adb.setTitle("HOW TO USE:")
+                adb.setTitle("使用方法: ")
                         .setMessage(activity.getString(R.string.nethunter_howtouse_delimiter))
-                        .setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+                        .setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
                 final AlertDialog ad = adb.create();
                 ad.setCancelable(true);
                 ad.show();
@@ -315,9 +314,9 @@ public class NetHunterFragment extends Fragment {
 
             readmeButton3.setOnClickListener(view -> {
                 MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-                adb.setTitle("HOW TO USE:")
+                adb.setTitle("使用方法: ")
                         .setMessage(activity.getString(R.string.nethunter_howtouse_runoncreate))
-                        .setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+                        .setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
                 final AlertDialog ad = adb.create();
                 ad.setCancelable(true);
                 ad.show();
@@ -329,15 +328,15 @@ public class NetHunterFragment extends Fragment {
             insertPositions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    //if Insert to Top
+                    // 插入到顶部
                     if (position == 0) {
                         insertTitles.setVisibility(View.INVISIBLE);
                         targetPositionId = 1;
-                        //if Insert to Bottom
+                        // 插入到底部
                     } else if (position == 1) {
                         insertTitles.setVisibility(View.INVISIBLE);
                         targetPositionId = nethunterModelList.size() + 1;
-                        //if Insert Before
+                        // 插入到之前
                     } else if (position == 2) {
                         insertTitles.setVisibility(View.VISIBLE);
                         insertTitles.setAdapter(arrayAdapter);
@@ -348,10 +347,9 @@ public class NetHunterFragment extends Fragment {
                             }
                             @Override
                             public void onNothingSelected(AdapterView<?> parent) {
-
                             }
                         });
-                        //if Insert After
+                        // 插入到之后
                     } else {
                         insertTitles.setVisibility(View.VISIBLE);
                         insertTitles.setAdapter(arrayAdapter);
@@ -362,32 +360,30 @@ public class NetHunterFragment extends Fragment {
                             }
                             @Override
                             public void onNothingSelected(AdapterView<?> parent) {
-
                             }
                         });
                     }
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
                 }
             });
 
             MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-            adb.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-            adb.setPositiveButton("OK", (dialog, which) -> { });
+            adb.setNegativeButton("取消", (dialog, which) -> dialog.dismiss());
+            adb.setPositiveButton("确定", (dialog, which) -> { });
             final androidx.appcompat.app.AlertDialog ad = adb.create();
             ad.setView(promptView);
             ad.setCancelable(true);
             ad.setOnShowListener(dialog -> {
                 final Button buttonAdd = ad.getButton(DialogInterface.BUTTON_POSITIVE);
                 buttonAdd.setOnClickListener(v1 -> {
-                    if (titleEditText.getText().toString().isEmpty()){
-                        NhPaths.showMessage(context, "Title cannot be empty");
-                    } else if (cmdEditText.getText().toString().isEmpty()){
-                        NhPaths.showMessage(context, "Command cannot be empty");
-                    } else if (delimiterEditText.getText().toString().isEmpty()){
-                        NhPaths.showMessage(context, "Delimiter cannot be empty");
+                    if (titleEditText.getText().toString().isEmpty()) {
+                        NhPaths.showMessage(context, "标题不能为空");
+                    } else if (cmdEditText.getText().toString().isEmpty()) {
+                        NhPaths.showMessage(context, "命令不能为空");
+                    } else if (delimiterEditText.getText().toString().isEmpty()) {
+                        NhPaths.showMessage(context, "分隔符不能为空");
                     } else {
                         ArrayList<String> dataArrayList = new ArrayList<>();
                         dataArrayList.add(titleEditText.getText().toString());
@@ -403,7 +399,7 @@ public class NetHunterFragment extends Fragment {
         });
     }
 
-    private void onDeleteItemSetup(){
+    private void onDeleteItemSetup() {
         deleteButton.setOnClickListener(v -> {
             List<NethunterModel> nethunterModelList = NethunterData.getInstance().nethunterModelListFull;
             if (nethunterModelList == null) return;
@@ -417,11 +413,11 @@ public class NetHunterFragment extends Fragment {
 
             MaterialAlertDialogBuilder adbDelete = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
             adbDelete.setView(promptViewDelete);
-            adbDelete.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-            adbDelete.setPositiveButton("Delete", (dialog, which) -> { });
-            //If you want the dialog to stay open after clicking OK, you need to do it this way...
+            adbDelete.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+            adbDelete.setPositiveButton("删除", (dialog, which) -> { });
+            // 如果点击确定后想保持对话框打开, 需要这样处理...
             final androidx.appcompat.app.AlertDialog adDelete = adbDelete.create();
-            adDelete.setMessage("Select the item you want to remove: ");
+            adDelete.setMessage("请选择要删除的条目: ");
             adDelete.setOnShowListener(dialog -> {
                 final Button buttonDelete = adDelete.getButton(DialogInterface.BUTTON_POSITIVE);
                 buttonDelete.setOnClickListener(v1 -> {
@@ -430,19 +426,19 @@ public class NetHunterFragment extends Fragment {
                     ArrayList<Integer> selectedTargetIds = new ArrayList<>();
                     for (int i = 0; i < recyclerViewDeleteItem.getChildCount(); i++) {
                         viewHolder = recyclerViewDeleteItem.findViewHolderForAdapterPosition(i);
-                        if (viewHolder != null){
+                        if (viewHolder != null) {
                             CheckBox box = viewHolder.itemView.findViewById(R.id.f_nethunter_recyclerview_dialog_chkbox);
-                            if (box.isChecked()){
+                            if (box.isChecked()) {
                                 selectedPosition.add(i);
-                                selectedTargetIds.add(i+1);
+                                selectedTargetIds.add(i + 1);
                             }
                         }
                     }
                     if (!selectedPosition.isEmpty()) {
                         NethunterData.getInstance().deleteData(selectedPosition, selectedTargetIds, NethunterSQL.getInstance(context));
-                        NhPaths.showMessage(context, "Successfully deleted " + selectedPosition.size() + " items.");
+                        NhPaths.showMessage(context, "成功删除 " + selectedPosition.size() + " 条记录. ");
                         adDelete.dismiss();
-                    } else NhPaths.showMessage(context, "Nothing to be deleted.");
+                    } else NhPaths.showMessage(context, "没有可删除的内容. ");
                 });
             });
             adDelete.show();
@@ -459,7 +455,7 @@ public class NetHunterFragment extends Fragment {
             final Spinner titlesAfter = promptViewMove.findViewById(R.id.f_nethunter_move_adb_spr_titlesafter);
             final Spinner actions = promptViewMove.findViewById(R.id.f_nethunter_move_adb_spr_actions);
             ArrayList<String> titleArrayList = new ArrayList<>();
-            for (NethunterModel nethunterModel: nethunterModelList){
+            for (NethunterModel nethunterModel : nethunterModelList) {
                 titleArrayList.add(nethunterModel.getTitle());
             }
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, titleArrayList);
@@ -469,10 +465,8 @@ public class NetHunterFragment extends Fragment {
 
             MaterialAlertDialogBuilder adbMove = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
             adbMove.setView(promptViewMove);
-            adbMove.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-            adbMove.setPositiveButton("Move", (dialog, which) -> {
-
-            });
+            adbMove.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+            adbMove.setPositiveButton("移动", (dialog, which) -> { });
             final AlertDialog adMove = adbMove.create();
             adMove.setOnShowListener(dialog -> {
                 final Button buttonMove = adMove.getButton(DialogInterface.BUTTON_POSITIVE);
@@ -482,11 +476,11 @@ public class NetHunterFragment extends Fragment {
                     if (originalPositionIndex == targetPositionIndex ||
                             (actions.getSelectedItemPosition() == 0 && targetPositionIndex == (originalPositionIndex + 1)) ||
                             (actions.getSelectedItemPosition() == 1 && targetPositionIndex == (originalPositionIndex - 1))) {
-                        NhPaths.showMessage(context, "You are moving the item to the same position, nothing to be moved.");
+                        NhPaths.showMessage(context, "您正在将项目移动到相同位置, 无需移动. ");
                     } else {
                         if (actions.getSelectedItemPosition() == 1) targetPositionIndex += 1;
                         NethunterData.getInstance().moveData(originalPositionIndex, targetPositionIndex, NethunterSQL.getInstance(context));
-                        NhPaths.showMessage(context, "Successfully moved item.");
+                        NhPaths.showMessage(context, "成功移动项目. ");
                         adMove.dismiss();
                     }
                 });

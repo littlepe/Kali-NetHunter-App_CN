@@ -2,7 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
@@ -10,32 +10,35 @@
         android:orientation="vertical"
         android:focusableInTouchMode="true">
 
-
+        <!-- 功能说明 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The Powershell HTTP payload allows you to download and run a generic powershell payload from a URL. The URL to payload should be in a location accessible to the victim."
+            android:text="PowerShell HTTP 载荷允许你从指定 URL 下载并执行一个通用 PowerShell 脚本. 该 URL 必须能够被目标主机访问. "
             android:layout_gravity="center_horizontal|center"
             android:gravity="center"
             android:padding="4dp" />
+
+        <!-- URL 标签 -->
         <TextView
             android:layout_width="230dp"
             android:layout_height="match_parent"
             android:text="@string/ps_payload_url"
             android:padding="4dp" />
 
+        <!-- URL 输入框 -->
         <EditText
             android:id="@+id/payloadUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"/>
+            android:inputType="text" />
 
+        <!-- 更新按钮 -->
         <Button
             android:id="@+id/powershellOptionsUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/update" />
     </LinearLayout>
-
 </ScrollView>

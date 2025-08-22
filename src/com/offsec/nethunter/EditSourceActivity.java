@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 
-
 public class EditSourceActivity extends AppCompatActivity {
     private String configFilePath = "";
     private Activity activity;
@@ -40,7 +39,7 @@ public class EditSourceActivity extends AppCompatActivity {
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
-        NhPaths.showMessage(activity, "File Loaded");
+        NhPaths.showMessage(activity, "文件已加载");
     }
 
     @Override
@@ -52,28 +51,14 @@ public class EditSourceActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /* Not usable?
-    public void updateSource() {
-
-        EditText source = (EditText) findViewById(R.id.source);
-        String newSource = source.getText().toString();
-        Boolean isSaved = exe.SaveFileContents(newSource, configFilePath);
-        if(isSaved){
-            NhPaths.showMessage("Source updated");
-        } else {
-            NhPaths.showMessage("Source not updated");
-        }
-    }
-    */
-
     public void updateSource(View view) {
         EditText source = findViewById(R.id.source);
         String newSource = source.getText().toString();
         boolean isSaved = exe.SaveFileContents(newSource, configFilePath);
         if (isSaved) {
-            NhPaths.showMessage(activity,"Source updated");
+            NhPaths.showMessage(activity,"源代码已更新");
         } else {
-            NhPaths.showMessage(activity,"Source not updated");
+            NhPaths.showMessage(activity,"源代码未更新");
         }
     }
 }

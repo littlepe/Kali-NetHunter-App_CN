@@ -88,31 +88,31 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	Log.d(TAG, "onCreate");
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
-        // Initiate the NhPaths singleton class, and it will then keep living until the app dies.
-        // Also with its sharepreference listener registered, the CHROOT_PATH variable can be updated immediately on sharepreference changes.
+        // 初始化 NhPaths 单例类, 它将一直存在直到应用退出. 
+        // 同时, 通过其注册的 SharedPreference 监听器, 可以在 SharedPreference 更改时立即更新 CHROOT_PATH 变量. 
         nhPaths = NhPaths.getInstance(getApplicationContext());
 
-        // We need to run root check here so nothing else doesn't pile up with dialogs
+        // 我们需要在这里运行 root 检查, 以免其他操作被对话框阻塞
         if (!CheckForRoot.isRoot()){
-            showWarningDialog("Root permission", "Root permission is required!!", false);
+            showWarningDialog("Root 权限", "需要 Root 权限！！", false);
         }
 
-        // This function just delays here until root is given.
-        // Purpose: don't run anything else until root access is given :)
+        // 这个函数会在这里延迟, 直到获得 root 权限. 
+        // 目的: 在获得 root 访问权限之前, 不要运行任何其他操作 :)
         while (!CheckForRoot.isRoot()) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                showWarningDialog("NetHunter app cannot be run properly", "Root permission is required!!", true);
+                showWarningDialog("NetHunter 应用无法正常运行", "需要 Root 权限！！", true);
             }
         }
 
-        // Initiate the PermissionCheck class.
+        // 初始化 PermissionCheck 类. 
         permissionCheck = new PermissionCheck(this, getApplicationContext());
-        // Register the NetHunter receiver with intent actions.
+        // 注册带有 Intent 操作的 NetHunter 接收器. 
         nethunterReceiver = new NethunterReceiver();
         IntentFilter AppNavHomeIntentFilter = new IntentFilter();
         AppNavHomeIntentFilter.addAction(NethunterReceiver.CHECKCOMPAT);
@@ -120,16 +120,16 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
         AppNavHomeIntentFilter.addAction(NethunterReceiver.CHECKCHROOT);
         AppNavHomeIntentFilter.addAction("ChrootManager");
         this.registerReceiver(nethunterReceiver, new IntentFilter(AppNavHomeIntentFilter));
-        // initiate prefs.
+        // 初始化 prefs. 
         prefs = getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
 
-        // Start copying the app files to the corresponding path.
+        // 开始将应用文件复制到相应路径. 
         ProgressDialog progressDialog = new ProgressDialog(this);
         copyBootFilesExecutor = new CopyBootFilesExecutor(getApplicationContext(), this, progressDialog);
         copyBootFilesExecutor.setListener(new CopyBootFilesExecutor.CopyBootFilesExecutorListener() {
             @Override
             public void onPrepare() {
-                progressDialog.setMessage("Initializing...");
+                progressDialog.setMessage("正在初始化...");
                 progressDialog.setCancelable(false);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
@@ -143,7 +143,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
                         case "0":
                         case "1":
                         case "2":
-                            showWarningDialog("NetHunter app cannot be run properly", "Failed to copy files, please check your storage permission!!", true);
+                            showWarningDialog("NetHunter 应用无法正常运行", "复制文件失败, 请检查您的存储权限！！", true);
                             break;
                     }
                 }
@@ -152,12 +152,12 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
             public void onExecutorPrepare() {
                 Context context = getApplicationContext();
                 if (context == null) {
-                    Log.e(TAG, "Context is null. Cannot proceed.");
+                    Log.e(TAG, "Context 为空. 无法继续. ");
                     return;
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Initializing...");
+                builder.setTitle("正在初始化...");
 
                 View customView = LayoutInflater.from(context).inflate(R.layout.progress_dialog, null);
                 builder.setView(customView);
@@ -170,33 +170,33 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
             public void onExecutorFinished(Object result) {
                 Context appContext = getApplicationContext();
                 if (appContext == null) {
-                    Log.e(TAG, "Application context is null. Cannot proceed.");
+                    Log.e(TAG, "应用上下文为空. 无法继续. ");
                     return;
                 }
 
-                // Fetch the busybox path again after the busybox_nh is copied.
+                // 在 busybox_nh 复制后再次获取 busybox 路径. 
                 NhPaths.BUSYBOX = NhPaths.getBusyboxPath();
 
-                // Initialize all SQL singletons to reduce lag when switching fragments.
+                // 初始化所有 SQL 单例以减少切换 Fragment 时的延迟. 
                 NethunterSQL.getInstance(appContext);
                 KaliServicesSQL.getInstance(appContext);
                 CustomCommandsSQL.getInstance(appContext);
                 USBArsenalSQL.getInstance(appContext);
 
-                // Set up default SharedPreferences values.
+                // 设置默认的 SharedPreferences 值. 
                 setDefaultSharePreference();
 
-                // Check if busybox is installed.
+                // 检查是否安装了 busybox. 
                 if (!CheckForRoot.isBusyboxInstalled()) {
-                    showWarningDialog("NetHunter app cannot be run properly", "No busybox is detected, please make sure you have busybox installed!!", true);
+                    showWarningDialog("NetHunter 应用无法正常运行", "未检测到 busybox, 请确保您已安装 busybox！！", true);
                 }
 
-                // Check if NetHunter terminal app is installed.
+                // 检查是否安装了 NetHunter 终端应用. 
                 if (appContext.getPackageManager().getLaunchIntentForPackage("com.offsec.nhterm") == null) {
-                    showWarningDialog("NetHunter app cannot be run properly", "NetHunter terminal is not installed yet.", true);
+                    showWarningDialog("NetHunter 应用无法正常运行", "NetHunter 终端尚未安装. ", true);
                 }
 
-                // Check if all required permissions are granted.
+                // 检查是否已授予所有必需的权限. 
                 if (isAllRequiredPermissionsGranted()) {
                     setRootView();
                 }
@@ -204,11 +204,11 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
         });
 
         copyBootFilesExecutor.execute();
-        // Check if the required permissions are granted.
+        // 检查是否已授予必需的权限. 
         if (isAllRequiredPermissionsGranted()) {
             setRootView();
         } else {
-            // Request the required permissions.
+            // 请求必需的权限. 
             permissionCheck.requestPermissions();
         }
     }
@@ -244,17 +244,17 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
                             } else {
                                 getPackageManager().getPackageInfo("com.offsec.nhterm", 0);
                             }
-                            Log.d(TAG, "onRequestPermissionsResult: com.offsec.nhterm is found.");
+                            Log.d(TAG, "onRequestPermissionsResult: 找到 com.offsec.nhterm. ");
                         } catch (PackageManager.NameNotFoundException e) {
-                            Log.e(TAG, "onRequestPermissionsResult: com.offsec.nhterm not found.");
+                            Log.e(TAG, "onRequestPermissionsResult: 未找到 com.offsec.nhterm. ");
                             available = false;
                         }
                         if (!available) {
-                            showWarningDialog("NetHunter app cannot be run properly", "NetHunter Terminal is not installed yet, please install from the store!", true);
+                            showWarningDialog("NetHunter 应用无法正常运行", "NetHunter 终端尚未安装, 请从商店安装！", true);
                             return;
                         }
                     }
-                    showWarningDialog("NetHunter app cannot be run properly", "Please grant all the permission requests from outside the app or restart the app to grant the rest of permissions again.", true);
+                    showWarningDialog("NetHunter 应用无法正常运行", "请在应用外部授予所有权限请求, 或重新启动应用以再次授予其余权限. ", true);
                     return;
                 }
             }
@@ -268,17 +268,17 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
     public boolean onReceiverReattach(KaliGPSUpdates.Receiver receiver) {
         Log.d(TAG, "onReceiverReattach");
         if (LocationUpdateService.isInstanceCreated()) {
-            // there is already a service running, we should re-attach to it
+            // 已经有一个服务在运行, 我们应该重新附加到它
             this.locationUpdateReceiver = receiver;
             Log.d(TAG, "locationService: " + !(locationService == null));
             if (locationService != null) {
                 locationService.requestUpdates(locationUpdateReceiver);
-            } else { // the app was probably re-launched. the service is running but we've not bound it
+            } else { // 应用可能被重新启动. 服务正在运行, 但我们尚未绑定它
                 onLocationUpdatesRequested(receiver);
             }
-            return true; // reattached
+            return true; // 重新附加
         }
-        return false; // nothing to reattach to
+        return false; // 没有可重新附加的对象
     }
 
     @Override
@@ -296,7 +296,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
-            // We've bound to Update Service, cast the IBinder and get LocalService instance
+            // 我们已经绑定到更新服务, 转换 IBinder 并获取 LocalService 实例
             LocationUpdateService.ServiceBinder binder = (LocationUpdateService.ServiceBinder) service;
             locationService = binder.getService();
             updateServiceBound = true;
@@ -313,7 +313,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
 
     @Override
     public void onBackPressed() {
-        //If isBackPressEnable is false then not allow user to press back button.
+        //如果 isBackPressEnable 为 false, 则不允许用户按返回键. 
         if (isBackPressEnabled) {
             super.onBackPressed();
             if (titles.size() > 1) {
@@ -327,12 +327,12 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
                 if (menuNav.getItem(i).getTitle() == mTitle) {
                     MenuItem _current = menuNav.getItem(i);
                     if (lastSelectedMenuItem != _current) {
-                        //remove last
+                        //移除上一个
                         lastSelectedMenuItem.setChecked(false);
-                        // update for the next
+                        // 更新为下一个
                         lastSelectedMenuItem = _current;
                     }
-                    //set checked
+                    //设置选中
                     _current.setChecked(true);
                     i = mSize;
                 }
@@ -359,7 +359,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
     protected void onStart() {
         super.onStart();
 
-        // Run CompatCheck Service
+        // 运行兼容性检查服务
         if (navigationView != null) startService(new Intent(getApplicationContext(), CompatCheckService.class));
     }
 
@@ -379,7 +379,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
     private void setRootView(){
         setContentView(R.layout.base_layout);
 
-        //set boot_kali wallpaper as background
+        //将 boot_kali 壁纸设置为背景
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setHomeButtonEnabled(true);
@@ -389,11 +389,11 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
         mDrawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
 
-        // WearOS optimisation
+        // WearOS 优化
         Boolean iswatch = getBaseContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
         Boolean snowfall;
 
-        // Snowfall enable 2/2
+        // 启用降雪效果 2/2
         prefs.edit().putBoolean("snowfall_enabled", false).apply();
 
         String model = Build.HARDWARE;
@@ -416,32 +416,32 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
             snowfall = prefs.getBoolean("snowfall_enabled", true);
         }
 
-        // Snowfall
+        // 降雪效果
         View SnowfallView = findViewById(R.id.snowfall);
         if (snowfall) SnowfallView.setVisibility(View.VISIBLE);
         else SnowfallView.setVisibility(View.GONE);
 
-        // Disable USB arsenal for devices without ConfigFS support
+        // 为不支持 ConfigFS 的设备禁用 USB Arsenal
         if (!new File("/config/usb_gadget/g1").exists())
             navigationView.getMenu().getItem(7).setVisible(false);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         @SuppressLint("InflateParams") LinearLayout navigationHeadView = (LinearLayout) inflater.inflate(R.layout.sidenav_header, null);
-            navigationView.addHeaderView(navigationHeadView);
+        navigationView.addHeaderView(navigationHeadView);
 
         FloatingActionButton readmeButton = navigationHeadView.findViewById(R.id.info_fab);
         readmeButton.setOnClickListener(v -> showLicense());
 
-        /// moved build info to the menu
+        /// 将构建信息移动到菜单中
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd KK:mm:ss a zzz",
                 Locale.US);
 
         final String buildTime = sdf.format(BuildConfig.BUILD_TIME);
         TextView buildInfo1 = navigationHeadView.findViewById(R.id.buildinfo1);
         TextView buildInfo2 = navigationHeadView.findViewById(R.id.buildinfo2);
-        buildInfo1.setText(String.format("Version: %s (%s)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
-        buildInfo2.setText(String.format("Date: %s", buildTime));
+        buildInfo1.setText(String.format("版本: %s (%s)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
+        buildInfo2.setText(String.format("日期: %s", buildTime));
 
-       if (navigationView != null) {
+        if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
 
@@ -451,11 +451,11 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
                 .beginTransaction()
                 .replace(R.id.container, NetHunterFragment.newInstance(R.id.nethunter_item))
                 .commit();
-            // and put the title in the queue for when you need to back through them
-            titles.push(Objects.requireNonNull(navigationView.getMenu().getItem(0).getTitle()).toString());
-            // disable all fragment first until it passes the compat check.
-            navigationView.getMenu().setGroupEnabled(R.id.chrootDependentGroup, false);
-        // if the nav bar hasn't been seen, let's show it
+        // 并将标题放入堆栈中, 以便在需要返回时使用
+        titles.push(Objects.requireNonNull(navigationView.getMenu().getItem(0).getTitle()).toString());
+        // 首先禁用所有 Fragment, 直到通过兼容性检查. 
+        navigationView.getMenu().setGroupEnabled(R.id.chrootDependentGroup, false);
+        // 如果尚未显示导航栏, 则显示它
         if (!prefs.getBoolean("seenNav", false)) {
             mDrawerLayout.openDrawer(GravityCompat.START);
             SharedPreferences.Editor ed = prefs.edit();
@@ -463,7 +463,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
             ed.apply();
         }
 
-        if (lastSelectedMenuItem == null) { // only in the 1st create
+        if (lastSelectedMenuItem == null) { // 仅在第一次创建时
             lastSelectedMenuItem = navigationView.getMenu().getItem(0);
             lastSelectedMenuItem.setChecked(true);
         }
@@ -479,7 +479,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
     }
 
     private void showLicense() {
-        // @binkybear here goes the changelog etc... \n\n%s
+        // @binkybear 这里是更新日志等... \n\n%s
         String readmeData = String.format("%s\n\n%s\n\n%s",
                 getResources().getString(R.string.licenseInfo),
                 getResources().getString(R.string.nhwarning),
@@ -488,9 +488,9 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
         Linkify.addLinks(readmeText, Linkify.WEB_URLS);
 
         MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(this, R.style.DialogStyle);
-        adb.setTitle("README INFO")
+        adb.setTitle("README 信息")
                 .setMessage(readmeText);
-        adb.setNegativeButton("Cancel", (dialog, id) -> dialog.cancel());
+        adb.setNegativeButton("取消", (dialog, id) -> dialog.cancel());
         adb.setCancelable(true);
 
         AlertDialog ad = adb.create();
@@ -506,15 +506,15 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 menuItem -> {
-                    // only change it if is not the same as the last one
+                    // 仅当与上一个不同时才更改
                     if (lastSelectedMenuItem != menuItem) {
-                        //remove last
+                        //移除上一个
                         if(lastSelectedMenuItem != null)
                             lastSelectedMenuItem.setChecked(false);
-                        // update for the next
+                        // 更新为下一个
                         lastSelectedMenuItem = menuItem;
                     }
-                    //set checked
+                    //设置选中
                     menuItem.setChecked(true);
                     mDrawerLayout.closeDrawers();
                     mTitle = menuItem.getTitle();
@@ -530,15 +530,15 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
     private void setupDrawerContentWear(NavigationView navigationViewWear) {
         navigationViewWear.setNavigationItemSelectedListener(
                 menuItem -> {
-                    // only change it if is not the same as the last one
+                    // 仅当与上一个不同时才更改
                     if (lastSelectedMenuItem != menuItem) {
-                        //remove last
+                        //移除上一个
                         if(lastSelectedMenuItem != null)
                             lastSelectedMenuItem.setChecked(false);
-                        // update for the next
+                        // 更新为下一个
                         lastSelectedMenuItem = menuItem;
                     }
-                    //set checked
+                    //设置选中
                     menuItem.setChecked(true);
                     mDrawerLayout.closeDrawers();
                     mTitle = menuItem.getTitle();
@@ -567,87 +567,87 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
                                     .commit();
                             break;
                         */
-                        case R.id.can_item:
-                            changeFragment(fragmentManager, CANFragment.newInstance(itemId));
-                            break;
-                        case R.id.deauth_item:
-                            changeFragment(fragmentManager, DeAuthFragment.newInstance(itemId));
-                            break;
-                        case R.id.kaliservices_item:
-                            changeFragment(fragmentManager, KaliServicesFragment.newInstance(itemId));
-                            break;
-                        case R.id.custom_commands_item:
-                            changeFragment(fragmentManager, CustomCommandsFragment.newInstance(itemId));
-                            break;
-                        case R.id.hid_item:
-                            changeFragment(fragmentManager, HidFragment.newInstance(itemId));
-                            break;
-                        case R.id.duckhunter_item:
-                            changeFragment(fragmentManager, com.offsec.nethunter.DuckHunterFragment.newInstance(itemId));
-                            break;
-                        case R.id.usbarsenal_item:
-                            if (exe.RunAsRootReturnValue("ls /config/usb_gadget/g1") == 0) {
-                                changeFragment(fragmentManager, USBArsenalFragment.newInstance(itemId));
-                            } else {
-                                showWarningDialog("", "USB Arsenal (ConfigFS) is only supported by kernels above 4.x. Please note that HID, RNDIS, and Mass Storage should be automatically enabled on older devices with NetHunter patches.", false);
-                            }
-                            break;
-                        case R.id.badusb_item:
-                            changeFragment(fragmentManager, BadusbFragment.newInstance(itemId));
-                            break;
-                        case R.id.wifipumpkin_item:
-                            changeFragment(fragmentManager, WifipumpkinFragment.newInstance(itemId));
-                            break;
-                        case R.id.wps_item:
-                            changeFragment(fragmentManager, WPSFragment.newInstance(itemId));
-                            break;
-                        case R.id.bt_item:
-                            changeFragment(fragmentManager, BTFragment.newInstance(itemId));
-                            break;
-                        case R.id.audio_item:
-                            changeFragment(fragmentManager, com.offsec.nethunter.AudioFragment.newInstance(itemId));
-                            break;
-                        case R.id.macchanger_item:
-                            changeFragment(fragmentManager, MacchangerFragment.newInstance(itemId));
-                            break;
-                        case R.id.createchroot_item:
-                            changeFragment(fragmentManager, ChrootManagerFragment.newInstance(itemId));
-                            break;
-                        case R.id.mpc_item:
-                            changeFragment(fragmentManager, MPCFragment.newInstance(itemId));
-                            break;
-                        case R.id.vnc_item:
-                            if (getApplicationContext().getPackageManager().getLaunchIntentForPackage("com.offsec.nethunter.kex") == null) {
-                                showWarningDialog("", "NetHunter KeX is not installed yet, please install from the store!", false);
-                            } else {
-                                    changeFragment(fragmentManager, VNCFragment.newInstance(itemId));
-                            }
-                            break;
-                        case R.id.searchsploit_item:
-                            changeFragment(fragmentManager, com.offsec.nethunter.SearchSploitFragment.newInstance(itemId));
-                            break;
-                        case R.id.nmap_item:
-                            changeFragment(fragmentManager, NmapFragment.newInstance(itemId));
-                            break;
-                        case R.id.pineapple_item:
-                            changeFragment(fragmentManager, PineappleFragment.newInstance(itemId));
-                            break;
-                        case R.id.gps_item:
-                            changeFragment(fragmentManager, KaliGpsServiceFragment.newInstance(itemId));
-                            break;
-                        case R.id.settings_item:
-                            changeFragment(fragmentManager, SettingsFragment.newInstance(itemId));
-                            break;
-                        case R.id.kernel_item:
-                            changeFragment(fragmentManager, KernelFragment.newInstance(itemId));
-                            break;
-                        case R.id.modules_item:
-                            changeFragment(fragmentManager, ModulesFragment.newInstance(itemId));
-                            break;
-                        case R.id.set_item:
-                            changeFragment(fragmentManager, SETFragment.newInstance(itemId));
-                            break;
-                    }
+            case R.id.can_item:
+                changeFragment(fragmentManager, CANFragment.newInstance(itemId));
+                break;
+            case R.id.deauth_item:
+                changeFragment(fragmentManager, DeAuthFragment.newInstance(itemId));
+                break;
+            case R.id.kaliservices_item:
+                changeFragment(fragmentManager, KaliServicesFragment.newInstance(itemId));
+                break;
+            case R.id.custom_commands_item:
+                changeFragment(fragmentManager, CustomCommandsFragment.newInstance(itemId));
+                break;
+            case R.id.hid_item:
+                changeFragment(fragmentManager, HidFragment.newInstance(itemId));
+                break;
+            case R.id.duckhunter_item:
+                changeFragment(fragmentManager, com.offsec.nethunter.DuckHunterFragment.newInstance(itemId));
+                break;
+            case R.id.usbarsenal_item:
+                if (exe.RunAsRootReturnValue("ls /config/usb_gadget/g1") == 0) {
+                    changeFragment(fragmentManager, USBArsenalFragment.newInstance(itemId));
+                } else {
+                    showWarningDialog("", "USB Arsenal (ConfigFS) 仅受 4.x 以上内核支持. 请注意, HID、RNDIS 和大容量存储应在具有 NetHunter 补丁的旧设备上自动启用. ", false);
+                }
+                break;
+            case R.id.badusb_item:
+                changeFragment(fragmentManager, BadusbFragment.newInstance(itemId));
+                break;
+            case R.id.wifipumpkin_item:
+                changeFragment(fragmentManager, WifipumpkinFragment.newInstance(itemId));
+                break;
+            case R.id.wps_item:
+                changeFragment(fragmentManager, WPSFragment.newInstance(itemId));
+                break;
+            case R.id.bt_item:
+                changeFragment(fragmentManager, BTFragment.newInstance(itemId));
+                break;
+            case R.id.audio_item:
+                changeFragment(fragmentManager, com.offsec.nethunter.AudioFragment.newInstance(itemId));
+                break;
+            case R.id.macchanger_item:
+                changeFragment(fragmentManager, MacchangerFragment.newInstance(itemId));
+                break;
+            case R.id.createchroot_item:
+                changeFragment(fragmentManager, ChrootManagerFragment.newInstance(itemId));
+                break;
+            case R.id.mpc_item:
+                changeFragment(fragmentManager, MPCFragment.newInstance(itemId));
+                break;
+            case R.id.vnc_item:
+                if (getApplicationContext().getPackageManager().getLaunchIntentForPackage("com.offsec.nethunter.kex") == null) {
+                    showWarningDialog("", "NetHunter KeX 尚未安装, 请从商店安装！", false);
+                } else {
+                    changeFragment(fragmentManager, VNCFragment.newInstance(itemId));
+                }
+                break;
+            case R.id.searchsploit_item:
+                changeFragment(fragmentManager, com.offsec.nethunter.SearchSploitFragment.newInstance(itemId));
+                break;
+            case R.id.nmap_item:
+                changeFragment(fragmentManager, NmapFragment.newInstance(itemId));
+                break;
+            case R.id.pineapple_item:
+                changeFragment(fragmentManager, PineappleFragment.newInstance(itemId));
+                break;
+            case R.id.gps_item:
+                changeFragment(fragmentManager, KaliGpsServiceFragment.newInstance(itemId));
+                break;
+            case R.id.settings_item:
+                changeFragment(fragmentManager, SettingsFragment.newInstance(itemId));
+                break;
+            case R.id.kernel_item:
+                changeFragment(fragmentManager, KernelFragment.newInstance(itemId));
+                break;
+            case R.id.modules_item:
+                changeFragment(fragmentManager, ModulesFragment.newInstance(itemId));
+                break;
+            case R.id.set_item:
+                changeFragment(fragmentManager, SETFragment.newInstance(itemId));
+                break;
+        }
     }
 
     public void restoreActionBar() {
@@ -706,7 +706,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
         warningAD.setCancelable(false);
         warningAD.setTitle(title);
         warningAD.setMessage(message);
-        warningAD.setPositiveButton("CLOSE", (dialog, which) -> {
+        warningAD.setPositiveButton("关闭", (dialog, which) -> {
             dialog.dismiss();
             if (NeedToExit)
                 System.exit(1);
@@ -714,7 +714,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
         warningAD.create().show();
     }
 
-    // Main app broadcastReceiver to response for different actions.
+    // 主应用广播接收器, 用于响应不同的操作. 
     public class NethunterReceiver extends BroadcastReceiver{
         public static final String CHECKCOMPAT = BuildConfig.APPLICATION_ID + ".CHECKCOMPAT";
         public static final String BACKPRESSED = BuildConfig.APPLICATION_ID + ".BACKPRESSED";
@@ -725,9 +725,9 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
             if (intent.getAction() != null) {
                 switch (intent.getAction()) {
                     case CHECKCOMPAT:
-                        showWarningDialog("NetHunter app cannot be run properly",
-                            intent.getStringExtra("message"),
-                            true);
+                        showWarningDialog("NetHunter 应用无法正常运行",
+                                intent.getStringExtra("message"),
+                                true);
                         break;
                     case BACKPRESSED:
                         isBackPressEnabled = (intent.getBooleanExtra("isEnable", true));
@@ -753,7 +753,7 @@ public class AppNavHomeActivity extends AppCompatActivity implements KaliGPSUpda
                             if (e.getMessage() != null) {
                                 Log.e(AppNavHomeActivity.TAG, e.getMessage());
                             } else {
-                                Log.e(AppNavHomeActivity.TAG, "e.getMessage is Null.");
+                                Log.e(AppNavHomeActivity.TAG, "e.getMessage 为空. ");
                             }
                         }
                         break;

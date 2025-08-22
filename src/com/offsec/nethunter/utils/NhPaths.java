@@ -41,8 +41,8 @@ public class NhPaths implements SharedPreferences.OnSharedPreferenceChangeListen
     private NhPaths(Context context) {
         sharedPreferences = context.getApplicationContext().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        APP                             = "com.offsec.nethunter";                // Static app name seems to be needed as some weirdness with getting app name is going on ( sometimes we get: androidx.multidex )
-        APP_PATH                        = "/data/data/" + APP;                   // context.getApplicationContext().getFilesDir().getPath();
+        APP                             = "com.offsec.nethunter";                // 需要静态应用名称, 因为获取应用名称时存在一些问题（有时我们会得到: androidx.multidex）
+        APP_PATH                        = "/data/data/" + APP;                   // 应用文件目录路径（也可通过 context.getApplicationContext().getFilesDir().getPath() 获取）
         APP_DATABASE_PATH               = APP_PATH + "/databases";
         APP_INITD_PATH                  = APP_PATH + "/etc/init.d";
         APP_SCRIPTS_PATH                = APP_PATH + "/scripts";

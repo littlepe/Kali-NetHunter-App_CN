@@ -8,6 +8,7 @@
     android:gravity="right"
     android:orientation="vertical">
 
+    <!-- 说明文字 -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +17,7 @@
         android:padding="4dp"
         android:text="@string/gps_description" />
 
+    <!-- GPS 提供者开关 -->
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_gps_provider"
         android:layout_width="match_parent"
@@ -23,9 +25,10 @@
         android:checked="false"
         android:padding="10dp"
         android:text="@string/switch_gps_provider"
-        android:textOff="Off"
-        android:textOn="On" />
+        android:textOff="关闭"
+        android:textOn="开启" />
 
+    <!-- gpsd 开关 -->
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_gpsd"
         android:layout_width="match_parent"
@@ -33,6 +36,7 @@
         android:padding="10dp"
         android:text="@string/switch_gpsd" />
 
+    <!-- 无线网卡接口 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,9 +46,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wireless interface"
-            android:padding="10dp"
-            />
+            android:text="无线网卡接口"
+            android:padding="10dp" />
 
         <EditText
             android:id="@+id/wlan_interface"
@@ -52,9 +55,9 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint="wlan0" />
-
     </LinearLayout>
 
+    <!-- 蓝牙接口 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,9 +67,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bluetooth interface"
-            android:padding="10dp"
-            />
+            android:text="蓝牙接口"
+            android:padding="10dp" />
 
         <EditText
             android:id="@+id/bt_interface"
@@ -74,10 +76,9 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint="hci0" />
-
     </LinearLayout>
 
-
+    <!-- RTL-SDR 功能 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,8 +92,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:text="RTL SDR" />
-
+            android:text="RTL-SDR" />
 
         <CheckBox
             android:id="@+id/rtlamr"
@@ -102,7 +102,6 @@
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:text="RTL AMR" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -118,8 +117,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:text="RTL ADSB" />
-
+            android:text="RTL ADS-B" />
 
         <CheckBox
             android:id="@+id/mousejack"
@@ -129,13 +127,14 @@
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:text="Mousejack" />
-
     </LinearLayout>
 
+    <!-- 分隔 -->
     <Space
         android:layout_width="match_parent"
         android:layout_height="15sp" />
 
+    <!-- 操作按钮 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -156,6 +155,7 @@
             app:srcCompat="@drawable/ic_action_settings_applications" />
     </LinearLayout>
 
+    <!-- 帮助文字 -->
     <TextView
         android:id="@+id/gps_help"
         android:layout_width="wrap_content"
@@ -166,6 +166,7 @@
         android:text="@string/gps_help"
         tools:visibility="visible" />
 
+    <!-- 日志输出 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -180,5 +181,4 @@
             android:padding="16sp"
             android:textColor="@android:color/holo_green_light" />
     </ScrollView>
-
 </LinearLayout>

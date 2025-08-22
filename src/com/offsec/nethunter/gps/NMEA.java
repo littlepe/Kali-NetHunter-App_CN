@@ -10,15 +10,14 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This class is a container for several static methods which help
- * with generating NMEA data.
+ * 该类是一个容器, 包含多个用于帮助生成 NMEA 数据的静态方法. 
  * <p>
- * A nice reference for NMEA is at https://www.gpsinformation.org/dale/nmea.htm
+ * NMEA 的一个很好的参考位于 https://www.gpsinformation.org/dale/nmea.htm
  */
 final class NMEA {
     /**
-     * Formats the speed in knots from the #Location into a string.
-     * If the speed is unknown, it returns an empty string.
+     * 将 #Location 中的速度（节）格式化为字符串. 
+     * 如果速度未知, 则返回空字符串. 
      */
     public static String formatSpeedKt(Location location) {
         String s = "";
@@ -29,8 +28,8 @@ final class NMEA {
     }
 
     /**
-     * Formats the bearing from the #Location into a string.  If the
-     * bearing is unknown, it returns an empty string.
+     * 将 #Location 中的方位角格式化为字符串. 
+     * 如果方位角未知, 则返回空字符串. 
      */
     public static String formatBearing(Location location) {
         String s = "";
@@ -61,7 +60,7 @@ final class NMEA {
         else if (nbr_sat > 0)
             fix = "2";
 
-        //TODO: calculate DOP values
+        //TODO: 计算 DOP 值
         return fix + "," + prn + ",,,";
     }
 

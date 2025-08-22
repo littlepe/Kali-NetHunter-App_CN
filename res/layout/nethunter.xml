@@ -13,7 +13,7 @@
         android:gravity="center"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="SYSTEM INFORMATION">
+        android:text="系统信息">
     </TextView>
 
     <TextView
@@ -65,25 +65,25 @@
                 android:id="@+id/f_nethunter_refreshButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Refresh" />
+                android:text="刷新" />
 
             <Button
                 android:id="@+id/f_nethunter_addItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add" />
+                android:text="添加" />
 
             <Button
                 android:id="@+id/f_nethunter_deleteItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete" />
+                android:text="删除" />
 
             <Button
                 android:id="@+id/f_nethunter_moveItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Move" />
+                android:text="移动" />
 
         </LinearLayout>
     </HorizontalScrollView>

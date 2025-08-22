@@ -29,7 +29,7 @@ public class PermissionCheck {
         this.context = context;
     }
 
-    // First check the permissions everytime the app is freshly run.
+    // 每次应用全新启动时首先检查权限
     public void checkPermissions(String[] PERMISSIONS, int REQUEST_CODE) {
         if (!hasPermissions(context, PERMISSIONS)) {
             ActivityCompat.requestPermissions(activity, PERMISSIONS, REQUEST_CODE);

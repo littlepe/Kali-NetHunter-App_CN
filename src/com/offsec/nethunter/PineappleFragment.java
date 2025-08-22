@@ -46,7 +46,7 @@ public class PineappleFragment extends Fragment {
 
         Log.d(TAG, NhPaths.APP_SCRIPTS_PATH);
 
-        // Checkbox for No Upstream
+        /* 无上游复选框 */
         final CheckBox noupCheckbox = rootView.findViewById(R.id.pineapple_noup);
         View.OnClickListener checkBoxListener = v -> {
             if (noupCheckbox.isChecked()) {
@@ -57,7 +57,7 @@ public class PineappleFragment extends Fragment {
         };
         noupCheckbox.setOnClickListener(checkBoxListener);
 
-        // Checkbox for Transparent Proxy
+        /* 透明代理复选框 */
         final CheckBox transCheckbox = rootView.findViewById(R.id.pineapple_transproxy);
         checkBoxListener = v -> {
             if (noupCheckbox.isChecked()) {
@@ -68,7 +68,7 @@ public class PineappleFragment extends Fragment {
         };
         transCheckbox.setOnClickListener(checkBoxListener);
 
-        // Start Button
+        /* 启动按钮 */
         addClickListener(R.id.pineapple_start_button, v -> {
             new Thread(() -> {
                 ShellExecuter exe = new ShellExecuter();
@@ -76,10 +76,10 @@ public class PineappleFragment extends Fragment {
                 Log.d(TAG, command);
                 exe.RunAsRootOutput(command);
             }).start();
-            NhPaths.showMessage(context, "Starting eth0 connection");
+            NhPaths.showMessage(context, "正在启动 eth0 连接");
         }, rootView);
 
-        // Stop|Close Button
+        /* 停止 | 关闭按钮 */
         addClickListener(R.id.pineapple_close_button, v -> {
             new Thread(() -> {
                 ShellExecuter exe = new ShellExecuter();
@@ -87,26 +87,26 @@ public class PineappleFragment extends Fragment {
                 Log.d(TAG, command);
                 exe.RunAsRootOutput(command);
             }).start();
-            NhPaths.showMessage(context, "Bringing down eth0 conneciton");
+            NhPaths.showMessage(context, "正在断开 eth0 连接");
         }, rootView);
 
         return rootView;
     }
 
     private String startConnection(View rootView) {
-        // Port Text Field
+        /* 端口文本框 */
         EditText port = rootView.findViewById(R.id.pineapple_webport);
 
-        // Gateway IP Text Field
+        /* 网关 IP 文本框 */
         EditText gateway_ip = rootView.findViewById(R.id.pineapple_gatewayip);
 
-        // Client IP Text Field
+        /* 客户端 IP 文本框 */
         EditText web_ip = rootView.findViewById(R.id.pineapple_clientip);
 
-        // CIDR Text Field
+        /* CIDR 文本框 */
         EditText CIDR = rootView.findViewById(R.id.pineapple_cidr);
 
-        // Pineapple CIDR Text Field
+        /* Pineapple CIDR 文本框 */
         return web_ip.getText() + " " + CIDR.getText() + " " + gateway_ip.getText() + " " + port.getText();
     }
 

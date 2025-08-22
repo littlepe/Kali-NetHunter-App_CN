@@ -240,7 +240,7 @@ public class USBArsenalSQL extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL("DROP TABLE IF EXISTS " + USBSWITCH_TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + USBNETWORK_TABLE_NAME);
-            this.onCreate(db);
+            onCreate(db);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -273,18 +273,18 @@ public class USBArsenalSQL extends SQLiteOpenHelper {
 
     public String restoreData(String storedDBpath) {
         if (!new File(storedDBpath).exists()){
-            return "db file not found.";
+            return "数据库文件未找到. ";
         }
 
         SQLiteDatabase tempDB = SQLiteDatabase.openDatabase(storedDBpath, null, SQLiteDatabase.OPEN_READONLY);
         if (tempDB.getVersion() > this.getReadableDatabase().getVersion()) {
             tempDB.close();
-            return "db cannot be restored.\nReason: the db version of your backup db is newer than the current db version.";
+            return "无法恢复数据库. \n原因: 备份数据库版本高于当前数据库版本. ";
         }
         tempDB.close();
 
         if (!verifyDB(storedDBpath)) {
-            return "Invalid DB format.";
+            return "数据库格式无效. ";
         }
 
         try {

@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Move: "
+                android:text="移动: "
                 android:textColor="@android:color/background_light"
                 android:layout_marginStart="8dp"
                 android:textSize="18sp"/>

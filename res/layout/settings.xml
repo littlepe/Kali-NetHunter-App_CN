@@ -46,7 +46,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:paddingTop="10dp"
-                    android:text="SCREEN SIZE:"
+                    android:text="屏幕尺寸:"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
@@ -58,8 +58,6 @@
                     android:layout_marginEnd="20dp"
                     android:paddingTop="10dp"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -76,7 +74,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:paddingTop="15dp"
-                    android:text="SELECT ANIMATION:"
+                    android:text="选择动画:"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -88,7 +86,6 @@
                     android:layout_marginEnd="5dp"
                     android:dropDownWidth="match_parent"
                     android:saveEnabled="false" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -104,7 +101,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="Convert"
+                    android:text="转换"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <CheckBox
@@ -114,9 +111,8 @@
                     android:layout_weight="1"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="Preview"
+                    android:text="预览"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -147,7 +143,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:paddingTop="10dp"
-                    android:text="IMAGE RESOLUTION:"
+                    android:text="图片分辨率:"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
@@ -220,7 +216,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:paddingTop="10dp"
-                    android:text="FINAL RESOLUTION:"
+                    android:text="最终分辨率:"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
@@ -246,7 +242,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <View
                     android:layout_height="match_parent"
@@ -289,7 +285,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:paddingTop="10dp"
-                    android:text="FRAME RATE:"
+                    android:text="帧率:"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
@@ -325,7 +321,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:paddingTop="10dp"
-                    android:text="PATH:"
+                    android:text="路径:"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
@@ -334,7 +330,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="80"
-                    android:hint="Detecting..." />
+                    android:hint="检测中..." />
             </LinearLayout>
 
             <Button
@@ -342,7 +338,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Make bootanimation"
+                android:text="生成开机动画"
                 android:textColor="#ffffffff" />
 
             <Button
@@ -350,58 +346,58 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Install bootanimation"
+                android:text="安装开机动画"
                 android:textColor="#ffffffff" />
 
-          <View
-              android:id="@+id/divider5"
-              android:layout_width="match_parent"
-              android:layout_height="1dp"
-              android:background="?android:attr/listDivider" />
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
-          <TextView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="BACKUP OR RESTORE NETHUNTER FILES"
-              android:paddingTop="10dp"
-              android:padding="4dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="备份或还原 NetHunter 文件"
+                android:paddingTop="10dp"
+                android:padding="4dp" />
 
             <Button
-              android:id="@+id/backup"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="Backup"
-              android:textColor="#ffffffff" />
+                android:id="@+id/backup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="备份"
+                android:textColor="#ffffffff" />
 
             <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center_horizontal"
-              android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-              <EditText
-                  android:id="@+id/restorefilename"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"
-                  android:hint="/sdcard/nh_files_20201010.tar"
-                  android:inputType="text" />
+                <EditText
+                    android:id="@+id/restorefilename"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="/sdcard/nh_files_20201010.tar"
+                    android:inputType="text" />
 
-              <Button
-                  android:id="@+id/restorefilebrowse"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="5"
-                  android:text="..."
-                  android:textColor="#ffffffff" />
-          </LinearLayout>
+                <Button
+                    android:id="@+id/restorefilebrowse"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="..."
+                    android:textColor="#ffffffff" />
+            </LinearLayout>
 
             <Button
-              android:id="@+id/restore"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="Restore"
-              android:textColor="#ffffffff" />
+                android:id="@+id/restore"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="还原"
+                android:textColor="#ffffffff" />
 
             <View
                 android:id="@+id/divider11"
@@ -413,7 +409,7 @@
                 android:id="@+id/selinuxonboot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Set SELinux to permissive on boot" />
+                android:text="开机时将 SELinux 设为宽松模式" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -424,26 +420,26 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SELINUX STATUS"
+                    android:text="SELinux 状态"
                     android:paddingTop="10dp"
                     android:padding="4dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/selinux"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Loading.."
+                    android:text="加载中..."
                     android:paddingTop="10dp"
                     android:padding="4dp"
-                    android:layout_weight="3"/>
+                    android:layout_weight="3" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/selinux_toggle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Loading.."
+                android:text="加载中..."
                 android:textColor="#ffffffff" />
 
             <View
@@ -452,29 +448,28 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CURRENT BUSYBOX VERSION"
-                android:paddingTop="10dp"
-                android:padding="4dp"
-                android:layout_weight="1"/>
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/busybox_version"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Loading.."
-                android:paddingTop="10dp"
-                android:padding="4dp"
-                android:layout_weight="3"/>
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="当前 BusyBox 版本"
+                    android:padding="4dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/busybox_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="加载中..."
+                    android:paddingTop="10dp"
+                    android:padding="4dp"
+                    android:layout_weight="3" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -485,33 +480,33 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NEW VERSION"
-                    android:padding="4dp"/>
+                    android:text="新版本"
+                    android:padding="4dp" />
 
-            <Spinner
-                android:id="@+id/bb_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:dropDownWidth="match_parent"
-                android:saveEnabled="false" />
+                <Spinner
+                    android:id="@+id/bb_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:dropDownWidth="match_parent"
+                    android:saveEnabled="false" />
 
-            <Button
-                android:id="@+id/select_bb"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="Apply"
-                android:textColor="#ffffffff" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/select_bb"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:text="应用"
+                    android:textColor="#ffffffff" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/system_bb"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
-                android:text="Use as default system busybox"
+                android:text="设为默认系统 BusyBox"
                 android:textColor="#ffffffff" />
 
             <View
@@ -529,18 +524,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="CURRENT TERMINAL STYLE"
+                    android:text="当前终端样式"
                     android:padding="4dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/prompt_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Loading.."
+                    android:text="加载中..."
                     android:paddingTop="10dp"
                     android:padding="4dp"
-                    android:layout_weight="3"/>
+                    android:layout_weight="3" />
             </LinearLayout>
 
             <LinearLayout
@@ -555,7 +550,7 @@
                     android:layout_width="wrap_content"
                     android:padding="4dp"
                     android:layout_weight="1"
-                    android:text="SELECT NEW STYLE:" />
+                    android:text="选择新样式:" />
 
                 <Spinner
                     android:id="@+id/prompt_spinner"
@@ -564,7 +559,7 @@
                     android:layout_weight="1"
                     android:dropDownWidth="match_parent"
                     android:saveEnabled="false"
-                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
             <Button
@@ -572,7 +567,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
-                android:text="Set zsh style"
+                android:text="设为 zsh 样式"
                 android:textColor="#ffffffff" />
 
             <View
@@ -584,7 +579,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="REMOVE NETHUNTER SYSTEM APP"
+                android:text="移除 NetHunter 系统应用"
                 android:paddingTop="10dp"
                 android:padding="4dp" />
 
@@ -594,8 +589,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:paddingBottom="10dp"
-                android:text="Uninstall NetHunter App"
+                android:text="卸载 NetHunter 应用"
                 android:textColor="#ffffffff" />
-      </LinearLayout>
-  </ScrollView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

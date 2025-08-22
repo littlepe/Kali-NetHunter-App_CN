@@ -11,7 +11,7 @@
         android:layout_marginStart="4dp"
         android:textSize="18sp"
         android:textColor="@color/accent_material_dark"
-        android:text="Title:"/>
+        android:text="标题:"/>
 
     <EditText
         android:id="@+id/f_nethunter_add_adb_et_title"
@@ -32,7 +32,7 @@
             android:layout_weight="0.9"
             android:textSize="18sp"
             android:textColor="@color/accent_material_dark"
-            android:text="Command for getting the output:"/>
+            android:text="获取输出的命令:"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/f_nethunter_add_btn_info_fab1"
@@ -67,7 +67,7 @@
             android:layout_weight="0.9"
             android:textSize="18sp"
             android:textColor="@color/accent_material_dark"
-            android:text="Line delimiter:"/>
+            android:text="行分隔符:"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/f_nethunter_add_btn_info_fab2"
@@ -99,7 +99,7 @@
             android:id="@+id/f_nethunters_add_adb_checkbox_runoncreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RunOnCreate"
+            android:text="创建时运行"
             android:textSize="18sp"
             android:textColor="@color/accent_material_dark"
             android:layout_marginStart="4dp"/>
@@ -123,7 +123,7 @@
         android:layout_marginStart="4dp"
         android:textSize="18sp"
         android:textColor="@color/accent_material_dark"
-        android:text="Position to insert:">
+        android:text="插入位置:">
     </TextView>
 
     <LinearLayout

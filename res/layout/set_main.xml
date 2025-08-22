@@ -22,25 +22,24 @@
                 android:gravity="center"
                 android:padding="4dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Select template" />
-
-            <Spinner
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/set_template"
-                android:spinnerMode="dropdown" />
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="选择模板" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/set_template"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
 
             <View
                 android:id="@+id/divider"
@@ -59,7 +58,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Link"
+                    android:text="链接"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -69,7 +68,6 @@
                     android:hint="https://google.com"
                     android:gravity="center"
                     android:id="@+id/set_link" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -83,7 +81,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Name"
+                    android:text="名称"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -94,7 +92,6 @@
                     android:text="E Corp"
                     android:gravity="center"
                     android:id="@+id/set_name" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -108,17 +105,16 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Subject"
+                    android:text="主题"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Subject"
+                    android:hint="主题"
                     android:gravity="center"
                     android:id="@+id/set_subject" />
-
             </LinearLayout>
 
             <TextView
@@ -126,7 +122,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Picture URL"
+                android:text="图片链接"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <LinearLayout
@@ -135,7 +131,6 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
-
                 <EditText
                     android:id="@+id/set_pic"
                     android:layout_width="fill_parent"
@@ -143,15 +138,14 @@
                     android:layout_weight="1"
                     android:inputType="text"
                     android:text="https://images.squarespace-cdn.com/content/v1/571a9b3cd51cd4f1ca1c03b5/1466795502628-9RGHINLEYWT4KUJE4CGI/Evil_Corp_logo.png" />
-
             </LinearLayout>
 
             <Button
                 android:id="@+id/refreshPreview"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Apply"
-                android:layout_weight="1"/>
+                android:text="应用"
+                android:layout_weight="1" />
 
             <View
                 android:id="@+id/divider4"
@@ -159,54 +153,50 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Preview"
-                    android:layout_weight="15"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="预览"
+                android:layout_weight="15"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <WebView
                 android:id="@+id/mybrowser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                />
+                android:layout_marginBottom="15dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/reset_template"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Reset"
-                android:textColor="#ffffffff" />
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/save_template"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Save"
-                android:textColor="#ffffffff" />
+                <Button
+                    android:id="@+id/reset_template"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="重置"
+                    android:textColor="#ffffffff" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/save_template"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="保存"
+                    android:textColor="#ffffffff" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/start_set"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Launch SET"
+                android:text="启动 SET"
                 android:textColor="#ffffffff" />
-
         </LinearLayout>
-
     </ScrollView>
 </layout>

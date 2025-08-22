@@ -20,13 +20,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Kali 服务数据库操作类
+ * 用于管理 Kali 服务的增删改查以及数据库备份恢复
+ */
 public class KaliServicesSQL extends SQLiteOpenHelper {
 	private static KaliServicesSQL instance;
-	private static final String DATABASE_NAME = "KaliServicesFragment";
-	public static final String TAG = "KaliServicesSQL";
-	private static final String TABLE_NAME = DATABASE_NAME;
-	private static final ArrayList<String> COLUMNS = new ArrayList<>();
-	private static final String[][] kaliserviceData = {
+	private static final String DATABASE_NAME = "KaliServicesFragment"; // 数据库名称
+	public static final String TAG = "KaliServicesSQL"; // 日志标签
+	private static final String TABLE_NAME = DATABASE_NAME; // 数据表名称
+	private static final ArrayList<String> COLUMNS = new ArrayList<>(); // 数据表列名
+	private static final String[][] kaliserviceData = { // 默认 Kali 服务数据
 			{"1", "APACHE2", "service apache2 start", "service apache2 stop", "apache2", "0"},
 			{"2", "BLUETOOTH", "service bluetooth start", "service bluetooth stop", "bluetoothd", "0"},
 			{"3", "DBUS", "service dbus start", "service dbus stop", "dbus-daemon", "0"},
@@ -37,6 +41,11 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 			{"8", "NETWORKING", "service networking start", "service networking stop", "networking", "0"},
 	};
 
+	/**
+	 * 获取单例实例
+	 * @param context 应用上下文
+	 * @return KaliServicesSQL 实例
+	 */
 	public static synchronized KaliServicesSQL getInstance(Context context){
 		if (instance == null) {
 			instance = new KaliServicesSQL(context.getApplicationContext());
@@ -46,7 +55,7 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 
 	private KaliServicesSQL(Context context) {
 		super(context, DATABASE_NAME, null, 1);
-		// Add your default column here;
+		// 添加数据表列名
 		COLUMNS.add("id");
 		COLUMNS.add("ServiceName");
 		COLUMNS.add("CommandforStartService");
@@ -57,13 +66,14 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		// 创建数据表
 		db.execSQL("CREATE TABLE " + TABLE_NAME + " (" + COLUMNS.get(0) + " INTEGER, " +
 				COLUMNS.get(1) + " TEXT, " + COLUMNS.get(2) +  " TEXT, " +
 				COLUMNS.get(3) + " TEXT, " + COLUMNS.get(4) + " TEXT, " +
 				COLUMNS.get(5) + " INTEGER)");
 		ContentValues initialValues = new ContentValues();
 		db.beginTransaction();
-		for (String[] data: kaliserviceData){
+		for (String[] data : kaliserviceData) {
 			initialValues.put(COLUMNS.get(0), data[0]);
 			initialValues.put(COLUMNS.get(1), data[1]);
 			initialValues.put(COLUMNS.get(2), data[2]);
@@ -78,10 +88,16 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// 升级数据库时重建表
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 		this.onCreate(db);
 	}
 
+	/**
+	 * 查询并绑定数据
+	 * @param kaliServicesModelArrayList 数据列表
+	 * @return 查询到的数据列表
+	 */
 	public List<KaliServicesModel> bindData(List<KaliServicesModel> kaliServicesModelArrayList) {
 		SQLiteDatabase db = getWritableDatabase();
 		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMNS.get(0) + ";", null);
@@ -104,7 +120,7 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 					columnValue3,
 					columnValue4,
 					columnValue5,
-					"[-] Service is NOT running"
+					"[-] 服务未运行"
 			));
 		}
 		cursor.close();
@@ -112,6 +128,11 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 		return kaliServicesModelArrayList;
 	}
 
+	/**
+	 * 添加数据
+	 * @param targetPositionId 目标位置 ID
+	 * @param Data 数据列表
+	 */
 	public void addData(int targetPositionId, List<String> Data) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues initialValues = new ContentValues();
@@ -129,6 +150,10 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	/**
+	 * 删除数据
+	 * @param selectedTargetIds 选中的目标 ID 列表
+	 */
 	public void deleteData(List<Integer> selectedTargetIds){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMNS.get(0) + " in (" + TextUtils.join(",", selectedTargetIds) + ");");
@@ -141,6 +166,11 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	/**
+	 * 移动数据
+	 * @param originalPosition 原始位置
+	 * @param targetPosition 目标位置
+	 */
 	public void moveData(Integer originalPosition, Integer targetPosition){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("UPDATE " + TABLE_NAME + " SET " + COLUMNS.get(0) + " = 0 - 1 WHERE " + COLUMNS.get(0) + " = " + (originalPosition + 1) + ";");
@@ -156,6 +186,11 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	/**
+	 * 编辑数据
+	 * @param targetPosition 目标位置
+	 * @param editData 编辑数据
+	 */
 	public void editData(Integer targetPosition, List<String> editData){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("UPDATE " + TABLE_NAME + " SET " + COLUMNS.get(1) + " = '" + editData.get(0).replace("'", "''") + "', " +
@@ -167,6 +202,9 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	/**
+	 * 重置数据
+	 */
 	public void resetData(){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -175,7 +213,7 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 				COLUMNS.get(4) + " TEXT, " + COLUMNS.get(5) + " INTEGER)");
 		ContentValues initialValues = new ContentValues();
 		db.beginTransaction();
-		for (String[] data: kaliserviceData){
+		for (String[] data : kaliserviceData){
 			initialValues.put(COLUMNS.get(0), data[0]);
 			initialValues.put(COLUMNS.get(1), data[1]);
 			initialValues.put(COLUMNS.get(2), data[2]);
@@ -189,6 +227,11 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	/**
+	 * 备份数据
+	 * @param storedDBpath 保存数据库路径
+	 * @return 备份结果
+	 */
 	public String backupData(String storedDBpath) {
 		try {
 			File data = Environment.getDataDirectory();
@@ -212,12 +255,17 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 		return null;
 	}
 
+	/**
+	 * 恢复数据
+	 * @param storedDBpath 恢复数据库路径
+	 * @return 恢复结果
+	 */
 	public String restoreData(String storedDBpath) {
 		if (!new File(storedDBpath).exists()){
-			return "db file not found.";
+			return "未找到数据库文件. ";
 		}
 		if (!verifyDB(storedDBpath)) {
-			return "invalid columns format.";
+			return "数据库格式无效. ";
 		}
 		try {
 			File data = Environment.getDataDirectory();
@@ -241,10 +289,15 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 		return null;
 	}
 
+	/**
+	 * 验证数据库
+	 * @param storedDBpath 数据库路径
+	 * @return 验证结果
+	 */
 	private boolean verifyDB(String storedDBpath) {
 		SQLiteDatabase tempDB = SQLiteDatabase.openDatabase(storedDBpath, null, SQLiteDatabase.OPEN_READWRITE);
 		Cursor c = tempDB.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='" + TABLE_NAME + "'", null);
-		if (c.getCount()==1){
+		if (c.getCount() == 1) {
 			c.close();
 			c = tempDB.query(TABLE_NAME, null, null, null, null, null, null);
 			String[] tempColumnNames = c.getColumnNames();
@@ -253,8 +306,8 @@ public class KaliServicesSQL extends SQLiteOpenHelper {
 				tempDB.close();
 				return false;
 			}
-			for (int i = 0; i < tempColumnNames.length; i++){
-				if (!tempColumnNames[i].equals(COLUMNS.get(i))){
+			for (int i = 0; i < tempColumnNames.length; i++) {
+				if (!tempColumnNames[i].equals(COLUMNS.get(i))) {
 					tempDB.close();
 					return false;
 				}

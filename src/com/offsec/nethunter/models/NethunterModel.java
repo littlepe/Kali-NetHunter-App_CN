@@ -1,7 +1,7 @@
 package com.offsec.nethunter.models;
 
 /*
-    Nethunter Model class, each model object represent the data of each recyclerview item.
+    Nethunter 模型类, 每个模型对象代表 RecyclerView 中一项的数据. 
  */
 public class NethunterModel {
     private String title;

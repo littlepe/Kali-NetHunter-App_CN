@@ -43,7 +43,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-
 public class DuckHunterConvertFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "DuckHunterConvert";
     private final String duckyInputFile;
@@ -98,7 +97,7 @@ public class DuckHunterConvertFragment extends Fragment implements View.OnClickL
         b.setOnClickListener(this);
         b1.setOnClickListener(this);
 
-        // Duckhunter preset spinner templates
+        // Duckhunter 预设脚本模板
         String[] duckyscript_file = getDuckyScriptFiles();
         Spinner duckyscriptSpinner = rootView.findViewById(R.id.duckhunter_preset_spinner);
         ArrayAdapter<String> duckyscriptAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, duckyscript_file);
@@ -162,7 +161,7 @@ public class DuckHunterConvertFragment extends Fragment implements View.OnClickL
                     }
                     br.close();
                     editsource.setText(text.toString());
-                    NhPaths.showMessage(context, "Script loaded");
+                    NhPaths.showMessage(context, "脚本已加载");
                 } catch (Exception e) {
                     NhPaths.showMessage(context, e.getMessage());
                 }
@@ -243,17 +242,17 @@ public class DuckHunterConvertFragment extends Fragment implements View.OnClickL
                 }
                 MaterialAlertDialogBuilder alert = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
 
-                alert.setTitle("Name");
-                alert.setMessage("Please enter a name for your script.");
+                alert.setTitle("名称");
+                alert.setMessage("请输入脚本名称. ");
 
-                // Set an EditText view to get user input
+                // 设置一个 EditText 以获取用户输入
                 final EditText input = new EditText(activity);
                 alert.setView(input);
 
-                alert.setPositiveButton("Ok", (dialog, whichButton) -> {
+                alert.setPositiveButton("确定", (dialog, whichButton) -> {
                     String value = input.getText().toString();
                     if (!value.isEmpty()) {
-                        // Save file (ask name)
+                        // 保存文件（询问名称）
                         File scriptFile = new File(NhPaths.APP_SD_FILES_PATH + loadFilePath + File.separator + value + ".conf");
                         System.out.println(scriptFile.getAbsolutePath());
                         if (!scriptFile.exists()) {
@@ -267,26 +266,26 @@ public class DuckHunterConvertFragment extends Fragment implements View.OnClickL
                                     myOutWriter.append(text);
                                     myOutWriter.close();
                                     fOut.close();
-                                    NhPaths.showMessage(context, "Script saved");
+                                    NhPaths.showMessage(context, "脚本已保存");
                                 }
                             } catch (Exception e) {
                                 NhPaths.showMessage(context, e.getMessage());
                             }
                         } else {
-                            NhPaths.showMessage(context, "File already exists");
+                            NhPaths.showMessage(context, "文件已存在");
                         }
                     } else {
-                        NhPaths.showMessage(context, "Wrong name provided");
+                        NhPaths.showMessage(context, "名称无效");
                     }
                 });
 
-                alert.setNegativeButton("Cancel", (dialog, whichButton) -> {
+                alert.setNegativeButton("取消", (dialog, whichButton) -> {
                     ///Do nothing
                 });
                 alert.show();
                 break;
             default:
-                NhPaths.showMessage(context, "Unknown click");
+                NhPaths.showMessage(context, "未知点击");
                 break;
         }
     }

@@ -57,6 +57,7 @@ public class KaliServicesRecyclerViewAdapter extends RecyclerView.Adapter<KaliSe
 		Spannable tempStatusTextView = new SpannableString(kaliServicesModelList.get(position).getStatus());
 		tempStatusTextView.setSpan(new ForegroundColorSpan(kaliServicesModelList.get(position).getStatus().startsWith("[+]")?Color.GREEN:Color.parseColor("#D81B60")),0, kaliServicesModelList.get(position).getStatus().length(),0);
 		itemViewHolder.nametextView.setText(kaliServicesModelList.get(position).getServiceName());
+		// “开机启动”复选框
 		itemViewHolder.runOnChrootStartCheckbox.setChecked(kaliServicesModelList.get(position).getRunOnChrootStart().equals("1"));
 		itemViewHolder.mSwitch.setChecked(kaliServicesModelList.get(position).getStatus().startsWith("[+]"));
 		itemViewHolder.statustextView.setText(tempStatusTextView);
@@ -76,9 +77,9 @@ public class KaliServicesRecyclerViewAdapter extends RecyclerView.Adapter<KaliSe
 
 			readmeButton1.setOnClickListener(view -> {
 				MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
-				adb.setTitle("HOW TO USE:")
+				adb.setTitle("使用说明: ")
 						.setMessage(context.getString(R.string.kaliservices_howto_startservice))
-						.setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+						.setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
 				final androidx.appcompat.app.AlertDialog ad = adb.create();
 				ad.setCancelable(true);
 				ad.show();
@@ -86,9 +87,9 @@ public class KaliServicesRecyclerViewAdapter extends RecyclerView.Adapter<KaliSe
 
 			readmeButton2.setOnClickListener(view -> {
 				MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
-				adb.setTitle("HOW TO USE:")
+				adb.setTitle("使用说明: ")
 						.setMessage(context.getString(R.string.kaliservices_howto_stopservice))
-						.setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+						.setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
 				final androidx.appcompat.app.AlertDialog ad = adb.create();
 				ad.setCancelable(true);
 				ad.show();
@@ -96,9 +97,9 @@ public class KaliServicesRecyclerViewAdapter extends RecyclerView.Adapter<KaliSe
 
 			readmeButton3.setOnClickListener(view -> {
 				MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
-				adb.setTitle("HOW TO USE:")
+				adb.setTitle("使用说明: ")
 						.setMessage(context.getString(R.string.kaliservices_howto_checkservice))
-						.setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+						.setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
 				final androidx.appcompat.app.AlertDialog ad = adb.create();
 				ad.setCancelable(true);
 				ad.show();
@@ -106,9 +107,9 @@ public class KaliServicesRecyclerViewAdapter extends RecyclerView.Adapter<KaliSe
 
 			readmeButton4.setOnClickListener(view -> {
 				MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
-				adb.setTitle("HOW TO USE:")
+				adb.setTitle("使用说明: ")
 						.setMessage(context.getString(R.string.kaliservices_howto_runServiceOnBoot))
-						.setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+						.setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
 				final androidx.appcompat.app.AlertDialog ad = adb.create();
 				ad.setCancelable(true);
 				ad.show();
@@ -132,19 +133,19 @@ public class KaliServicesRecyclerViewAdapter extends RecyclerView.Adapter<KaliSe
 			MaterialAlertDialogBuilder adbEdit = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
 			adbEdit.setView(promptViewEdit);
 			adbEdit.setCancelable(true);
-			adbEdit.setPositiveButton("OK", (dialog, which) -> { });
+			adbEdit.setPositiveButton("确定", (dialog, which) -> { });
 			final AlertDialog adEdit = adbEdit.create();
 			adEdit.setOnShowListener(dialog -> {
 				final Button buttonEdit = adEdit.getButton(DialogInterface.BUTTON_POSITIVE);
 				buttonEdit.setOnClickListener(v1 -> {
 					if (titleEditText.getText().toString().isEmpty()){
-						NhPaths.showMessage(context, "Title cannot be empty");
+						NhPaths.showMessage(context, "标题不能为空");
 					} else if (startCmdEditText.getText().toString().isEmpty()){
-						NhPaths.showMessage(context, "Start Command cannot be empty");
+						NhPaths.showMessage(context, "启动命令不能为空");
 					} else if (stopCmdEditText.getText().toString().isEmpty()){
-						NhPaths.showMessage(context, "Stop Command cannot be empty");
+						NhPaths.showMessage(context, "停止命令不能为空");
 					} else if (checkstatusCmdEditText.getText().toString().isEmpty()){
-						NhPaths.showMessage(context, "String cannot be empty");
+						NhPaths.showMessage(context, "状态检查命令不能为空");
 					}else {
 						ArrayList<String> dataArrayList = new ArrayList<>();
 						dataArrayList.add(titleEditText.getText().toString());
@@ -241,7 +242,7 @@ public class KaliServicesRecyclerViewAdapter extends RecyclerView.Adapter<KaliSe
 			runOnChrootStartCheckbox = view.findViewById(R.id.f_kaliservices_recyclerview_runonchrootstart_checkbox);
 			mSwitch = view.findViewById(R.id.f_kaliservices_recyclerview_switch_toggle);
 			statustextView = view.findViewById(R.id.f_kaliservices_recyclerview_serviceresult_tv);
-			//WearOS optimisation
+			// WearOS 优化
 			SharedPreferences sharedpreferences = context.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
 			boolean iswatch = sharedpreferences.getBoolean("running_on_wearos", false);
 			if (iswatch) {

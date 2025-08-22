@@ -13,7 +13,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_enable_faulty_check"
-        android:title="Enable Faulty Module Check"
+        android:title="启用故障模块检查"
         android:checkable="true"
         android:checked="true" />
 </menu>

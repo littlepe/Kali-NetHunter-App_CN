@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="Settings"
+                    android:text="设置"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
@@ -57,7 +57,6 @@
                     android:ems="10"
                     app:srcCompat="@drawable/ic_action_refresh"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -73,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="Device :"
+                    android:text="设备: "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -84,7 +83,6 @@
                     android:saveEnabled="false"
                     android:spinnerMode="dropdown"
                     tools:ignore="TouchTargetSizeCheck" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -99,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Baudrate :"
+                    android:text="波特率: "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
@@ -118,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="95dp"
-                    android:text="CAN Speed :"
+                    android:text="CAN 速率: "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
@@ -165,7 +163,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Counter"
+                        android:text="计数器"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/holo_red_light"
                         tools:ignore="TextContrastCheck" />
@@ -175,11 +173,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Sleep"
+                        android:text="休眠"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/holo_red_light"
                         tools:ignore="TextContrastCheck" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -194,7 +191,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Data"
+                        android:text="数据"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/holo_red_light"
                         tools:ignore="TextContrastCheck" />
@@ -204,7 +201,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TTY Output"
+                        android:text="TTY 输出"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/holo_red_light"
                         tools:ignore="TextContrastCheck" />
@@ -214,18 +211,17 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Mode"
+                        android:text="模式"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/holo_red_light"
                         tools:ignore="TextContrastCheck" />
-
                 </LinearLayout>
 
                 <EditText
                     android:id="@+id/usb_id_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="ID Value (e.g., 2)"
+                    android:hint="ID 值（如 2）"
                     android:visibility="gone"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -234,7 +230,7 @@
                     android:id="@+id/usb_counter_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Counter Value (e.g., infinite)"
+                    android:hint="计数器值（如 infinite）"
                     android:visibility="gone"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -243,7 +239,7 @@
                     android:id="@+id/usb_sleep_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Sleep Value (ms) (e.g., 200)"
+                    android:hint="休眠值（毫秒）（如 200）"
                     android:visibility="gone"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -252,7 +248,7 @@
                     android:id="@+id/usb_data_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Data (e.g., 0C1A2F3E0C1A2F3)"
+                    android:hint="数据（如 0C1A2F3E0C1A2F3）"
                     android:visibility="gone"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -279,12 +275,10 @@
                     android:id="@+id/start_canusb_send"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Run" />
+                    android:text="运行" />
 
             </LinearLayout>
 
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

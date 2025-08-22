@@ -44,9 +44,9 @@ public class DuckHunterFragment extends Fragment {
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private static SharedPreferences sharedpreferences;
-    // Language vars
+    // 语言变量
     private static final HashMap<String, String> map = new HashMap<>();
-    public static String lang = "us"; // Set US as default language
+    public static String lang = "us"; // 默认语言设置为美国英语
     private static String[] keyboardLayoutString;
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String TAG = "DuckHunterFragment";
@@ -76,25 +76,25 @@ public class DuckHunterFragment extends Fragment {
         activity = getActivity();
         duckyInputFile = NhPaths.APP_SD_FILES_PATH + "/modules/ducky_in.txt";
         duckyOutputFile = NhPaths.APP_SD_FILES_PATH + "/modules/ducky_out.sh";
-        map.put("American English", "us");
-        map.put("Turkish", "tr");
-        map.put("Swedish", "sv");
-        map.put("Slovenian", "si");
-        map.put("Russian", "ru");
-        map.put("Portuguese", "pt");
-        map.put("Norwegian", "no");
-        map.put("Croatian", "hr");
-        map.put("United Kingdom", "gb");
-        map.put("French", "fr");
-        map.put("Finland", "fi");
-        map.put("Spain", "es");
-        map.put("Danish", "dk");
-        map.put("German", "de");
-        map.put("Candian", "ca");
-        map.put("Canadian Multilingual Standard", "cm");
-        map.put("Brazil", "br");
-        map.put("Belgian", "be");
-        map.put("Hungarian", "hu");
+        map.put("美国英语", "us");
+        map.put("土耳其语", "tr");
+        map.put("瑞典语", "sv");
+        map.put("斯洛文尼亚语", "si");
+        map.put("俄语", "ru");
+        map.put("葡萄牙语", "pt");
+        map.put("挪威语", "no");
+        map.put("克罗地亚语", "hr");
+        map.put("英国英语", "gb");
+        map.put("法语", "fr");
+        map.put("芬兰语", "fi");
+        map.put("西班牙语", "es");
+        map.put("丹麦语", "dk");
+        map.put("德语", "de");
+        map.put("加拿大英语", "ca");
+        map.put("加拿大多元语言标准", "cm");
+        map.put("巴西语", "br");
+        map.put("比利时语", "be");
+        map.put("匈牙利语", "hu");
         keyboardLayoutString = map.keySet().toArray(new String[0]);
     }
 
@@ -144,23 +144,23 @@ public class DuckHunterFragment extends Fragment {
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.duckConvertAttack:
-                // Pre-execution step
-                mainHandler.post(() -> NhPaths.showMessage(context, "Launching Attack"));
+                // 执行前步骤
+                mainHandler.post(() -> NhPaths.showMessage(context, "正在启动攻击"));
 
-                // Background task
+                // 后台任务
                 executorService.execute(() -> {
                     boolean result = exe.RunAsRootReturnValue("sh " + duckyOutputFile) == 0;
 
-                    // Post-execution step
+                    // 执行后步骤
                     mainHandler.post(() -> {
                         if (!result) {
                             if (new File("/config/usb_gadget/g1").exists()) {
-                                NhPaths.showMessage_long(context, "HID interfaces are not enabled! Please enable in USB Arsenal.");
+                                NhPaths.showMessage_long(context, "HID 接口未启用！请在 USB Arsenal 中启用. ");
                             } else if (new File("/dev/hidg0").exists()) {
-                                NhPaths.showMessage_long(context, "Fixing HID interface permissions..");
+                                NhPaths.showMessage_long(context, "正在修复 HID 接口权限...");
                                 exe.RunAsRoot(new String[]{"chmod 666 /dev/hidg*"});
                             } else {
-                                NhPaths.showMessage_long(context, "HID interfaces are not patched or enabled, please check your kernel configuration.");
+                                NhPaths.showMessage_long(context, "HID 接口未启用或未打补丁, 请检查内核配置. ");
                             }
                         }
                     });
@@ -209,8 +209,8 @@ public class DuckHunterFragment extends Fragment {
     private void openLanguageDialog() {
         int keyboardLayoutIndex = sharedpreferences.getInt("DuckHunterLanguageIndex", 0);
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-        builder.setTitle("Language:");
-        builder.setPositiveButton("OK", (dialog, which) -> {
+        builder.setTitle("语言: ");
+        builder.setPositiveButton("确定", (dialog, which) -> {
             if (mViewPager.getCurrentItem() == 1) {
                 if (getView() == null) {
                     return;
@@ -262,11 +262,11 @@ public class DuckHunterFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 1:
-                    return "Preview";
+                    return "预览";
                 case 2:
                     return "BT Ducky";
                 default:
-                    return "Convert";
+                    return "转换";
             }
         }
     }

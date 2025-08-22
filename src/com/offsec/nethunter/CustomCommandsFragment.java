@@ -42,7 +42,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CustomCommandsFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     public static final String TAG = "CustomCommandsFragment";
@@ -55,7 +54,7 @@ public class CustomCommandsFragment extends Fragment {
     public static int targetPositionId;
 
     public CustomCommandsFragment() {
-        Log.d(TAG, "CustomCommandsFragment: init ");
+        Log.d(TAG, "CustomCommandsFragment: 初始化");
     }
 
     public static CustomCommandsFragment newInstance(int sectionNumber) {
@@ -104,7 +103,7 @@ public class CustomCommandsFragment extends Fragment {
         onDeleteItemSetup();
         onMoveItemSetup();
 
-        //WearOS optimisation
+        // WearOS 优化
         SharedPreferences sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
         boolean iswatch = sharedpreferences.getBoolean("running_on_wearos", false);
         if (iswatch) {
@@ -117,7 +116,7 @@ public class CustomCommandsFragment extends Fragment {
         inflater.inflate(R.menu.custom_commands, menu);
         final MenuItem searchItem = menu.findItem(R.id.f_customcommands_action_search);
         final SearchView searchView = (SearchView) searchItem.getActionView();
-        //WearOS optimisation
+        // WearOS 优化
         boolean iswatch = requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
         if(iswatch) {
             searchItem.setVisible(false);
@@ -130,7 +129,7 @@ public class CustomCommandsFragment extends Fragment {
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) { //when you press the search button
+            public boolean onQueryTextSubmit(String query) { // 当按下搜索按钮时
                 customCommandsRecyclerViewAdapter.getFilter().filter(query);
                 return false;
             }
@@ -153,22 +152,22 @@ public class CustomCommandsFragment extends Fragment {
 
         switch (item.getItemId()){
             case R.id.f_customcommands_menu_backupDB:
-                titleTextView.setText("Full path to where you want to save the database:");
+                titleTextView.setText("完整路径, 用于保存数据库: ");
                 storedpathEditText.setText(NhPaths.APP_SD_SQLBACKUP_PATH + "/FragmentCustomCommands");
                 MaterialAlertDialogBuilder adbBackup = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
                 adbBackup.setView(promptView);
-                adbBackup.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-                adbBackup.setPositiveButton("OK", (dialog, which) -> { });
+                adbBackup.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+                adbBackup.setPositiveButton("确定", (dialog, which) -> { });
                 final AlertDialog adBackup = adbBackup.create();
                 adBackup.setOnShowListener(dialog -> {
                     final Button buttonOK = adBackup.getButton(DialogInterface.BUTTON_POSITIVE);
                     buttonOK.setOnClickListener(v -> {
                         String returnedResult = CustomCommandsData.getInstance().backupData(CustomCommandsSQL.getInstance(context), storedpathEditText.getText().toString());
                         if (returnedResult == null){
-                            NhPaths.showMessage(context, "db is successfully backup to " + storedpathEditText.getText().toString());
+                            NhPaths.showMessage(context, "数据库已成功备份到 " + storedpathEditText.getText().toString());
                         } else {
                             dialog.dismiss();
-                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Failed to backup the DB.").setMessage(returnedResult).create().show();
+                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("备份数据库失败").setMessage(returnedResult).create().show();
                         }
                         dialog.dismiss();
                     });
@@ -177,22 +176,22 @@ public class CustomCommandsFragment extends Fragment {
                 break;
             default:
             case R.id.f_customcommands_menu_restoreDB:
-                titleTextView.setText("Full path of the db file from where you want to restore:");
+                titleTextView.setText("完整路径, 用于恢复数据库: ");
                 storedpathEditText.setText(NhPaths.APP_SD_SQLBACKUP_PATH + "/FragmentCustomCommands");
                 MaterialAlertDialogBuilder adbRestore = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
                 adbRestore.setView(promptView);
-                adbRestore.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-                adbRestore.setPositiveButton("OK", (dialog, which) -> { });
+                adbRestore.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+                adbRestore.setPositiveButton("确定", (dialog, which) -> { });
                 final AlertDialog adRestore = adbRestore.create();
                 adRestore.setOnShowListener(dialog -> {
                     final Button buttonOK = adRestore.getButton(DialogInterface.BUTTON_POSITIVE);
                     buttonOK.setOnClickListener(v -> {
                         String returnedResult = CustomCommandsData.getInstance().restoreData(CustomCommandsSQL.getInstance(context), storedpathEditText.getText().toString());
                         if (returnedResult == null) {
-                            NhPaths.showMessage(context, "db is successfully restored to " + storedpathEditText.getText().toString());
+                            NhPaths.showMessage(context, "数据库已成功恢复到 " + storedpathEditText.getText().toString());
                         } else {
                             dialog.dismiss();
-                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Failed to restore the DB.").setMessage(returnedResult).create().show();
+                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("恢复数据库失败").setMessage(returnedResult).create().show();
                         }
                         dialog.dismiss();
                     });
@@ -240,15 +239,15 @@ public class CustomCommandsFragment extends Fragment {
             insertPositions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    //if Insert to Top
+                    // 如果插入到顶部
                     if (position == 0) {
                         insertLabels.setVisibility(View.INVISIBLE);
                         targetPositionId = 1;
-                        //if Insert to Bottom
+                        // 如果插入到底部
                     } else if (position == 1) {
                         insertLabels.setVisibility(View.INVISIBLE);
                         targetPositionId = customCommandsModelList.size() + 1;
-                        //if Insert Before
+                        // 如果插入到某一项之前
                     } else if (position == 2) {
                         insertLabels.setVisibility(View.VISIBLE);
                         insertLabels.setAdapter(arrayAdapter);
@@ -259,10 +258,10 @@ public class CustomCommandsFragment extends Fragment {
                             }
                             @Override
                             public void onNothingSelected(AdapterView<?> parent) {
-                                Log.d(TAG, "onNothingSelected: Nothing selected.");
+                                Log.d(TAG, "onNothingSelected: 未选择任何项");
                             }
                         });
-                        //if Insert After
+                        // 如果插入到某一项之后
                     } else {
                         insertLabels.setVisibility(View.VISIBLE);
                         insertLabels.setAdapter(arrayAdapter);
@@ -273,30 +272,30 @@ public class CustomCommandsFragment extends Fragment {
                             }
                             @Override
                             public void onNothingSelected(AdapterView<?> parent) {
-                                Log.d(TAG, "onNothingSelected: Nothing selected.");
+                                Log.d(TAG, "onNothingSelected: 未选择任何项");
                             }
                         });
                     }
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-                    Log.d(TAG, "onNothingSelected: Nothing Selected");
+                    Log.d(TAG, "onNothingSelected: 未选择任何项");
                 }
             });
 
             MaterialAlertDialogBuilder adbAdd = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-            adbAdd.setPositiveButton("OK", (dialog, which) -> { });
+            adbAdd.setPositiveButton("确定", (dialog, which) -> { });
             final AlertDialog adAdd = adbAdd.create();
             adAdd.setView(promptViewAdd);
             adAdd.setCancelable(true);
-            //If you want the dialog to stay open after clicking OK, you need to do it this way...
+            // 如果希望点击确定后对话框保持打开状态, 需要这样处理...
             adAdd.setOnShowListener(dialog -> {
                 final Button buttonAdd = adAdd.getButton(DialogInterface.BUTTON_POSITIVE);
                 buttonAdd.setOnClickListener(v1 -> {
                     if (commandLabelEditText.getText().toString().isEmpty()){
-                        NhPaths.showMessage(context, "Label cannot be empty");
+                        NhPaths.showMessage(context, "标签不能为空");
                     } else if (commandEditText.getText().toString().isEmpty()){
-                        NhPaths.showMessage(context, "Command String cannot be empty");
+                        NhPaths.showMessage(context, "命令字符串不能为空");
                     } else {
                         ArrayList<String> dataArrayList = new ArrayList<>();
                         dataArrayList.add(commandLabelEditText.getText().toString());
@@ -327,13 +326,13 @@ public class CustomCommandsFragment extends Fragment {
             recyclerViewDeleteItem.setAdapter(customCommandsRecyclerViewAdapterDeleteItems);
 
             MaterialAlertDialogBuilder adbDelete = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-            adbDelete.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-            adbDelete.setPositiveButton("Delete", (dialog, which) -> { });
+            adbDelete.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+            adbDelete.setPositiveButton("删除", (dialog, which) -> { });
             final AlertDialog adDelete = adbDelete.create();
-            adDelete.setMessage("Select the service you want to remove: ");
+            adDelete.setMessage("请选择要删除的项: ");
             adDelete.setView(promptViewDelete);
             adDelete.setCancelable(true);
-            //If you want the dialog to stay open after clicking OK, you need to do it this way...
+            // 如果希望点击确定后对话框保持打开状态, 需要这样处理...
             adDelete.setOnShowListener(dialog -> {
                 final Button buttonDelete = adDelete.getButton(DialogInterface.BUTTON_POSITIVE);
                 buttonDelete.setOnClickListener(v1 -> {
@@ -352,10 +351,10 @@ public class CustomCommandsFragment extends Fragment {
                     }
                     if (!selectedPosition.isEmpty()) {
                         CustomCommandsData.getInstance().deleteData(selectedPosition, selectedTargetIds, CustomCommandsSQL.getInstance(context));
-                        NhPaths.showMessage(context, "Successfully deleted " + selectedPosition.size() + " items.");
+                        NhPaths.showMessage(context, "成功删除 " + selectedPosition.size() + " 项. ");
                         adDelete.dismiss();
                     } else {
-                        NhPaths.showMessage(context, "Nothing to be deleted.");
+                        NhPaths.showMessage(context, "没有可删除的项. ");
                     }
                 });
             });
@@ -384,8 +383,8 @@ public class CustomCommandsFragment extends Fragment {
             titlesAfter.setAdapter(arrayAdapter);
 
             MaterialAlertDialogBuilder adbMove = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-            adbMove.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-            adbMove.setPositiveButton("Move", (dialog, which) -> { });
+            adbMove.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+            adbMove.setPositiveButton("移动", (dialog, which) -> { });
             final AlertDialog adMove = adbMove.create();
             adMove.setView(promptViewMove);
             adMove.setCancelable(true);
@@ -397,11 +396,11 @@ public class CustomCommandsFragment extends Fragment {
                     if (originalPositionIndex == targetPositionIndex ||
                             (actions.getSelectedItemPosition() == 0 && targetPositionIndex == (originalPositionIndex + 1)) ||
                             (actions.getSelectedItemPosition() == 1 && targetPositionIndex == (originalPositionIndex - 1))) {
-                        NhPaths.showMessage(context, "You are moving the item to the same position, nothing to be moved.");
+                        NhPaths.showMessage(context, "您将项目移动到了相同的位置, 无需移动. ");
                     } else {
                         if (actions.getSelectedItemPosition() == 1) targetPositionIndex += 1;
                         CustomCommandsData.getInstance().moveData(originalPositionIndex, targetPositionIndex, CustomCommandsSQL.getInstance(context));
-                        NhPaths.showMessage(context, "Successfully moved item.");
+                        NhPaths.showMessage(context, "项目已成功移动. ");
                         adMove.dismiss();
                     }
                 });

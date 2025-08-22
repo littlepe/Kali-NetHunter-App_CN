@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +48,7 @@ public class ModulesFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private Activity activity;
     private final ShellExecuter exe = new ShellExecuter();
-    // 0: Alphabetical, 1: Reverse
+    // 0: 按字母顺序, 1: 逆序
     private int currentSortOrder = 0;
     public EditText modules_path;
 
@@ -68,17 +68,17 @@ public class ModulesFragment extends Fragment {
             String kernelVersion = System.getProperty("os.version");
             String pathWithKernelVersion = sanitizedModulesPath + "/" + kernelVersion;
 
-            // Find the full path of the module
+            // 查找模块完整路径
             String findCommand = "find " + sanitizedModulesPath + " " + pathWithKernelVersion + " -name " + moduleName + ".ko -print -quit";
             String moduleFilePath = exe.RunAsRootOutput(findCommand).trim();
 
             String info;
             if (moduleFilePath.isEmpty()) {
-                info = "Module not found: " + moduleName;
+                info = "未找到模块: " + moduleName;
             } else {
                 info = exe.RunAsRootOutput("modinfo " + moduleFilePath);
                 if (info == null || info.trim().isEmpty()) {
-                    info = "No information available for " + moduleName;
+                    info = "无法获取 " + moduleName + " 的信息";
                 }
             }
 
@@ -86,9 +86,9 @@ public class ModulesFragment extends Fragment {
             if (currentActivity != null) {
                 String finalInfo = info;
                 currentActivity.runOnUiThread(() -> new AlertDialog.Builder(currentActivity)
-                        .setTitle("Module Info: " + moduleName)
+                        .setTitle("模块信息: " + moduleName)
                         .setMessage(finalInfo)
-                        .setPositiveButton("OK", null)
+                        .setPositiveButton("确定", null)
                         .show());
             }
         });
@@ -102,17 +102,17 @@ public class ModulesFragment extends Fragment {
             String kernelVersion = System.getProperty("os.version");
             String pathWithKernelVersion = sanitizedModulesPath + "/" + kernelVersion;
 
-            // Find the full path of the module
+            // 查找模块完整路径
             String findCommand = "find " + sanitizedModulesPath + " " + pathWithKernelVersion + " -name " + moduleName + ".ko -print -quit";
             String moduleFilePath = exe.RunAsRootOutput(findCommand).trim();
 
             String dependencies;
             if (moduleFilePath.isEmpty()) {
-                dependencies = "Module not found: " + moduleName;
+                dependencies = "未找到模块: " + moduleName;
             } else {
                 dependencies = exe.RunAsRootOutput("modinfo " + moduleFilePath + " | grep depends");
                 if (dependencies == null || dependencies.trim().isEmpty()) {
-                    dependencies = "No dependencies found for " + moduleName;
+                    dependencies = "未找到 " + moduleName + " 的依赖";
                 }
             }
 
@@ -120,9 +120,9 @@ public class ModulesFragment extends Fragment {
             if (currentActivity != null) {
                 String finalDependencies = dependencies;
                 currentActivity.runOnUiThread(() -> new AlertDialog.Builder(currentActivity)
-                        .setTitle("Module Dependencies: " + moduleName)
+                        .setTitle("模块依赖: " + moduleName)
                         .setMessage(finalDependencies)
-                        .setPositiveButton("OK", null)
+                        .setPositiveButton("确定", null)
                         .show());
             }
         });
@@ -134,11 +134,11 @@ public class ModulesFragment extends Fragment {
         executor.execute(() -> {
             String loadedModulesRaw = exe.RunAsRootOutput("lsmod | cut -d' ' -f1");
             String[] loadedModules = loadedModulesRaw.split("\n");
-            // Remove header if present
+            // 移除标题行（如果存在）
             if (loadedModules.length > 0 && loadedModules[0].trim().equals("Module")) {
                 loadedModules = Arrays.copyOfRange(loadedModules, 1, loadedModules.length);
             }
-            // Build moduleStates: all loaded modules are true
+            // 构建 moduleStates: 所有已加载模块标记为 true
             Map<String, Boolean> moduleStates = new HashMap<>();
             for (String module : loadedModules) {
                 if (!module.trim().isEmpty()) {
@@ -146,7 +146,7 @@ public class ModulesFragment extends Fragment {
                 }
             }
             List<String> moduleList = new ArrayList<>(Arrays.asList(loadedModules));
-            // Remove empty entries
+            // 移除空条目
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 moduleList.removeIf(String::isEmpty);
             }
@@ -155,7 +155,7 @@ public class ModulesFragment extends Fragment {
             if (currentActivity != null) {
                 currentActivity.runOnUiThread(() -> {
                     if (moduleList.isEmpty()) {
-                        modules.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, Collections.singletonList("No modules loaded")));
+                        modules.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, Collections.singletonList("无已加载模块")));
                     } else {
                         modules.setAdapter(new ModuleListAdapter(requireContext(), moduleList, moduleStates));
                     }
@@ -179,7 +179,7 @@ public class ModulesFragment extends Fragment {
 
         ListView modules = requireView().findViewById(R.id.modulesList);
         assert searchView != null;
-        searchView.setQueryHint("Search modules");
+        searchView.setQueryHint("搜索模块");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) { return false; }
@@ -200,11 +200,11 @@ public class ModulesFragment extends Fragment {
 
         ListView modules = rootView.findViewById(R.id.modulesList);
 
-        // lsmod button
+        // lsmod 按钮
         Button lsmodButton = rootView.findViewById(R.id.lsmod);
         lsmodButton.setOnClickListener(view -> showLoadedModules(rootView));
 
-        // Use last path
+        // 使用上次路径
         modules_path = rootView.findViewById(R.id.modulesPath);
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
         String LastModulesPath = sharedPreferences.getString("last_modulespath", "");
@@ -213,13 +213,13 @@ public class ModulesFragment extends Fragment {
         modules.setOnItemLongClickListener((adapterView, view, position, id) -> {
             String selectedModule = modules.getItemAtPosition(position).toString();
             PopupMenu popup = new PopupMenu(requireContext(), view);
-            popup.getMenu().add("Show module information");
-            popup.getMenu().add("View Dependencies");
+            popup.getMenu().add("显示模块信息");
+            popup.getMenu().add("查看依赖");
             popup.setOnMenuItemClickListener(item -> {
-                if (Objects.equals(item.getTitle(), "Show module information")) {
+                if (Objects.equals(item.getTitle(), "显示模块信息")) {
                     showModuleInfo(selectedModule);
                     return true;
-                } else if (Objects.equals(item.getTitle(), "View Dependencies")) {
+                } else if (Objects.equals(item.getTitle(), "查看依赖")) {
                     showModuleDependencies(selectedModule);
                     return true;
                 }
@@ -229,12 +229,12 @@ public class ModulesFragment extends Fragment {
             return true;
         });
 
-        // Refresh Modules
+        // 刷新模块
         Button refreshButton = rootView.findViewById(R.id.refresh);
         refreshButton.setOnClickListener(view -> refreshModules(rootView));
         refreshModules(rootView);
 
-        // Modules toggle
+        // 模块开关
         modules.setOnItemClickListener((adapterView, view, i, l) -> {
             String modulesPath = modules_path != null ? modules_path.getText().toString() : "";
             String sanitizedModulesPath = modulesPath.replaceAll("[^a-zA-Z0-9/_-]", "");
@@ -248,41 +248,41 @@ public class ModulesFragment extends Fragment {
             if (isModuleLoaded != null && isModuleLoaded.trim().equals(selectedModule)) {
                 String disableModule = exe.RunAsRootOutput("rmmod " + selectedModule + " && echo Success || echo Failed");
                 if (disableModule.contains("Success")) {
-                    Log.d(TAG, "Module disabled: " + selectedModule);
-                    Toast.makeText(requireActivity().getApplicationContext(), "Module Disabled: " + selectedModule, Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "模块已禁用: " + selectedModule);
+                    Toast.makeText(requireActivity().getApplicationContext(), "模块已禁用: " + selectedModule, Toast.LENGTH_LONG).show();
                     if (statusIcon != null) {
                         statusIcon.setImageResource(R.drawable.ic_module_not_loaded);
                     }
                 } else {
-                    Toast.makeText(requireActivity().getApplicationContext(), "Failed - rmmod " + selectedModule, Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "失败 - rmmod " + selectedModule, Toast.LENGTH_LONG).show();
                 }
             } else {
                 String findCommand = "find " + sanitizedModulesPath + " " + pathWithKernelVersion + " -name " + selectedModule + ".ko -print -quit";
                 String foundModulePath = exe.RunAsRootOutput(findCommand);
 
                 if (foundModulePath == null || foundModulePath.trim().isEmpty()) {
-                    Toast.makeText(requireActivity().getApplicationContext(), "Module not found in the directory structure", Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "在目录结构中未找到模块", Toast.LENGTH_LONG).show();
                     return;
                 }
                 String modulePath = foundModulePath.trim();
 
                 String toggleModule = exe.RunAsRootOutput("insmod " + modulePath + " && echo Success || echo Failed");
                 if (toggleModule.contains("Success")) {
-                    Log.d(TAG, "Module enabled: " + selectedModule + " from path: " + modulePath);
-                    Toast.makeText(requireActivity().getApplicationContext(), "Module Enabled: " + selectedModule + " from path: " + modulePath, Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "模块已启用: " + selectedModule + " 路径: " + modulePath);
+                    Toast.makeText(requireActivity().getApplicationContext(), "模块已启用: " + selectedModule + " 路径: " + modulePath, Toast.LENGTH_LONG).show();
                     if (statusIcon != null) {
                         statusIcon.setImageResource(R.drawable.ic_module_loaded);
                     }
                 } else {
                     toggleModule = exe.RunAsRootOutput("modprobe -d " + sanitizedModulesPath + " " + selectedModule + " && echo Success || echo Failed");
                     if (toggleModule.contains("Success")) {
-                        Log.d(TAG, "Module enabled: " + selectedModule + " from path: " + sanitizedModulesPath);
-                        Toast.makeText(requireActivity().getApplicationContext(), "Module Enabled: " + selectedModule + " from path: " + sanitizedModulesPath, Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "模块已启用: " + selectedModule + " 路径: " + sanitizedModulesPath);
+                        Toast.makeText(requireActivity().getApplicationContext(), "模块已启用: " + selectedModule + " 路径: " + sanitizedModulesPath, Toast.LENGTH_LONG).show();
                         if (statusIcon != null) {
                             statusIcon.setImageResource(R.drawable.ic_module_loaded);
                         }
                     } else {
-                        Toast.makeText(requireActivity().getApplicationContext(), "Failed - modprobe -d " + sanitizedModulesPath + " " + selectedModule, Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireActivity().getApplicationContext(), "失败 - modprobe -d " + sanitizedModulesPath + " " + selectedModule, Toast.LENGTH_LONG).show();
                         if (sharedPreferences.getBoolean("enable_faulty_check", true)) {
                             checkFaultyModule(sanitizedModulesPath, selectedModule);
                         }
@@ -318,7 +318,7 @@ public class ModulesFragment extends Fragment {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            // Check if the directory exists
+            // 检查目录是否存在
             String kernelVersion = System.getProperty("os.version");
             String pathWithKernelVersion = sanitizedModulesPath + "/" + kernelVersion;
 
@@ -331,7 +331,7 @@ public class ModulesFragment extends Fragment {
                     if (currentActivity != null) {
                         finalSanitizedModulesPath = sanitizedModulesPath.get();
                         currentActivity.runOnUiThread(() ->
-                                Toast.makeText(currentActivity.getApplicationContext(), finalSanitizedModulesPath + " does not exist", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(currentActivity.getApplicationContext(), finalSanitizedModulesPath + " 不存在", Toast.LENGTH_SHORT).show()
                         );
                     }
                     return;
@@ -341,30 +341,30 @@ public class ModulesFragment extends Fragment {
             }
             finalSanitizedModulesPath = sanitizedModulesPath.get();
 
-            // Execute `find` command once
+            // 执行一次 `find` 命令
             String modulesRaw = exe.RunAsRootOutput("find " + finalSanitizedModulesPath + " -name *.ko -printf \"%f\\n\" | sed 's/\\.ko$//1'");
             if (modulesRaw.isEmpty()) {
                 Activity currentActivity = getActivity();
                 if (currentActivity != null) {
                     currentActivity.runOnUiThread(() ->
-                            modules.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, Collections.singletonList("No modules found")))
+                            modules.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, Collections.singletonList("未找到模块")))
                     );
                 }
                 return;
             }
             final String[] modulesArray = modulesRaw.split("\n");
 
-            // Execute `lsmod` once and cache results
+            // 执行一次 `lsmod` 并缓存结果
             String loadedModulesRaw = exe.RunAsRootOutput("lsmod | cut -d' ' -f1");
             List<String> loadedModules = Arrays.asList(loadedModulesRaw.split("\n"));
 
-            // Prepare module states
+            // 准备模块状态
             Map<String, Boolean> moduleStates = new HashMap<>();
             for (String module : modulesArray) {
                 moduleStates.put(module, loadedModules.contains(module));
             }
 
-            // Sort module list according to currentSortOrder
+            // 根据当前排序方式排序模块列表
             List<String> moduleList = new ArrayList<>(Arrays.asList(modulesArray));
             if (currentSortOrder == 0) {
                 Collections.sort(moduleList);
@@ -388,8 +388,8 @@ public class ModulesFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_sort:
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                builder.setTitle("Sort Modules")
-                        .setItems(new String[]{"Alphabetical", "Reverse"}, (dialog, which) -> {
+                builder.setTitle("排序模块")
+                        .setItems(new String[]{"按字母顺序", "逆序"}, (dialog, which) -> {
                             currentSortOrder = which;
                             refreshModules(requireView());
                         })
@@ -408,20 +408,20 @@ public class ModulesFragment extends Fragment {
     private void checkFaultyModule(String modulePath, String moduleName) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            // Retrieve kernel logs
+            // 获取内核日志
             String kernelLogs = exe.RunAsRootOutput("dmesg | tail -n 20");
             Activity currentActivity = getActivity();
             if (currentActivity != null) {
-                String finalKernelLogs = kernelLogs.trim().isEmpty() ? "No kernel logs available" : kernelLogs;
+                String finalKernelLogs = kernelLogs.trim().isEmpty() ? "无可用内核日志" : kernelLogs;
                 currentActivity.runOnUiThread(() -> {
-                    // Show a Toast with the error
-                    Toast.makeText(currentActivity.getApplicationContext(), "Error loading module: " + moduleName, Toast.LENGTH_LONG).show();
+                    // 显示 Toast 提示错误
+                    Toast.makeText(currentActivity.getApplicationContext(), "加载模块失败: " + moduleName, Toast.LENGTH_LONG).show();
 
-                    // Show an AlertDialog with detailed logs
+                    // 显示包含详细日志的 AlertDialog
                     new AlertDialog.Builder(currentActivity)
-                            .setTitle("Module Load Failed: " + moduleName)
-                            .setMessage("Kernel Logs:\n" + finalKernelLogs)
-                            .setPositiveButton("OK", null)
+                            .setTitle("模块加载失败: " + moduleName)
+                            .setMessage("内核日志: \n" + finalKernelLogs)
+                            .setPositiveButton("确定", null)
                             .show();
                 });
             }
@@ -465,7 +465,7 @@ public class ModulesFragment extends Fragment {
             String moduleName = modules.get(position);
             holder.textView.setText(moduleName);
 
-            // Set icon based on module state
+            // 根据模块状态设置图标
             Boolean isLoaded = moduleStates.get(moduleName);
             if (isLoaded != null && isLoaded) {
                 holder.statusIcon.setImageResource(R.drawable.ic_module_loaded);
@@ -473,7 +473,7 @@ public class ModulesFragment extends Fragment {
                 holder.statusIcon.setImageResource(R.drawable.ic_module_not_loaded);
             }
 
-            // Handle auto-load checkbox
+            // 处理自动加载复选框
             SharedPreferences preferences = context.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
             holder.autoLoadCheckBox.setChecked(preferences.getBoolean("autoload_" + moduleName, false));
             holder.autoLoadCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -501,9 +501,7 @@ public class ModulesFragment extends Fragment {
         }
     }
 
-    ////
-    // Bridge side functions
-    ////
+    /* Bridge 端函数 */
 
     public void run_cmd(String cmd) {
         Intent intent = Bridge.createExecuteIntent("/data/data/com.offsec.nhterm/files/usr/bin/kali", cmd);

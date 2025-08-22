@@ -56,7 +56,7 @@ public class BTFragment extends Fragment {
     private SharedPreferences sharedpreferences;
     private Context context;
     private Activity activity;
-    private final ShellExecuter exe = new ShellExecuter(); // Fixed issue with undefined 'exe'
+    private final ShellExecuter exe = new ShellExecuter(); // 修复了未定义 'exe' 的问题
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public static BTFragment newInstance(int sectionNumber) {
@@ -112,7 +112,7 @@ public class BTFragment extends Fragment {
                 return true;
             case R.id.update:
                 if (iswatch) {
-                    Toast.makeText(requireActivity().getApplicationContext(), "Updates have to be done manually through adb shell. If anything gone wrong at first run, please run Setup again.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "更新必须通过 adb shell 手动完成. 如果首次运行出现任何问题, 请再次运行设置. ", Toast.LENGTH_LONG).show();
                 } else {
                     RunUpdate();
                 }
@@ -128,14 +128,14 @@ public class BTFragment extends Fragment {
         }
         Boolean iswatch = sharedpreferences.getBoolean("running_on_wearos", false);
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.DialogStyleCompat);
-        builder.setTitle("Welcome to Bluetooth Arsenal!");
-        builder.setMessage("This seems to be the first run. Install the Bluetooth tools?");
-        builder.setPositiveButton("Install", (dialog, which) -> {
+        builder.setTitle("欢迎使用蓝牙武器库！");
+        builder.setMessage("这似乎是首次运行. 要安装蓝牙工具吗？");
+        builder.setPositiveButton("安装", (dialog, which) -> {
             if (iswatch) RunSetupWatch();
             else RunSetup();
             sharedpreferences.edit().putBoolean("setup_done", true).apply();
         });
-        builder.setNegativeButton("Disable message", (dialog, which) -> {
+        builder.setNegativeButton("禁用消息", (dialog, which) -> {
             dialog.dismiss();
             sharedpreferences.edit().putBoolean("setup_done", true).apply();
         });
@@ -147,14 +147,14 @@ public class BTFragment extends Fragment {
             sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
         }
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.DialogStyleCompat);
-        builder.setMessage("This seems to be the first run. Install the Bluetooth tools?");
-        builder.setPositiveButton("Yes", (dialog, which) -> {
-                RunSetupWatch();
-                sharedpreferences.edit().putBoolean("setup_done", true).apply();
+        builder.setMessage("这似乎是首次运行. 要安装蓝牙工具吗？");
+        builder.setPositiveButton("是", (dialog, which) -> {
+            RunSetupWatch();
+            sharedpreferences.edit().putBoolean("setup_done", true).apply();
         });
-        builder.setNegativeButton("No", (dialog, which) -> {
-                dialog.dismiss();
-                sharedpreferences.edit().putBoolean("setup_done", true).apply();
+        builder.setNegativeButton("否", (dialog, which) -> {
+            dialog.dismiss();
+            sharedpreferences.edit().putBoolean("setup_done", true).apply();
         });
         builder.show();
     }
@@ -166,18 +166,18 @@ public class BTFragment extends Fragment {
         run_cmd("echo -ne \"\\033]0;BT Arsenal Setup\\007\" && clear;" +
                 "apt update && apt install screen bluetooth bluez bluez-tools bluez-obexd libbluetooth3 sox spooftooph libglib2.0*-dev " +
                 "libsystemd-dev python3-dbus python3-bluez python3-pyudev python3-evdev libbluetooth-dev redfang bluelog blueranger -y;" +
-                "if [[ -f /usr/sbin/bluebinder ]]; then echo 'Bluebinder is installed!'; else wget https://raw.githubusercontent.com/yesimxev/bluebinder/master/prebuilt/armhf/bluebinder -P /usr/sbin/ && chmod +x /usr/sbin/bluebinder;fi;" +
-                "if [[ -f /usr/lib/libgbinder.so.1.1.25 ]]; then echo 'libgbinder.so.1.1.25 is installed!'; else wget https://raw.githubusercontent.com/yesimxev/libgbinder/master/prebuilt/armhf/libgbinder.so.1.1.25 -P /usr/lib/ &&" +
+                "if [[ -f /usr/sbin/bluebinder ]]; then echo 'Bluebinder 已安装！'; else wget https://raw.githubusercontent.com/yesimxev/bluebinder/master/prebuilt/armhf/bluebinder -P /usr/sbin/ && chmod +x /usr/sbin/bluebinder;fi;" +
+                "if [[ -f /usr/lib/libgbinder.so.1.1.25 ]]; then echo 'libgbinder.so.1.1.25 已安装！'; else wget https://raw.githubusercontent.com/yesimxev/libgbinder/master/prebuilt/armhf/libgbinder.so.1.1.25 -P /usr/lib/ &&" +
                 " ln -s libgbinder.so.1.1.25 /usr/lib/libgbinder.so.1.1 && ln -s libgbinder.so.1.1 /usr/lib/libgbinder.so.1 && ln -s libgbinder.so.1 /usr/lib/libgbinder.so;fi;" +
-                "if [[ -f /usr/lib/libglibutil.so.1.0.67 ]]; then echo 'libglibutil.so.1.0.67 is installed!'; else wget https://raw.githubusercontent.com/yesimxev/libglibutil/master/prebuilt/armhf/libglibutil.so.1.0.67 -P /usr/lib/ &&" +
+                "if [[ -f /usr/lib/libglibutil.so.1.0.67 ]]; then echo 'libglibutil.so.1.0.67 已安装！'; else wget https://raw.githubusercontent.com/yesimxev/libglibutil/master/prebuilt/armhf/libglibutil.so.1.0.67 -P /usr/lib/ &&" +
                 " ln -s libglibutil.so.1.0.67 /usr/lib/libglibutil.so.1.0 && ln -s libglibutil.so.1.0 /usr/lib/libglibutil.so.1 && ln -s libglibutil.so.1 /usr/lib/libglibutil.so;fi;" +
-                "if [[ -f /usr/bin/carwhisperer ]]; then echo 'carwhisperer is installed!'; else wget https://raw.githubusercontent.com/yesimxev/carwhisperer-0.2/master/prebuilt/armhf/carwhisperer -P /usr/bin/ && chmod +x /usr/bin/carwhisperer;fi;" +
-                "if [[ -f /usr/bin/rfcomm_scan ]]; then echo 'rfcomm_scan is installed!'; else wget https://raw.githubusercontent.com/yesimxev/bt_audit/master/prebuilt/armhf/rfcomm_scan -P /usr/bin/ && chmod +x /usr/bin/rfcomm_scan;fi;" +
-                "if [[ -d /root/carwhisperer ]]; then echo '/root/carwhisperer is installed!'; else git clone https://github.com/yesimxev/carwhisperer-0.2 /root/carwhisperer;fi;" +
-                "if [[ -f /root/badbt/btk_server.py ]]; then echo 'BadBT is installed!'; else git clone https://github.com/yesimxev/badbt /root/badbt && cp /root/badbt/org.thanhle.btkbservice.conf /etc/dbus-1/system.d/;fi;" +
-                "if [[ ! \"`grep 'noplugin=input' /etc/init.d/bluetooth`\" == \"\" ]]; then echo 'Bluetooth service is patched!'; else echo 'Patching Bluetooth service..' && " +
+                "if [[ -f /usr/bin/carwhisperer ]]; then echo 'carwhisperer 已安装！'; else wget https://raw.githubusercontent.com/yesimxev/carwhisperer-0.2/master/prebuilt/armhf/carwhisperer -P /usr/bin/ && chmod +x /usr/bin/carwhisperer;fi;" +
+                "if [[ -f /usr/bin/rfcomm_scan ]]; then echo 'rfcomm_scan 已安装！'; else wget https://raw.githubusercontent.com/yesimxev/bt_audit/master/prebuilt/armhf/rfcomm_scan -P /usr/bin/ && chmod +x /usr/bin/rfcomm_scan;fi;" +
+                "if [[ -d /root/carwhisperer ]]; then echo '/root/carwhisperer 已安装！'; else git clone https://github.com/yesimxev/carwhisperer-0.2 /root/carwhisperer;fi;" +
+                "if [[ -f /root/badbt/btk_server.py ]]; then echo 'BadBT 已安装！'; else git clone https://github.com/yesimxev/badbt /root/badbt && cp /root/badbt/org.thanhle.btkbservice.conf /etc/dbus-1/system.d/;fi;" +
+                "if [[ ! \"`grep 'noplugin=input' /etc/init.d/bluetooth`\" == \"\" ]]; then echo '蓝牙服务已修补！'; else echo '正在修补蓝牙服务..' && " +
                 "sed -i -e 's/# NOPLUGIN_OPTION=.*/NOPLUGIN_OPTION=\"--noplugin=input\"/g' /etc/init.d/bluetooth;fi;" +
-                "echo 'Everything is installed! Closing in 3secs..'; sleep 3 && exit ");
+                "echo '所有内容已安装！将在 3 秒后关闭..'; sleep 3 && exit ");
         sharedpreferences.edit().putBoolean("setup_done", true).apply();
     }
 
@@ -186,21 +186,21 @@ public class BTFragment extends Fragment {
             sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
         }
         run_cmd("echo -ne \"\\033]0;BT Arsenal Setup\\007\" && clear;apt update && apt install screen bluetooth bluez bluez-tools bluez-obexd libbluetooth3 sox spooftooph libglib2.0*-dev " +
-                        "libsystemd-dev python3-dbus python3-bluez python3-pyudev python3-evdev libbluetooth-dev redfang bluelog blueranger -y;" +
-                        "if [[ -f /usr/bin/carwhisperer && -f /usr/bin/rfcomm_scan ]];then echo 'All scripts are installed!'; else " +
-                        "git clone https://github.com/yesimxev/carwhisperer-0.2 /root/carwhisperer;" +
-                        "cd /root/carwhisperer;make && make install;git clone https://github.com/yesimxev/bt_audit /root/bt_audit;cd /root/bt_audit/src;make;" +
-                        "cp rfcomm_scan /usr/bin/;fi;" +
-                        "if [[ -f /usr/lib/libglibutil.so ]]; then echo 'Libglibutil is installed!'; else git clone https://github.com/yesimxev/libglibutil /root/libglibutil;" +
-                        "cd /root/libglibutil;make && make install-dev;fi;" +
-                        "if [[ -f /usr/lib/libgbinder.so ]]; then echo 'Libgbinder is installed!'; else git clone https://github.com/yesimxev/libgbinder /root/libgbinder;" +
-                        "cd /root/libgbinder;make && make install-dev;fi;" +
-                        "if [[ -f /usr/sbin/bluebinder ]]; then echo 'Bluebinder is installed!'; else git clone https://github.com/yesimxev/bluebinder /root/bluebinder;" +
-                        "cd /root/bluebinder;make && make install;fi;" +
-                        "if [[ -f /root/badbt/btk_server.py ]]; then echo 'BadBT is installed!'; else git clone https://github.com/yesimxev/badbt /root/badbt && cp /root/badbt/org.thanhle.btkbservice.conf /etc/dbus-1/system.d/;fi;" +
-                        "if [[ ! \"`grep 'noplugin=input' /etc/init.d/bluetooth`\" == \"\" ]]; then echo 'Bluetooth service is patched!'; else echo 'Patching Bluetooth service..' && " +
-                        "sed -i -e 's/.*NOPLUGIN_OPTION=\"\"/NOPLUGIN_OPTION=\"--noplugin=input\"/g' /etc/init.d/bluetooth;fi; echo 'Everything is installed!' && echo '\nPress any key to continue...' && read -s -n 1 && exit ");
-                sharedpreferences.edit().putBoolean("setup_done", true).apply();
+                "libsystemd-dev python3-dbus python3-bluez python3-pyudev python3-evdev libbluetooth-dev redfang bluelog blueranger -y;" +
+                "if [[ -f /usr/bin/carwhisperer && -f /usr/bin/rfcomm_scan ]];then echo '所有脚本已安装！'; else " +
+                "git clone https://github.com/yesimxev/carwhisperer-0.2 /root/carwhisperer;" +
+                "cd /root/carwhisperer;make && make install;git clone https://github.com/yesimxev/bt_audit /root/bt_audit;cd /root/bt_audit/src;make;" +
+                "cp rfcomm_scan /usr/bin/;fi;" +
+                "if [[ -f /usr/lib/libglibutil.so ]]; then echo 'Libglibutil 已安装！'; else git clone https://github.com/yesimxev/libglibutil /root/libglibutil;" +
+                "cd /root/libglibutil;make && make install-dev;fi;" +
+                "if [[ -f /usr/lib/libgbinder.so ]]; then echo 'Libgbinder 已安装！'; else git clone https://github.com/yesimxev/libgbinder /root/libgbinder;" +
+                "cd /root/libgbinder;make && make install-dev;fi;" +
+                "if [[ -f /usr/sbin/bluebinder ]]; then echo 'Bluebinder 已安装！'; else git clone https://github.com/yesimxev/bluebinder /root/bluebinder;" +
+                "cd /root/bluebinder;make && make install;fi;" +
+                "if [[ -f /root/badbt/btk_server.py ]]; then echo 'BadBT 已安装！'; else git clone https://github.com/yesimxev/badbt /root/badbt && cp /root/badbt/org.thanhle.btkbservice.conf /etc/dbus-1/system.d/;fi;" +
+                "if [[ ! \"`grep 'noplugin=input' /etc/init.d/bluetooth`\" == \"\" ]]; then echo '蓝牙服务已修补！'; else echo '正在修补蓝牙服务..' && " +
+                "sed -i -e 's/.*NOPLUGIN_OPTION=\"\"/NOPLUGIN_OPTION=\"--noplugin=input\"/g' /etc/init.d/bluetooth;fi; echo '所有内容已安装！' && echo '\n按任意键继续...' && read -s -n 1 && exit ");
+        sharedpreferences.edit().putBoolean("setup_done", true).apply();
     }
 
     public void RunUpdate() {
@@ -211,7 +211,7 @@ public class BTFragment extends Fragment {
                 "libbluetooth-dev redfang bluelog blueranger libglib2.0*-dev libsystemd-dev python3-dbus python3-bluez python3-pyudev python3-evdev  -y;if [[ -f /usr/bin/carwhisperer && -f /usr/bin/rfcomm_scan && -f /root/bluebinder && -f /root/libgbinder && -f /root/libglibutil ]];" +
                 "then cd /root/carwhisperer/;git pull && make && make install;cd /root/bluebinder/;git pull && make && make install;cd /root/libgbinder/;git pull && make && " +
                 "make install-dev;cd /root/libglibutil/;git pull && make && make install-dev;cd /root/bt_audit; git pull; cd src && make;" +
-                "cp rfcomm_scan /usr/bin/;cd /root/badbt/;git pull;fi; echo 'Done! Closing in 3secs..'; sleep 3 && exit ");
+                "cp rfcomm_scan /usr/bin/;cd /root/badbt/;git pull;fi; echo '完成！将在 3 秒后关闭..'; sleep 3 && exit ");
         sharedpreferences.edit().putBoolean("setup_done", true).apply();
     }
 
@@ -255,11 +255,11 @@ public class BTFragment extends Fragment {
                 case 3:
                     return "Carwhisperer";
                 case 2:
-                    return "Spoof";
+                    return "欺骗";
                 case 1:
-                    return "Tools";
+                    return "工具";
                 case 0:
-                    return "Main Page";
+                    return "主页面";
                 default:
                     return "";
             }
@@ -283,7 +283,7 @@ public class BTFragment extends Fragment {
         @Override
         public void onResume(){
             super.onResume();
-            Toast.makeText(requireActivity().getApplicationContext(), "Status updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity().getApplicationContext(), "状态已更新", Toast.LENGTH_SHORT).show();
             Executors.newSingleThreadExecutor().execute(() -> refresh(requireView().getRootView()));
         }
         @Override
@@ -293,7 +293,7 @@ public class BTFragment extends Fragment {
             View rootView = inflater.inflate(R.layout.bt_main, container, false);
             SharedPreferences sharedpreferences = context.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
 
-            // Detecting watch
+            // 检测手表
             final TextView BTMainDesc = rootView.findViewById(R.id.bt_maindesc);
             final TextView BTIface = rootView.findViewById(R.id.bt_if);
             final TextView BTService = rootView.findViewById(R.id.bt_service);
@@ -305,7 +305,7 @@ public class BTFragment extends Fragment {
                 BTService.setText(R.string.bt_service);
             }
 
-            // First run
+            // 首次运行
             Boolean setupdone = sharedpreferences.getBoolean("setup_done", false);
             if (!setupdone.equals(true)) {
                 if (iswatch) SetupDialogWatch();
@@ -314,19 +314,19 @@ public class BTFragment extends Fragment {
 
             final Spinner ifaces = rootView.findViewById(R.id.hci_interface);
 
-            // Bluebinder or bt_smd
+            // Bluebinder 或 bt_smd
             final TextView Binder = rootView.findViewById(R.id.bluebinder);
             File bt_smd = new File("/sys/module/hci_smd/parameters/hcismd_set");
             if (bt_smd.exists()) {
                 Binder.setText(R.string.bt_smd);
             }
 
-            // Bluetooth interfaces
+            // 蓝牙接口
             final String[] outputHCI = {""};
             Executors.newSingleThreadExecutor().execute(() -> outputHCI[0] = exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd hciconfig | grep hci | cut -d: -f1"));
             final ArrayList<String> hciIfaces = new ArrayList<>();
             if (outputHCI[0].isEmpty()) {
-                hciIfaces.add("None");
+                hciIfaces.add("无");
                 ifaces.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, hciIfaces));
             } else {
                 final String[] ifacesArray = outputHCI[0].split("\n");
@@ -341,16 +341,16 @@ public class BTFragment extends Fragment {
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parentView) {
-                    // TODO document why this method is empty
+                    // TODO 说明此方法为空的原因
                 }
             });
 
-            // Refresh Status
+            // 刷新状态
             ImageButton RefreshStatus = rootView.findViewById(R.id.refreshStatus);
             RefreshStatus.setOnClickListener(v -> refresh(rootView));
             Executors.newSingleThreadExecutor().execute(() -> refresh(rootView));
 
-            // Internal bluetooth support
+            // 内部蓝牙支持
             final Button bluebinderButton = rootView.findViewById(R.id.bluebinder_button);
             final Button dbusButton = rootView.findViewById(R.id.dbus_button);
             final Button btButton = rootView.findViewById(R.id.bt_button);
@@ -359,17 +359,17 @@ public class BTFragment extends Fragment {
             File vhci = new File("/dev/vhci");
 
             bluebinderButton.setOnClickListener( v -> {
-                if (bluebinderButton.getText().equals("Start")) {
+                if (bluebinderButton.getText().equals("启动")) {
                     if (!bt_smd.exists() && !hwbinder.exists() && !vhci.exists()) {
                         final MaterialAlertDialogBuilder confirmbuilder = new MaterialAlertDialogBuilder(requireActivity(), R.style.DialogStyleCompat);
-                        confirmbuilder.setTitle("Internal bluetooth support disabled");
-                        confirmbuilder.setMessage("Your device does not support hwbinder, vhci, or bt_smd. Make sure your kernel config has the recommended drivers enabled in order to use internal bluetooth.");
-                        confirmbuilder.setPositiveButton("Sure", (dialogInterface, i) -> {
+                        confirmbuilder.setTitle("内部蓝牙支持已禁用");
+                        confirmbuilder.setMessage("您的设备不支持 hwbinder、vhci 或 bt_smd. 请确保您的内核配置已启用推荐的驱动程序, 以便使用内部蓝牙. ");
+                        confirmbuilder.setPositiveButton("确定", (dialogInterface, i) -> {
                             bluebinderButton.setEnabled(false);
                             bluebinderButton.setTextColor(Color.parseColor("#40FFFFFF"));
                             dialogInterface.cancel();
                         });
-                        confirmbuilder.setNegativeButton("Try anyway", (dialogInterface, i) -> dialogInterface.cancel());
+                        confirmbuilder.setNegativeButton("仍然尝试", (dialogInterface, i) -> dialogInterface.cancel());
                         final AlertDialog alert = confirmbuilder.create();
                         alert.show();
                     } else {
@@ -382,51 +382,51 @@ public class BTFragment extends Fragment {
                         else {
                             File bluebinder = new File(NhPaths.CHROOT_PATH() + "/usr/sbin/bluebinder");
                             if (bluebinder.exists()) {
-                                // TODO - Enable this for only specific devices 1/2
-                                //Ensure all services are disabled before enabling airplane mode for bluebinder
+                                // TODO - 仅为特定设备启用此功能 1/2
+                                //在启用飞行模式以运行 bluebinder 之前, 确保所有服务都已禁用
                                 //exe.RunAsRoot(new String[]{
-                                    //"svc bluetooth disable",
-                                    //"svc wifi disable",
-                                    //"settings put global airplane_mode_on 1;am broadcast -a android.intent.action.AIRPLANE_MODE --ez state true",
-				    //"pm disable com.android.bluetooth"
+                                //"svc bluetooth disable",
+                                //"svc wifi disable",
+                                //"settings put global airplane_mode_on 1;am broadcast -a android.intent.action.AIRPLANE_MODE --ez state true",
+                                //"pm disable com.android.bluetooth"
                                 //});
 
-                                // Run the Bluebinder script
+                                // 运行 Bluebinder 脚本
                                 run_cmd("echo -ne \"\\033]0;Bluebinder\\007\" && clear;bluebinder || bluebinder;exit");
-                                Toast.makeText(requireActivity().getApplicationContext(), "Starting bluebinder...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireActivity().getApplicationContext(), "正在启动 bluebinder...", Toast.LENGTH_SHORT).show();
 
-                                // TODO - Enable this for only specific devices 2/2
-                                // Delay to disable airplane mode and re-enable Wi-Fi after 9 seconds
+                                // TODO - 仅为特定设备启用此功能 2/2
+                                // 延迟 9 秒后禁用飞行模式并重新启用 Wi-Fi
                                 /*new Handler().postDelayed(() -> exe.RunAsRoot(new String[]{
                                     "settings put global airplane_mode_on 0;am broadcast -a android.intent.action.AIRPLANE_MODE --ez state false",
                                     "svc wifi enable"
-                                }), 9000); // 9000 milliseconds delay*/
+                                }), 9000); // 9000 毫秒延迟*/
                             } else {
-                                Toast.makeText(requireActivity().getApplicationContext(), "Bluebinder is not installed. Launching setup..", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireActivity().getApplicationContext(), "Bluebinder 未安装. 正在启动设置..", Toast.LENGTH_SHORT).show();
                                 RunSetup();
                             }
                         }
                         refresh(rootView);
                     }
-                } else if (bluebinderButton.getText().equals("Stop")) {
+                } else if (bluebinderButton.getText().equals("停止")) {
                     if (bt_smd.exists()) {
                         exe.RunAsRoot(new String[]{"echo 0 > " + bt_smd});
                     }
                     else {
                         exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd pkill bluebinder;exit"});
-			exe.RunAsRoot(new String[]{"pm enable com.android.bluetooth"});
-			exe.RunAsRoot(new String[]{"svc bluetooth enable"});
+                        exe.RunAsRoot(new String[]{"pm enable com.android.bluetooth"});
+                        exe.RunAsRoot(new String[]{"svc bluetooth enable"});
                     }
                     refresh(rootView);
                 }
             });
 
-            // Services
+            // 服务
             dbusButton.setOnClickListener( v -> {
-                if (dbusButton.getText().equals("Start")) {
+                if (dbusButton.getText().equals("启动")) {
                     exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd service dbus start"});
                     refresh(rootView);
-                } else if (dbusButton.getText().equals("Stop")) {
+                } else if (dbusButton.getText().equals("停止")) {
                     exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd service dbus stop"});
                     refresh(rootView);
                 }
@@ -435,77 +435,77 @@ public class BTFragment extends Fragment {
             btButton.setOnClickListener( v -> {
                 String dbus_statusCMD = exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd service dbus status | grep dbus");
                 if (dbus_statusCMD.equals("dbus is running.")) {
-                    if (btButton.getText().equals("Start")) {
+                    if (btButton.getText().equals("启动")) {
                         exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd service bluetooth start"});
                         refresh(rootView);
-                    } else if (btButton.getText().equals("Stop")) {
+                    } else if (btButton.getText().equals("停止")) {
                         exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd service bluetooth stop"});
                         refresh(rootView);
                     }
                 } else {
-                    Toast.makeText(requireActivity().getApplicationContext(), "Enable dbus service first!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "请先启用 dbus 服务！", Toast.LENGTH_SHORT).show();
                 }
             });
 
             hciButton.setOnClickListener( v -> {
-                if (hciButton.getText().equals("Start")) {
-                    if (selected_iface.equals("None")) {
-                        Toast.makeText(requireActivity().getApplicationContext(), "No interface, please refresh or check connections!", Toast.LENGTH_SHORT).show();
+                if (hciButton.getText().equals("启动")) {
+                    if (selected_iface.equals("无")) {
+                        Toast.makeText(requireActivity().getApplicationContext(), "没有接口, 请刷新或检查连接！", Toast.LENGTH_SHORT).show();
                     } else {
                         exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd hciconfig " + selected_iface + " up noscan"});
                         refresh(rootView);
                     }
-                } else if (hciButton.getText().equals("Stop")) {
+                } else if (hciButton.getText().equals("停止")) {
                     exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd hciconfig " + selected_iface + " down"});
                     refresh(rootView);
                 }
             });
 
-            // Scanning
+            // 扫描
             Button StartScanButton = rootView.findViewById(R.id.start_scan);
             final TextView BTtime = rootView.findViewById(R.id.bt_time);
             ListView targets = rootView.findViewById(R.id.targets);
             ShellExecuter exe = new ShellExecuter();
             File ScanLog = new File(NhPaths.CHROOT_PATH() + "/root/blue.log");
             StartScanButton.setOnClickListener( v -> {
-                if (!selected_iface.equals("None")) {
+                if (!selected_iface.equals("无")) {
                     String hci_current = exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd hciconfig "+ selected_iface + " | grep 'UP RUNNING' | cut -f2 -d$'\\t'");
                     if (hci_current.equals("UP RUNNING ")) {
                         final String scantime = BTtime.getText().toString();
                         Executors.newSingleThreadExecutor().execute(() -> {
                             requireActivity().runOnUiThread(() -> {
                                 final ArrayList<String> scanning = new ArrayList<>();
-                                scanning.add("Scanning..");
+                                scanning.add("扫描中..");
                                 targets.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, scanning));
                             });
                             exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd rm /root/blue.log"});
                             exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd timeout " + scantime + " bluelog -i " + selected_iface + " -ncqo /root/blue.log;hciconfig " + selected_iface + " noscan"});
-                             requireActivity().runOnUiThread(() -> {
-                                 String outputScanLog = exe.RunAsRootOutput("cat " + ScanLog);
-                                 final String[] targetsArray = outputScanLog.split("\n");
-                                 ArrayAdapter<String> targetsadapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, targetsArray);
-                                 if (!outputScanLog.isEmpty()) {
-                                     targets.setAdapter(targetsadapter);
-                                 } else {
-                                     final ArrayList<String> notargets = new ArrayList<>();
-                                     notargets.add("No devices found");
-                                     targets.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, notargets));
-                                 }
-                             });
+                            requireActivity().runOnUiThread(() -> {
+                                String outputScanLog = exe.RunAsRootOutput("cat " + ScanLog);
+                                final String[] targetsArray = outputScanLog.split("\n");
+                                ArrayAdapter<String> targetsadapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, targetsArray);
+                                if (!outputScanLog.isEmpty()) {
+                                    targets.setAdapter(targetsadapter);
+                                } else {
+                                    final ArrayList<String> notargets = new ArrayList<>();
+                                    notargets.add("未找到设备");
+                                    targets.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, notargets));
+                                }
+                            });
                         });
                     } else
-                        Toast.makeText(requireActivity().getApplicationContext(), "Interface is down!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity().getApplicationContext(), "接口已关闭！", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(requireActivity().getApplicationContext(), "No interface selected!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "未选择接口！", Toast.LENGTH_SHORT).show();
                 }
             });
 
-            // Target selection
+            // 目标选择
             targets.setOnItemClickListener((adapterView, view, i, l) -> {
                 String selected_target = targets.getItemAtPosition(i).toString();
-                if (selected_target.equals("No devices found"))
-                    Toast.makeText(requireActivity().getApplicationContext(), "No target!", Toast.LENGTH_SHORT).show();
+                if (selected_target.equals("未找到设备"))
+                    Toast.makeText(requireActivity().getApplicationContext(), "没有目标！", Toast.LENGTH_SHORT).show();
                 else {
                     selected_addr = exe.RunAsRootOutput("echo " + selected_target + " | cut -d , -f 1");
                     selected_class = exe.RunAsRootOutput("echo " + selected_target + " | cut -d , -f 2");
@@ -513,13 +513,13 @@ public class BTFragment extends Fragment {
                     PreferencesData.saveString(context, "selected_address", selected_addr);
                     PreferencesData.saveString(context, "selected_class", selected_class);
                     PreferencesData.saveString(context, "selected_name", selected_name);
-                    Toast.makeText(requireActivity().getApplicationContext(), "Target selected!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "目标已选择！", Toast.LENGTH_SHORT).show();
                 }
             });
             return rootView;
         }
 
-        // Refresh main
+        // 刷新主页面
         private void refresh(View BTFragment) {
             final TextView Binderstatus = BTFragment.findViewById(R.id.BinderStatus);
             final TextView DBUSstatus = BTFragment.findViewById(R.id.DBUSstatus);
@@ -536,7 +536,7 @@ public class BTFragment extends Fragment {
                 String outputHCI = exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd hciconfig | grep hci | cut -d: -f1");
                 final ArrayList<String> hciIfaces = new ArrayList<>();
                 if (outputHCI.isEmpty()) {
-                    hciIfaces.add("None");
+                    hciIfaces.add("无");
                     ifaces.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, hciIfaces));
                 } else {
                     final String[] ifacesArray = outputHCI.split("\n");
@@ -616,10 +616,10 @@ public class BTFragment extends Fragment {
             CheckBox floodCheckBox = rootView.findViewById(R.id.l2ping_flood);
             CheckBox reverseCheckBox = rootView.findViewById(R.id.l2ping_reverse);
 
-            // Target address
+            // 目标地址
             final EditText sdp_address = rootView.findViewById(R.id.sdp_address);
 
-            // Set target
+            // 设置目标
             Button SetTarget = rootView.findViewById(R.id.set_target);
 
             SetTarget.setOnClickListener( v -> {
@@ -634,7 +634,7 @@ public class BTFragment extends Fragment {
             final EditText redfang_Range = rootView.findViewById(R.id.redfang_range);
             final EditText redfang_Log = rootView.findViewById(R.id.redfang_log);
 
-            // Checkbox for flood and reverse ping
+            // 洪水攻击和反向 ping 的复选框
             floodCheckBox.setOnClickListener( v -> {
                 if (floodCheckBox.isChecked())
                     flood = " -f ";
@@ -654,9 +654,9 @@ public class BTFragment extends Fragment {
                     String l2ping_size = l2ping_Size.getText().toString();
                     String l2ping_count = l2ping_Count.getText().toString();
                     String l2ping_interface = hci_interface.getText().toString();
-                    run_cmd("echo -ne \"\\033]0;Pinging BT device\\007\" && clear;l2ping -i " + l2ping_interface + " -s " + l2ping_size + " -c " + l2ping_count + flood + reverse + " " + l2ping_target + " && echo \"\nPinging done, closing in 3 secs..\";sleep 3 && exit");
+                    run_cmd("echo -ne \"\\033]0;正在 Ping BT 设备\\007\" && clear;l2ping -i " + l2ping_interface + " -s " + l2ping_size + " -c " + l2ping_count + flood + reverse + " " + l2ping_target + " && echo \"\nPing 完成, 将在 3 秒后关闭..\";sleep 3 && exit");
                 } else {
-                    Toast.makeText(requireActivity().getApplicationContext(), "No target address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "没有目标地址！", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -666,9 +666,9 @@ public class BTFragment extends Fragment {
             StartRFCommscan.setOnClickListener( v -> {
                 String sdp_target = sdp_address.getText().toString();
                 if (!sdp_target.isEmpty())
-                    run_cmd("echo -ne \"\\033]0;RFComm Scan\\007\" && clear;rfcomm_scan " + sdp_target);
+                    run_cmd("echo -ne \"\\033]0;RFComm 扫描\\007\" && clear;rfcomm_scan " + sdp_target);
                 else
-                    Toast.makeText(requireActivity().getApplicationContext(), "No target address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "没有目标地址！", Toast.LENGTH_SHORT).show();
             });
 
             // Redfang
@@ -680,7 +680,7 @@ public class BTFragment extends Fragment {
                 if (!redfang_range.isEmpty())
                     run_cmd("echo -ne \"\\033]0;Redfang\\007\" && clear;fang -r " + redfang_range + " -o " + redfang_logfile);
                 else
-                    Toast.makeText(requireActivity().getApplicationContext(), "No target range!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "没有目标范围！", Toast.LENGTH_SHORT).show();
             });
 
             // Blueranger
@@ -691,13 +691,13 @@ public class BTFragment extends Fragment {
                 if (!blueranger_target.isEmpty())
                     run_cmd("echo -ne \"\\033]0;Blueranger\\007\" && clear;blueranger " + blueranger_interface + " " + blueranger_target);
                 else
-                    Toast.makeText(requireActivity().getApplicationContext(), "No target address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "没有目标地址！", Toast.LENGTH_SHORT).show();
             });
 
-            // Start SDP Tool
+            // 启动 SDP 工具
             Button StartSDPButton = rootView.findViewById(R.id.start_sdp);
             StartSDPButton.setOnClickListener( v -> {
-                Toast.makeText(getContext(), "Discovery started..\nCheck the output below", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "发现已启动..\n请查看下方输出", Toast.LENGTH_SHORT).show();
                 Executors.newSingleThreadExecutor().execute(() -> startSDPtool(rootView));
             });
             return rootView;
@@ -716,7 +716,7 @@ public class BTFragment extends Fragment {
                     String CMDout = exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd sdptool -i " + sdp_interface + " browse " + sdp_target + " | sed '/^\\[/d' | sed '/^Linux/d'");
                     output.setText(CMDout);
                 } else
-                    Toast.makeText(requireActivity().getApplicationContext(), "No target address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "没有目标地址！", Toast.LENGTH_SHORT).show();
             });
         }
     }
@@ -735,19 +735,19 @@ public class BTFragment extends Fragment {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.bt_spoof, container, false);
 
-            // Selected iface
+            // 选择的接口
             final EditText spoof_interface = rootView.findViewById(R.id.spoof_interface);
 
-            // Target address
+            // 目标地址
             final EditText targetAddress = rootView.findViewById(R.id.targetAddress);
 
-            // Target Class
+            // 目标类别
             final EditText targetClass = rootView.findViewById(R.id.targetClass);
 
-            // Target Name
+            // 目标名称
             final EditText targetName = rootView.findViewById(R.id.targetName);
 
-            // Set target
+            // 设置目标
             Button SetTarget = rootView.findViewById(R.id.set_target);
 
             SetTarget.setOnClickListener(v -> {
@@ -759,11 +759,11 @@ public class BTFragment extends Fragment {
                 targetName.setText(selected_name);
             });
 
-            // Refresh
+            // 刷新
             Button RefreshStatus = rootView.findViewById(R.id.refreshSpoof);
             RefreshStatus.setOnClickListener(v -> refreshSpoof(rootView));
 
-            // Apply
+            // 应用
             Button ApplySpoof = rootView.findViewById(R.id.apply_spoof);
 
             ApplySpoof.setOnClickListener(v -> {
@@ -774,14 +774,14 @@ public class BTFragment extends Fragment {
                 if (target_class.equals(" -c ")) target_class = "";
                 if (target_name.equals(" -n \"\"")) target_name = "";
                 if (target_address.equals(" -a ") && target_name.isEmpty() && target_class.isEmpty()) {
-                    Toast.makeText(requireActivity().getApplicationContext(), "Please enter at least one parameter!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "请至少输入一个参数！", Toast.LENGTH_SHORT).show();
                 } else {
                     final String target_classname = target_class + target_name;
                     if (!target_address.equals(" -a ")) {
-                        run_cmd("echo -ne \"\\033]0;Spoofing Bluetooth\\007\" && clear;echo 'Spooftooph started..';spooftooph -i " + target_interface + target_address +
-                                "; sleep 2 && hciconfig " + target_interface + " up && spooftooph -i " + target_interface + target_classname + " && echo '\nBringing interface up with hciconfig..\n\nClass/Name changed, closing in 3 secs..';sleep 3 && exit");
+                        run_cmd("echo -ne \"\\033]0;欺骗蓝牙\\007\" && clear;echo 'Spooftooph 已启动..';spooftooph -i " + target_interface + target_address +
+                                "; sleep 2 && hciconfig " + target_interface + " up && spooftooph -i " + target_interface + target_classname + " && echo '\n正在使用 hciconfig 启动接口..\n\n类别/名称已更改, 将在 3 秒后关闭..';sleep 3 && exit");
                     } else {
-                        run_cmd("echo -ne \"\\033]0;Spoofing Bluetooth\\007\" && clear;echo 'Spooftooph started..';spooftooph -i " + target_interface + target_classname + " && echo '\nClass/Name changed, closing in 3 secs..';sleep 3 && exit");
+                        run_cmd("echo -ne \"\\033]0;欺骗蓝牙\\007\" && clear;echo 'Spooftooph 已启动..';spooftooph -i " + target_interface + target_classname + " && echo '\n类别/名称已更改, 将在 3 秒后关闭..';sleep 3 && exit");
                     }
                 }
             });
@@ -811,7 +811,7 @@ public class BTFragment extends Fragment {
                     String currentNameCMD = exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd hciconfig " + selectedIface + " -a | grep Name | cut -d\\' -f2");
                     currentName.setText(currentNameCMD);
                 } else
-                    Toast.makeText(requireActivity().getApplicationContext(), "Interface is down!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "接口已关闭！", Toast.LENGTH_SHORT).show();
             });
         }
     }
@@ -841,13 +841,13 @@ public class BTFragment extends Fragment {
                 CWdesc.setVisibility(View.GONE);
             }
 
-            // Selected iface
+            // 选择的接口
             final EditText cw_interface = rootView.findViewById(R.id.hci_interface);
 
-            // Target address
+            // 目标地址
             final EditText cw_address = rootView.findViewById(R.id.hci_address);
 
-            // Set target
+            // 设置目标
             Button SetTarget = rootView.findViewById(R.id.set_target);
 
             SetTarget.setOnClickListener( v -> {
@@ -855,14 +855,14 @@ public class BTFragment extends Fragment {
                 cw_address.setText(selected_address);
             });
 
-            // Channel
+            // 频道
             final EditText hci_channel = rootView.findViewById(R.id.hci_channel);
 
-            // CW Mode
+            // CW 模式
             Spinner cwmode = rootView.findViewById(R.id.cwmode);
             final ArrayList<String> modes = new ArrayList<>();
-            modes.add("Listen");
-            modes.add("Inject");
+            modes.add("监听");
+            modes.add("注入");
             cwmode.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, modes));
             cwmode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -874,10 +874,10 @@ public class BTFragment extends Fragment {
                 }
             });
 
-            // Listening
+            // 监听
             final EditText listenfilename = rootView.findViewById(R.id.listenfilename);
 
-            // Injecting
+            // 注入
             final EditText injectfilename = rootView.findViewById(R.id.injectfilename);
             final Button injectfilebrowse = rootView.findViewById(R.id.injectfilebrowse);
 
@@ -886,10 +886,10 @@ public class BTFragment extends Fragment {
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("audio/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select audio file"),1001);
-                });
+                startActivityForResult(Intent.createChooser(intent, "选择音频文件"),1001);
+            });
 
-            // Launch
+            // 启动
             Button StartCWButton = rootView.findViewById(R.id.start_cw);
             StartCWButton.setOnClickListener( v -> {
                 String cw_iface = cw_interface.getText().toString();
@@ -899,32 +899,32 @@ public class BTFragment extends Fragment {
                     String cw_listenfile = listenfilename.getText().toString();
                     String cw_injectfile = injectfilename.getText().toString();
 
-                    if (selected_mode.equals("Listen")) {
-                        run_cmd("echo -ne \"\\033]0;Listening BT audio\\007\" && clear;echo 'Carwhisperer starting..\nReturn to NetHunter to kill, or to listen live!'$'\n';carwhisperer " + cw_iface + " /root/carwhisperer/in.raw /sdcard/rec.raw " + cw_target + " " + cw_channel +
-                                " && echo 'Converting to wav to target directory..';sox -t raw -r 8000 -e signed -b 16 /sdcard/rec.raw -r 8000 -b 16 /sdcard/" + cw_listenfile + ";echo Done! || echo 'No convert file!';sleep 3 && exit");
-                    } else if (selected_mode.equals("Inject")) {
-                        run_cmd("echo -ne \"\\033]0;Injecting BT audio\\007\" && clear;echo 'Carwhisperer starting..';length=$(($(soxi -D '" + cw_injectfile + "' | cut -d. -f1)+8));sox '" + cw_injectfile + "' -r 8000 -b 16 -c 1 tempi.raw && timeout $length " +
-                                "carwhisperer " + cw_iface + " tempi.raw tempo.raw " + cw_target + " " + cw_channel + "; rm tempi.raw && rm tempo.raw;echo '\nInjection done, closing in 3 secs..';sleep 3 && exit");
+                    if (selected_mode.equals("监听")) {
+                        run_cmd("echo -ne \"\\033]0;监听 BT 音频\\007\" && clear;echo 'Carwhisperer 启动中..\n返回 NetHunter 以停止, 或实时监听！'$'\n';carwhisperer " + cw_iface + " /root/carwhisperer/in.raw /sdcard/rec.raw " + cw_target + " " + cw_channel +
+                                " && echo '正在转换为 wav 到目标目录..';sox -t raw -r 8000 -e signed -b 16 /sdcard/rec.raw -r 8000 -b 16 /sdcard/" + cw_listenfile + ";echo 完成! || echo '没有转换文件！';sleep 3 && exit");
+                    } else if (selected_mode.equals("注入")) {
+                        run_cmd("echo -ne \"\\033]0;注入 BT 音频\\007\" && clear;echo 'Carwhisperer 启动中..';length=$(($(soxi -D '" + cw_injectfile + "' | cut -d. -f1)+8));sox '" + cw_injectfile + "' -r 8000 -b 16 -c 1 tempi.raw && timeout $length " +
+                                "carwhisperer " + cw_iface + " tempi.raw tempo.raw " + cw_target + " " + cw_channel + "; rm tempi.raw && rm tempo.raw;echo '\n注入完成, 将在 3 秒后关闭..';sleep 3 && exit");
                     }
                 } else
-                    Toast.makeText(requireActivity().getApplicationContext(), "No target address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity().getApplicationContext(), "没有目标地址！", Toast.LENGTH_SHORT).show();
             });
 
-            // Kill
+            // 停止
             Button StopCWButton = rootView.findViewById(R.id.stop_cw);
             StopCWButton.setOnClickListener( v -> {
-                    exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd pkill carwhisperer"});
-                    Toast.makeText(requireActivity().getApplicationContext(), "Killed", Toast.LENGTH_SHORT).show();
-                    });
+                exe.RunAsRoot(new String[]{NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd pkill carwhisperer"});
+                Toast.makeText(requireActivity().getApplicationContext(), "已停止", Toast.LENGTH_SHORT).show();
+            });
 
-            // Stream or play audio
+            // 流式传输或播放音频
             ImageButton PlayAudioButton = rootView.findViewById(R.id.play_audio);
             ImageButton StopAudioButton = rootView.findViewById(R.id.stop_audio);
             AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, 8000, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT, 20000, AudioTrack.MODE_STREAM);
             PlayAudioButton.setOnClickListener( v -> {
                 File cw_listenfile = new File(NhPaths.SD_PATH + "/rec.raw");
                 if (cw_listenfile.length() == 0) {
-                    Toast.makeText(getContext(), "File not found!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "未找到文件！", Toast.LENGTH_SHORT).show();
                 } else {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         InputStream s = null;
@@ -934,7 +934,7 @@ public class BTFragment extends Fragment {
                             e.printStackTrace();
                         }
                         audioTrack.play();
-                        // Reading data.
+                        // 读取数据. 
                         byte[] data = new byte[200];
                         int n;
                         try {
@@ -952,8 +952,8 @@ public class BTFragment extends Fragment {
                 }
             });
             StopAudioButton.setOnClickListener(v -> {
-                        audioTrack.pause();
-                        audioTrack.flush();
+                audioTrack.pause();
+                audioTrack.flush();
             });
             return rootView;
         }
@@ -978,7 +978,7 @@ public class BTFragment extends Fragment {
         @Override
         public void onResume(){
             super.onResume();
-            Toast.makeText(requireActivity().getApplicationContext(), "Status updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity().getApplicationContext(), "状态已更新", Toast.LENGTH_SHORT).show();
             Executors.newSingleThreadExecutor().execute(() -> refresh_badbt(requireView().getRootView()));
         }
 
@@ -990,57 +990,57 @@ public class BTFragment extends Fragment {
             SharedPreferences sharedpreferences = context.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
             boolean iswatch = requireContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
 
-            // Watch optimisation
+            // 手表优化
             final TextView BadBTdesc = rootView.findViewById(R.id.badbt_desc);
             if (iswatch) {
                 BadBTdesc.setVisibility(View.GONE);
             }
 
-            // Selected iface, name, bdaddr, class
+            // 选择的接口、名称、bdaddr、类别
             final EditText badbt_interface = rootView.findViewById(R.id.badbt_interface);
             final EditText badbt_name = rootView.findViewById(R.id.badbt_name);
             final EditText badbt_bdaddr = rootView.findViewById(R.id.badbt_address);
             final EditText badbt_class = rootView.findViewById(R.id.badbt_class);
 
-            // Class spinner
+            // 类别下拉列表
             Spinner badbtclass = rootView.findViewById(R.id.badbt_class_spinner);
             final ArrayList<String> classes = new ArrayList<>();
-            classes.add("Keyboard");
-            classes.add("Headset");
-            classes.add("Speaker");
-            classes.add("Mouse");
-            classes.add("Printer");
-            classes.add("PC");
-            classes.add("Mobile");
-            classes.add("Custom");
+            classes.add("键盘");
+            classes.add("耳机");
+            classes.add("扬声器");
+            classes.add("鼠标");
+            classes.add("打印机");
+            classes.add("电脑");
+            classes.add("手机");
+            classes.add("自定义");
             badbtclass.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, classes));
             badbtclass.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int pos, long id) {
                     selected_prefix = parentView.getItemAtPosition(pos).toString();
                     switch (selected_prefix) {
-                        case "Keyboard":
+                        case "键盘":
                             badbt_class.setText("0x000540");
                             break;
-                        case "Headset":
+                        case "耳机":
                             badbt_class.setText("0x000408");
                             break;
-                        case "Speaker":
+                        case "扬声器":
                             badbt_class.setText("0x240414");
                             break;
-                        case "Mouse":
+                        case "鼠标":
                             badbt_class.setText("0x002580");
                             break;
-                        case "Printer":
+                        case "打印机":
                             badbt_class.setText("0x040680");
                             break;
-                        case "PC":
+                        case "电脑":
                             badbt_class.setText("0x02010c");
                             break;
-                        case "Mobile":
+                        case "手机":
                             badbt_class.setText("0x000204");
                             break;
-                        case "Custom":
+                        case "自定义":
                             badbt_class.setText("");
                             break;
                     }
@@ -1051,7 +1051,7 @@ public class BTFragment extends Fragment {
             });
 
 
-            // Refresh
+            // 刷新
             refresh_badbt(rootView);
             String prevbadbtname = sharedpreferences.getString("badbt-name", "");
             if (!prevbadbtname.isEmpty()) badbt_name.setText(prevbadbtname);
@@ -1062,16 +1062,16 @@ public class BTFragment extends Fragment {
             String prevbadbtclass = sharedpreferences.getString("badbt-class", "");
             if (!prevbadbtclass.isEmpty()) badbt_class.setText(prevbadbtclass);
 
-            // Refresh Status
+            // 刷新状态
             ImageButton RefreshBadBTStatus = rootView.findViewById(R.id.refreshBadBTStatus);
             RefreshBadBTStatus.setOnClickListener(v -> refresh_badbt(rootView));
 
-            // String
+            // 字符串
             final EditText badbt_string = rootView.findViewById(R.id.editBadBT);
 
-            // Services
+            // 服务
             badbtServerButton.setOnClickListener( v -> {
-                if (badbtServerButton.getText().equals("Start")) {
+                if (badbtServerButton.getText().equals("启动")) {
                     String BadBT_name = badbt_name.getText().toString();
                     String BadBT_iface = badbt_interface.getText().toString();
                     String BadBT_bdaddr = badbt_bdaddr.getText().toString();
@@ -1086,37 +1086,37 @@ public class BTFragment extends Fragment {
 
                     if (dbus_statusCMD.equals("dbus is running.") && bt_statusCMD.equals("bluetooth is running.") && !bt_ifaceCMD.isEmpty()) {
                         if (!BadBT_name.isEmpty() && !BadBT_iface.isEmpty() && !BadBT_bdaddr.isEmpty()) {
-                            Toast.makeText(requireActivity().getApplicationContext(), "Starting server...", Toast.LENGTH_SHORT).show();
-                            run_cmd("echo -ne \"\\033]0;BadBT Server\\007\" && clear;python3 /root/badbt/btk_server.py -n '"
-                                    + BadBT_name + "' -i " + BadBT_iface + " -c " + BadBT_class + " -a " + BadBT_bdaddr + "&;sleep 1 && echo 'Starting agent...' && sleep 1 && bluetoothctl --agent NoInputNoOutput && exit");
+                            Toast.makeText(requireActivity().getApplicationContext(), "正在启动服务器...", Toast.LENGTH_SHORT).show();
+                            run_cmd("echo -ne \"\\033]0;BadBT 服务器\\007\" && clear;python3 /root/badbt/btk_server.py -n '"
+                                    + BadBT_name + "' -i " + BadBT_iface + " -c " + BadBT_class + " -a " + BadBT_bdaddr + "&;sleep 1 && echo '正在启动代理...' && sleep 1 && bluetoothctl --agent NoInputNoOutput && exit");
                             refresh_badbt(rootView);
                         } else {
-                            Toast.makeText(requireActivity().getApplicationContext(), "Please enter interface, keyboard name, and address!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireActivity().getApplicationContext(), "请输入接口、键盘名称和地址！", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(requireActivity().getApplicationContext(), "Bluetooth interface or service not running!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireActivity().getApplicationContext(), "蓝牙接口或服务未运行！", Toast.LENGTH_LONG).show();
                     }
-                } else if (badbtServerButton.getText().equals("Stop")) {
+                } else if (badbtServerButton.getText().equals("停止")) {
                     exe.RunAsRoot(new String[]{"kill `ps -ef | grep '[btk]_server' | awk {'print $2'}`"});
                     exe.RunAsRoot(new String[]{"pkill bluetoothctl"});
                     refresh_badbt(rootView);
                 }
             });
 
-            // Mode
+            // 模式
             Spinner badbtmode = rootView.findViewById(R.id.badbtmode);
             View BadBTSettingsView = rootView.findViewById(R.id.badbtsettings_layout);
             final ArrayList<String> modes = new ArrayList<>();
-            modes.add("Send strings");
-            modes.add("Interactive");
+            modes.add("发送字符串");
+            modes.add("交互式");
             badbtmode.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, modes));
             badbtmode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int pos, long id) {
                     selected_badbtmode = parentView.getItemAtPosition(pos).toString();
-                    if (selected_badbtmode.equals("Interactive")) {
+                    if (selected_badbtmode.equals("交互式")) {
                         BadBTSettingsView.setVisibility(View.GONE);
-                    } else if (selected_badbtmode.equals("Send strings")){
+                    } else if (selected_badbtmode.equals("发送字符串")){
                         BadBTSettingsView.setVisibility(View.VISIBLE);
                     }
                 }
@@ -1125,40 +1125,40 @@ public class BTFragment extends Fragment {
                 }
             });
 
-            // Prefix
+            // 前缀
             CheckBox uacCheckBox = rootView.findViewById(R.id.uac_bypass);
             View BadBTUACView = rootView.findViewById(R.id.badbtuac_layout);
             Spinner badbtprefix = rootView.findViewById(R.id.badbtprefix);
             Spinner badbtpresets_uac = rootView.findViewById(R.id.badbtpresets_uac);
             final ArrayList<String> presets_uac = new ArrayList<>();
             final ArrayList<String> prefixes = new ArrayList<>();
-            prefixes.add("Mobile Home");
-            prefixes.add("Mobile Browser");
+            prefixes.add("手机主页");
+            prefixes.add("手机浏览器");
             prefixes.add("Windows CMD");
-            prefixes.add("Mac Terminal");
-            prefixes.add("Linux Terminal");
-            prefixes.add("None");
+            prefixes.add("Mac 终端");
+            prefixes.add("Linux 终端");
+            prefixes.add("无");
             badbtprefix.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, prefixes));
             badbtprefix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int pos, long id) {
                     selected_prefix = parentView.getItemAtPosition(pos).toString();
                     switch (selected_prefix) {
-                        case "Mobile Home":
+                        case "手机主页":
                             BadBTUACView.setVisibility(View.GONE);
                             prefixCMD = "mobile";
                             uacCheckBox.setChecked(false);
                             presets_uac.clear();
-                            presets_uac.add("None");
+                            presets_uac.add("无");
                             badbtpresets_uac.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, presets_uac));
                             uacCMD = "-";
                             break;
-                        case "Mobile Browser":
+                        case "手机浏览器":
                             BadBTUACView.setVisibility(View.GONE);
                             prefixCMD = "mobilewww";
                             uacCheckBox.setChecked(false);
                             presets_uac.clear();
-                            presets_uac.add("None");
+                            presets_uac.add("无");
                             badbtpresets_uac.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, presets_uac));
                             uacCMD = "-";
                             break;
@@ -1166,30 +1166,30 @@ public class BTFragment extends Fragment {
                             BadBTUACView.setVisibility(View.VISIBLE);
                             prefixCMD = "windows";
                             break;
-                        case "Mac Terminal":
+                        case "Mac 终端":
                             BadBTUACView.setVisibility(View.GONE);
                             prefixCMD = "mac";
                             uacCheckBox.setChecked(false);
                             presets_uac.clear();
-                            presets_uac.add("None");
+                            presets_uac.add("无");
                             badbtpresets_uac.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, presets_uac));
                             uacCMD = "-";
                             break;
-                        case "Linux Terminal":
+                        case "Linux 终端":
                             BadBTUACView.setVisibility(View.GONE);
                             prefixCMD = "linux";
                             uacCheckBox.setChecked(false);
                             presets_uac.clear();
-                            presets_uac.add("None");
+                            presets_uac.add("无");
                             badbtpresets_uac.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, presets_uac));
                             uacCMD = "-";
                             break;
-                        case "None":
+                        case "无":
                             BadBTUACView.setVisibility(View.GONE);
                             uacCMD = "-";
                             uacCheckBox.setChecked(false);
                             presets_uac.clear();
-                            presets_uac.add("None");
+                            presets_uac.add("无");
                             badbtpresets_uac.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, presets_uac));
                             uacCMD = "-";
                             break;
@@ -1200,13 +1200,13 @@ public class BTFragment extends Fragment {
                 }
             });
 
-            // Presets
+            // 预设
             Spinner badbtpresets = rootView.findViewById(R.id.badbtpresets);
             EditText badbtstring = rootView.findViewById(R.id.editBadBT);
             final ArrayList<String> presets = new ArrayList<>();
             presets.add("Rickroll");
-            presets.add("Fake Windows Update");
-            presets.add("None");
+            presets.add("虚假 Windows 更新");
+            presets.add("无");
             badbtpresets.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, presets));
             badbtpresets.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -1216,10 +1216,10 @@ public class BTFragment extends Fragment {
                         case "Rickroll":
                             badbtstring.setText(R.string.bt_badbt_string_rickroll);
                             break;
-                        case "Fake Windows Update":
+                        case "虚假 Windows 更新":
                             badbtstring.setText(R.string.bt_badbt_string_fakeupdate);
                             break;
-                        case "None":
+                        case "无":
                             badbtstring.setText("");
                             break;
                     }
@@ -1242,7 +1242,7 @@ public class BTFragment extends Fragment {
                 }
                 else {
                     presets_uac.clear();
-                    presets_uac.add("None");
+                    presets_uac.add("无");
                     badbtpresets_uac.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, presets_uac));
                     badbtpresets_uac.setVisibility(View.GONE);
                     uacCMD = "-";
@@ -1260,7 +1260,7 @@ public class BTFragment extends Fragment {
                         uacCMD = "win10";
                     } else if (selected_preset_uac.equals("Windows 11")) {
                         uacCMD = "win11";
-                    } else if (selected_preset.equals("None")) {
+                    } else if (selected_preset.equals("无")) {
                         uacCMD = "-";
                     }
                 }
@@ -1269,41 +1269,41 @@ public class BTFragment extends Fragment {
                 }
             });
 
-            // Load from file
+            // 从文件加载
             final Button injectStringButton = rootView.findViewById(R.id.injectstringbrowse);
             injectStringButton.setOnClickListener( v -> {
                 Intent intent2 = new Intent();
                 intent2.addCategory(Intent.CATEGORY_OPENABLE);
                 intent2.setType("text/*");
                 intent2.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent2, "Select text file"),1002);
+                startActivityForResult(Intent.createChooser(intent2, "选择文本文件"),1002);
             });
 
-            // Start
+            // 启动
             Button StartBadBtButton = rootView.findViewById(R.id.start_badbt);
             StartBadBtButton.setOnClickListener( v -> {
-                    if (selected_badbtmode.equals("Send strings")) {
-                        String BadBT_string = badbt_string.getText().toString();
-                        run_cmd("echo -ne \"\\033]0;BadBT Send Strings\\007\" && clear;python3 /root/badbt/send_string.py '" + BadBT_string + "' " + prefixCMD + " " + uacCMD + ";sleep 2 && echo 'Exiting..' && exit");
-                        Toast.makeText(requireActivity().getApplicationContext(), "Sending strings..", Toast.LENGTH_SHORT).show();
-                        } else if (selected_badbtmode.equals("Interactive")) {
-                        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.DialogStyleCompat);
-                        builder.setTitle("Are you sure?");
-                        builder.setMessage("Interactive mode will run in NetHunter terminal, but needs a physical keyboard connected as of now.");
-                        builder.setPositiveButton("Ok", (dialog, which) -> {
-                            run_cmd("echo -ne \"\\033]0;BadBT Client\\007\" && clear;python3 /root/badbt/kb_client.py");
-                            Toast.makeText(requireActivity().getApplicationContext(), "Starting keyboard client..", Toast.LENGTH_SHORT).show();
-                        });
-                        builder.setNegativeButton("Cancel", (dialog, which) -> {
-                        });
-                        builder.show();
-                    }
-        });
+                if (selected_badbtmode.equals("发送字符串")) {
+                    String BadBT_string = badbt_string.getText().toString();
+                    run_cmd("echo -ne \"\\033]0;BadBT 发送字符串\\007\" && clear;python3 /root/badbt/send_string.py '" + BadBT_string + "' " + prefixCMD + " " + uacCMD + ";sleep 2 && echo '正在退出..' && exit");
+                    Toast.makeText(requireActivity().getApplicationContext(), "正在发送字符串..", Toast.LENGTH_SHORT).show();
+                } else if (selected_badbtmode.equals("交互式")) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.DialogStyleCompat);
+                    builder.setTitle("确定吗？");
+                    builder.setMessage("交互式模式将在 NetHunter 终端中运行, 但目前需要连接物理键盘. ");
+                    builder.setPositiveButton("确定", (dialog, which) -> {
+                        run_cmd("echo -ne \"\\033]0;BadBT 客户端\\007\" && clear;python3 /root/badbt/kb_client.py");
+                        Toast.makeText(requireActivity().getApplicationContext(), "正在启动键盘客户端..", Toast.LENGTH_SHORT).show();
+                    });
+                    builder.setNegativeButton("取消", (dialog, which) -> {
+                    });
+                    builder.show();
+                }
+            });
 
             return rootView;
         }
 
-        // Refresh badbt
+        // 刷新 badbt
         private void refresh_badbt(View BTFragment) {
 
             final TextView BadBTServerStatus = BTFragment.findViewById(R.id.BadBTServerStatus);
@@ -1363,7 +1363,7 @@ public class BTFragment extends Fragment {
     }
 
     ////
-    // Bridge side functions
+    // Bridge 端函数
     ////
 
     public void run_cmd(String cmd) {

@@ -42,7 +42,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:text="Settings"
+                    android:text="设置"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="Interface :"
+                    android:text="接口: "
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     tools:ignore="HardcodedText" />
 
@@ -93,7 +93,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Start"
+                    android:text="启动"
                     tools:ignore="ButtonStyle,HardcodedText,VisualLintButtonSize" />
 
                 <Button
@@ -101,7 +101,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Stop"
+                    android:text="停止"
                     tools:ignore="ButtonStyle,HardcodedText,VisualLintButtonSize" />
 
                 <Button
@@ -109,7 +109,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Refresh"
+                    android:text="刷新"
                     tools:ignore="ButtonStyle,HardcodedText,VisualLintButtonSize" />
             </LinearLayout>
 
@@ -132,7 +132,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Randomize"
+                        android:text="随机化"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/holo_red_light"
                         tools:ignore="HardcodedText,TextContrastCheck" />
@@ -143,7 +143,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Level"
+                        android:text="级别"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/holo_red_light"
                         tools:ignore="HardcodedText,TextContrastCheck" />
@@ -158,19 +158,18 @@
                     android:dropDownWidth="wrap_content"
                     android:visibility="gone"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
             </LinearLayout>
+
             <WebView
                 android:id="@+id/icsim"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp" />
 
             <WebView
                 android:id="@+id/controls"
                 android:layout_width="match_parent"
                 android:layout_height="260dp" />
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

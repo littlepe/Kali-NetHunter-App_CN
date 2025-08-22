@@ -24,31 +24,34 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 自定义命令数据库操作类
+ * 用于管理自定义命令的增删改查以及数据库备份恢复
+ */
 public class CustomCommandsSQL extends SQLiteOpenHelper {
     private static CustomCommandsSQL instance;
     private static final String DATABASE_NAME = "CustomCommandsFragment";
-    private static final String TAG = "CustomCommandsSQL";
+    private static final String TAG = "自定义命令-SQL";
     private static final String TABLE_NAME = DATABASE_NAME;
     private static final ArrayList<String> COLUMNS = new ArrayList<>();
     private static final String[][] customcommandsData = {
-            {"1", "Update Kali Metapackages",
+            {"1", "更新 Kali 元软件包",
                     "echo -ne \"\\033]0;Updating Kali\\007\" && clear;apt update && apt -y upgrade",
                     "kali", "interactive", "0"},
-            {"2", "Launch Wifite",
+            {"2", "启动 Wifite",
                     "echo -ne \"\\033]0;Wifite\\007\" && clear;wifite",
                     "kali", "interactive", "0"},
-            {"3", "Launch hcxdumptool",
+            {"3", "启动 hcxdumptool",
                     "echo -ne \"\\033]0;hcxdumptool\\007\" && clear;hcxdumptool -i wlan1 -w $HOME/$(date +\"%Y-%m-%d_%H-%M-%S\").pcapng",
                     "kali", "interactive", "0"},
-            {"4", "Start wlan1 in monitor mode",
+            {"4", "将 wlan1 设为监控模式",
                     "echo -ne \"\\033]0;Wlan1 monitor mode\\007\" && clear;ip link set wlan1 down && iw wlan1 set monitor control && ip link set wlan1 up;sleep 2 && exit",
                     "kali", "interactive", "0"},
-            {"5", "Start wlan0 in monitor mode",
-                    "echo -ne \"\\033]0;Wlan0 Monitor Mode\\007\" && clear;su -c \"[ -f /sys/module/wlan/parameters/con_mode ] && echo 4 > /sys/module/wlan/parameters/con_mode;ip link set wlan0 down;ip link set wlan0 up || echo 'Your device is not QCACLD3.0 or does not support monitor mode! Exiting..'\";echo 'Done! Exiting..' && sleep 2 && exit",
+            {"5", "将 wlan0 设为监控模式",
+                    "echo -ne \"\\033]0;Wlan0 Monitor Mode\\007\" && clear;su -c \"[ -f /sys/module/wlan/parameters/con_mode ] && echo 4 > /sys/module/wlan/parameters/con_mode;ip link set wlan0 down;ip link set wlan0 up || echo '设备不支持 QCACLD3.0 或监控模式！退出中..'\";echo '完成！退出中..' && sleep 2 && exit",
                     "android", "interactive", "0"},
-            {"6", "Stop wlan0 monitor mode",
-                    "echo -ne \"\\033]0;Stopping Wlan0 Mon Mode\\007\" && clear;su -c \"[ -f /sys/module/wlan/parameters/con_mode ] && ip link set wlan0 down; echo 0 > /sys/module/wlan/parameters/con_mode;ip link set wlan0 up; svc wifi enable || echo 'Your device is not QCACLD3.0 or does not support monitor mode! Exiting..'\";echo 'Done! Exiting..' && sleep 2 && exit",
+            {"6", "关闭 wlan0 监控模式",
+                    "echo -ne \"\\033]0;Stopping Wlan0 Mon Mode\\007\" && clear;su -c \"[ -f /sys/module/wlan/parameters/con_mode ] && ip link set wlan0 down; echo 0 > /sys/module/wlan/parameters/con_mode;ip link set wlan0 up; svc wifi enable || echo '设备不支持 QCACLD3.0 或监控模式！退出中..'\";echo '完成！退出中..' && sleep 2 && exit",
                     "android", "interactive", "0"},
     };
 
@@ -75,7 +78,7 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
                 COLUMNS.get(1) + " TEXT, " + COLUMNS.get(2) +  " TEXT, " +
                 COLUMNS.get(3) + " TEXT, " + COLUMNS.get(4) + " TEXT, " +
                 COLUMNS.get(5) + " INTEGER)");
-        // For devices update from db version 2 to 3 only;
+        // 若检测到旧数据库则迁移
         if (new File(NhPaths.APP_DATABASE_PATH + "/KaliLaunchers").exists()) {
             convertOldDBtoNewDB(db);
         } else {
@@ -97,9 +100,12 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Handle database upgrade if needed
+        // 如需升级可在此处理
     }
 
+    /**
+     * 查询并绑定数据
+     */
     public List<CustomCommandsModel> bindData(List<CustomCommandsModel> customCommandsModelArrayList) {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMNS.get(0) + ";", null);
@@ -111,14 +117,14 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
             int index5 = cursor.getColumnIndex(COLUMNS.get(5));
 
             if (index1 >= 0 && index2 >= 0 && index3 >= 0 && index4 >= 0 && index5 >= 0) {
-                // Use the indices safely
                 String commandLabel = cursor.getString(index1);
-                String command = cursor.getString(index2);
-                String runtimeEnv = cursor.getString(index3);
+                String command       = cursor.getString(index2);
+                String runtimeEnv    = cursor.getString(index3);
                 String executionMode = cursor.getString(index4);
-                String runOnBoot = cursor.getString(index5);
+                String runOnBoot     = cursor.getString(index5);
 
-                customCommandsModelArrayList.add(new CustomCommandsModel(commandLabel, command, runtimeEnv, executionMode, runOnBoot));
+                customCommandsModelArrayList.add(
+                        new CustomCommandsModel(commandLabel, command, runtimeEnv, executionMode, runOnBoot));
             }
         }
         cursor.close();
@@ -126,6 +132,9 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
         return customCommandsModelArrayList;
     }
 
+    /**
+     * 添加数据
+     */
     public void addData(int targetPositionId, @NonNull List<String> Data) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues initialValues = new ContentValues();
@@ -143,33 +152,24 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * 删除数据
+     */
     public void deleteData(List<Integer> selectedTargetIds){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMNS.get(0) + " in (" + TextUtils.join(",", selectedTargetIds) + ");");
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMNS.get(0) + ";", null);
 
         while (cursor.moveToNext()) {
-            int index1 = cursor.getColumnIndex(COLUMNS.get(1));
-            int index2 = cursor.getColumnIndex(COLUMNS.get(2));
-            int index3 = cursor.getColumnIndex(COLUMNS.get(3));
-            int index4 = cursor.getColumnIndex(COLUMNS.get(4));
-            int index5 = cursor.getColumnIndex(COLUMNS.get(5));
-
-            if (index1 >= 0 && index2 >= 0 && index3 >= 0 && index4 >= 0 && index5 >= 0) {
-                // Use the indices safely
-                String commandLabel = cursor.getString(index1);
-                String command = cursor.getString(index2);
-                String runtimeEnv = cursor.getString(index3);
-                String executionMode = cursor.getString(index4);
-                String runOnBoot = cursor.getString(index5);
-
-                // Process the data as needed
-            }
+            // 仅用于重新编号, 无需处理数据
         }
         cursor.close();
         db.close();
     }
 
+    /**
+     * 移动数据
+     */
     public void moveData(Integer originalPosition, Integer targetPosition){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + TABLE_NAME + " SET " + COLUMNS.get(0) + " = 0 - 1 WHERE " + COLUMNS.get(0) + " = " + (originalPosition + 1) + ";");
@@ -182,6 +182,9 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * 编辑数据
+     */
     public void editData(Integer targetPosition, List<String> editData){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + TABLE_NAME + " SET " + COLUMNS.get(1) + " = '" + editData.get(0).replace("'", "''") + "', " +
@@ -192,6 +195,9 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * 重置数据
+     */
     public void resetData(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -203,7 +209,7 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
                 COLUMNS.get(5) + " TEXT);");
         ContentValues initialValues = new ContentValues();
         db.beginTransaction();
-        for (String[] data: customcommandsData){
+        for (String[] data : customcommandsData){
             initialValues.put(COLUMNS.get(0), data[0]);
             initialValues.put(COLUMNS.get(1), data[1]);
             initialValues.put(COLUMNS.get(2), data[2]);
@@ -217,6 +223,9 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * 备份数据
+     */
     public String backupData(String storedDBpath) {
         try {
             File sd = Environment.getExternalStorageDirectory();
@@ -241,15 +250,18 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
         return null;
     }
 
+    /**
+     * 恢复数据
+     */
     public String restoreData(String storedDBpath) {
         if (!new File(storedDBpath).exists()){
-            return null;
+            return "数据库文件不存在";
         }
         if (SQLiteDatabase.openDatabase(storedDBpath, null, SQLiteDatabase.OPEN_READONLY).getVersion() != 3) {
-            return null;
+            return "数据库版本不匹配";
         }
         if (!verifyDB(storedDBpath)) {
-            return null;
+            return "数据库格式无效";
         }
         try {
             File sd = Environment.getExternalStorageDirectory();
@@ -264,9 +276,9 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
                          FileChannel dst = new FileOutputStream(currentDB).getChannel()) {
                         dst.transferFrom(src, 0, src.size());
                     } catch (FileNotFoundException e) {
-                        Log.e(TAG, "File not found: " + e.getMessage());
+                        Log.e(TAG, "文件未找到: " + e.getMessage());
                     } catch (IOException e) {
-                        Log.e(TAG, "IO Exception: " + e.getMessage());
+                        Log.e(TAG, "IO 异常: " + e.getMessage());
                     }
                 }
             }
@@ -293,7 +305,6 @@ public class CustomCommandsSQL extends SQLiteOpenHelper {
         }
     }
 
-    //Convert the old db of customcommands sql to the new one.
     private boolean restoreOldDBtoNewDB(String storedDBpath) {
         try (SQLiteDatabase tempDB = SQLiteDatabase.openDatabase(storedDBpath, null, SQLiteDatabase.OPEN_READWRITE)) {
             convertOldDBtoNewDB(tempDB);

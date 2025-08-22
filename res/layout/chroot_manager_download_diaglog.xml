@@ -12,7 +12,7 @@
             android:layout_marginEnd="8dp"
             android:textSize="18sp"
             android:textColor="@color/clearTitle"
-            android:text="Arch:"/>
+            android:text="架构: "/>
 
         <Spinner
             android:id="@+id/f_chrootmanager_arch_adb_spr"
@@ -30,7 +30,7 @@
             android:layout_marginEnd="8dp"
             android:textSize="18sp"
             android:textColor="@color/clearTitle"
-            android:text="Min or Full install:"/>
+            android:text="最小或完整安装: "/>
 
         <Spinner
             android:id="@+id/f_chrootmanager_minorfull_adb_spr"
@@ -46,7 +46,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Path of the folder you want to download to:"
+            android:text="下载文件夹路径: "
             android:textSize="18sp"
             android:textColor="@color/clearTitle"/>
 

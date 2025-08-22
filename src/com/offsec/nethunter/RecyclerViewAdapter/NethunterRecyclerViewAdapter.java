@@ -66,9 +66,9 @@ public class NethunterRecyclerViewAdapter extends RecyclerView.Adapter<Nethunter
             final FloatingActionButton readmeButton3 = promptViewEdit.findViewById(R.id.f_nethunter_edit_btn_info_fab3);
             readmeButton1.setOnClickListener(view -> {
                 MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
-                adb.setTitle("HOW TO USE:")
+                adb.setTitle("使用说明:")
                         .setMessage(context.getString(R.string.nethunter_howtouse_cmd))
-                        .setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+                        .setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
                 final AlertDialog ad = adb.create();
                 ad.setCancelable(true);
                 ad.show();
@@ -76,9 +76,9 @@ public class NethunterRecyclerViewAdapter extends RecyclerView.Adapter<Nethunter
 
             readmeButton2.setOnClickListener(view -> {
                 MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
-                adb.setTitle("HOW TO USE:")
+                adb.setTitle("使用说明:")
                         .setMessage(context.getString(R.string.nethunter_howtouse_delimiter))
-                        .setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+                        .setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
                 final AlertDialog ad = adb.create();
                 ad.setCancelable(true);
                 ad.show();
@@ -86,9 +86,9 @@ public class NethunterRecyclerViewAdapter extends RecyclerView.Adapter<Nethunter
 
             readmeButton3.setOnClickListener(view -> {
                 MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
-                adb.setTitle("HOW TO USE:")
+                adb.setTitle("使用说明:")
                         .setMessage(context.getString(R.string.nethunter_howtouse_runoncreate))
-                        .setNegativeButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
+                        .setNegativeButton("关闭", (dialogInterface, i) -> dialogInterface.dismiss());
                 final AlertDialog ad = adb.create();
                 ad.setCancelable(true);
                 ad.show();
@@ -107,7 +107,7 @@ public class NethunterRecyclerViewAdapter extends RecyclerView.Adapter<Nethunter
                             nethunterModelList.get(position))).getRunOnCreate().equals("1"));
 
             MaterialAlertDialogBuilder adb = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
-            adb.setPositiveButton("Apply", (dialog, which) -> { });
+            adb.setPositiveButton("应用", (dialog, which) -> { });
             final AlertDialog ad = adb.create();
             ad.setView(promptViewEdit);
             ad.setCancelable(true);
@@ -115,11 +115,11 @@ public class NethunterRecyclerViewAdapter extends RecyclerView.Adapter<Nethunter
                 final Button buttonEdit = ad.getButton(DialogInterface.BUTTON_POSITIVE);
                 buttonEdit.setOnClickListener(v1 -> {
                     if (titleEditText.getText().toString().isEmpty()){
-                        NhPaths.showMessage(context, "Title cannot be empty");
+                        NhPaths.showMessage(context, "标题不能为空");
                     } else if (cmdEditText.getText().toString().isEmpty()){
-                        NhPaths.showMessage(context, "Command cannot be empty");
+                        NhPaths.showMessage(context, "命令不能为空");
                     } else if (delimiterEditText.getText().toString().isEmpty()){
-                        NhPaths.showMessage(context, "Delimiter cannot be empty");
+                        NhPaths.showMessage(context, "分隔符不能为空");
                     } else {
                         ArrayList<String> dataArrayList = new ArrayList<>();
                         dataArrayList.add(titleEditText.getText().toString());

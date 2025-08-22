@@ -66,7 +66,7 @@ public class BtDuckyFragment extends BTFragment {
         injectButton.setOnClickListener(v -> {
             String statusCMD = exe.RunAsRootOutput(NhPaths.APP_SCRIPTS_PATH + "/bootkali custom_cmd bluetoothctl info | grep 'Connected: yes'");
             if (!statusCMD.contains("Connected: yes")) {
-                Toast.makeText(requireContext(), "Start the server first", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "请先启动服务器", Toast.LENGTH_SHORT).show();
             } else {
                 saveFile(true);
                 run_cmd("python3 /root/badbt/ducky.py -d " + tmpfilePath + "; exit");
@@ -83,7 +83,7 @@ public class BtDuckyFragment extends BTFragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
+                // 什么都不做
             }
         });
         return rootView;
@@ -105,7 +105,7 @@ public class BtDuckyFragment extends BTFragment {
     private void openFile() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*"); // All files
+        intent.setType("*/*"); // 所有文件
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE);
     }
 
@@ -121,17 +121,17 @@ public class BtDuckyFragment extends BTFragment {
         }
         MaterialAlertDialogBuilder alert = new MaterialAlertDialogBuilder(requireActivity(), R.style.DialogStyleCompat);
 
-        alert.setTitle("Name");
-        alert.setMessage("Please enter a name for your script.");
+        alert.setTitle("名称");
+        alert.setMessage("请输入脚本的名称. ");
 
-        // Set an EditText view to get user input
+        // 设置一个 EditText 视图以获取用户输入
         final EditText input = new EditText(activity);
         alert.setView(input);
 
-        alert.setPositiveButton("Ok", (dialog, whichButton) -> {
+        alert.setPositiveButton("确定", (dialog, whichButton) -> {
             String value = input.getText().toString();
             if (!value.isEmpty()) {
-                // Save file (ask name)
+                // 保存文件（询问名称）
                 File scriptFile = new File(NhPaths.APP_SD_FILES_PATH + loadFilePath + File.separator + value + ".conf");
                 System.out.println(scriptFile.getAbsolutePath());
                 if (!scriptFile.exists()) {
@@ -143,15 +143,15 @@ public class BtDuckyFragment extends BTFragment {
                         NhPaths.showMessage(context, e.getMessage());
                     }
                 } else {
-                    NhPaths.showMessage(context, "File already exists");
+                    NhPaths.showMessage(context, "文件已存在");
                 }
             } else {
-                NhPaths.showMessage(context, "Wrong name provided");
+                NhPaths.showMessage(context, "提供的名称无效");
             }
         });
 
-        alert.setNegativeButton("Cancel", (dialog, whichButton) -> {
-            ///Do nothing
+        alert.setNegativeButton("取消", (dialog, whichButton) -> {
+            ///什么都不做
         });
 
         if (tmp) {
@@ -198,7 +198,7 @@ public class BtDuckyFragment extends BTFragment {
             inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(requireContext(), "Error reading file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "读取文件时出错", Toast.LENGTH_SHORT).show();
         }
 
         return content.toString();
@@ -212,11 +212,11 @@ public class BtDuckyFragment extends BTFragment {
             writer.close();
             assert outputStream != null;
             outputStream.close();
-            Toast.makeText(requireContext(), "File saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "文件已保存", Toast.LENGTH_SHORT).show();
 
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(requireContext(), "Error saving file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "保存文件时出错", Toast.LENGTH_SHORT).show();
         }
     }
 }

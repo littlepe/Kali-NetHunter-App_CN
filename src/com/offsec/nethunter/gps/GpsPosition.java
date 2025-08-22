@@ -23,8 +23,8 @@ public class GpsPosition {
     @NonNull
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "GpsPosition: latitude: %f, longitude: %f, time: %f, quality: %d, " +
-                        "direction: %f, altitude: %f, velocity: %f", latitude, longitude, time, quality,
+        return String.format(Locale.getDefault(), "GPS位置: 纬度: %f, 经度: %f, 时间: %f, 质量: %d, " +
+                        "方向: %f, 海拔: %f, 速度: %f", latitude, longitude, time, quality,
                 direction, altitude, velocity);
     }
 }

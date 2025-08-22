@@ -56,10 +56,15 @@ public class USBArsenalFragment extends Fragment {
     private final Handler uiHandler = new Handler(Looper.getMainLooper());
     private static boolean is_init_exists = true;
     //private Message msg = new Message();
+    /** 当前 USB 状态提示 */
     private TextView usbStatusTextView;
+    /** 已挂载镜像提示 */
     private TextView mountedImageTextView;
+    /** 镜像挂载提示 */
     private TextView mountedImageHintTextView;
+    /** 当前查询字符串提示 */
     private TextView currentInquiryHintTextView;
+    /** USB 网络共享提示 */
     private TextView usbNetworkTetheringHintTextView;
     private ImageButton reloadUSBStateImageButton;
     private ImageButton reloadMountStateButton;
@@ -142,11 +147,13 @@ public class USBArsenalFragment extends Fragment {
         usbNetworkInfoEditTextGroup[3] = view.findViewById(R.id.f_usbarsenal_et_usbnetwork_gatewayip);
         usbNetworkInfoEditTextGroup[4] = view.findViewById(R.id.f_usbarsenal_et_usbnetwork_ipsubnetmask);
 
+        /* 检查 /init.nethunter.rc 是否存在 */
         { Message msg = new Message();
             msg.what = USBArsenalHandlerThread.IS_INIT_EXIST;
             msg.obj = "[ -f /init.nethunter.rc ]";
             usbArsenalHandlerThread.getHandler().sendMessage(msg); }
 
+        /* 获取存储功能目录名 */
         { Message msg = new Message();
             msg.what = USBArsenalHandlerThread.GET_STORAGE_FUNC_FOLDER_NAME;
             msg.obj = "find /config/usb_gadget/g1/functions/ -name \"mass_storage.*\" -maxdepth 1 -type d -exec basename {} \\; | head -n1";
@@ -154,6 +161,7 @@ public class USBArsenalFragment extends Fragment {
 
         ArrayAdapter<String> usbFuncWinArrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, new ArrayList<>());
         ArrayAdapter<String> usbFuncMACArrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, new ArrayList<>());
+        /* USB 网络攻击模式下拉框 */
         ArrayAdapter<String> usbNetworkAttackModeArrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.usbarsenal_usb_network_attack_mode));
         usbFuncWinArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         usbFuncMACArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -219,6 +227,7 @@ public class USBArsenalFragment extends Fragment {
             }
         });
 
+        /* 设置 USB 接口按钮 */
         setUSBIfaceButton.setOnClickListener(v -> {
             if (isAllUSBInfosValid()) {
                 setUSBIfaceButton.setEnabled(false);
@@ -255,6 +264,7 @@ public class USBArsenalFragment extends Fragment {
             }
         });
 
+        /* 启动 USB 网络共享按钮 */
         setUSBNetworkTetheringButton.setOnClickListener(v -> run_cmd_android("usbtethering -o " + usbNetworkInfoEditTextGroup[0].getText().toString() +
                 " -i " + usbNetworkInfoEditTextGroup[1].getText().toString() +
                 " -A " + usbNetworkInfoEditTextGroup[2].getText().toString() +
@@ -262,6 +272,7 @@ public class USBArsenalFragment extends Fragment {
                 " -C " + usbNetworkInfoEditTextGroup[3].getText().toString() +
                 " -D " + usbNetworkInfoEditTextGroup[4].getText().toString()));
 
+        /* 重新加载 USB 状态按钮 */
         reloadUSBStateImageButton.setOnClickListener(v -> {
             Message msg = new Message();
             msg.what = USBArsenalHandlerThread.RELOAD_USBIFACE;
@@ -269,6 +280,7 @@ public class USBArsenalFragment extends Fragment {
             usbArsenalHandlerThread.getHandler().sendMessage(msg);
         });
 
+        /* 重新加载挂载状态按钮 */
         reloadMountStateButton.setOnClickListener(v -> {
             Message msg = new Message();
             msg.what = USBArsenalHandlerThread.RELOAD_MOUNTSTATUS;
@@ -277,9 +289,10 @@ public class USBArsenalFragment extends Fragment {
             getImageFiles();
         });
 
+        /* 挂载镜像按钮 */
         mountImgButton.setOnClickListener(v -> {
             if (imgFileSpinner.getSelectedItem() == null) {
-                NhPaths.showMessage(context, "No image file is selected.");
+                NhPaths.showMessage(context, "未选择镜像文件. ");
             } else {
                 mountImgButton.setEnabled(false);
                 unmountImgButton.setEnabled(false);
@@ -301,18 +314,20 @@ public class USBArsenalFragment extends Fragment {
             }
         });
 
+        /* 卸载镜像按钮 */
         unmountImgButton.setOnClickListener(v -> {
             mountImgButton.setEnabled(false);
             unmountImgButton.setEnabled(false);
             Message msg = new Message();
             msg.what = USBArsenalHandlerThread.UNMOUNT_IMAGE;
             msg.obj = String.format("echo '' > /config/usb_gadget/g1/functions/%s/lun.0/file" +
-                                    " && echo '0' > /config/usb_gadget/g1/functions/%s/lun.0/ro" +
-                                    " && echo '0' > /config/usb_gadget/g1/functions/%s/lun.0/cdrom",
-                      usbStorageFunctionName, usbStorageFunctionName, usbStorageFunctionName);
+                            " && echo '0' > /config/usb_gadget/g1/functions/%s/lun.0/ro" +
+                            " && echo '0' > /config/usb_gadget/g1/functions/%s/lun.0/cdrom",
+                    usbStorageFunctionName, usbStorageFunctionName, usbStorageFunctionName);
             usbArsenalHandlerThread.getHandler().sendMessage(msg);
         });
 
+        /* 修改查询字符串按钮 */
         changeInquiryButton.setOnClickListener(v -> {
             Message msg = new Message();
             msg.what = USBArsenalHandlerThread.CHANGE_INQUIRY_STRING;
@@ -320,15 +335,16 @@ public class USBArsenalFragment extends Fragment {
             usbArsenalHandlerThread.getHandler().sendMessage(msg);
         });
 
+        /* 保存 USB 功能配置按钮 */
         saveUSBFunctionConfigButton.setOnClickListener(v -> {
             if (!usbSwitchInfoEditTextGroup[0].getText().toString().matches("0x[0-9a-fA-F]{4}") ||
                     !usbSwitchInfoEditTextGroup[1].getText().toString().matches("0x[0-9a-fA-F]{4}")) {
-                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Invalid Format").setMessage("The regex must be 0x[0-9a-fA-F]{4}").create().show();
+                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("格式错误").setMessage("必须为 0x[0-9a-fA-F]{4}").create().show();
             } else if (!usbSwitchInfoEditTextGroup[2].getText().toString().matches("\\w+|^$") ||
                     !usbSwitchInfoEditTextGroup[3].getText().toString().matches("\\w+|^$")) {
-                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Invalid Format").setMessage("The regex must be \\w*|^$").create().show();
+                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("格式错误").setMessage("必须为 \\w*|^$").create().show();
             } else if (!usbSwitchInfoEditTextGroup[4].getText().toString().matches("[0-9A-Z]{10}|^$")) {
-                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Invalid Format").setMessage("The regex must be [0-9A-Z]{10}|^$").create().show();
+                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("格式错误").setMessage("必须为 [0-9A-Z]{10}|^$").create().show();
             } else {
                 for (int i = 0; i < usbSwitchInfoEditTextGroup.length; i++) {
                     if (!USBArsenalSQL.getInstance(context).setUSBSwitchColumnData(
@@ -336,14 +352,15 @@ public class USBArsenalFragment extends Fragment {
                             i + 2,
                             targetOSSpinner.getSelectedItem().toString(),
                             usbSwitchInfoEditTextGroup[i].getText().toString().toLowerCase())){
-                        NhPaths.showMessage(context, "Something's wrong when processing " + usbSwitchInfoEditTextGroup[i].getText().toString().toLowerCase());
+                        NhPaths.showMessage(context, "处理 " + usbSwitchInfoEditTextGroup[i].getText().toString().toLowerCase() + " 时出错");
                     } else {
-                        NhPaths.showMessage(context, "Saved.");
+                        NhPaths.showMessage(context, "已保存. ");
                     }
                 }
             }
         });
 
+        /* 保存 USB 网络配置按钮 */
         saveUSBNetworkTetheringConfigButton.setOnClickListener(v -> {
             USBArsenalUSBNetworkModel usbArsenalUSBNetworkModel = new USBArsenalUSBNetworkModel(
                     usbNetworkInfoEditTextGroup[0].getText().toString(),
@@ -353,9 +370,9 @@ public class USBArsenalFragment extends Fragment {
                     usbNetworkInfoEditTextGroup[4].getText().toString()
             );
             if(!USBArsenalSQL.getInstance(context).setUSBNetworkColumnData(getusbNetWorkModeSpinnerPosition(), usbArsenalUSBNetworkModel)){
-                NhPaths.showMessage(context, "Failed saving configs to DB, please check if your input is valid.");
+                NhPaths.showMessage(context, "保存配置到数据库失败, 请检查输入. ");
             } else {
-                NhPaths.showMessage(context, "Saved.");
+                NhPaths.showMessage(context, "已保存. ");
             }
         });
 
@@ -365,6 +382,7 @@ public class USBArsenalFragment extends Fragment {
                     case USBArsenalHandlerThread.IS_INIT_EXIST:
                         if ((int)resultObject == 0) {
                             is_init_exists = true;
+                            /* 读取 USB 功能列表 */
                             { Message msg = new Message();
                                 msg.what = USBArsenalHandlerThread.RETRIEVE_USB_FUNCS;
                                 msg.obj = "cat /init.nethunter.rc | grep -E -o 'sys.usb.config=([a-zA-Z,_]+)' | sed 's/sys.usb.config=//' | sort | uniq";
@@ -400,9 +418,9 @@ public class USBArsenalFragment extends Fragment {
                     case USBArsenalHandlerThread.SETUSBIFACE:
                         uiHandler.post(() -> {
                             if ((int)resultObject != 0){
-                                NhPaths.showMessage(context, "Failed to set USB function.");
+                                NhPaths.showMessage(context, "设置 USB 功能失败. ");
                             } else {
-                                NhPaths.showMessage(context, "USB function set successfully.");
+                                NhPaths.showMessage(context, "USB 功能设置成功. ");
                                 reloadUSBStateImageButton.performClick();
                             }
                             setUSBIfaceButton.setEnabled(true);
@@ -411,7 +429,7 @@ public class USBArsenalFragment extends Fragment {
                     case USBArsenalHandlerThread.RELOAD_USBIFACE:
                         uiHandler.post(() -> {
                             if (resultObject.toString().isEmpty()) {
-                                usbStatusTextView.setText("No USB function has been enabled");
+                                usbStatusTextView.setText("未启用任何 USB 功能");
                                 imageMounterLL.setVisibility(View.GONE);
                                 mountedImageHintTextView.setVisibility(View.VISIBLE);
                             } else {
@@ -441,22 +459,22 @@ public class USBArsenalFragment extends Fragment {
                         break;
                     case USBArsenalHandlerThread.GET_STORAGE_FUNC_FOLDER_NAME:
                         String folder_name = resultObject.toString().split("\\n")[0];
-                        // fallback to mass_storage.0 if other not found
+                        /* 若未找到则回退到 mass_storage.0 */
                         if (folder_name.isEmpty()) folder_name = "mass_storage.0";
                         usbStorageFunctionName = folder_name;
                         break;
                     case USBArsenalHandlerThread.RELOAD_MOUNTSTATUS:
                         uiHandler.post(() -> {
-                            if (resultObject.toString().isEmpty()){ mountedImageTextView.setText("No image is mounted."); }
+                            if (resultObject.toString().isEmpty()){ mountedImageTextView.setText("未挂载镜像. "); }
                             else {mountedImageTextView.setText(resultObject.toString());}
                         });
                         break;
                     case USBArsenalHandlerThread.MOUNT_IMAGE:
                         uiHandler.post(() -> {
                             if ((int)resultObject == 0){
-                                NhPaths.showMessage(context, imgFileSpinner.getSelectedItem().toString() + " has been mounted.");
+                                NhPaths.showMessage(context, imgFileSpinner.getSelectedItem().toString() + " 已挂载. ");
                             } else {
-                                NhPaths.showMessage(context, "Failed to mount image " + imgFileSpinner.getSelectedItem().toString());
+                                NhPaths.showMessage(context, "挂载镜像 " + imgFileSpinner.getSelectedItem().toString() + " 失败. ");
                             }
                             reloadMountStateButton.performClick();
                             mountImgButton.setEnabled(true);
@@ -466,12 +484,11 @@ public class USBArsenalFragment extends Fragment {
                     case USBArsenalHandlerThread.UNMOUNT_IMAGE:
                         uiHandler.post(() -> {
                             if ((int)resultObject == 0){
-                                NhPaths.showMessage(context, imgFileSpinner.getSelectedItem().toString() + " has been unmounted.");
+                                NhPaths.showMessage(context, imgFileSpinner.getSelectedItem().toString() + " 已卸载. ");
                                 reloadMountStateButton.performClick();
                             } else {
-                                NhPaths.showMessage_long(context, "Failed to unmount image " + imgFileSpinner.getSelectedItem().toString() +
-                                        ". Your drive may be still be in use by the host, please eject your drive on the host first," +
-                                        "and then try to umount the image again.");
+                                NhPaths.showMessage_long(context, "卸载镜像 " + imgFileSpinner.getSelectedItem().toString() +
+                                        " 失败, 可能仍在被主机使用, 请先安全弹出, 然后重试. ");
                             }
                             reloadMountStateButton.performClick();
                             mountImgButton.setEnabled(true);
@@ -482,15 +499,14 @@ public class USBArsenalFragment extends Fragment {
                         String newInquiry = inquiryStringEditText.getText().toString();
                         if ((int)resultObject == 0){
                             if (newInquiry.isEmpty()) {
-                                NhPaths.showMessage(context, "Inquiry string reset to default successfully.");
-                                currentInquiryHintTextView.setText("Linux File-CD/Stor gadget (kernel default)");
+                                NhPaths.showMessage(context, "查询字符串已恢复默认. ");
+                                currentInquiryHintTextView.setText("Linux File-CD/Stor gadget（内核默认）");
                             } else {
-                                NhPaths.showMessage(context, "Inquiry string changed to '" + newInquiry + "' successfully.");
+                                NhPaths.showMessage(context, "查询字符串已更改为: “" + newInquiry + "”");
                                 currentInquiryHintTextView.setText(newInquiry);
                             }
                         } else {
-                            NhPaths.showMessage_long(context, "Failed to change inquiry string to '" + newInquiry +
-                                    "'.");
+                            NhPaths.showMessage_long(context, "更改查询字符串失败. ");
                         }
                         break;
                     case USBArsenalHandlerThread.GET_USBSWITCH_SQL_DATA:
@@ -542,22 +558,22 @@ public class USBArsenalFragment extends Fragment {
 
         switch (item.getItemId()){
             case R.id.f_usbarsenal_menu_backupDB:
-                titleTextView.setText("Full path to where you want to save the database:");
+                titleTextView.setText("请输入备份数据库的完整路径: ");
                 storedpathEditText.setText(NhPaths.APP_SD_SQLBACKUP_PATH + "/FragmentUSBArsenal");
                 MaterialAlertDialogBuilder adbBackup = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
                 adbBackup.setView(promptView);
-                adbBackup.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-                adbBackup.setPositiveButton("OK", (dialog, which) -> { });
+                adbBackup.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+                adbBackup.setPositiveButton("确定", (dialog, which) -> { });
                 final AlertDialog adBackup = adbBackup.create();
                 adBackup.setOnShowListener(dialog -> {
                     final Button buttonOK = adBackup.getButton(DialogInterface.BUTTON_POSITIVE);
                     buttonOK.setOnClickListener(v -> {
                         String returnedResult = USBArsenalSQL.getInstance(context).backupData(storedpathEditText.getText().toString());
                         if (returnedResult == null){
-                            NhPaths.showMessage(context, "db successfully backed up to " + storedpathEditText.getText().toString());
+                            NhPaths.showMessage(context, "数据库已成功备份到 " + storedpathEditText.getText().toString());
                         } else {
                             dialog.dismiss();
-                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Failed to backup the DB.").setMessage(returnedResult).create().show();
+                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("备份失败").setMessage(returnedResult).create().show();
                         }
                         dialog.dismiss();
                     });
@@ -565,24 +581,24 @@ public class USBArsenalFragment extends Fragment {
                 adBackup.show();
                 break;
             case R.id.f_usbarsenal_menu_restoreDB:
-                titleTextView.setText("Full path of the db file from where you want to restore:");
+                titleTextView.setText("请输入要还原的数据库文件完整路径: ");
                 storedpathEditText.setText(NhPaths.APP_SD_SQLBACKUP_PATH + "/FragmentUSBArsenal");
                 MaterialAlertDialogBuilder adbRestore = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
                 adbRestore.setView(promptView);
-                adbRestore.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-                adbRestore.setPositiveButton("OK", (dialog, which) -> { });
+                adbRestore.setNegativeButton("取消", (dialog, which) -> dialog.cancel());
+                adbRestore.setPositiveButton("确定", (dialog, which) -> { });
                 final AlertDialog adRestore = adbRestore.create();
                 adRestore.setOnShowListener(dialog -> {
                     final Button buttonOK = adRestore.getButton(DialogInterface.BUTTON_POSITIVE);
                     buttonOK.setOnClickListener(v -> {
                         String returnedResult = USBArsenalSQL.getInstance(context).restoreData(storedpathEditText.getText().toString());
                         if (returnedResult == null) {
-                            NhPaths.showMessage(context, "db is successfully restored to " + storedpathEditText.getText().toString());
+                            NhPaths.showMessage(context, "数据库已成功从 " + storedpathEditText.getText().toString() + " 还原. ");
                             refreshUSBSwitchInfos(gettargetOSSpinnerString(), getusbFuncSpinnerString());
                             refreshUSBNetworkInfos(getusbNetWorkModeSpinnerPosition());
                         } else {
                             dialog.dismiss();
-                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Failed to restore the DB.").setMessage(returnedResult).create().show();
+                            new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("还原失败").setMessage(returnedResult).create().show();
                         }
                         dialog.dismiss();
                     });
@@ -591,11 +607,11 @@ public class USBArsenalFragment extends Fragment {
                 break;
             case R.id.f_usbarsenal_menu_ResetToDefault:
                 if (USBArsenalSQL.getInstance(context).resetData()) {
-                    NhPaths.showMessage(context, "db is successfully reset to default.");
+                    NhPaths.showMessage(context, "数据库已重置为默认. ");
                     refreshUSBSwitchInfos(gettargetOSSpinnerString(), getusbFuncSpinnerString());
                     refreshUSBNetworkInfos(getusbNetWorkModeSpinnerPosition());
                 } else {
-                    NhPaths.showMessage_long(context, "Failed to reset the db to default.");
+                    NhPaths.showMessage_long(context, "重置数据库失败. ");
                 }
                 break;
         }
@@ -630,15 +646,16 @@ public class USBArsenalFragment extends Fragment {
         usbNetworkInfoEditTextGroup = null;
     }
 
+    /* 获取镜像文件列表 */
     private void getImageFiles() {
         mountImgButton.setEnabled(false);
         unmountImgButton.setEnabled(false);
         ArrayList<String> result = new ArrayList<>();
         File image_folder = new File(NhPaths.APP_SD_FILES_IMG_PATH);
         if (!image_folder.exists()) {
-            NhPaths.showMessage(context, "Creating directory for storing image files..");
+            NhPaths.showMessage(context, "正在创建镜像文件存放目录…");
             if (!image_folder.mkdir()) {
-                NhPaths.showMessage(context, "Failed to create directory for storing image files at " + NhPaths.APP_SD_FILES_IMG_PATH);
+                NhPaths.showMessage(context, "创建镜像目录失败: " + NhPaths.APP_SD_FILES_IMG_PATH);
                 return;
             }
         }
@@ -663,6 +680,7 @@ public class USBArsenalFragment extends Fragment {
         unmountImgButton.setEnabled(true);
     }
 
+    /* 获取当前 USB 功能字符串 */
     private String getusbFuncSpinnerString() {
         if (usbFuncSpinner.getSelectedItem() != null) {
             return usbFuncSpinner.getSelectedItem().toString() +
@@ -671,40 +689,44 @@ public class USBArsenalFragment extends Fragment {
         return "reset";
     }
 
+    /* 获取当前目标系统字符串 */
     private String gettargetOSSpinnerString() {
         return targetOSSpinner.getSelectedItem().toString();
     }
 
+    /* 获取 USB 网络模式索引 */
     private int getusbNetWorkModeSpinnerPosition() {
         return usbNetworkAttackModeSpinner.getSelectedItemPosition();
     }
 
+    /* 检查所有 USB 信息是否有效 */
     private boolean isAllUSBInfosValid() {
         if (!is_init_exists){
             if (!usbSwitchInfoEditTextGroup[0].getText().toString().matches("^0x[0-9a-fA-F]{4}$")) {
-                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Invalid Format").setMessage("The regex must be ^0x[0-9a-fA-F]{4}$").create().show();
+                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("格式错误").setMessage("必须为 ^0x[0-9a-fA-F]{4}$").create().show();
                 return false;
             }
             if (!usbSwitchInfoEditTextGroup[1].getText().toString().matches("^0x[0-9a-fA-F]{4}$")) {
-                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Invalid Format").setMessage("The regex must be ^0x[0-9a-fA-F]{4}$").create().show();
+                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("格式错误").setMessage("必须为 ^0x[0-9a-fA-F]{4}$").create().show();
                 return false;
             }
             if (!usbSwitchInfoEditTextGroup[2].getText().toString().matches("^\\w+$|^$")) {
-                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Invalid Format").setMessage("The regex must be ^\\w+$|^$").create().show();
+                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("格式错误").setMessage("必须为 ^\\w+$|^$").create().show();
                 return false;
             }
             if (!usbSwitchInfoEditTextGroup[3].getText().toString().matches("^\\w+$|^$")) {
-                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Invalid Format").setMessage("The regex must be ^\\w+$|^$").create().show();
+                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("格式错误").setMessage("必须为 ^\\w+$|^$").create().show();
                 return false;
             }
             if (!usbSwitchInfoEditTextGroup[4].getText().toString().matches("^[0-9A-Z]{10}$|^$")) {
-                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("Invalid Format").setMessage("The regex must be ^[0-9A-Z]{10}$|^$").create().show();
+                new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat).setTitle("格式错误").setMessage("必须为 ^[0-9A-Z]{10}$|^$").create().show();
                 return false;
             }
         }
         return true;
     }
 
+    /* 刷新 USB 配置信息 */
     private void refreshUSBSwitchInfos(String targetOSName, String functionName) {
         Message msg = new Message();
         Bundle bundle = new Bundle();
@@ -716,6 +738,7 @@ public class USBArsenalFragment extends Fragment {
         usbArsenalHandlerThread.getHandler().sendMessage(msg);
     }
 
+    /* 刷新 USB 网络配置信息 */
     private void refreshUSBNetworkInfos(int attackModePosition) {
         Message msg = new Message();
         msg.what = USBArsenalHandlerThread.GET_USBNETWORK_SQL_DATA;
@@ -724,10 +747,7 @@ public class USBArsenalFragment extends Fragment {
         usbArsenalHandlerThread.getHandler().sendMessage(msg);
     }
 
-    ////
-    // Bridge side functions
-    ////
-
+    /* Bridge 执行命令 */
     public void run_cmd_android(String cmd) {
         Intent intent = Bridge.createExecuteIntent("/data/data/com.offsec.nhterm/files/usr/bin/android-su", cmd);
         context.startActivity(intent);

@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Internal Wifi AP mode:"
+                android:text="内置 Wi-Fi AP 模式: "
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -37,7 +37,7 @@
                 android:id="@+id/wlan0ap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Loading.." />
+                android:hint="加载中.." />
         </LinearLayout>
 
         <View
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:text="Virtual wlan1 interface"
+                android:text="虚拟 wlan1 接口"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Access Point"
+                android:text="接入点"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -97,7 +97,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upstream"
+                android:text="上行链路"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -127,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:hint="Free Wifi" />
+                android:hint="免费 Wi-Fi" />
         </LinearLayout>
 
         <LinearLayout
@@ -160,7 +160,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Channel"
+                android:text="信道"
                 android:padding="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -178,20 +178,20 @@
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Captive Portal"
-            android:padding="4dp"
-            android:layout_weight="15"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="强制门户"
+                android:padding="4dp"
+                android:layout_weight="15"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <ImageButton
-            android:id="@+id/refreshTemplates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_action_refresh"
-            android:layout_weight="1"/>
+            <ImageButton
+                android:id="@+id/refreshTemplates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_action_refresh"
+                android:layout_weight="1"/>
         </LinearLayout>
 
         <View
@@ -221,7 +221,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:visibility="gone"
-                android:text="Preview"
+                android:text="预览"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
@@ -246,7 +246,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Install from zip"
+            android:text="从 zip 安装"
             android:textColor="#ffffffff" />
 
         <View
@@ -257,7 +257,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/wp3start_button"
-            android:text="Start"
+            android:text="启动"
             android:textColor="#ffffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

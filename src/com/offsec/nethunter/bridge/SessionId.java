@@ -6,12 +6,12 @@ import java.util.Objects;
 
 public class SessionId {
   /**
-   * Created a new session.
+   * 创建一个新的会话. 
    */
   public static final SessionId NEW_SESSION = SessionId.of("new");
 
   /**
-   * Presents current session in NeoTerm.
+   * 表示 NeoTerm 中的当前会话. 
    */
   public static final SessionId CURRENT_SESSION = SessionId.of("current");
 
@@ -28,7 +28,7 @@ public class SessionId {
   @NonNull
   @Override
   public String toString() {
-    return "TerminalSession { id = " + sessionId + " }";
+    return "终端会话 { id = " + sessionId + " }";
   }
 
   @Override

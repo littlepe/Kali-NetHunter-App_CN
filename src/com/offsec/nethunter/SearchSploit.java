@@ -1,14 +1,16 @@
 package com.offsec.nethunter;
 
+/* 漏洞信息实体类 */
 public class SearchSploit {
-    private long id;
-    private String description;
-    private String file;
-    private String date;
-    private String author;
-    private String platform;
-    private String type;
-    private Integer port;
+    private long id;               // 编号
+    private String description;    // 描述
+    private String file;           // 文件名
+    private String date;           // 发布日期
+    private String author;         // 作者
+    private String platform;       // 平台
+    private String type;           // 类型
+    private Integer port;          // 端口
+    /* 表名及字段常量 */
     final static String TABLE = "SearchSploitTable";
     final static String ID = "ID";
     final static String FILE = "FILE";

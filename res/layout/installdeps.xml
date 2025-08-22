@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/installdeps_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- 安装按钮 -->
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -14,12 +16,13 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="307dp"
         android:layout_marginBottom="440dp"
-        android:text="Install"
+        android:text="安装"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
+    <!-- 说明文字 -->
     <TextView
         android:id="@+id/textView12"
         android:layout_width="409dp"
@@ -27,15 +30,15 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:text="TextView"
+        android:text="您可以在此处安装一些依赖项, 这些依赖项是 chroot 环境默认未提供的. "
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Here you can install some dependencies for most of the stuff that chroot does not come with" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 副标题 -->
     <TextView
         android:id="@+id/textView13"
         android:layout_width="247dp"
@@ -44,7 +47,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="1dp"
-        android:text="Setup and install mana dependencies"
+        android:text="设置并安装 mana 所需依赖"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

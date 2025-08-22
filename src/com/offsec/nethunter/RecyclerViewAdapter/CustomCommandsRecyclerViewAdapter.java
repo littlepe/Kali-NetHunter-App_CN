@@ -50,7 +50,8 @@ public class CustomCommandsRecyclerViewAdapter extends RecyclerView.Adapter<Cust
 		itemViewHolder.commandLabelTextView.setText(customCommandsModelList.get(position).getCommandLabel());
 		itemViewHolder.execEnvTextView.setText(customCommandsModelList.get(position).getRuntimeEnv());
 		itemViewHolder.execModeTextView.setText(customCommandsModelList.get(position).getExecutionMode());
-		itemViewHolder.runOnBootTextView.setText(customCommandsModelList.get(position).getRunOnBoot().equals("1")?"yes":"no");
+		// 将 1/0 转换成“是/否”显示
+		itemViewHolder.runOnBootTextView.setText(customCommandsModelList.get(position).getRunOnBoot().equals("1")?"是":"否");
 		itemViewHolder.commandLabelTextView.setOnLongClickListener(v -> {
 			final ViewGroup nullParent = null;
 			final LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -80,15 +81,15 @@ public class CustomCommandsRecyclerViewAdapter extends RecyclerView.Adapter<Cust
 			MaterialAlertDialogBuilder adbEdit = new MaterialAlertDialogBuilder(context, R.style.DialogStyleCompat);
 			adbEdit.setView(promptViewEdit);
 			adbEdit.setCancelable(true);
-			adbEdit.setPositiveButton("OK", (dialog, which) -> { });
+			adbEdit.setPositiveButton("确定", (dialog, which) -> { });
 			final AlertDialog adEdit = adbEdit.create();
 			adEdit.setOnShowListener(dialog -> {
 				final Button buttonEdit = adEdit.getButton(DialogInterface.BUTTON_POSITIVE);
 				buttonEdit.setOnClickListener(v1 -> {
 					if (commandLabelEditText.getText().toString().isEmpty()){
-						NhPaths.showMessage(context, "Label cannot be empty");
+						NhPaths.showMessage(context, "标签不能为空");
 					} else if (commandEditText.getText().toString().isEmpty()){
-						NhPaths.showMessage(context, "Command string cannot be empty");
+						NhPaths.showMessage(context, "命令不能为空");
 					} else {
 						ArrayList<String> dataArrayList = new ArrayList<>();
 						dataArrayList.add(commandLabelEditText.getText().toString());
@@ -153,19 +154,19 @@ public class CustomCommandsRecyclerViewAdapter extends RecyclerView.Adapter<Cust
 	static class ItemViewHolder extends RecyclerView.ViewHolder{
 		private final TextView commandLabelTextView;
 		private final TextView execEnvTextView;
-        private final TextView execModeTextView;
-        private final TextView runOnBootTextView;
+		private final TextView execModeTextView;
+		private final TextView runOnBootTextView;
 		//private Button editButton;
-        private final Button runButton;
+		private final Button runButton;
 
 		private ItemViewHolder(View view){
 			super(view);
-            commandLabelTextView = view.findViewById(R.id.f_customcommands_recyclerview_tv_cmdlabel);
-            execEnvTextView = view.findViewById(R.id.f_customcommands_recyclerview_tv_execenvironment);
-            execModeTextView = view.findViewById(R.id.f_customcommands_recyclerview_tv_execmode);
-            runOnBootTextView = view.findViewById(R.id.f_customcommands_recyclerview_tv_runonboot);
-            //editButton = view.findViewById(R.id.f_customcommands_recyclerview_btn_edit);
-            runButton = view.findViewById(R.id.f_customcommands_recyclerview_btn_run);
+			commandLabelTextView = view.findViewById(R.id.f_customcommands_recyclerview_tv_cmdlabel);
+			execEnvTextView = view.findViewById(R.id.f_customcommands_recyclerview_tv_execenvironment);
+			execModeTextView = view.findViewById(R.id.f_customcommands_recyclerview_tv_execmode);
+			runOnBootTextView = view.findViewById(R.id.f_customcommands_recyclerview_tv_runonboot);
+			//editButton = view.findViewById(R.id.f_customcommands_recyclerview_btn_edit);
+			runButton = view.findViewById(R.id.f_customcommands_recyclerview_btn_run);
 		}
 	}
 }

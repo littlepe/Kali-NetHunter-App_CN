@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NetHunter</string>
-    <string name="app_nav_home_label">NetHunter</string>
+    <string name="app_name">NetHunter CN</string>
+    <string name="app_nav_home_label">NetHunter CN</string>
 
-    <string name="hometitle">System Information</string>
-    <!--string name="nethunter_description">Welcome to Kali Linux NetHunter by Offensive Security! This application is designed to make it easier to execute attacks and control services. The navigation menu contains links to useful commands, settings, macros, and attack configuration pages. Most configurations work out of the box but some may require some minimal tweaking.</string-->
-    <string name="nethunter_description">You can ADD, DELETE, MOVE, SEARCH, BACKUP, RESTORE and RESET your custom command item. You can also long click on the item label to EDIT the item.</string>
-    <string name="nethunter_current_interfaces">Network Interfaces</string>
-    <string name="nethunter_external_ip">External IP</string>
-    <string name="nethunter_hid_detect">HID Interfaces</string>
-    <string name="nethunter_busybox_detect">Busybox Version</string>
-    <string name="nethunter_kernelver_detect">Kernel Version</string>
-    <string name="nethunter_terminal_detect">NetHunter Terminal Status</string>
-    <string name="nethunter_howtouse_cmd">Put your own command string here, it will be run in Android environment to get the output displayed.</string>
-    <string name="nethunter_howtouse_delimiter">Put your desired delimiter string if you want to split the output into lines, default is "\\n".</string>
-    <string name="nethunter_howtouse_runoncreate">To get the output upon the fragment is created, check this option. Otherwise you have to click RUN button manually to get the output.</string>
+    <string name="hometitle">系统信息</string>
+    <!--string name="nethunter_description">欢迎使用Offensive Security的Kali Linux NetHunter！此应用旨在更轻松地执行攻击和控制服务. 导航菜单包含指向有用命令、设置、宏和攻击配置页面的链接. 大多数配置开箱即用, 但有些可能需要最少的调整. </string-->
+    <string name="nethunter_description">您可以添加、删除、移动、搜索、备份、恢复和重置您的自定义命令项. 您也可以长按项标签来编辑项. </string>
+    <string name="nethunter_current_interfaces">网络接口</string>
+    <string name="nethunter_external_ip">外部IP</string>
+    <string name="nethunter_hid_detect">HID接口</string>
+    <string name="nethunter_busybox_detect">Busybox版本</string>
+    <string name="nethunter_kernelver_detect">内核版本</string>
+    <string name="nethunter_terminal_detect">NetHunter终端状态</string>
+    <string name="nethunter_howtouse_cmd">在此处输入您自己的命令字符串, 它将在Android环境中运行以获取显示的输出. </string>
+    <string name="nethunter_howtouse_delimiter">如果您想将输出拆分为多行, 请输入您想要的分隔符字符串, 默认为"\\n". </string>
+    <string name="nethunter_howtouse_runoncreate">若要在片段创建时立即获取输出, 请勾选此选项. 否则您需要手动点击运行按钮来获取输出. </string>
 
-    <string name="hid_powersploit_description">The Powersploit payload provides you a choice of reverse meterpreter HTTP/S payloads. "URL to payload" should be a URL accessible to the victim machine where the larger payload is downloaded to.</string>
-    <string name="hid_windows_cmd_description">This Windows CMD payload allows you to enter raw commands to a Windows command prompt. Hitting the list menu will allow you to choose keyboard layout or UAC bypass options. </string>
+    <string name="hid_powersploit_description">Powersploit有效负载为您提供了反向meterpreter HTTP/S有效负载的选择. "Payload URL"应是受害机器可访问的URL, 用于下载更大的有效负载. </string>
+    <string name="hid_windows_cmd_description">此Windows CMD有效负载允许您向Windows命令提示符输入原始命令. 点击列表菜单可选择键盘布局或UAC绕过选项. </string>
 
     <!-- KaliServices -->
-    <string name="kali_services_description">Kali Chroot services can be started and stopped via the switch toggle buttons, you can also ADD, DELETE, MOVE, SEARCH, BACKUP, RESTORE and RESET your own service item, and long click on the item label to EDIT the item as well.</string>
-    <string name="kaliservices_howto_startservice">To START a service in kali, a command will be run INSIDE KaliChroot that looks like this:\n\nbusybox chroot &lt;chroot_folder> /usr/bin/sudo &lt;command_to_start_service>\n\nService is considered STARTED if the return value is 0 and vice versa.</string>
-    <string name="kaliservices_howto_stopservice">To STOP a service in kali, a command will be run INSIDE KaliChroot that looks like this:\n\nbusybox chroot &lt;chroot_folder> /usr/bin/sudo &lt;command_to_stop_service>\n\nService is considered STOPPED if the return value is 0 and vice versa.</string>
-    <string name="kaliservices_howto_checkservice">To Check if a service in kali is up or not, a command will be run OUTSIDE KaliChroot that looks like this:\n\nbusybox ps -o pid,comm | grep -w \'&lt;service_name>\'\n\nService is considered UP if the return value is 0 and vice versa.</string>
-    <string name="kaliservices_howto_runServiceOnBoot">To automatically start the service after Kali Chroot is up, check this option.</string>
+    <string name="kali_services_description">可以通过开关切换按钮启动和停止Kali Chroot服务, 您也可以添加、删除、移动、搜索、备份、恢复和重置您自己的服务项, 并且也可以通过长按项标签来编辑项. </string>
+    <string name="kaliservices_howto_startservice">要在Kali中启动服务, 将在KaliChroot内部运行一个如下所示的命令: \n\nbusybox chroot &lt;chroot_folder> /usr/bin/sudo &lt;command_to_start_service>\n\n如果返回值为0, 则认为服务已启动, 反之亦然. </string>
+    <string name="kaliservices_howto_stopservice">要在Kali中停止服务, 将在KaliChroot内部运行一个如下所示的命令: \n\nbusybox chroot &lt;chroot_folder> /usr/bin/sudo &lt;command_to_stop_service>\n\n如果返回值为0, 则认为服务已停止, 反之亦然. </string>
+    <string name="kaliservices_howto_checkservice">要检查Kali中的服务是否正在运行, 将在KaliChroot外部运行一个如下所示的命令: \n\nbusybox ps -o pid,comm | grep -w \'&lt;service_name>\'\n\n如果返回值为0, 则认为服务正在运行, 反之亦然. </string>
+    <string name="kaliservices_howto_runServiceOnBoot">要在Kali Chroot启动后自动启动服务, 请勾选此选项. </string>
 
     <!-- Modules -->
-    <string name="modules_description">Manage kernel modules, if your kernel has any supported. Most devices use all drivers as inbuilt. For information (modinfo) click and hold selected module for menu.</string>
+    <string name="modules_description">管理内核模块（如果您的内核支持）. 大多数设备将所有驱动程序内置. 要获取信息（modinfo）, 请点击并按住所选模块以显示菜单. </string>
 
     <!-- CustomCommands -->
-    <string name="custom_commands_description">You can ADD, DELETE, MOVE, SEARCH, BACKUP, RESTORE and RESET your custom command item. You can also long click on the item label to EDIT the item.</string>
+    <string name="custom_commands_description">您可以添加、删除、移动、搜索、备份、恢复和重置您的自定义命令项. 您也可以长按项标签来编辑项. </string>
     <string-array name="custom_commands_sendto_array">
         <item>android</item>
         <item>kali</item>
@@ -42,16 +42,16 @@
 
     <!-- USB Arsenal -->
     <string name="drawertitleusbarsenal">USB Arsenal</string>
-    <string name="usbarsenal_hint1_imagemounter">*Place all your .img or .iso files in "/sdcard/nh_files/diskimage/"</string>
-    <string name="usbarsenal_current_usb_state">Current USB state: </string>
-    <string name="usbarsenal_description">The USB Arsenal is awesome</string>
-    <string name="usbarsenal_header">USB Function Selector</string>
-    <string name="usbarsenal_enabledfunctions">USB functions currently enabled:</string>
-    <string name="usbarsenal_nofunctionsenabled">No USB function is currently enabled</string>
-    <string name="usbarsenal_imagemounter_header">Image Mounter</string>
-    <string name="usbarsenal_imagemounter_description">Image Mounter can be used only if the USB function \"mass_storage\" has been enabled</string>
-    <string name="usbarsenal_networktethering_header">USB Network Tethering</string>
-    <string name="usbarsenal_networktethering_description">USB NetWork Tethering can be used only if the USB function \"rndis\" or \"acmecm\" has been enabled</string>
+    <string name="usbarsenal_hint1_imagemounter">*请将所有.img或.iso文件放置在"/sdcard/nh_files/diskimage/"</string>
+    <string name="usbarsenal_current_usb_state">当前USB状态: </string>
+    <string name="usbarsenal_description">USB Arsenal非常强大</string>
+    <string name="usbarsenal_header">USB功能选择器</string>
+    <string name="usbarsenal_enabledfunctions">当前启用的USB功能:</string>
+    <string name="usbarsenal_nofunctionsenabled">当前未启用任何USB功能</string>
+    <string name="usbarsenal_imagemounter_header">镜像挂载器</string>
+    <string name="usbarsenal_imagemounter_description">仅当USB功能\"mass_storage\"已启用时, 才能使用镜像挂载器</string>
+    <string name="usbarsenal_networktethering_header">USB网络共享</string>
+    <string name="usbarsenal_networktethering_description">仅当USB功能\"rndis\"或\"acmecm\"已启用时, 才能使用USB网络共享</string>
     <string-array name="usbarsenal_target_platform">
         <item>Windows</item>
         <item>Linux</item>
@@ -78,122 +78,122 @@
         <item>acm,ecm,hid,mass_storage</item>
     </string-array>
     <string-array name="usbarsenal_usb_adb">
-        <item>Enable</item>
-        <item>Disable</item>
+        <item>启用</item>
+        <item>禁用</item>
     </string-array>
     <string-array name="usbarsenal_usb_network_attack_mode">
-        <item>Network Tethering Only</item>
+        <item>仅网络共享</item>
     </string-array>
 
     <!-- Bad USB -->
-    <string name="badusb_label">BadUSB MITM Attack</string>
-    <string name="badusb_description">This is our implementation of the BadUSB attack as demonstrated at Black Hat USA 2014. Enabling this USB gadget mode will allow your device to act as a USB network interface when plugged into a target computer. Connecting the USB cable to a PC will force all traffic from that PC (Windows or Linux) through the NetHunter device, where the traffic can be MITM\'ed.</string>
+    <string name="badusb_label">BadUSB中间人攻击</string>
+    <string name="badusb_description">这是我们在Black Hat USA 2014上演示的BadUSB攻击的实现. 启用此USB小工具模式后, 您的设备在插入目标计算机时将充当USB网络接口. 将USB电缆连接到PC将强制该PC（Windows或Linux）的所有流量通过NetHunter设备, 从而可以对流量进行中间人攻击. </string>
 
 
-    <string name="wifipumpkin_description">Start an Evil-Twin Access Point and intercept HTTP traffic. Custom captive portals, featuring mobile network upstream (rmnet_data2), internal wlan0 upstream, internal wlan0/wlan1 AP mode, and external adapters. Custom portals are also supported. Testing version. Preview will be added soon.</string>
-    <string name="mana_hostapd_wpe">The hostapd configuration file used for 802.1x/EAP authentication attack (hostapd-wpe)  This is not used with MANA.</string>
-    <string name="mana_hostapd_wpe_certs">Generate certificates (1st time only)</string>
-    <string name="mana_dhcpd">The dhcpd configuration file used by Mana.</string>
-    <string name="mana_dnsspoof">The dnsspoof configuration file used by Mana.</string>
-    <string name="mana_nat_full">The Mana script that does full NAT &amp; SSL interception.</string>
-    <string name="mana_nat_simple">The Mana script that does full NAT only.</string>
-    <string name="mana_nat_simple_bdf">The Mana script that does full NAT &amp; BDFProxy HTTP routing to port 8080.</string>
-    <string name="bdfproxy_cfg">The configuration file for BDFProxy.</string>
-    <string name="mana_bettercap_description">Route traffic to bettercap proxy with Mana-toolkit</string>
+    <string name="wifipumpkin_description">启动一个邪恶双子接入点并拦截HTTP流量. 自定义 captive portals, 支持移动网络上游（rmnet_data2）、内部wlan0上游、内部wlan0/wlan1 AP模式以及外部适配器. 也支持自定义门户网站. 测试版本. 预览即将添加. </string>
+    <string name="mana_hostapd_wpe">用于802.1x/EAP认证攻击的hostapd配置文件（hostapd-wpe）. 这不与MANA一起使用. </string>
+    <string name="mana_hostapd_wpe_certs">生成证书（仅首次）</string>
+    <string name="mana_dhcpd">Mana使用的dhcpd配置文件. </string>
+    <string name="mana_dnsspoof">Mana使用的dnsspoof配置文件. </string>
+    <string name="mana_nat_full">执行完整NAT和SSL拦截的Mana脚本. </string>
+    <string name="mana_nat_simple">仅执行完整NAT的Mana脚本. </string>
+    <string name="mana_nat_simple_bdf">执行完整NAT并将BDFProxy HTTP路由到端口8080的Mana脚本. </string>
+    <string name="bdfproxy_cfg">BDFProxy的配置文件. </string>
+    <string name="mana_bettercap_description">使用Mana-toolkit将流量路由到bettercap代理</string>
 
 
-    <string name="hostapd_private_key">Private Key Password</string>
+    <string name="hostapd_private_key">私钥密码</string>
 
-    <string name="select_language">Language</string>
-    <string name="duckConvertAttack">Attack</string>
-    <string name="duck_hunter_headline">The DuckHunter script can easily convert "USB Rubber Ducky" scripts into NetHunter HID format.  You can generate preconfigured scripts at the incredibly useful <a href="http://www.ducktoolkit.com/Home.jsp">Ducky Toolkit</a> site, or check out the Rubber Ducky script syntax from the official <a href="https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript">README</a></string>
+    <string name="select_language">语言</string>
+    <string name="duckConvertAttack">攻击</string>
+    <string name="duck_hunter_headline">DuckHunter脚本可以轻松将“USB Rubber Ducky”脚本转换为NetHunter HID格式. 您可以在极其有用的<a href="http://www.ducktoolkit.com/Home.jsp">Ducky Toolkit</a>站点生成预配置脚本, 或查看官方<a href="https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript">README</a>中的Rubber Ducky脚本语法. </string>
     <string-array name="duckhunter_preset_array">
-        <item>Select preset</item>
+        <item>选择预设</item>
         <item>Hello World</item>
-        <item>OSX Perl Reverse Shell</item>
-        <item>OSX Ruby Reverse Shell</item>
-        <item>Enable Windows RDP</item>
-        <item>Fake Windows 10 Update</item>
+        <item>OSX Perl反向Shell</item>
+        <item>OSX Ruby反向Shell</item>
+        <item>启用Windows RDP</item>
+        <item>伪造Windows 10更新</item>
     </string-array>
 
-    <string name="payload_select">Please select</string>
+    <string name="payload_select">请选择</string>
     <string-array name="payloads">
         <item>windows/meterpreter/reverse_http</item>
         <item>windows/meterpreter/reverse_https</item>
     </string-array>
 
-    <string name="source">Edit source</string>
+    <string name="source">编辑源</string>
 
-    <string name="start_badusb">Start BadUSB attack</string>
-    <string name="stop_badusb">Stop BadUSB attack</string>
+    <string name="start_badusb">启动BadUSB攻击</string>
+    <string name="stop_badusb">停止BadUSB攻击</string>
 
-    <string name="launch_kali_menu">Launch Kali Menu in Terminal</string>
-    <string name="launch_kali_shell">Launch Kali Shell in Terminal</string>
-    <string name="launch_wifite">Launch Wifite</string>
-    <string name="update_kali_chroot">Update Kali chroot</string>
-    <string name="turn_off_external_wifi">Turn Off External Wifi</string>
+    <string name="launch_kali_menu">在终端中启动Kali菜单</string>
+    <string name="launch_kali_shell">在终端中启动Kali Shell</string>
+    <string name="launch_wifite">启动Wifite</string>
+    <string name="update_kali_chroot">更新Kali chroot</string>
+    <string name="turn_off_external_wifi">关闭外部WiFi</string>
 
 
-    <string name="update">Update</string>
-    <string name="load">Load from SDCARD</string>
-    <string name="save">Save to SDCARD</string>
-    <string name="execute_attack">Execute Attack</string>
+    <string name="update">更新</string>
+    <string name="load">从SDCARD加载</string>
+    <string name="save">保存到SDCARD</string>
+    <string name="execute_attack">执行攻击</string>
 
-    <string name="stop_mana">Stop mana</string>
-    <string name="start_mana">Start mana</string>
+    <string name="stop_mana">停止mana</string>
+    <string name="start_mana">启动mana</string>
     <string name="bssid">BSSID</string>
     <string name="ssid">SSID</string>
-    <string name="chanel">Channel</string>
-    <string name="enable_karma">Enable karma</string>
-    <string name="admin">UAC Bypass</string>
-    <string name="choose_language">Keyboard Layout</string>
-    <string name="reset_usb">Reset USB</string>
+    <string name="chanel">信道</string>
+    <string name="enable_karma">启用karma</string>
+    <string name="admin">UAC绕过</string>
+    <string name="choose_language">键盘布局</string>
+    <string name="reset_usb">重置USB</string>
 
     <!-- Macchanger -->
-    <string name="iface">Interface</string>
-    <string name="payload">Payload</string>
-    <string name="loading_service">Loading service state</string>
-    <string name="get_external_ip">Get external IP</string>
+    <string name="iface">接口</string>
+    <string name="payload">有效负载</string>
+    <string name="loading_service">正在加载服务状态</string>
+    <string name="get_external_ip">获取外部IP</string>
     <string name="karma_loud">karma loud</string>
 
-    <string name="ps_ip_address">IP Address (LHOST)</string>
-    <string name="ps_port">Port (LPORT)</string>
-    <string name="ps_payload_url">URL to payload</string>
+    <string name="ps_ip_address">IP地址 (LHOST)</string>
+    <string name="ps_port">端口 (LPORT)</string>
+    <string name="ps_payload_url">Payload URL</string>
 
-    <string name="toast_error_permissions">NetHunter App does not have permission to send to NetHunter terminal!</string>
-    <string name="toast_install_terminal">Error launching intent. Install Android Terminal!</string>
+    <string name="toast_error_permissions">NetHunter应用没有权限发送到NetHunter终端！</string>
+    <string name="toast_install_terminal">启动意图错误. 请安装Android终端！</string>
     <string name="descriptiontext" />
 
-    <string name="macchanger_description">**Important: Android 10 has MAC Randomization provided already, but if you still want to set a custom mac address yourself, the following criteria are required:\n1. Enable the \'Use randomised MAC\' on each SSID you connect to.\n2. The AP you want to connect to must be connected with a correct password before.\nAs Manually connect to a AP will lose the changed mac.</string>
-    <string name="interface_select">Pick an interface:</string>
-    <string name="macchanger_select">Select macchanger mode:</string>
-    <string name="reset_mac">Reset wlan0 MAC address</string>
-    <string name="currentmac">Current MAC:</string>
+    <string name="macchanger_description">**重要: Android 10已提供MAC随机化功能, 但如果您仍想自行设置自定义mac地址, 需满足以下条件: \n1. 在您连接的每个SSID上启用“使用随机MAC”. \n2. 您要连接的AP必须事先使用正确的密码连接过. \n因为手动连接到AP会丢失更改的mac. </string>
+    <string name="interface_select">选择一个接口: </string>
+    <string name="macchanger_select">选择macchanger模式: </string>
+    <string name="reset_mac">重置wlan0 MAC地址</string>
+    <string name="currentmac">当前MAC: </string>
     <string name="TwoMACDigits">XX</string>
     <string name="macSeparator">:</string>
-    <string name="changeMAC">Change MAC</string>
-    <string name="resetMAC">Reset MAC</string>
-    <string name="reloadMAC">Reload MAC</string>
-    <string name="randomMAC">Random MAC</string>
-    <string name="customMAC">Custom MAC</string>
-    <string name="autorunningscripts">NetHunter: auto-running startup scripts</string>
-    <string name="toastForNoBusybox">Uh oh! NetHunter can\'t find busybox!</string>
-    <string name="readonly">Read-only</string>
+    <string name="changeMAC">更改MAC</string>
+    <string name="resetMAC">重置MAC</string>
+    <string name="reloadMAC">重新加载MAC</string>
+    <string name="randomMAC">随机MAC</string>
+    <string name="customMAC">自定义MAC</string>
+    <string name="autorunningscripts">NetHunter: 正在自动运行启动脚本</string>
+    <string name="toastForNoBusybox">糟糕！NetHunter找不到busybox！</string>
+    <string name="readonly">只读</string>
     <string-array name="macchanger_opts">
-        <item>Random MAC</item>
-        <item>Custom MAC</item>
+        <item>随机MAC</item>
+        <item>自定义MAC</item>
     </string-array>
     <string-array name="interface_opts">
-        <item>wlan0 (Internal wireless card)</item>
-        <item>wlan1 (External wireless card)</item>
-        <item>eth0 (Ethernet)</item>
-        <item>rndis0 (USB > Ethernet)</item>
-        <item>usb0 (USB > Ethernet Nexus7 2013 when tethering | badusb)</item>
+        <item>wlan0 (内部无线网卡)</item>
+        <item>wlan1 (外部无线网卡)</item>
+        <item>eth0 (以太网)</item>
+        <item>rndis0 (USB > 以太网)</item>
+        <item>usb0 (USB > 以太网 Nexus7 2013 共享时 | badusb)</item>
     </string-array>
 
     <!-- USB Army(Not in use yet) -->
     <string-array name="usb_states">
-        <item>Reset</item>
+        <item>重置</item>
         <item>mtp,hid</item>
         <item>hid</item>
         <item>mass_storage</item>
@@ -208,32 +208,32 @@
         <item>Mac OS</item>
     </string-array>
     <string-array name="usb_adb">
-        <item>No adb</item>
+        <item>无adb</item>
         <item>adb</item>
     </string-array>
 
     <!-- KeX -->
-    <string name="kex_description">Welcome to the Kali NetHunter Desktop Experience.\nEnjoy the full potential of Kali Linux, straight from your pocket, even on HDMI output. Audio supported, Use the Audio Manager to stream sound through KeX. Delay has been added to avoid soft reboot on some devices.</string>
+    <string name="kex_description">欢迎使用Kali NetHunter桌面体验. \n直接从您的口袋中享受Kali Linux的全部潜力, 甚至支持HDMI输出. 支持音频, 使用音频管理器通过KeX流式传输声音. 已添加延迟以避免在某些设备上软重启. </string>
 
     <!-- BT Attacks -->
-    <string name="bt_description">Welcome to Bluetooth Arsenal! Internal bluetooth support is now available for devices with RFCOMM, UART H4, VHCI and BINDER_IPC enabled in kernel, or devices with bt_smd driver.</string>
-    <string name="bt_carwhisperer">Carwhisperer script from the way back. Listen to, or inject audio to various devices like speakers, headsets, watches or even cars. Carwshisperer is not supported by internal bluetooth (VHCI or bt_smd) yet.</string>
-    <string name="bt_spoof">Spoof your BT adapters address, class, and name.</string>
-    <string name="bt_tools">Brute force BT device addresses, ping, and discover their services.</string>
-    <string name="bt_badbt">Inspired by the Mr.Robot police car scene and the Flipper XFW Team, you can now create a Bluetooth keyboard server and send keystrokes straight from NetHunter. You may need to run setup again from the top right menu to install BadBT. Running this on a smartwatch against your paired phone may despair your watch from phone/wearos app. Prefixes are experimental.</string>
+    <string name="bt_description">欢迎使用蓝牙Arsenal！现在, 内核中启用了RFCOMM、UART H4、VHCI和BINDER_IPC的设备, 或具有bt_smd驱动程序的设备, 可以使用内部蓝牙支持. </string>
+    <string name="bt_carwhisperer">来自过去的Carwhisperer脚本. 收听或向各种设备（如扬声器、耳机、手表甚至汽车）注入音频. 内部蓝牙（VHCI或bt_smd）尚不支持Carwhisperer. </string>
+    <string name="bt_spoof">欺骗您的BT适配器地址、类别和名称. </string>
+    <string name="bt_tools">暴力破解BT设备地址、ping并发现其服务. </string>
+    <string name="bt_badbt">受Mr.Robot警车场景和Flipper XFW团队的启发, 您现在可以创建蓝牙键盘服务器并从NetHunter直接发送击键. 您可能需要从右上角菜单再次运行设置来安装BadBT. 在智能手表上针对配对手机运行此功能可能会使您的手表与phone/wearos应用断开连接. 前缀是实验性的. </string>
 
     <!-- SET -->
-    <string name="set_description">Social Engineering Toolkit email template builder by yesimxev. Please note you need to have a working Gmail or email relay configuration for SET in order to use these templates. It is recommended not to have account picture if you use Gmail.</string>
+    <string name="set_description">由yesimxev开发的社会工程学工具包电子邮件模板构建器. 请注意, 您需要为SET配置有效的Gmail或电子邮件中继配置才能使用这些模板. 建议在使用Gmail时不要设置帐户图片. </string>
 
     <!-- WPS -->
-    <string name="wps_description">OneShot performs WPS PIN and Pixie Dust attack without having to switch to monitor mode. Note that if scan is empty, you might need to reset your interface.</string>
+    <string name="wps_description">OneShot执行WPS PIN和Pixie Dust攻击, 无需切换到监控模式. 注意, 如果扫描为空, 您可能需要重置接口. </string>
 
     <!-- Settings -->
-    <string name="settings_description">Select your desired boot animation here. Please note that some older phones prefer 90% the size of original screen resolution, so it can run smoothly. In that case, tick convert, then set image resolution and final resolution together.</string>
+    <string name="settings_description">在此处选择您想要的启动动画. 请注意, 一些较旧的手机偏好原始屏幕分辨率的90%大小, 以便流畅运行. 在这种情况下, 请勾选转换, 然后同时设置图像分辨率和最终分辨率. </string>
 
     <!-- Kernel -->
-    <string name="kernel_description">Flash your custom kernel straight from Android. Still in experimental state. Some systems does not support runtime flashing. In that case, it is recommended to flash the kernel through recovery. Your device\'s actual codename may not be in the kernel repo, in that case, use the list below to find available device names.</string>
- 
+    <string name="kernel_description">直接从Android刷入您的自定义内核. 仍处于实验状态. 某些系统不支持运行时刷机. 在这种情况下, 建议通过恢复模式刷入内核. 您设备的实际代号可能不在内核仓库中, 在这种情况下, 请使用下面的列表查找可用的设备名称. </string>
+
     <!-- chroot stuff -->
     <array name="f_chrootmanager_build_chroot_arm_opts">
         <item>arm64</item>
@@ -244,81 +244,82 @@
         <item>min</item>
     </array>
 
-    <string name="thechroottitle">The Kali chroot</string>
-    <string name="installkalichrootbutton">Install Kali Chroot</string>
-    <string name="removekalichrootbutton">Remove Chroot</string>
-    <string name="MaintainChrootInTerminal">Add Metapackages</string>
-    <string name="existingchrootfound">An existing Kali chroot directory was found!</string>
-    <string name="nokalichrootfound">No Kali chroot directory was found.</string>
-    <string name="reallyremovechroot">Really remove the chroot?</string>
-    <string name="nogoingback">There\'s no going back.  You lose everything in your chroot.  Forever-ever.\n\nNOTE:  To fully ensure the chroot is not mounted and no processes are using it, <b><u>THE DEVICE WILL NOW BE REBOOTED</u></b>, then the chroot will be deleted.</string>
-    <string name="rebootbutton">Reboot and remove chroot</string>
-    <string name="chickenoutbutton">Forget it</string>
-    <string name="rebootingdialogtitle">Rebooting the device&#8230;</string>
-    <string name="rebootingdialogbody">The device is being restarted. (No complaining.  You were just told this would happen!)</string>
-    <string name="deletingforroom">Deleting to make room for download&#8230;</string>
-    <string name="problemdeletingoldfile">Problem deleting old file.  Just sayin\'.</string>
-    <string name="startingdownload">Starting download.  Standby&#8230;</string>
-    <string name="unwritablestorageerror">Nowhere to write to.  Make sure you have your external storage mounted and available.</string>
-    <string name="checkingforchroot">"Checking for chroot at "</string>
-    <string name="toastchrootmountedwarning">Kali chroot is mounted and NOT deleted.  Reboot again to remove!!</string>
-    <string name="toastdeletingchroot">Deleting Kali chroot&#8230;</string>
-    <string name="toastdeletedchroot">Kali chroot has been deleted.</string>
-    <string name="toastmigratingchroot">Migrating Kali chroot&#8230;</string>
-    <string name="toastmigratedchroot">Kali chroot has been migrated.</string>
-    <string name="unzippinguntarringdone">Unzipping &amp; untarring done.</string>
-    <string name="unzippinganduntarring">Unzipping and untarring....</string>
-    <string name="downloadfailscheck">Something went wrong verifying the downloaded file.  Whoops.  Try again.</string>
-    <string name="aboutchroot">This is Chroot Manager for Kali. The \"chroot\" is a full installation of Kali Linux that shares processing, networking, storage, and other resources with Android. It resides in your internal app storage area and is required to have at least 8 Gb free space for the minimal or full installation, just to make sure it won\'t break your system.</string>
-    <string name="extractinganddeploying">Extracting and Deploying</string>
-    <string name="nhwarning">WARNING:\nNetHunter installs and uses a standard Kali Linux distribution \"under the hood\".  To support this functionality, some <u>standard Android security features such as Security Enhanced Linux (SELinux) are disabled</u>.  Moreover, Kali\'s Linux processes may run with full root privileges and can therefore access system functionality well beyond the normal Android security model.  Consider therefore that this device, as a hybrid, may not be as secure as either standard Kali Linux OR standard Android, and you are advised not to install or use Nethunter on \"daily driver\" devices or devices which store or access sensitive/private data.</string>
-    <string name="nhteam">DEVELOPERS:\ngitlab.com/groups/kalilinux/nethunter/-/group_members</string>
-    <string name="unknown">Unknown</string>
-    <string name="statusText">Status:</string>
-    <string name="licenseInfo">LICENSE INFO:\nNetHunter is licensed under the GPLv2 (gnu.org/licenses/old-licenses/gpl-2.0.en.html) and the source code is available at gitlab.com/kalilinux/nethunter.\n Some icons are licensed from Google, Inc. under CC BY 4.0 (creativecommons.org/licenses/by/4.0). Android-VersionManager and jTar are licensed under Apache 2.0.  </string><string name="attack_launched">Attack launched!</string>
+    <string name="thechroottitle">Kali chroot</string>
+    <string name="installkalichrootbutton">安装Kali Chroot</string>
+    <string name="removekalichrootbutton">移除Chroot</string>
+    <string name="MaintainChrootInTerminal">添加元包</string>
+    <string name="existingchrootfound">发现现有的Kali chroot目录！</string>
+    <string name="nokalichrootfound">未找到Kali chroot目录. </string>
+    <string name="reallyremovechroot">确实要移除chroot吗？</string>
+    <string name="nogoingback">无法回头. 您将丢失chroot中的所有内容. 永远. \n\n注意: 为确保chroot未挂载且没有进程使用它, <b><u>设备现在将重启</u></b>, 然后chroot将被删除. </string>
+    <string name="rebootbutton">重启并移除chroot</string>
+    <string name="chickenoutbutton">算了</string>
+    <string name="rebootingdialogtitle">正在重启设备&#8230;</string>
+    <string name="rebootingdialogbody">设备正在重新启动. （别抱怨. 刚告诉过您会发生这种情况！）</string>
+    <string name="deletingforroom">正在删除以为下载腾出空间&#8230;</string>
+    <string name="problemdeletingoldfile">删除旧文件时出现问题. 只是说一下. </string>
+    <string name="startingdownload">开始下载. 请稍候&#8230;</string>
+    <string name="unwritablestorageerror">无处可写. 请确保您的外部存储已挂载且可用. </string>
+    <string name="checkingforchroot">"正在检查chroot位于 "</string>
+    <string name="toastchrootmountedwarning">Kali chroot已挂载, 未删除. 请再次重启以移除！！</string>
+    <string name="toastdeletingchroot">正在删除Kali chroot&#8230;</string>
+    <string name="toastdeletedchroot">Kali chroot已被删除. </string>
+    <string name="toastmigratingchroot">正在迁移Kali chroot&#8230;</string>
+    <string name="toastmigratedchroot">Kali chroot已迁移. </string>
+    <string name="unzippinguntarringdone">解压和解包完成. </string>
+    <string name="unzippinganduntarring">正在解压和解包....</string>
+    <string name="downloadfailscheck">验证下载文件时出现问题. 哎呀. 请重试. </string>
+    <string name="aboutchroot">这是Kali的Chroot管理器. “chroot”是一个完整的Kali Linux安装, 与Android共享处理、网络、存储和其他资源. 它位于您的内部应用存储区域, 至少需要8 GB的可用空间（最小或完整安装）, 以确保不会破坏您的系统. </string>
+    <string name="extractinganddeploying">正在提取和部署</string>
+    <string name="nhwarning">警告: \nNetHunter在“底层”安装并使用标准的Kali Linux发行版. 为支持此功能, 一些<u>标准的Android安全功能（如安全增强型Linux (SELinux)）被禁用</u>. 此外, Kali的Linux进程可能以完全root权限运行, 因此可以访问远超正常Android安全模型的系统功能. 因此, 请考虑此设备作为混合体, 可能不如标准Kali Linux或标准Android安全, 建议不要在“日常使用”设备或存储或访问敏感/私人数据的设备上安装或使用Nethunter. </string>
+    <string name="nhteam">开发者: \nhttps://gitlab.com/groups/kalilinux/nethunter/-/group_members\n\n汉化·校对·开发·测试: \nhttp://www.coolapk.com/u/31057759\nhttp://github.com/littlepe\nhttps://space.bilibili.com/649699256\n(没错,就我一个人)\n\n汉化版代码开源地址:\nhttps://github.com/littlepe/Kali-NetHunter-App_CN</string>
+    <string name="unknown">未知</string>
+    <string name="statusText">状态: </string>
+    <string name="licenseInfo">本软件完全免费, 请勿倒卖, 修改请标明作者. \n\n许可证信息: \nNetHunter根据GPLv2许可:\nhttps://gnu.org/licenses/old-licenses/gpl-2.0.en.html\n源代码:\nhttps://gitlab.com/kalilinux/nethunter\n部分图标由Google, Inc.根据CC BY 4.0许可:\nhttps://creativecommons.org/licenses/by/4.0\n\nAndroid版本管理器和jTar在Apache 2.0下获得许可 </string>
+    <string name="attack_launched">攻击已启动！</string>
 
     <!-- sidebar menu item titles -->
-    <string name="drawertitlenethunter">Home</string>
-    <string name="drawertitlecreatechroot">Kali Chroot Manager</string>
-    <string name="drawertitlecheckupdate">Check App Update</string>
-    <string name="drawertitlekaliservices">Kali Services</string>
-    <string name="drawertitlecustomcommands">Custom Commands</string>
-    <string name="drawertitlemacchanger">MAC Changer</string>
-    <string name="drawertitlevncmanager">KeX Manager</string>
-    <string name="drawertitleaudio">Audio Manager</string>
-    <string name="drawertitlehid">HID Attacks</string>
+    <string name="drawertitlenethunter">主页</string>
+    <string name="drawertitlecreatechroot">Kali Chroot管理器</string>
+    <string name="drawertitlecheckupdate">检查应用更新</string>
+    <string name="drawertitlekaliservices">Kali服务</string>
+    <string name="drawertitlecustomcommands">自定义命令</string>
+    <string name="drawertitlemacchanger">MAC地址更改器</string>
+    <string name="drawertitlevncmanager">KeX管理器</string>
+    <string name="drawertitleaudio">音频管理器</string>
+    <string name="drawertitlehid">HID攻击</string>
     <string name="drawertitleduckhunter">DuckHunter HID</string>
-    <string name="drawertitlebadusb">Bad USB MITM Attack</string>
+    <string name="drawertitlebadusb">Bad USB中间人攻击</string>
     <string name="drawertitlewifipumpkin">Wifipumpkin</string>
-    <string name="drawertitlewps">WPS Attacks</string>
-    <string name="drawertitlebt">Bluetooth Arsenal</string>
-    <string name="drawertitlenmap">Nmap Scan</string>
-    <string name="drawertitlempc">Metasploit Payload Generator</string>
+    <string name="drawertitlewps">WPS攻击</string>
+    <string name="drawertitlebt">蓝牙Arsenal</string>
+    <string name="drawertitlenmap">Nmap扫描</string>
+    <string name="drawertitlempc">Metasploit有效负载生成器</string>
     <string name="drawertitlesearchsploit">SearchSploit</string>
-    <string name="drawertitlepineapple">Pineapple Connector</string>
-    <string name="drawertitlegps">Wardriving</string>
+    <string name="drawertitlepineapple">Pineapple连接器</string>
+    <string name="drawertitlegps"> Wardriving</string>
     <string name="drawertitledeauth">DeAuth</string>
     <string name="drawertitlecan">CARsenal</string>
-    <string name="drawertitlesettings">Settings</string>
-    <string name="drawertitlekernel">Kernel</string>
-    <string name="drawertitlemodules">Modules</string>
+    <string name="drawertitlesettings">设置</string>
+    <string name="drawertitlekernel">内核</string>
+    <string name="drawertitlemodules">模块</string>
     <string name="drawertitleset">SET</string>
-    <string name="InstallAndUpdateButtonText"><![CDATA[Install & Update]]></string>
-    <string name="metapackagesExplanation">Choose some \"metapackages\". The chroot will also be upgraded (via \"apt-get update/dist-upgrade\").\n\nSelecting metapackages you already have installed (or no packages at all) simply update/upgrades without removing anything.\n\nDepending on what metapackages you select, you may be asked to do stuff (such as set passwords for services), so pay attention.</string>
-    <string name="metapackagesAdditionalInfo">Local storage requirements may be in the 20+ GB range. This installation/update will be performed in a terminal, so watch for issues. When completed, press the back button.</string>
-    <string name="rootdialogmessage">Whoopsy daisy!  NetHunter requires elevated administrator (root) privileges.\n\nMake sure root access is available.\n\nIf you touched the deny button by error, go to SuperSU app, find NetHunter in the APPS tab, and allow access (grant).\n\nDepending on your version of Android, this may require a \"rooting\" procedure to install the <tt>su</tt> binary.\n\nOn LineageOS or LS-based Android, you may need to go to your device <b>Settings</b>, and under <b>Developer Options</b>, enable <b>Root access</b> for <b>Apps</b>.\n\nAdditionally, you will need to make sure <tt>busybox</tt> is installed, usually to <tt>/system/xbin/busybox</tt>.</string>
-    <string name="rootdialogtitle">Missing root/busybox</string>
-    <string name="rootdialogposbutton">Try again</string>
-    <string name="rootdialognegbutton">Quit</string>
+    <string name="InstallAndUpdateButtonText"><![CDATA[安装与更新]]></string>
+    <string name="metapackagesExplanation">选择一些“元包”. chroot也将被升级（通过“apt-get update/dist-upgrade”）. \n\n选择已安装的元包（或不选择任何包）只会更新/升级, 不会删除任何内容. \n\n根据您选择的元包, 可能会要求您执行一些操作（例如为服务设置密码）, 因此请注意. </string>
+    <string name="metapackagesAdditionalInfo">本地存储需求可能在20+ GB范围内. 此安装/更新将在终端中执行, 因此请注意问题. 完成后, 按返回按钮. </string>
+    <string name="rootdialogmessage">哎呀！NetHunter需要提升的管理员（root）权限. \n\n确保root访问可用. \n\n如果您错误地点击了拒绝按钮, 请转到SuperSU应用, 在APPS选项卡中找到NetHunter, 并允许访问（授予）. \n\n根据您的Android版本, 这可能需要进行“root”程序来安装<tt>su</tt>二进制文件. \n\n在LineageOS或基于LS的Android上, 您可能需要转到设备<b>设置</b>, 在<b>开发者选项</b>下, 为<b>应用</b>启用<b>Root访问</b>. \n\n此外, 您需要确保安装了<tt>busybox</tt>, 通常安装在<tt>/system/xbin/busybox</tt>. </string>
+    <string name="rootdialogtitle">缺少root/busybox</string>
+    <string name="rootdialogposbutton">重试</string>
+    <string name="rootdialognegbutton">退出</string>
 
-    <string name="legacychroottitle">Legacy chroot found!</string>
-    <string name="legacychrootmessage">You appear to already have an existing Kali chroot from an older version of Nethunter.\n\nMigrating it to its new location requires a reboot.\n\n Or, you can leave the old chroot alone and install a new chroot.  If you choose this option, make sure you have enough storage for both.</string>
-    <string name="legacychrootposbutton">Migrate (reboot)</string>
-    <string name="legacychrootnegbutton">Ignore current</string>
+    <string name="legacychroottitle">发现旧版chroot！</string>
+    <string name="legacychrootmessage">您似乎已有旧版Nethunter的现有Kali chroot. \n\n将其迁移到新位置需要重启. \n\n或者, 您可以保留旧chroot并安装新chroot. 如果选择此选项, 请确保有足够的存储空间容纳两者. </string>
+    <string name="legacychrootposbutton">迁移（重启）</string>
+    <string name="legacychrootnegbutton">忽略当前</string>
 
     <!-- MPC -->
-    <string name="mpc_description">MSFvenom Payload Creator (MSFPC) is a wrapper written by g0tmi1k to generate multiple types of payloads, based on users choice. The idea is to be as simple as possible (only requiring one input) to produce their payload.</string>
-    <string name="mpc_type">Type:</string>
+    <string name="mpc_description">MSFvenom有效负载创建器（MSFPC）是g0tmi1k编写的一个包装器, 用于根据用户选择生成多种类型的有效负载. 其理念是尽可能简单（只需要一个输入）来生成它们的有效负载. </string>
+    <string name="mpc_type">类型: </string>
     <string-array name="mpc_type_array">
         <item>ASP</item>
         <item>ASPX</item>
@@ -334,41 +335,41 @@
         <item>Windows [.exe/.dll]</item>
         <item>Android [.apk]</item>
     </string-array>
-    <string name="mpc_port">Port:</string>
+    <string name="mpc_port">端口: </string>
     <string name="mpc_port_default">443</string>
-    <string name="mpc_ip_address">IP Address:</string>
-    <string name="mpc_payload">Payload Options:</string>
+    <string name="mpc_ip_address">IP地址: </string>
+    <string name="mpc_payload">有效负载选项: </string>
     <string-array name="mpc_payload_array">
         <item>MSF</item>
         <item>CMD</item>
     </string-array>
     <string-array name="mpc_callback_array">
-        <item>Reverse</item>
-        <item>Bind</item>
+        <item>反向</item>
+        <item>绑定</item>
     </string-array>
     <string-array name="mpc_stage_array">
-        <item>Staged</item>
-        <item>Stageless</item>
+        <item>分阶段</item>
+        <item>无阶段</item>
     </string-array>
     <string-array name="mpc_callbacktype_array">
         <item>TCP</item>
         <item>HTTP</item>
         <item>HTTPS</item>
-        <item>Find Port</item>
+        <item>查找端口</item>
     </string-array>
-    <string name="mpc_generateSDCARD">Generate to SDCARD</string>
-    <string name="mpc_generateHTTP">Generate to HTTP</string>
+    <string name="mpc_generateSDCARD">生成到SDCARD</string>
+    <string name="mpc_generateHTTP">生成到HTTP</string>
 
     <!-- SearchSploit -->
-    <string name="searchsploit_searchbar">Search Exploits</string>
+    <string name="searchsploit_searchbar">搜索漏洞利用</string>
 
     <!-- Custom Launcher -->
-    <string name="add_lauchner_btn_label">Label: </string>
-    <string name="add_lauchner_btn_command">Command: </string>
-    <string name="toast_input_error_launcher">Invalid arguments given!</string>
-    <string name="installing_notice">Installing Chroot…</string>
-    <string name="drawer_opened">Drawer opened</string>
-    <string name="drawer_closed">Drawer closed</string>
+    <string name="add_lauchner_btn_label">标签:  </string>
+    <string name="add_lauchner_btn_command">命令:  </string>
+    <string name="toast_input_error_launcher">输入了无效参数！</string>
+    <string name="installing_notice">正在安装Chroot…</string>
+    <string name="drawer_opened">抽屉已打开</string>
+    <string name="drawer_closed">抽屉已关闭</string>
     <string-array name="exec_mode">
         <item>BACKGROUND</item>
         <item>INTERACTIVE</item>
@@ -377,40 +378,40 @@
         <item>KALI</item>
         <item>ANDROID</item>
     </string-array>
-    <string name="cancel">Cancel</string>
-    <string name="extract_chroot">Decompressing and deploying the Chroot… (~5–10 min)</string>
+    <string name="cancel">取消</string>
+    <string name="extract_chroot">正在解压和部署Chroot…（约5–10分钟）</string>
 
     <!-- Start NMAP -->
     <string name="nmap_hint">scanme.nmap.org, 192.168.0.1; 10.0.0–255.1&#8211;254</string>
     <string-array name="nmap_interface_array">
-        <item>Select interface</item>
+        <item>选择接口</item>
         <item>wlan0</item>
         <item>wlan1</item>
         <item>eth0</item>
         <item>rndis0</item>
     </string-array>
-    <string name="nmap_all">Enable OS version detect, script scan, and traceroute</string>
-    <string name="nmap_ipv6">Enable IPv6</string>
-    <string name="nmap_timing_template">Timing Template</string>
+    <string name="nmap_all">启用操作系统版本检测、脚本扫描和路由跟踪</string>
+    <string name="nmap_ipv6">启用IPv6</string>
+    <string name="nmap_timing_template">定时模板</string>
     <string-array name="nmap_timing_array">
-        <item>Select timing template</item>
-        <item>Paranoid</item>
-        <item>Sneaky</item>
-        <item>Polite</item>
-        <item>Normal</item>
-        <item>Aggressive</item>
-        <item>Insane</item>
+        <item>选择定时模板</item>
+        <item>偏执</item>
+        <item>偷偷摸摸</item>
+        <item>礼貌</item>
+        <item>正常</item>
+        <item>激进</item>
+        <item>疯狂</item>
     </string-array>
-    <string name="nmap_ports">Ports</string>
-    <string name="nmap_fastmode">Fast mode (fewer ports)</string>
-    <string name="nmap_dontrandomize">Don\'t randomize port scan</string>
-    <string name="nmap_topports">Top 20 Ports</string>
-    <string name="nmap_osdetectenable">Enable OS detection</string>
-    <string name="nmap_servicedetect">Service/Version Detection</string>
-    <string name="nmap_hostdiscovery_ping">Ping Scan</string>
-    <string name="nmap_scan_technique">Scan Techniques</string>
+    <string name="nmap_ports">端口</string>
+    <string name="nmap_fastmode">快速模式（较少端口）</string>
+    <string name="nmap_dontrandomize">不随机化端口扫描</string>
+    <string name="nmap_topports">前20端口</string>
+    <string name="nmap_osdetectenable">启用操作系统检测</string>
+    <string name="nmap_servicedetect">服务/版本检测</string>
+    <string name="nmap_hostdiscovery_ping">Ping扫描</string>
+    <string name="nmap_scan_technique">扫描技术</string>
     <string-array name="nmap_scantechnique_array">
-        <item>Select scan technique</item>
+        <item>选择扫描技术</item>
         <item>TCP SYN</item>
         <item>Connect()</item>
         <item>ACK</item>
@@ -420,20 +421,20 @@
         <item>FIN</item>
         <item>XMAS</item>
     </string-array>
-    <string name="nmap_udpscan">UDP Scan</string>
+    <string name="nmap_udpscan">UDP扫描</string>
     <!-- End NMAP -->
 
 
     <!-- Start PineappleFragment -->
-    <string name="pineapple_description">The pineapple connector is used in conjunction with the Hak5 Pineapple Nano and a USB OTG cable.   This helper will connect the Pineapple Nano over ethernet and upstream your wifi connection.</string>
-    <string name="pineapple_gateway">Pineapple Gateway/Web Interface IP</string>
-    <string name="pineapple_port">Pineapple Nano Web Port</string>
-    <string name="pineapple_ip">Client IP</string>
+    <string name="pineapple_description">Pineapple连接器与Hak5 Pineapple Nano和USB OTG电缆结合使用. 此助手将通过以太网连接Pineapple Nano并上游您的WiFi连接. </string>
+    <string name="pineapple_gateway">Pineapple网关/Web界面IP</string>
+    <string name="pineapple_port">Pineapple Nano Web端口</string>
+    <string name="pineapple_ip">客户端IP</string>
     <string name="pineapple_cidr">Pineapple CIDR</string>
-    <string name="pineapple_start_OTG">Setup Connection</string>
-    <string name="pineapple_stop_OTG">Close Connection</string>
-    <string name="pineapple_noupstream">No upstream</string>
-    <string name="pineapple_transproxy">Forward port 80/443 to 8080/8083</string>
+    <string name="pineapple_start_OTG">建立连接</string>
+    <string name="pineapple_stop_OTG">关闭连接</string>
+    <string name="pineapple_noupstream">无上游</string>
+    <string name="pineapple_transproxy">将端口80/443转发到8080/8083</string>
     <string name="pineapple_subnet">172.16.42.0/24</string>
     <string name="pineapple_webport">1471</string>
     <string name="pineapple_gatewayip">172.16.42.1</string>
@@ -441,265 +442,265 @@
     <!-- End PineappleFragment -->
 
     <!-- Start GPSFragment -->
-    <string name="switch_gps_provider">Android GPS Provider</string>
-    <string name="switch_gpsd">gpsd in chroot</string>
-    <string name="gps_button_launch_app">Launch %s in NH Terminal</string>
-    <string name="gps_description">Converts your GPS to NMEA then provides to Kali chroot. Perfect for wardriving with Kismet or just a generic GPS server for Kali. Select your desired datasources. Make sure your wireless interface is in monitor mode before starting Kismet. Internal wireless interfaces can also be used thanks to the monitor mode by QCACLD-3.0 driver.</string>
-    <string name="gps_help">You may need to give Nethunter permissions to GPS. Go to Settings > Apps > Nethunter > Permissions.</string>
-    <string name="loading_wait">Loading wait…</string>
-    <string name="loading_file">Loading…  FILE: %s</string>
-    <string name="scanButtonText">Scan</string>
-    <string name="advancedOptionsSwitchText">Advanced Options</string>
-    <string name="edit_whitelist_file">Edit whitelist file.</string>
-    <string name="type_wlan_interface">Type wlan interface</string>
-    <string name="scan_networks">Scan Networks</string>
-    <string name="channel">Channel</string>
-    <string name="whitelist">Whitelist</string>
-    <string name="deauthenticate_anyone_besides_me">Deauthenticate anyone besides me</string>
-    <string name="start_deauthentication">Start Deauthentication :)</string>
-    <string name="objects_to_inject">Objects to Inject</string>
-    <string name="inject_characteristics">Inject Characteristics</string>
-    <string name="shellshock_command">Shellshock command</string>
-    <string name="inject_settings">Inject Settings</string>
-    <string name="gps_notification_lat">"Lat: "</string>
-    <string name="gps_notification_long">"Long: "</string>
+    <string name="switch_gps_provider">Android GPS提供程序</string>
+    <string name="switch_gpsd">chroot中的gpsd</string>
+    <string name="gps_button_launch_app">在NH终端中启动%s</string>
+    <string name="gps_description">将您的GPS转换为NMEA, 然后提供给Kali chroot. 非常适合使用Kismet进行wardriving, 或仅为Kali提供通用GPS服务器. 选择您想要的数据源. 在启动Kismet之前, 请确保您的无线接口处于监控模式. 由于QCACLD-3.0驱动程序的监控模式, 内部无线接口也可以使用. </string>
+    <string name="gps_help">您可能需要授予Nethunter GPS权限. 转到设置 > 应用 > Nethunter > 权限. </string>
+    <string name="loading_wait">正在加载, 请稍候…</string>
+    <string name="loading_file">正在加载…  文件: %s</string>
+    <string name="scanButtonText">扫描</string>
+    <string name="advancedOptionsSwitchText">高级选项</string>
+    <string name="edit_whitelist_file">编辑白名单文件. </string>
+    <string name="type_wlan_interface">输入wlan接口</string>
+    <string name="scan_networks">扫描网络</string>
+    <string name="channel">信道</string>
+    <string name="whitelist">白名单</string>
+    <string name="deauthenticate_anyone_besides_me">取消除我之外的所有人的认证</string>
+    <string name="start_deauthentication">开始取消认证 :)</string>
+    <string name="objects_to_inject">要注入的对象</string>
+    <string name="inject_characteristics">注入特征</string>
+    <string name="shellshock_command">Shellshock命令</string>
+    <string name="inject_settings">注入设置</string>
+    <string name="gps_notification_lat">"纬度: "</string>
+    <string name="gps_notification_long">"经度: "</string>
     <string name="gps_notification_accuracy">"+/- "</string>
-    <string name="gps_notification_source">"Source: "</string>
-    <string name="gps_notification_age">"Age: "</string>
-    <string name="gps_notification_sats">"Sats: "</string>
+    <string name="gps_notification_source">"来源: "</string>
+    <string name="gps_notification_age">"时间: "</string>
+    <string name="gps_notification_sats">"卫星: "</string>
 
     <!-- End GPSFragment -->
 
     <!--Notification Channel-->
-    <string name="boot_notification_channel">Boot</string>
-    <string name="boot_notification_channel_description">Notification for run at boot services</string>
+    <string name="boot_notification_channel">启动</string>
+    <string name="boot_notification_channel_description">用于开机运行服务的通知</string>
 
     <!--Custom Spinner Array-->
     <string-array name="array_move_position">
-        <item>Before:</item>
-        <item>After:</item>
+        <item>之前: </item>
+        <item>之后: </item>
     </string-array>
 
     <string-array name="array_insert_position">
-        <item>Insert to Top</item>
-        <item>Insert to Bottom</item>
-        <item>Insert Before:</item>
-        <item>Insert After:</item>
+        <item>插入到顶部</item>
+        <item>插入到底部</item>
+        <item>插入到之前: </item>
+        <item>插入到之后: </item>
     </string-array>
 
     <!-- dummy_accessibility_service -->
     <string name="dummy_accessibility_service">dummy_accessibility_service</string>
-    <string name="bootanimation_path_not_found">Bootanimation path not found</string>
-    <string name="launch_kismet_nhterm">Launch Kismet in NH Terminal</string>
-    <string name="list_of_available_folders">\n List of available folder(s) in\n\"%s/\":\n\n</string>
-    <string name="not_yet_installed">Not yet installed!</string>
-    <string name="running">Running!</string>
-    <string name="stopped">Stopped</string>
-    <string name="launch_kismet">Launch Kismet</string>
-    <string name="full_path_to_where_you_want_to_save_the_database">Full path to where you want to save the database:</string>
-    <string name="full_path_of_the_db_file_from_where_you_want_to_restore2">Full path of the db file from where you want to restore:</string>
-    <string name="download_latest_kali_chroot_from_official_image">DOWNLOAD LATEST KALI CHROOT FROM OFFICIAL IMAGE</string>
-    <string name="download_latest_kali_chroot_from_official_image2">DOWNLOAD LATEST KALI CHROOT FROM OFFICIAL IMAGE</string>
-    <string name="type_the_full_path_of_your_kali_chroot_tarball_file">Type the full path of your Kali Chroot tarball file:</string>
-    <string name="long_press_to_manage_a_command_dont_forget_to_backup_use_double_quotes_if_needed">Long press to manage a command, dont forget to backup!. Use double quotes if needed.</string>
-    <string name="search_command">search command</string>
-    <string name="add_command">Add Command</string>
-    <string name="add">Add</string>
-    <string name="delete">Delete</string>
-    <string name="move">Move</string>
-    <string name="not_supported">Not supported</string>
-    <string name="supported">Supported</string>
+    <string name="bootanimation_path_not_found">未找到启动动画路径</string>
+    <string name="launch_kismet_nhterm">在NH终端中启动Kismet</string>
+    <string name="list_of_available_folders">\n 在\n\"%s/\"中可用的文件夹列表: \n\n</string>
+    <string name="not_yet_installed">尚未安装！</string>
+    <string name="running">正在运行！</string>
+    <string name="stopped">已停止</string>
+    <string name="launch_kismet">启动Kismet</string>
+    <string name="full_path_to_where_you_want_to_save_the_database">要保存数据库的完整路径: </string>
+    <string name="full_path_of_the_db_file_from_where_you_want_to_restore2">要从中恢复的数据库文件的完整路径: </string>
+    <string name="download_latest_kali_chroot_from_official_image">从官方镜像下载最新的KALI CHROOT</string>
+    <string name="download_latest_kali_chroot_from_official_image2">从官方镜像下载最新的KALI CHROOT</string>
+    <string name="type_the_full_path_of_your_kali_chroot_tarball_file">输入您的Kali Chroot tarball文件的完整路径: </string>
+    <string name="long_press_to_manage_a_command_dont_forget_to_backup_use_double_quotes_if_needed">长按以管理命令, 别忘了备份！. 如果需要, 请使用双引号. </string>
+    <string name="search_command">搜索命令</string>
+    <string name="add_command">添加命令</string>
+    <string name="add">添加</string>
+    <string name="delete">删除</string>
+    <string name="move">移动</string>
+    <string name="not_supported">不支持</string>
+    <string name="supported">支持</string>
     <string name="setup_done_key">wp3_setup_done</string>
-    <string name="good">Good</string>
-    <string name="nope">Nope</string>
+    <string name="good">良好</string>
+    <string name="nope">不行</string>
     <string name="wpe_description">wpe_description</string>
-    <string name="change_path">Change path</string>
+    <string name="change_path">更改路径</string>
     <string name="data_local_nhsystem">/data/local/nhsystem/</string>
     <string name="kali_arm64">kali-arm64</string>
-    <string name="loading_dot_dot_dot">Loading ...</string>
-    <string name="chroot_manager_install">Install</string>
-    <string name="chroot_manager_add_metapackage">Add Metapackge</string>
-    <string name="chroot_manager_backup">Backup</string>
-    <string name="chroot_manager_start">Start</string>
-    <string name="chroot_manager_stop">Stop</string>
-    <string name="chroot_manager_remove">Remove</string>
+    <string name="loading_dot_dot_dot">正在加载 ...</string>
+    <string name="chroot_manager_install">安装</string>
+    <string name="chroot_manager_add_metapackage">添加元包</string>
+    <string name="chroot_manager_backup">备份</string>
+    <string name="chroot_manager_start">启动</string>
+    <string name="chroot_manager_stop">停止</string>
+    <string name="chroot_manager_remove">移除</string>
 
     <!-- Nethunter Audio -->
-    <string name="module_name">NetHunter Audio</string>
-    <string name="audio_description">This module allow Chroot audio playback to Android environment over local server, ensuring seamless playback of HQ-Audio output through the main speakers.</string>
-    <string name="auto_start">Auto Start</string>
-    <string name="playback_service_status">NH Playback %1$s</string>
-    <string name="playback_status_starting">Starting</string>
-    <string name="playback_status_buffering">Buffering</string>
-    <string name="playback_status_playing">Playing</string>
-    <string name="playback_status_stopping">Stopping</string>
-    <string name="playback_status_stopped">Stopped</string>
-    <string name="playback_service_label">PulseDroid Playback</string>
+    <string name="module_name">NetHunter音频</string>
+    <string name="audio_description">此模块允许Chroot音频通过本地服务器在Android环境中播放, 确保通过主扬声器无缝播放HQ音频输出. </string>
+    <string name="auto_start">自动启动</string>
+    <string name="playback_service_status">NH播放 %1$s</string>
+    <string name="playback_status_starting">正在启动</string>
+    <string name="playback_status_buffering">正在缓冲</string>
+    <string name="playback_status_playing">正在播放</string>
+    <string name="playback_status_stopping">正在停止</string>
+    <string name="playback_status_stopped">已停止</string>
+    <string name="playback_service_label">PulseDroid播放</string>
     <string name="service_notification_channel">pulsedroid_service</string>
-    <string name="btn_play">Play</string>
-    <string name="btn_starting">Starting…</string>
-    <string name="btn_buffering">Buffering…</string>
-    <string name="btn_stop">Stop</string>
-    <string name="btn_stopping">Stopping…</string>
-    <string name="btn_waiting">Waiting…</string>
-    <string name="btn_exit">Exit</string>
-    <string name="input_port">Port</string>
-    <string name="input_host">Host</string>
-    <string name="play_error">Playback error:\n%1$s</string>
-    <string name="buffer_infinite">infinite</string>
-    <string name="buffer_none">none</string>
-    <string name="input_buffer_headroom">Buffer headroom</string>
-    <string name="input_target_latency">Target latency</string>
+    <string name="btn_play">播放</string>
+    <string name="btn_starting">正在启动…</string>
+    <string name="btn_buffering">正在缓冲…</string>
+    <string name="btn_stop">停止</string>
+    <string name="btn_stopping">正在停止…</string>
+    <string name="btn_waiting">等待中…</string>
+    <string name="btn_exit">退出</string>
+    <string name="input_port">端口</string>
+    <string name="input_host">主机</string>
+    <string name="play_error">播放错误: \n%1$s</string>
+    <string name="buffer_infinite">无限</string>
+    <string name="buffer_none">无</string>
+    <string name="input_buffer_headroom">缓冲余量</string>
+    <string name="input_target_latency">目标延迟</string>
     <string name="builderinfo">IamCOD3X</string>
     <string name="build_version">1.0</string>
-    <string name="moduleInfo">Module Based on PulseDroid by dront78</string>
+    <string name="moduleInfo">基于dront78的PulseDroid模块</string>
 
-    <string name="duckhunter_conversion_failed">Conversion failed.</string>
+    <string name="duckhunter_conversion_failed">转换失败. </string>
 
     <!-- AUDIO -->
-    <string name="audio_service_not_connected">Service not connected yet. Please wait.</string>
+    <string name="audio_service_not_connected">服务尚未连接. 请稍候. </string>
     <string name="audio_serverinput">127.0.0.1</string>
     <string name="audio_portinput">8000</string>
-    <string name="audio_service_not_bound">Service not bound. Please try again.</string>
+    <string name="audio_service_not_bound">服务未绑定. 请重试. </string>
     <string name="error_title_empty">services_error_title_empty</string>
 
     <!-- VNC -->
-    <string name="vnc_watch_status">Status:</string>
-    <string name="vnc_watch_sessions">Sessions:</string>
-    <string name="vnc_hide_advanced_settings">HIDE ADVANCED SETTINGS</string>
-    <string name="vnc_disable_audio">Disable audio</string>
-    <string name="vnc_enable_audio">Enable audio</string>
-    <string name="vnc_hide_advanced_settings2">HIDE ADVANCED SETTINGS</string>
-    <string name="vnc_show_advanced_settings">SHOW ADVANCED SETTINGS</string>
-    <string name="vnc_stopped">STOPPED</string>
-    <string name="vnc_kexuser_none">None</string>
-    <string name="vnc_running">RUNNING</string>
-    <string name="vnc_enable_audio2">Enable audio</string>
-    <string name="vnc_disable_audio2">Disable audio</string>
+    <string name="vnc_watch_status">状态: </string>
+    <string name="vnc_watch_sessions">会话: </string>
+    <string name="vnc_hide_advanced_settings">隐藏高级设置</string>
+    <string name="vnc_disable_audio">禁用音频</string>
+    <string name="vnc_enable_audio">启用音频</string>
+    <string name="vnc_hide_advanced_settings2">隐藏高级设置</string>
+    <string name="vnc_show_advanced_settings">显示高级设置</string>
+    <string name="vnc_stopped">已停止</string>
+    <string name="vnc_kexuser_none">无</string>
+    <string name="vnc_running">正在运行</string>
+    <string name="vnc_enable_audio2">启用音频</string>
+    <string name="vnc_disable_audio2">禁用音频</string>
 
     <!-- MACCHANGER -->
-    <string name="macchanger_generate">GENERATE</string>
-    <string name="macchanger_clear">CLEAR</string>
-    <string name="macchanger_set_hostname">Set Hostname</string>
-    <string name="macchanger_current_hostname">Current Hostname:</string>
+    <string name="macchanger_generate">生成</string>
+    <string name="macchanger_clear">清除</string>
+    <string name="macchanger_set_hostname">设置主机名</string>
+    <string name="macchanger_current_hostname">当前主机名: </string>
 
     <!-- SERVICES -->
-    <string name="kaliservices_full_path_save_db">Full path to where you want to save the database:</string>
-    <string name="kaliservices_full_path_restore_db">Full path of the db file from where you want to restore:</string>
+    <string name="kaliservices_full_path_save_db">要保存数据库的完整路径: </string>
+    <string name="kaliservices_full_path_restore_db">要从中恢复的数据库文件的完整路径: </string>
     <string name="service_servicename_start"><![CDATA[service <servicename> start]]></string>
     <string name="service_servicename_stop"><![CDATA[service <servicename> stop]]></string>
     <string name="service_servicename"><![CDATA[<servicename>]]></string>
 
     <!-- BLUETOOTH (BT) -->
-    <string name="bt_interface">Interface</string>
-    <string name="bt_service">BT Service</string>
-    <string name="bt_smd">Bluetooth SMD</string>
-    <string name="bt_stopped">Stopped</string>
-    <string name="bt_start">Start</string>
-    <string name="bt_running">Running</string>
-    <string name="bt_stop">Stop</string>
-    <string name="bt_enabled">Enabled</string>
-    <string name="bt_disabled">Disabled</string>
-    <string name="bt_up">Up</string>
-    <string name="bt_down">Down</string>
+    <string name="bt_interface">接口</string>
+    <string name="bt_service">BT服务</string>
+    <string name="bt_smd">蓝牙SMD</string>
+    <string name="bt_stopped">已停止</string>
+    <string name="bt_start">启动</string>
+    <string name="bt_running">正在运行</string>
+    <string name="bt_stop">停止</string>
+    <string name="bt_enabled">已启用</string>
+    <string name="bt_disabled">已禁用</string>
+    <string name="bt_up">上线</string>
+    <string name="bt_down">下线</string>
     <string name="bt_badbt_string_rickroll">https://www.youtube.com/watch?v=dQw4w9WgXcQ</string>
     <string name="bt_badbt_string_fakeupdate">iexplore -k http://fakeupdate.net/win10ue</string>
 
     <!-- WPS -->
-    <string name="wps_wireless_interface">Wireless interface:</string>
-    <string name="wps_scan">Scan</string>
-    <string name="wps_reset_interface">Reset interface</string>
+    <string name="wps_wireless_interface">无线接口: </string>
+    <string name="wps_scan">扫描</string>
+    <string name="wps_reset_interface">重置接口</string>
     <string name="wps_pixie_dust">Pixie Dust</string>
     <string name="wps_pixie_force">Pixie Force</string>
-    <string name="wps_online_bruteforce">Online Bruteforce</string>
-    <string name="wps_custom_pin">Custom PIN</string>
-    <string name="wps_delay">Delay</string>
-    <string name="wps_wps_button">WPS Button</string>
-    <string name="wps_pin">PIN:</string>
+    <string name="wps_online_bruteforce">在线暴力破解</string>
+    <string name="wps_custom_pin">自定义PIN</string>
+    <string name="wps_delay">延迟</string>
+    <string name="wps_wps_button">WPS按钮</string>
+    <string name="wps_pin">PIN: </string>
     <string name="wps_wpspin_hint">12345678</string>
-    <string name="wps_delay2">Delay:</string>
+    <string name="wps_delay2">延迟: </string>
     <string name="wps_delaytime_hint">1</string>
-    <string name="wps_seconds">seconds</string>
-    <string name="wps_launch_attack">Launch attack</string>
+    <string name="wps_seconds">秒</string>
+    <string name="wps_launch_attack">发起攻击</string>
 
     <!-- KERNEL -->
-    <string name="kernel_device_details">Device details</string>
-    <string name="kernel_device">Device:</string>
-    <string name="kernel_loading">Loading ..</string>
-    <string name="kernel_codename">Codename:</string>
-    <string name="kernel_android">Android:</string>
-    <string name="kernel_custom_codename">Custom codename</string>
+    <string name="kernel_device_details">设备详情</string>
+    <string name="kernel_device">设备: </string>
+    <string name="kernel_loading">正在加载 ..</string>
+    <string name="kernel_codename">代号: </string>
+    <string name="kernel_android">Android: </string>
+    <string name="kernel_custom_codename">自定义代号</string>
     <string name="kernel_device_codename">device_codename</string>
-    <string name="kernel_check">Check</string>
-    <string name="kernel_select_kernel_to_flash">Select kernel to flash</string>
+    <string name="kernel_check">检查</string>
+    <string name="kernel_select_kernel_to_flash">选择要刷入的内核</string>
     <string name="kernel_kernel_nethunter_zip">/sdcard/kernel_nethunter.zip</string>
     <string name="kernel_dots">...</string>
-    <string name="kernel_flash_kernel">Flash kernel</string>
+    <string name="kernel_flash_kernel">刷入内核</string>
 
     <!-- CHROOTMGR -->
-    <string name="chrootmgr_download_latest">DOWNLOAD LATEST KALI CHROOT</string>
-    <string name="chrootmgr_install_from_local_storage">INSTALL FROM LOCAL STORAGE</string>
+    <string name="chrootmgr_download_latest">下载最新的KALI CHROOT</string>
+    <string name="chrootmgr_install_from_local_storage">从本地存储安装</string>
 
     <!-- MODULES -->
-    <string name="modules_path">Modules path</string>
+    <string name="modules_path">模块路径</string>
     <string name="modules_system_lib_path">/system/lib/modules</string>
     <string name="modules_lsmod">lsmod</string>
-    <string name="modules_refresh">Refresh</string>
-    <string name="modules_available_modules">Available modules</string>
+    <string name="modules_refresh">刷新</string>
+    <string name="modules_available_modules">可用模块</string>
     <string-array name="sort_options">
-        <item>Alphabetical</item>
-        <item>Reverse Alphabetical</item>
+        <item>字母顺序</item>
+        <item>反字母顺序</item>
     </string-array>
 
     <!-- USB ARSENAL -->
-    <string name="usbarsenal_full_db_path_save">Full path to where you want to save the database:</string>
-    <string name="usbarsenal_full_db_path_restore">Full path of the db file from where you want to restore:</string>
-    <string name="usbarsenal_no_usb_function_enabled">No USB function has been enabled</string>
-    <string name="usbarsenal_no_image_mounted">No image is mounted.</string>
-    <string name="usbarsenal_linux_file_cd_store_gadget">Linux File-CD/Stor gadget (kernel default)</string>
+    <string name="usbarsenal_full_db_path_save">要保存数据库的完整路径: </string>
+    <string name="usbarsenal_full_db_path_restore">要从中恢复的数据库文件的完整路径: </string>
+    <string name="usbarsenal_no_usb_function_enabled">未启用任何USB功能</string>
+    <string name="usbarsenal_no_image_mounted">未挂载任何镜像. </string>
+    <string name="usbarsenal_linux_file_cd_store_gadget">Linux文件-CD/存储小工具（内核默认）</string>
 
     <!-- SETTINGS -->
-    <string name="settings_bootanimation_path">Bootanimation path not found</string>
-    <string name="settings_set_enforcing">Set to Enforcing</string>
-    <string name="settings_selinux_disabled">SELinux is Disabled</string>
-    <string name="settings_selinux_permissive">Set to Permissive</string>
-    <string name="settings_enforcing">Enforcing</string>
-    <string name="settings_permissive">Permissive</string>
+    <string name="settings_bootanimation_path">未找到启动动画路径</string>
+    <string name="settings_set_enforcing">设置为强制模式</string>
+    <string name="settings_selinux_disabled">SELinux已禁用</string>
+    <string name="settings_selinux_permissive">设置为宽容模式</string>
+    <string name="settings_enforcing">强制</string>
+    <string name="settings_permissive">宽容</string>
 
     <!-- GPS -->
     <string name="gps_permissions">gps_permissions</string>
 
     <!-- WIFI PUMPKIN3 -->
-    <string name="wp3_supported">Supported</string>
-    <string name="wp3_not_supported">Not supported</string>
+    <string name="wp3_supported">支持</string>
+    <string name="wp3_not_supported">不支持</string>
 
     <!-- NETHUNTER FRAGMENT / APPNAVHOME -->
-    <string name="nethunter_full_path_save_db">Full path to where you want to save the database:</string>
-    <string name="nethunter_full_path_db_restore">Full path of the db file from where you want to restore:</string>
+    <string name="nethunter_full_path_save_db">要保存数据库的完整路径: </string>
+    <string name="nethunter_full_path_db_restore">要从中恢复的数据库文件的完整路径: </string>
 
     <!-- CARsenal -->
-    <string name="can_description">This module allow you to use CAN Bus with various tools. Kernel device should have CAN support enabled, for more information look at the documentation in the menu.</string>
-    <string name="can_tools_desc">Unleash the power of can-utils suite by managing logs and Generate, Dump, Sniff or Replay signals! You may also run car diagnosis using Freediag and transfert CAN frames between two machines using Cannelloni tool!</string>
-    <string name="can_canusb_desc">Use your CAN Analyzer USB by Dumping and Sending signals using usb-can tool!</string>
-    <string name="can_caribou_desc">A friendly automotive security exploration tool.</string>
-    <string name="can_icsim_desc">Instrument Cluster Simulator for SocketCAN</string>
+    <string name="can_description">此模块允许您使用各种工具处理CAN总线. 内核设备应启用CAN支持, 更多信息请查看菜单中的文档. </string>
+    <string name="can_tools_desc">通过管理日志和生成、转储、嗅探或重放信号来释放can-utils套件的威力！您还可以使用Freediag运行汽车诊断, 并使用Cannelloni工具在两台机器之间传输CAN帧！</string>
+    <string name="can_canusb_desc">使用您的CAN分析仪USB, 通过usb-can工具转储和发送信号！</string>
+    <string name="can_caribou_desc">一个友好的汽车安全探索工具. </string>
+    <string name="can_icsim_desc">用于SocketCAN的仪表盘模拟器</string>
     <string name="can_app_name">MyApp</string>
-    <string name="can_settings">Settings</string>
-    <string name="can_refresh_button">Refresh</string>
+    <string name="can_settings">设置</string>
+    <string name="can_refresh_button">刷新</string>
     <!-- CARsenal About menu -->
     <string name="about_author">
-        ABOUT:\n\n
-        Found a bug? A suggestion? Follow me on my networks and let me know!\n\n
+        关于: \n\n
+        发现错误？有建议？在我的社交网络上关注我并告诉我！\n\n
         https://linktr.ee/v0lk3n\n\n
-        CREDITS:\n\n
-        Made with ♥ by V0lk3n\n\n
-        - Fenugrec! For freediag tool.\nhttps://github.com/fenugrec\n\n
-        - Kobolt! For can-usb.\nhttps://github.com/kobolt\n\n
-        - Alexmohr! For can-usb fork.\nhttps://github.com/alexmohr\n\n
-        - Linux-Can! For can-utils and socketcand.\nhttps://github.com/linux-can\n\n
-        - Mguentner! For cannelloni.\nhttps://github.com/mguentner\n\n
-        - CaringCaribou!\nhttps://github.com/CaringCaribou\n\n
-        - zombieCraig! For ICSim tool.\nhttps://github.com/zombieCraig\n\n
-        - idlesign! For VIN Info tool.\nhttps://github.com/idlesign\n\n
+        致谢: \n\n
+        由V0lk3n用心制作\n\n
+        - Fenugrec！感谢freediag工具. \nhttps://github.com/fenugrec\n\n
+        - Kobolt！感谢can-usb. \nhttps://github.com/kobolt\n\n
+        - Alexmohr！感谢can-usb分支. \nhttps://github.com/alexmohr\n\n
+        - Linux-Can！感谢can-utils和socketcand. \nhttps://github.com/linux-can\n\n
+        - Mguentner！感谢cannelloni. \nhttps://github.com/mguentner\n\n
+        - CaringCaribou！\nhttps://github.com/CaringCaribou\n\n
+        - zombieCraig！感谢ICSim工具. \nhttps://github.com/zombieCraig\n\n
+        - idlesign！感谢VIN信息工具. \nhttps://github.com/idlesign\n\n
     </string>
 </resources>

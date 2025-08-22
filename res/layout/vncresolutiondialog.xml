@@ -23,7 +23,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="width"
+                android:hint="长"
                 android:inputType="number" />
 
             <EditText
@@ -31,7 +31,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="height"
+                android:hint="高"
                 android:inputType="number" />
 
         </LinearLayout>

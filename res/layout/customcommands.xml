@@ -55,19 +55,19 @@
                 android:id="@+id/f_customcommands_addItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add" />
+                android:text="添加" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/f_customcommands_deleteItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete" />
+                android:text="删除" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/f_customcommands_moveItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Move" />
+                android:text="移动" />
 
         </LinearLayout>
     </HorizontalScrollView>

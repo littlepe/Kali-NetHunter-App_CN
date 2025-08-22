@@ -53,13 +53,13 @@ public class AudioFragment extends Fragment {
         public void onServiceConnected(ComponentName className, IBinder service) {
             boundService = ((AudioPlaybackService.LocalBinder) service).getService();
             if (boundService != null) {
-                // Now that the service is bound, update the UI and enable the play button
+                // 现在服务已绑定, 更新 UI 并启用播放按钮
                 boundService.playState().observe(getViewLifecycleOwner(), playState -> updatePlayState(playState));
                 boundService.showNotification();
                 updatePrefs(boundService);
 
                 if (boundService.getAutostartPref() && boundService.isStartable()) {
-                    play(); // Optionally start playback if autostart is enabled
+                    play(); // 如果启用了自动启动, 则选择性地开始播放
                 }
             }
             isServiceBound = true;
@@ -67,7 +67,7 @@ public class AudioFragment extends Fragment {
 
         public void onServiceDisconnected(ComponentName className) {
             boundService = null;
-            isServiceBound = false; // Clear the reference when the service is disconnected
+            isServiceBound = false; // 服务断开连接时清除引用
         }
     };
 
@@ -75,7 +75,7 @@ public class AudioFragment extends Fragment {
         return error;
     }
 
-    // Add the newInstance method
+    // 添加 newInstance 方法
     public static AudioFragment newInstance(int itemId) {
         AudioFragment fragment = new AudioFragment();
         Bundle args = new Bundle();
@@ -88,18 +88,18 @@ public class AudioFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateAudioFragment");
 
-        // Retrieve the itemId passed in newInstance
+        // 检索在 newInstance 中传递的 itemId
         if (getArguments() != null) {
             itemId = getArguments().getInt("ITEM_ID", -1);
         }
 
-        // Log or use the itemId as needed
+        // 根据需要记录或使用 itemId
         Log.d(TAG, "Received itemId: " + itemId);
 
-        // Inflate the layout for this fragment
+        // 为此 Fragment 填充布局
         View view = inflater.inflate(R.layout.audio, container, false);
 
-        // Initialize UI elements
+        // 初始化 UI 元素
         fullScrollView = view.findViewById(R.id.fullScrollView);
         serverInput = view.findViewById(R.id.EditTextServer);
         portInput = view.findViewById(R.id.EditTextPort);
@@ -113,13 +113,13 @@ public class AudioFragment extends Fragment {
         TextView moduleVerLabel = view.findViewById(R.id.buildVersionLabel);
 
         String builderinfo = getString(R.string.builderinfo);
-        builderinfoLabel.setText(MessageFormat.format("Maintainer: {0}", builderinfo));
+        builderinfoLabel.setText(MessageFormat.format("维护者: {0}", builderinfo));
 
         String moduleInfo = getString(R.string.moduleInfo);
-        moduleInfoLabel.setText(MessageFormat.format("Info: {0}", moduleInfo));
+        moduleInfoLabel.setText(MessageFormat.format("信息: {0}", moduleInfo));
 
         String BuildVerInfo = getString(R.string.build_version);
-        moduleVerLabel.setText(MessageFormat.format("Version: {0}", BuildVerInfo));
+        moduleVerLabel.setText(MessageFormat.format("版本: {0}", BuildVerInfo));
 
         playButton.setOnClickListener(v -> {
             if (boundService != null) {
@@ -129,12 +129,12 @@ public class AudioFragment extends Fragment {
                     play();
                 }
             } else {
-                // Optionally, show a message or handle the case where the service is not connected yet
+                // 可选地, 显示消息或处理服务尚未连接的情况
                 errorText.setText(R.string.audio_service_not_connected);
             }
         });
 
-        // Set up spinners with default values
+        // 使用默认值设置下拉列表
         setupDefaultAudioConfig();
 
         return view;
@@ -143,7 +143,7 @@ public class AudioFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // Bind to AudioPlaybackService
+        // 绑定到 AudioPlaybackService
         Intent intent = new Intent(getActivity(), AudioPlaybackService.class);
         requireActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
@@ -160,7 +160,7 @@ public class AudioFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Clear view references
+        // 清除视图引用
         autoStartCheckBox = null;
         fullScrollView = null;
         playButton = null;
@@ -182,11 +182,11 @@ public class AudioFragment extends Fragment {
         serverInput.setText(R.string.audio_serverinput);
         portInput.setText(R.string.audio_portinput);
 
-        // Format values for buffer headroom and target latency as seconds
+        // 将缓冲区间隙和目标延迟值格式化为秒
         List<String> formattedBufferHeadroom = formatValuesAsSeconds(VALUES_BUFFER_HEADROOM);
         List<String> formattedTargetLatency = formatValuesAsSeconds(VALUES_TARGET_LATENCY);
 
-        // Set up adapters with the formatted string values
+        // 使用格式化的字符串值设置适配器
         ArrayAdapter<String> bufferAdapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_spinner_dropdown_item, formattedBufferHeadroom);
         bufferHeadroomSpinner.setAdapter(bufferAdapter);
 
@@ -194,14 +194,14 @@ public class AudioFragment extends Fragment {
         targetLatencySpinner.setAdapter(latencyAdapter);
     }
 
-    // Helper method to format values as seconds
+    // 将值格式化为秒的辅助方法
     private List<String> formatValuesAsSeconds(List<Long> values) {
         List<String> formattedValues = new ArrayList<>();
         for (Long value : values) {
             if (value >= 0) {
                 formattedValues.add(String.format(Locale.getDefault(), "%.3fs", value / 1000000.0));
             } else {
-                formattedValues.add("Default"); // or another label for special values like -1
+                formattedValues.add("默认"); // 或为特殊值（如 -1）使用其他标签
             }
         }
         return formattedValues;
@@ -248,31 +248,31 @@ public class AudioFragment extends Fragment {
 
         switch (playState) {
             case STOPPED:
-                appendErrorText("Disconnected State", android.R.color.holo_orange_light);
+                appendErrorText("已断开连接状态", android.R.color.holo_orange_light);
                 appendDashes();
                 playButton.setEnabled(true);
                 break;
             case STARTING:
-                appendErrorText("Connection Starting", android.R.color.holo_green_dark);
+                appendErrorText("连接启动中", android.R.color.holo_green_dark);
                 playButton.setEnabled(true);
                 break;
             case BUFFERING:
-                appendErrorText("Establishing Connection", android.R.color.holo_orange_light);
+                appendErrorText("正在建立连接", android.R.color.holo_orange_light);
                 playButton.setEnabled(true);
                 break;
             case STARTED:
-                appendErrorText("Everything is working fine! Enjoy!", android.R.color.holo_green_dark);
+                appendErrorText("一切正常！请享受！", android.R.color.holo_green_dark);
                 appendDashes();
                 playButton.setEnabled(true);
                 break;
             case STOPPING:
-                appendErrorText("Connection Disconnecting", android.R.color.holo_red_light);
+                appendErrorText("连接断开中", android.R.color.holo_red_light);
                 playButton.setEnabled(false);
                 break;
         }
 
         if (boundService != null && boundService.getError() != null) {
-            appendErrorText("An error occurred: " + boundService.getError().getMessage(), android.R.color.holo_red_dark);
+            appendErrorText("发生错误: " + boundService.getError().getMessage(), android.R.color.holo_red_dark);
             appendDashes();
         }
     }
@@ -312,26 +312,26 @@ public class AudioFragment extends Fragment {
         try {
             port = Integer.parseInt(portInput.getText().toString());
         } catch (NumberFormatException e) {
-            portInput.setError("Invalid port number");
+            portInput.setError("端口号无效");
             return;
         }
-        // Clear any previous error messages
+        // 清除之前的任何错误消息
         portInput.setError(null);
 
         if (server.isEmpty()) {
-            serverInput.setError("Server cannot be empty");
+            serverInput.setError("服务器不能为空");
             return;
         }
 
         if (boundService != null) {
-            // Log the server and port being used
+            // 记录正在使用的服务器和端口
             Log.d(TAG, "Attempting to play on server: " + server + " port: " + port);
 
-            // Set preferences and start playback
+            // 设置首选项并开始播放
             boundService.setPrefs(server, port, autoStartCheckBox.isChecked());
             boundService.play(server, port);
         } else {
-            // Handle case where service is not bound
+            // 处理服务未绑定的情况
             errorText.setText(R.string.audio_service_not_bound);
             Log.e(TAG, "Service not bound when attempting to play.");
         }

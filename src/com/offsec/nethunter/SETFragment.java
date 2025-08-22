@@ -99,9 +99,9 @@ public class SETFragment extends Fragment {
     public void SetupDialog() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.DialogStyleCompat);
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
-        builder.setTitle("Welcome to SET!");
-        builder.setMessage("In order to make sure everything is working, an initial setup needs to be done.");
-        builder.setPositiveButton("Check & Install", new DialogInterface.OnClickListener(){
+        builder.setTitle("欢迎使用 SET！");
+        builder.setMessage("为确保一切正常, 需要执行初始设置. ");
+        builder.setPositiveButton("检查并安装", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
                 RunSetup();
                 sharedpreferences.edit().putBoolean("set_setup_done", true).apply();
@@ -112,14 +112,14 @@ public class SETFragment extends Fragment {
 
     public void RunSetup() {
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
-        run_cmd("echo -ne \"\\033]0;SET Setup\\007\" && clear;if [[ -d /root/setoolkit ]]; then echo 'SET is already installed'" +
-                ";else git clone https://github.com/yesimxev/social-engineer-toolkit /root/setoolkit && echo 'Successfully installed SET!';fi; echo 'Closing in 3secs..'; sleep 3 && exit ");
+        run_cmd("echo -ne \"\\033]0;SET 设置\\007\" && clear;if [[ -d /root/setoolkit ]]; then echo 'SET 已安装'" +
+                ";else git clone https://github.com/yesimxev/social-engineer-toolkit  /root/setoolkit && echo '成功安装 SET！';fi; echo '3秒后关闭..'; sleep 3 && exit ");
         sharedpreferences.edit().putBoolean("set_setup_done", true).apply();
     }
 
     public void RunUpdate() {
         sharedpreferences = activity.getSharedPreferences("com.offsec.nethunter", Context.MODE_PRIVATE);
-        run_cmd("echo -ne \"\\033]0;SET Update\\007\" && clear;if [[ -d /root/setoolkit ]]; then cd /root/setoolkit && git pull && echo 'Successfully updated SET! Closing in 3secs..';else echo 'Please run SETUP first!';fi; sleep 3 && exit ");
+        run_cmd("echo -ne \"\\033]0;SET 更新\\007\" && clear;if [[ -d /root/setoolkit ]]; then cd /root/setoolkit && git pull && echo '成功更新 SET！3秒后关闭..';else echo '请先运行设置！';fi; sleep 3 && exit ");
         sharedpreferences.edit().putBoolean("set_setup_done", true).apply();
     }
 
@@ -146,7 +146,7 @@ public class SETFragment extends Fragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Email Template";
+            return "邮件模板";
         }
     }
 
@@ -173,18 +173,18 @@ public class SETFragment extends Fragment {
             EditText PhishName = rootView.findViewById(R.id.set_name);
             EditText PhishSubject = rootView.findViewById(R.id.set_subject);
 
-            // First run
+            /* 首次运行 */
             Boolean setupdone = sharedpreferences.getBoolean("set_setup_done", false);
             if (!setupdone.equals(true))
                 SetupDialog();
 
-            // Templates spinner
+            /* 模板下拉框 */
             String[] templates = new String[]{"Messenger", "Facebook", "Twitter"};
             Spinner template_spinner = rootView.findViewById(R.id.set_template);
             template_spinner.setAdapter(new ArrayAdapter<>(requireContext(),
                     android.R.layout.simple_list_item_1, templates));
 
-            // Select Template
+            /* 选择模板 */
             WebView myBrowser = rootView.findViewById(R.id.mybrowser);
             template_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -194,17 +194,17 @@ public class SETFragment extends Fragment {
                         case "Messenger":
                             template_src = NhPaths.APP_SD_FILES_PATH + "/configs/set-messenger.html";
                             template_tempfile = "set-messenger.html";
-                            PhishSubject.setText(MessageFormat.format("{0} sent you a message on Messenger.", PhishName.getText()));
+                            PhishSubject.setText(MessageFormat.format("{0} 在 Messenger 上给您发了消息. ", PhishName.getText()));
                             break;
                         case "Facebook":
                             template_src = NhPaths.APP_SD_FILES_PATH + "/configs/set-facebook.html";
                             template_tempfile = "set-facebook.html";
-                            PhishSubject.setText(MessageFormat.format("{0} sent you a message on Facebook.", PhishName.getText()));
+                            PhishSubject.setText(MessageFormat.format("{0} 在 Facebook 上给您发了消息. ", PhishName.getText()));
                             break;
                         case "Twitter":
                             template_src = NhPaths.APP_SD_FILES_PATH + "/configs/set-twitter.html";
                             template_tempfile = "set-twitter.html";
-                            PhishSubject.setText(MessageFormat.format("{0} sent you a Direct Message on Twitter!", PhishName.getText()));
+                            PhishSubject.setText(MessageFormat.format("{0} 在 Twitter 上给您发了私信！", PhishName.getText()));
                             break;
                     }
                     myBrowser.clearCache(true);
@@ -219,17 +219,17 @@ public class SETFragment extends Fragment {
             Button SaveTemplate = rootView.findViewById(R.id.save_template);
             Button LaunchSET = rootView.findViewById(R.id.start_set);
 
-            // Refresh Template
+            /* 刷新模板 */
             Button RefreshPreview = rootView.findViewById(R.id.refreshPreview);
             RefreshPreview.setOnClickListener(v -> refresh(rootView));
 
-            // Reset Template
+            /* 重置模板 */
             ResetTemplate.setOnClickListener(v -> {
                 myBrowser.clearCache(true);
                 myBrowser.loadUrl(template_src);
             });
 
-            // Save Template
+            /* 保存模板 */
             SaveTemplate.setOnClickListener(v -> {
                 refresh(rootView);
                 final String template_path = NhPaths.SD_PATH + template_tempfile;
@@ -237,10 +237,10 @@ public class SETFragment extends Fragment {
                 String phish_subject = PhishSubject.getText().toString();
                 exe.RunAsChrootOutput("echo 'SUBJECT=\"" + phish_subject + "\"' > " + template_final + " && echo 'HTML=\"' >> " + template_final +
                         " && cat " + template_path + " >> " + template_final + " && echo '\\nEND\"' >> " + template_final);
-                Toast.makeText(requireActivity().getApplicationContext(), "Successfully saved to SET templates folder", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity().getApplicationContext(), "已成功保存到 SET 模板文件夹", Toast.LENGTH_SHORT).show();
             });
 
-            // Launch SET
+            /* 启动 SET */
             LaunchSET.setOnClickListener(v -> run_cmd("echo -ne \"\\033]0;SET\\007\" && clear;cd /root/setoolkit && ./setoolkit"));
             return rootView;
         }
@@ -249,7 +249,7 @@ public class SETFragment extends Fragment {
             WebView myBrowser = SETFragment.findViewById(R.id.mybrowser);
             final String template_path = NhPaths.SD_PATH + "/" + template_tempfile;
 
-            // Setting fields
+            /* 设置字段 */
             EditText PhishLink = SETFragment.findViewById(R.id.set_link);
             EditText PhishName = SETFragment.findViewById(R.id.set_name);
             EditText PhishPic = SETFragment.findViewById(R.id.set_pic);
@@ -263,13 +263,13 @@ public class SETFragment extends Fragment {
 
             switch (selected_template) {
                 case "Messenger":
-                    PhishSubject.setText(MessageFormat.format("{0} sent you a message on Messenger.", PhishName.getText()));
+                    PhishSubject.setText(MessageFormat.format("{0} 在 Messenger 上给您发了消息. ", PhishName.getText()));
                     break;
                 case "Facebook":
-                    PhishSubject.setText(MessageFormat.format("{0} sent you a message on Facebook.", PhishName.getText()));
+                    PhishSubject.setText(MessageFormat.format("{0} 在 Facebook 上给您发了消息. ", PhishName.getText()));
                     break;
                 case "Twitter":
-                    PhishSubject.setText(MessageFormat.format("{0} sent you a Direct Message on Twitter!", PhishName.getText()));
+                    PhishSubject.setText(MessageFormat.format("{0} 在 Twitter 上给您发了私信！", PhishName.getText()));
                     break;
             }
 
@@ -288,9 +288,7 @@ public class SETFragment extends Fragment {
         }
     }
 
-    ////
-    // Bridge side functions
-    ////
+    /* Bridge 端函数 */
 
     public void run_cmd(String cmd) {
         Intent intent = Bridge.createExecuteIntent("/data/data/com.offsec.nhterm/files/usr/bin/kali", cmd);

@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="Settings"
+                    android:text="设置"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="Interface :"
+                    android:text="接口: "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -80,7 +80,6 @@
                     android:saveEnabled="false"
                     android:spinnerMode="dropdown"
                     tools:ignore="TouchTargetSizeCheck" />
-
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Message :"
+                    android:text="消息: "
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -114,7 +113,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -127,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="File :"
+                    android:text="文件: "
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -154,13 +152,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:text="Browse"
+                    android:text="浏览"
                     android:textColor="#ffffffff"
                     tools:ignore="DuplicateSpeakableTextCheck"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
@@ -169,7 +166,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Advanced Options" />
+                android:text="高级选项" />
 
             <LinearLayout
                 android:id="@+id/caribou_advanced_options"
@@ -191,7 +188,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Start Address"
+                        android:text="起始地址"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -200,7 +197,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Length"
+                        android:text="长度"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -209,10 +206,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Separate Line"
+                        android:text="分隔行"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -235,7 +231,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Src."
+                        android:text="源地址"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -244,10 +240,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Dst."
+                        android:text="目标地址"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -261,7 +256,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Seed"
+                        android:text="种子"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -270,7 +265,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Min."
+                        android:text="最小值"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -279,10 +274,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Max."
+                        android:text="最大值"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -296,7 +290,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Delay"
+                        android:text="延迟"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -314,10 +308,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Enable Pad"
+                        android:text="启用填充"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -331,7 +324,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Enable Output"
+                        android:text="启用输出"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -340,7 +333,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Enable Loop"
+                        android:text="启用循环"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -349,17 +342,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Enable Reverse"
+                        android:text="启用反向"
                         android:textColor="@android:color/holo_red_light"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
-
                 </LinearLayout>
 
                 <EditText
                     android:id="@+id/start_addr_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Start Address Value (e.g., 0x1fffb000)"
+                    android:hint="起始地址值（如 0x1fffb000）"
                     android:visibility="gone"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -368,7 +360,7 @@
                     android:id="@+id/length_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Length Value (e.g., 0x4800)"
+                    android:hint="长度值（如 0x4800）"
                     android:visibility="gone"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -378,73 +370,73 @@
                     android:id="@+id/separate_line_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Separate Line Value (e.g., 5)"
+                    android:hint="分隔行值（如 5）"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
                     android:id="@+id/seed_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Seed Value (e.g., 0xabc123)"
+                    android:hint="种子值（如 0xabc123）"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
                     android:id="@+id/id_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="ID Value (e.g., 0x003)"
+                    android:hint="ID 值（如 0x003）"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
                     android:id="@+id/src_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Source Value (e.g., 0x3e8)"
+                    android:hint="源地址值（如 0x3e8）"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
                     android:id="@+id/dst_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Destination Value (e.g., 0x3e9)"
+                    android:hint="目标地址值（如 0x3e9）"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
                     android:id="@+id/min_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Minimum Value (e.g., 2)"
+                    android:hint="最小值（如 2）"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
                     android:id="@+id/max_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Minimum Value (e.g., 5)"
+                    android:hint="最大值（如 5）"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
                     android:id="@+id/delay_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Delay Value (e.g., 1)"
+                    android:hint="延迟值（如 1）"
                     android:visibility="gone"
                     android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
             <View
@@ -468,10 +460,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="3"
-                    android:text="Modules"
+                    android:text="模块"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -489,15 +480,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dump" />
+                    android:text="转储" />
 
                 <Button
                     android:id="@+id/start_listener"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Listener" />
-
+                    android:text="监听" />
             </LinearLayout>
 
             <LinearLayout
@@ -516,7 +506,7 @@
                         android:id="@+id/label_fuzz"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fuzz :"
+                        android:text="模糊测试: "
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -537,7 +527,7 @@
                         android:id="@+id/start_fuzzer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RUN"
+                        android:text="运行"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -555,7 +545,7 @@
                         android:id="@+id/label_send"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Send :"
+                        android:text="发送: "
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -576,7 +566,7 @@
                         android:id="@+id/start_send"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RUN"
+                        android:text="运行"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />
@@ -593,7 +583,7 @@
                         android:id="@+id/label_uds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="UDS :"
+                        android:text="UDS: "
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -614,7 +604,7 @@
                         android:id="@+id/start_uds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RUN"
+                        android:text="运行"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />
@@ -632,7 +622,7 @@
                         android:id="@+id/label_xcp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="XCP :"
+                        android:text="XCP: "
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -653,17 +643,12 @@
                         android:id="@+id/start_xcp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RUN"
+                        android:text="运行"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </LinearLayout>
-
-
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

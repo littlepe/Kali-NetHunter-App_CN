@@ -26,14 +26,14 @@ public class NethunterSQL extends SQLiteOpenHelper {
     private static final String TABLE_NAME = DATABASE_NAME;
     private static final ArrayList<String> COLUMNS = new ArrayList<>();
     private static final String[][] nethunterData = {
-            {"1", "Kernel Version", "uname -a", "\\n", "1"},
-            {"2", "Busybox Version", Environment.getDataDirectory().getAbsolutePath() + "/data/com.offsec.nethunter/scripts/bin/busybox_nh | head -n1", "\\n", "1"},
-            {"3", "Root Status", "su -v", "\\n", "1"},
-            {"4", "HID Status", "[ -n \"$(ls /dev/hidg* 2>/dev/null)\" ] && ls /dev/hidg* || { echo \"HID interface not found.\"; if [[ $(uname -r | cut -d. -f1) -ge 4 ]]; then echo \"Please enable in USB Arsenal.\"; fi }", "\\n", "1"},
-            {"5", "CAN Status", NhPaths.BUSYBOX + " ifconfig | awk '/^[a-zA-Z0-9]/ {print $1}' | sed 's/://' | grep -E '^(can|vcan|slcan)[0-9]+$' || echo \"CAN interface not found.\nPlease enable in CAN Arsenal.\"", "\\n", "1"},
-            {"6", "NetHunter Terminal Status", "[ \"$(pm list packages | grep 'com.offsec.nhterm')\" ] && echo \"NetHunter Terminal is installed.\" || echo \"NetHunter Terminal is NOT yet installed.\"", "\\n", "1"},
-            {"7", "Network Interface Status", " ip -o addr show | " + NhPaths.BUSYBOX + " awk '{print $2, $3, $4}'", "\\n", "1"},
-            {"8", "External IP", NhPaths.BUSYBOX + " which wget > /dev/null 2>&1 && " + NhPaths.BUSYBOX + " wget -qO - icanhazip.com || " + NhPaths.BUSYBOX + " curl -s ipv4.icanhazip.com", "\\n", "0"}
+            {"1", "内核版本", "uname -a", "\\n", "1"},
+            {"2", "Busybox 版本", Environment.getDataDirectory().getAbsolutePath() + "/data/com.offsec.nethunter/scripts/bin/busybox_nh | head -n1", "\\n", "1"},
+            {"3", "Root 状态", "su -v", "\\n", "1"},
+            {"4", "HID 状态", "[ -n \"$(ls /dev/hidg* 2>/dev/null)\" ] && ls /dev/hidg* || { echo \"未找到 HID 接口. \"; if [[ $(uname -r | cut -d. -f1) -ge 4 ]]; then echo \"请在 USB Arsenal 中启用. \"; fi }", "\\n", "1"},
+            {"5", "CAN 状态", NhPaths.BUSYBOX + " ifconfig | awk '/^[a-zA-Z0-9]/ {print $1}' | sed 's/://' | grep -E '^(can|vcan|slcan)[0-9]+$' || echo \"未找到 CAN 接口. \n请在 CAN Arsenal 中启用. \"", "\\n", "1"},
+            {"6", "NetHunter 终端状态", "[ \"$(pm list packages | grep 'com.offsec.nhterm')\" ] && echo \"NetHunter 终端已安装. \" || echo \"NetHunter 终端尚未安装. \"", "\\n", "1"},
+            {"7", "网络接口状态", " ip -o addr show | " + NhPaths.BUSYBOX + " awk '{print $2, $3, $4}'", "\\n", "1"},
+            {"8", "外网 IP", NhPaths.BUSYBOX + " which wget > /dev/null 2>&1 && " + NhPaths.BUSYBOX + " wget -qO - icanhazip.com || " + NhPaths.BUSYBOX + " curl -s ipv4.icanhazip.com", "\\n", "0"}
     };
 
     public static synchronized NethunterSQL getInstance(Context context){

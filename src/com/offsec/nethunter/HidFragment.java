@@ -42,8 +42,8 @@ import androidx.viewpager.widget.ViewPager;
 public class HidFragment extends Fragment {
     private ViewPager mViewPager;
     private SharedPreferences sharedpreferences;
-    private final CharSequence[] platforms = {"No UAC Bypass", "Windows 7", "Windows 8", "Windows 10"};
-    private final CharSequence[] languages = {"American English", "Belgian", "British English", "Danish", "French", "German", "Italian", "Norwegian", "Portuguese", "Russian", "Spanish", "Swedish", "Canadian Multilingual", "Canadian", "Hungarian"};
+    private final CharSequence[] platforms = {"无 UAC 绕过", "Windows 7", "Windows 8", "Windows 10"};
+    private final CharSequence[] languages = {"美国英语", "比利时", "英国英语", "丹麦语", "法语", "德语", "意大利语", "挪威语", "葡萄牙语", "俄语", "西班牙语", "瑞典语", "加拿大多语言", "加拿大", "匈牙利语"};
     private String configFilePath;
     private Context context;
     private Activity activity;
@@ -97,7 +97,7 @@ public class HidFragment extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
         int pageNum = mViewPager.getCurrentItem();
         final MenuItem sourceButton = menu.findItem(R.id.source_button);
-        //WearOS optimisation
+        // WearOS 优化
         boolean iswatch = requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
         if (pageNum == 0) {
             sourceButton.setVisible(!iswatch);
@@ -115,12 +115,12 @@ public class HidFragment extends Fragment {
                     start();
                 } else {
                     if (new File("/config/usb_gadget/g1").exists())
-                        NhPaths.showMessage_long(context,"HID interfaces are not enabled! Please enable in USB Arsenal.");
+                        NhPaths.showMessage_long(context,"HID 接口未启用！请在 USB Arsenal 中启用. ");
                     else if (new File("/dev/hidg0").exists()) {
-                        NhPaths.showMessage_long(context, "Fixing HID interface permissions..");
+                        NhPaths.showMessage_long(context, "正在修复 HID 接口权限...");
                         exe.RunAsRoot(new String[]{"chmod 666 /dev/hidg*"});
                     }
-                    else NhPaths.showMessage_long(context,"HID interfaces are not patched or enabled, please check your kernel configuration.");
+                    else NhPaths.showMessage_long(context,"HID 接口未启用或未打补丁, 请检查内核配置. ");
                 }
                 return true;
             case R.id.stop_service:
@@ -211,7 +211,7 @@ public class HidFragment extends Fragment {
                     command[0] = "su -c '" + NhPaths.APP_SCRIPTS_PATH + "/bootkali start-rev-met-elevated-win10 --" + lang + "'";
                     break;
                 default:
-                    NhPaths.showMessage(context,"No option selected 1");
+                    NhPaths.showMessage(context,"未选择任何选项 1");
                     break;
             }
         } else if (pageNum == 1) {
@@ -229,7 +229,7 @@ public class HidFragment extends Fragment {
                     command[0] = "su -c '" + NhPaths.APP_SCRIPTS_PATH + "/bootkali hid-cmd-elevated-win10 --" + lang + "'";
                     break;
                 default:
-                    NhPaths.showMessage(context,"No option selected 2");
+                    NhPaths.showMessage(context,"未选择任何选项 2");
                     break;
             }
         }
@@ -238,7 +238,7 @@ public class HidFragment extends Fragment {
             ShellExecuter exe = new ShellExecuter();
             exe.RunAsRoot(command);
             //Logger.appendLog(outp1);
-            mViewPager.post(() -> NhPaths.showMessage(context,"Attack execution ended."));
+            mViewPager.post(() -> NhPaths.showMessage(context,"攻击执行结束. "));
         }).start();
     }
 
@@ -246,14 +246,14 @@ public class HidFragment extends Fragment {
         ShellExecuter exe = new ShellExecuter();
         String[] command = {"stop-badusb"};
         exe.RunAsRoot(command);
-        NhPaths.showMessage(context,"Reseting USB");
+        NhPaths.showMessage(context,"正在重置 USB");
     }
 
     private void openDialog() {
         int UACBypassIndex = sharedpreferences.getInt("UACBypassIndex", 0);
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-        builder.setTitle("UAC Bypass:");
-        builder.setPositiveButton("OK", (dialog, which) -> {
+        builder.setTitle("UAC 绕过: ");
+        builder.setPositiveButton("确定", (dialog, which) -> {
         });
 
         builder.setSingleChoiceItems(platforms, UACBypassIndex, (dialog, which) -> {
@@ -268,8 +268,8 @@ public class HidFragment extends Fragment {
         int keyboardLayoutIndex = sharedpreferences.getInt("HIDKeyboardLayoutIndex", 0);
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
-        builder.setTitle("Keyboard Layout:");
-        builder.setPositiveButton("OK", (dialog, which) -> {
+        builder.setTitle("键盘布局: ");
+        builder.setPositiveButton("确定", (dialog, which) -> {
 
         });
 
@@ -363,10 +363,10 @@ public class HidFragment extends Fragment {
 
                 boolean isSaved = exe.SaveFileContents(newText, configFileUrlPath);
                 if (!isSaved) {
-                    NhPaths.showMessage(context, "Source not updated (configFileUrlPath)");
+                    NhPaths.showMessage(context, "源代码未更新 (configFileUrlPath)");
                 }
             } else {
-                NhPaths.showMessage(context, "Unknown click");
+                NhPaths.showMessage(context, "未知点击");
             }
         }
 
@@ -473,7 +473,7 @@ public class HidFragment extends Fragment {
                     String text = source.getText().toString();
                     boolean isSaved = exe.SaveFileContents(text, configFilePath);
                     if (isSaved) {
-                        NhPaths.showMessage(context, "Source updated");
+                        NhPaths.showMessage(context, "源代码已更新");
                     }
 
                     break;
@@ -498,17 +498,17 @@ public class HidFragment extends Fragment {
                     }
                     MaterialAlertDialogBuilder alert = new MaterialAlertDialogBuilder(activity, R.style.DialogStyleCompat);
 
-                    alert.setTitle("Name");
-                    alert.setMessage("Please enter a name for your script.");
+                    alert.setTitle("名称");
+                    alert.setMessage("请输入脚本名称. ");
 
-                    // Set an EditText view to get user input
+                    // 设置一个 EditText 以获取用户输入
                     final EditText input = new EditText(activity);
                     alert.setView(input);
 
-                    alert.setPositiveButton("Ok", (dialog, whichButton) -> {
+                    alert.setPositiveButton("确定", (dialog, whichButton) -> {
                         String value = input.getText().toString();
                         if (!value.isEmpty()) {
-                            //FIXME Save file (ask name)
+                            //FIXME 保存文件（询问名称）
                             File scriptFile = new File(loadFilePath + File.separator + value + ".conf");
                             if (!scriptFile.exists()) {
                                 try {
@@ -523,24 +523,24 @@ public class HidFragment extends Fragment {
                                     myOutWriter.append(text1);
                                     myOutWriter.close();
                                     fOut.close();
-                                    NhPaths.showMessage(context,"Script saved");
+                                    NhPaths.showMessage(context,"脚本已保存");
                                 } catch (Exception e) {
                                     NhPaths.showMessage(context, e.getMessage());
                                 }
                             } else {
-                                NhPaths.showMessage(context,"File already exists");
+                                NhPaths.showMessage(context,"文件已存在");
                             }
                         } else {
-                            NhPaths.showMessage(context,"Wrong name provided");
+                            NhPaths.showMessage(context,"名称无效");
                         }
                     });
-                    alert.setNegativeButton("Cancel", (dialog, whichButton) -> {
+                    alert.setNegativeButton("取消", (dialog, whichButton) -> {
                         ///Do nothing
                     });
                     alert.show();
                     break;
                 default:
-                    NhPaths.showMessage(context,"Unknown click");
+                    NhPaths.showMessage(context,"未知点击");
                     break;
             }
         }
@@ -548,10 +548,10 @@ public class HidFragment extends Fragment {
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             if (requestCode == PICKFILE_RESULT_CODE && (resultCode == Activity.RESULT_OK && getView() != null)) {
-                    String FilePath = Objects.requireNonNull(data.getData()).getPath();
-                    EditText source = getView().findViewById(R.id.windowsCmdSource);
-                    exe.ReadFile_ASYNC(FilePath, source);
-                    NhPaths.showMessage(context, "Script loaded");
+                String FilePath = Objects.requireNonNull(data.getData()).getPath();
+                EditText source = getView().findViewById(R.id.windowsCmdSource);
+                exe.ReadFile_ASYNC(FilePath, source);
+                NhPaths.showMessage(context, "脚本已加载");
 
             }
         }
@@ -591,10 +591,10 @@ public class HidFragment extends Fragment {
 
                 boolean isSaved = exe.SaveFileContents(newText, configFileUrlPath);
                 if (!isSaved) {
-                    NhPaths.showMessage(context, "Source not updated (configFileUrlPath)");
+                    NhPaths.showMessage(context, "源代码未更新 (configFileUrlPath)");
                 }
             } else {
-                NhPaths.showMessage(context, "Unknown click");
+                NhPaths.showMessage(context, "未知点击");
             }
         }
 

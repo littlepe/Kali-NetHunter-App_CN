@@ -25,7 +25,7 @@
                 android:layout_marginStart="4dp"
                 android:textSize="18sp"
                 android:textColor="@color/accent_material_dark"
-                android:text="Label:"/>
+                android:text="标签: "/>
 
             <EditText
                 android:id="@+id/f_customcommands_add_adb_et_label"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:inputType="text"
-                android:hint="Enter your title name here"/>
+                android:hint="在此输入标题"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,8 +46,7 @@
                     android:layout_marginStart="4dp"
                     android:textSize="18sp"
                     android:textColor="@color/accent_material_dark"
-                    android:text="Command:"/>
-
+                    android:text="命令: "/>
             </LinearLayout>
 
             <EditText
@@ -55,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:hint="Enter your command string here"/>
+                android:hint="在此输入命令字符串"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,7 +68,7 @@
                     android:layout_weight="0.4"
                     android:textSize="18sp"
                     android:textColor="@color/accent_material_dark"
-                    android:text="Send to:"/>
+                    android:text="发送至: "/>
 
                 <Spinner
                     android:id="@+id/f_customcommands_add_adb_spr_sendto"
@@ -92,7 +91,7 @@
                     android:layout_weight="0.4"
                     android:textSize="18sp"
                     android:textColor="@color/accent_material_dark"
-                    android:text="Exec mode:"/>
+                    android:text="执行方式: "/>
 
                 <Spinner
                     android:id="@+id/f_customcommands_add_adb_spr_execmode"
@@ -100,7 +99,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -113,13 +111,11 @@
                     android:id="@+id/f_customcommands_add_adb_checkbox_runonboot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="RunOnBoot"
+                    android:text="开机自启"
                     android:textSize="18sp"
                     android:textColor="@color/accent_material_dark"
                     android:layout_marginStart="4dp"/>
-
             </LinearLayout>
-
 
             <TextView
                 android:layout_width="match_parent"
@@ -127,9 +123,8 @@
                 android:layout_marginStart="4dp"
                 android:textSize="18sp"
                 android:textColor="@color/accent_material_dark"
-                android:text="Position to insert:">
+                android:text="插入位置: "/>
 
-            </TextView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,16 +135,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:entries="@array/array_insert_position">
-                </Spinner>
+                    android:entries="@array/array_insert_position"/>
                 <Spinner
                     android:id="@+id/f_customcommands_add_adb_spr_labels"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp">
-                </Spinner>
+                    android:layout_marginStart="4dp"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 </LinearLayout>
