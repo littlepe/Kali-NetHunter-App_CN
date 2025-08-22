@@ -63,6 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="0.6"
-            android:text="RUN" />
+            android:text="运行" />
     </LinearLayout>
 </LinearLayout>
