@@ -160,7 +160,11 @@ class AboutActivity : AppCompatActivity() {
     }
 
     findViewById<View>(R.id.about_version_view).setOnClickListener {
-      App.get().easterEgg(this, "Emmmmmm...")
+      App.get().easterEgg(this, "嘿嘿，请你吃棒棒糖:D")
+    }
+
+    findViewById<View>(R.id.about_cn_source_code_view).setOnClickListener {
+      openUrl("https://github.com/littlepe/Kali-NetHunter-App_CN")
     }
 
     findViewById<View>(R.id.about_source_code_view).setOnClickListener {

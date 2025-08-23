@@ -1,193 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">NetHunter Terminal</string>
-  <string name="copy_text">Copy</string>
-  <string name="paste_text">Paste</string>
-  <string name="super_paste_text">Super Paste</string>
-  <string name="text_selection_more">More</string>
+  <string name="app_name">NetHunter 终端</string>
+  <string name="copy_text">复制</string>
+  <string name="paste_text">粘贴</string>
+  <string name="super_paste_text">超级粘贴</string>
+  <string name="text_selection_more">更多</string>
 
-  <string name="toggle_tab_switcher_menu_item">Toggle Tabs</string>
-  <string name="new_session">New Session</string>
-  <string name="new_session_more">New Session…</string>
-  <string name="new_emergency_session">New Emergency Shell</string>
-  <string name="new_bash_session">New Bash Shell</string>
-  <string name="new_root_session">New Root Shell</string>
-  <string name="service_status_text">%d session(s)</string>
-  <string name="service_lock_acquired">(Wake Locked)</string>
-  <string name="service_acquire_lock">Acquire Lock</string>
-  <string name="service_release_lock">Release Lock</string>
+  <string name="toggle_tab_switcher_menu_item">切换标签</string>
+  <string name="new_session">新建会话</string>
+  <string name="new_session_more">新建会话…</string>
+  <string name="new_emergency_session">紧急 Shell</string>
+  <string name="new_bash_session">Bash Shell</string>
+  <string name="new_root_session">Root Shell</string>
+  <string name="service_status_text">%d 个会话</string>
+  <string name="service_lock_acquired">（已唤醒锁定）</string>
+  <string name="service_acquire_lock">获取锁定</string>
+  <string name="service_release_lock">释放锁定</string>
 
-  <string name="setup_info">Hello, NH-Terminal</string>
-  <string name="setup_next">Let\'s Go!</string>
-  <string name="setup_setup_method">Select your installation method</string>
-  <string name="setup_online">Online Setup</string>
-  <string name="setup_local">Local Zip File Setup</string>
-  <string name="setup_backup">Restore from NH-Terminal Backup</string>
-  <string name="setup_source_parameter">Source Parameter</string>
-  <string name="setup_input_source_parameter">Input source parameter…</string>
+  <string name="setup_info">你好，NH-终端</string>
+  <string name="setup_next">开始吧！</string>
+  <string name="setup_setup_method">选择安装方式</string>
+  <string name="setup_online">在线安装</string>
+  <string name="setup_local">本地 Zip 文件安装</string>
+  <string name="setup_backup">从 NH-终端备份恢复</string>
+  <string name="setup_source_parameter">源参数</string>
+  <string name="setup_input_source_parameter">输入源参数…</string>
   <string name="setup_dots" translatable="false">…</string>
-  <string name="setup_hint_online">URL of mirror that contains setup zip files</string>
-  <string name="setup_hint_local">File path to showConfirmDialog zip files</string>
-  <string name="setup_hint_backup">File path to backup file(*.neobackup)</string>
-  <string name="setup_error_file_not_found">File not found</string>
-  <string name="setup_error_invalid_url">Invalid URL</string>
-  <string name="setup_error_no_internet">No Internet connection</string>
-  <string name="setup_error_connection_failed">Failed to connect to server</string>
-  <string name="setup_error_parameter_null">Setup parameter is null</string>
-  <string name="setup_preparing">Preparing…</string>
-  <string name="setup_confirm">Finish Setup</string>
-  <string name="setup_confirm_text">Everything goes well till now, continue?</string>
-  <string name="setup_reset_confirm">Reset Confirm</string>
-  <string name="setup_reset_confirm_text">This operation will clear all your data! Continue?</string>
+  <string name="setup_hint_online">包含安装 zip 文件的镜像 URL</string>
+  <string name="setup_hint_local">zip 文件的文件路径</string>
+  <string name="setup_hint_backup">备份文件路径（*.neobackup）</string>
+  <string name="setup_error_file_not_found">找不到文件</string>
+  <string name="setup_error_invalid_url">无效 URL</string>
+  <string name="setup_error_parameter_null">安装参数为空</string>
+  <string name="setup_preparing">准备中…</string>
+  <string name="setup_confirm">完成安装</string>
+  <string name="setup_confirm_text">目前一切顺利，是否继续？</string>
+  <string name="setup_reset_confirm">确认重置</string>
+  <string name="setup_reset_confirm_text">此操作将清除所有数据！是否继续？</string>
 
-  <string name="about">About</string>
-  <string name="settings">Settings</string>
-  <string name="general_settings">General Settings</string>
-  <string name="general_settings_desc">Bell, Vibrate, Shell, Initial Command</string>
-  <string name="ui_settings">UI Settings</string>
-  <string name="ui_settings_desc">FullScreen, Title Bar, Animation</string>
-  <string name="package_settings">Package Settings</string>
-  <string name="package_settings_desc">Source, Updates, Upgrades</string>
-  <string name="customization_settings_desc">Font, ColorScheme</string>
-  <string name="older_customization_settings_desc">Disabled as of no required functions available by old android api</string>
-  <string name="customization_settings">Customization</string>
+  <string name="about">关于</string>
+  <string name="settings">设置</string>
+  <string name="general_settings">常规设置</string>
+  <string name="general_settings_desc">提示音、振动、Shell、初始命令</string>
+  <string name="ui_settings">界面设置</string>
+  <string name="ui_settings_desc">全屏、标题栏、动画</string>
+  <string name="package_settings">软件包设置</string>
+  <string name="package_settings_desc">源、更新、升级</string>
+  <string name="customization_settings_desc">字体、配色方案</string>
+  <string name="older_customization_settings_desc">由于旧版 Android API 缺少所需功能，已禁用</string>
+  <string name="customization_settings">个性化</string>
 
-  <string name="toggle_ime">Toggle Keyboard</string>
-  <string name="float_up">Float Up</string>
-  <string name="shell_not_found">Shell %s not found</string>
-  <string name="shell_not_found_message">Would you like you install it?</string>
-  <string name="fullscreen_mode_changed">FullScreen mode changed, please restart NH-Terminal.</string>
-  <string name="permission_denied">NH-Terminal cannot get essential permissions, exiting.</string>
-  <string name="error">Oops!</string>
-  <string name="use_system_shell">System Shell</string>
-  <string name="retry">Retry</string>
-  <string name="source_changed">APT source changed, you may get it updated by executing: apt update</string>
-  <string name="done">Done</string>
-  <string name="install">Install</string>
-  <string name="package_details">Package: %s\n\nVersion: %s\n\nDepends: %s\n\nInstalled Size: %s\n\nDescription: %s\n\nHome
-    Page: %s
+  <string name="toggle_ime">切换键盘</string>
+  <string name="float_up">浮动上移</string>
+  <string name="shell_not_found">未找到 Shell %s</string>
+  <string name="shell_not_found_message">是否安装？</string>
+  <string name="fullscreen_mode_changed">全屏模式已更改，请重启 NH-终端。</string>
+  <string name="permission_denied">NH-终端无法获取必要权限，将退出。</string>
+  <string name="error">出错了！</string>
+  <string name="use_system_shell">使用系统 Shell</string>
+  <string name="retry">重试</string>
+  <string name="source_changed">APT 源已更改，可通过执行：apt update 进行更新</string>
+  <string name="done">完成</string>
+  <string name="install">安装</string>
+  <string name="package_details">软件包：%s\n\n版本：%s\n\n依赖：%s\n\n安装大小：%s\n\n描述：%s\n\n主页：%s
   </string>
-  <string name="package_list_empty">Package list is empty, please check your source.</string>
-  <string name="menu_refresh_list">Refresh</string>
-  <string name="menu_update">Update and Refresh</string>
-  <string name="install_font">Install Font</string>
-  <string name="install_color">Install Color Scheme</string>
+  <string name="package_list_empty">软件包列表为空，请检查源。</string>
+  <string name="menu_refresh_list">刷新</string>
+  <string name="menu_update">更新并刷新</string>
+  <string name="install_font">安装字体</string>
+  <string name="install_color">安装配色方案</string>
 
-  <string name="crash_model">Model: %s</string>
-  <string name="crash_app">App: %s</string>
-  <string name="crash_stack_trace">Stack Trace</string>
+  <string name="crash_model">型号：%s</string>
+  <string name="crash_app">应用：%s</string>
+  <string name="crash_stack_trace">堆栈跟踪</string>
 
-  <string name="installer_message">Installing</string>
-  <string name="installer_install_zsh_required">We will install oh-my-zsh and switch your login program to zsh
-  </string>
+  <string name="installer_message">安装中</string>
 
-  <string name="pref_general_bell">Bell</string>
-  <string name="pref_general_bell_desc">Bell when receiving \'\\a\'</string>
-  <string name="pref_general_vibrate">Vibrate</string>
-  <string name="pref_general_vibrate_desc">Vibrate when receiving \'\\a\'</string>
-  <string name="pref_general_backspace_map_to_esc">BackSpace Mapped to Esc</string>
-  <string name="pref_general_backspace_map_to_esc_desc">Send esc when backspace is pressed</string>
-  <string name="pref_general_shell">Login Program</string>
-  <string name="pref_general_shell_desc">Which program should we use as shell when login</string>
-  <string name="pref_general_initial_command">Initial Command</string>
-  <string name="pref_general_initial_command_desc">Execute commands when a session is being created</string>
-  <string name="pref_general_auto_completion">Auto Completion(Experimental)</string>
-  <string name="pref_general_auto_completion_desc">Enable complete things when typing commands or path. This is still
-    work in progress with lots of bugs to deal with
+  <string name="pref_general_backspace_map_to_esc">退格映射为 Esc</string>
+  <string name="pref_general_backspace_map_to_esc_desc">按下退格时发送 esc</string>
+  <string name="pref_general_initial_command">初始命令</string>
+  <string name="pref_general_initial_command_desc">创建会话时执行的命令</string>
+  <string name="pref_general_volume_as_control">使用音量键作为特殊键</string>
+  <string name="pref_general_volume_as_control_desc">音量减 → Ctrl\n音量加 → FN</string>
+  <string name="pref_general_enable_word_based_ime">启用基于单词的输入法</string>
+  <string name="pref_general_enable_word_based_ime_desc">选择基于单词或字符的输入法</string>
+  <string name="pref_ui_fullscreen">全屏</string>
+  <string name="pref_ui_hide_toolbar">隐藏工具栏</string>
+  <string name="pref_ui_hide_toolbar_desc">键盘显示时隐藏工具栏</string>
+  <string name="pref_ui_close_tab_anim_next_tab">关闭标签动画切换至下一个标签</string>
+  <string name="pref_ui_close_tab_anim_next_tab_desc">关闭标签时切换到下一个标签而非上一个标签
   </string>
-  <string name="pref_general_volume_as_control">Use volume up and down as special keys</string>
-  <string name="pref_general_volume_as_control_desc">Volume Down as Ctrl\nVolume Up as FN</string>
-  <string name="pref_general_use_execve_wrapper">Use execve() wrapper</string>
-  <string name="pref_general_use_execve_wrapper_desc">Hook execve() to avoid incorrect shebang</string>
-  <string name="pref_general_enable_word_based_ime">Enable word based IME</string>
-  <string name="pref_general_enable_word_based_ime_desc">Word based or char based IME</string>
-  <string name="pref_ui_fullscreen">Full Screen</string>
-  <string name="pref_ui_hide_toolbar">Hide Toolbar</string>
-  <string name="pref_ui_hide_toolbar_desc">Hide toolbar when keyboard is showing</string>
-  <string name="pref_ui_close_tab_anim_next_tab">Next tab animation</string>
-  <string name="pref_ui_close_tab_anim_next_tab_desc">Switch to the next tab instead of the previous tab when closing
-    tab
-  </string>
-  <string name="pref_ui_eks_weight_explicit">Use explicit weight for ExtraKeysView</string>
-  <string name="pref_ui_eks_weight_explicit_desc">If ExtraKeysView shows incorrectly, please enable this</string>
-  <string name="pref_ui_eks_enabled">Show extra keys</string>
-  <string name="pref_ui_eks_enabled_desc">Some useful keys like arrow, esc, tab, etc.</string>
-  <string name="pref_customization_font">Font</string>
-  <string name="pref_customization_color_scheme">Color Scheme</string>
-  <string name="pref_customization_eks">Extra Keys</string>
-  <string name="pref_package_source">Source</string>
+  <string name="pref_ui_eks_weight_explicit">为 ExtraKeysView 使用显式权重</string>
+  <string name="pref_ui_eks_weight_explicit_desc">若 ExtraKeysView 显示异常，请启用此项</string>
+  <string name="pref_ui_eks_enabled">显示扩展键</string>
+  <string name="pref_ui_eks_enabled_desc">显示方向键、Esc、Tab 等实用按键</string>
+  <string name="pref_customization_font">字体</string>
+  <string name="pref_customization_color_scheme">配色方案</string>
+  <string name="pref_package_source">源</string>
 
-  <string name="exit">Exit</string>
-  <string name="term_here">Term Here</string>
-  <string name="user_script">User Script</string>
-  <string name="command_shortcut">Command Shortcut</string>
-  <string name="no_user_script_found">No user script found (Did you forget to set executable permissions?)</string>
-  <string name="no_files_selected">No files selected\n\n(raw Intent: %s)</string>
-  <string name="unsupported_term_here">Unsupported term here\n\n(raw Intent: %s)</string>
-  <string name="files_to_handle">Files to Handle</string>
-  <string name="available_user_scripts">Available User Scripts</string>
-  <string name="confirm_remove_file_from_list">Remove file from list?</string>
-  <string name="confirm_remove">Remove?</string>
-  <string name="command_shortcut_display_title">Title</string>
-  <string name="command_shortcut_command">Command</string>
-  <string name="no_command_extra">No command provided, did you put extras?</string>
-  <string name="command_display_title_cannot_be_null">Display title cannot be null</string>
-  <string name="menu_upgrade">Upgrade</string>
-  <string name="apt_update_ok">Package list successfully updated</string>
-  <string name="apt_upgrade_ok">Package successfully upgraded</string>
-  <string name="installing_topic">Installation started. Please pay attention to the prompt that appears on the
-    screen
-  </string>
-  <string name="session_closed">Session was closed</string>
-  <string name="restore_session">Cancel</string>
-  <string name="show_help">Show Help</string>
-  <string name="service_connection_failed">Failed to connect to service</string>
-  <string name="about_version_label">Version</string>
-  <string name="about_developers_label">Developers &amp; Contributors</string>
-  <string name="about_libraries_label">Libraries</string>
-  <string name="about_source_label">Source Code</string>
-  <string name="about_reset_label">Reset App</string>
-  <string name="about_reset_label_desc">Clear all files except user home directory</string>
-  <string name="support_donate_label">Donate</string>
-  <string name="support_donate_description">If you like this app, you can offer developers a cup of coffee</string>
-  <string name="support_donate_dialog_text">This app is made in my spare time. Not only me needs to develop app, but
-    also maintains various software packages and servers. If you can support me, I will be more motivated to improve
-    this app.
-  </string>
-  <string name="support_donate_alipay">Alipay</string>
-  <string name="about_developers">Kiva for Maintaining\nCrixec for Icon Design\nCoolApk User @NimaQu for providing
-    server\nQQ User @My for providing free network
-  </string>
-  <string name="new_color_scheme">New Color Scheme</string>
-  <string name="faq">FAQ</string>
-  <string name="new_source">New</string>
-  <string name="process_exit_info">Process completed</string>
-  <string name="process_exit_code">code %d</string>
-  <string name="process_exit_signal">signal %d</string>
-  <string name="process_exit_prompt">press Enter</string>
-  <string name="process_exit_prompt_press_back">Press Back</string>
-  <string name="save_color_info">Enter new color scheme name</string>
-  <string name="save_color_scheme_name_template">NewColorScheme</string>
-  <string name="save_color">Save color scheme</string>
-  <string name="discard_changes">Discard all changes?</string>
-  <string name="save">Save</string>
-  <string name="select_new_value">Select</string>
-  <string name="input_new_value">Enter new color</string>
-  <string name="toggle_eks">Toggle extra keys</string>
-  <string name="new_x_session">New X Session</string>
-  <string name="new_session_with_profile">New Session With Profile</string>
-  <string name="no_profile_available">No profile available</string>
-  <string name="no_file_picker">No file picker found</string>
-  <string name="input_new_source_url">Enter new URL</string>
-  <string name="input_new_source_repo">Enter new Repo</string>
-  <string name="error_new_source_url">URL cannot be empty</string>
-  <string name="error_new_source_repo">Repo cannot be empty</string>
-  <string name="sorry_for_development">This feature is still under development so it is only available on DEBUG
-    builds.\n
-  </string>
-  <string name="dangerous_zone">Danger Zone</string>
-  <string name="reset_app_warning">This will delete and re-copy required files to boot kali chroot, confirm?</string>
+  <string name="exit">退出</string>
+  <string name="term_here">在此处打开终端</string>
+  <string name="user_script">用户脚本</string>
+  <string name="command_shortcut">命令快捷方式</string>
+  <string name="no_user_script_found">未找到用户脚本（是否忘记设置可执行权限？）</string>
+  <string name="no_files_selected">未选择文件\n\n（原始 Intent：%s）</string>
+  <string name="unsupported_term_here">不支持的在此处打开终端\n\n（原始 Intent：%s）</string>
+  <string name="files_to_handle">待处理文件</string>
+  <string name="available_user_scripts">可用用户脚本</string>
+  <string name="confirm_remove_file_from_list">从列表移除文件？</string>
+  <string name="confirm_remove">确认移除？</string>
+  <string name="command_shortcut_display_title">标题</string>
+  <string name="command_shortcut_command">命令</string>
+  <string name="no_command_extra">未提供命令，是否忘记添加 extras？</string>
+  <string name="menu_upgrade">升级</string>
+  <string name="apt_update_ok">软件包列表更新成功</string>
+  <string name="apt_upgrade_ok">软件包升级成功</string>
+  <string name="show_help">显示帮助</string>
+  <string name="service_connection_failed">连接服务失败</string>
+  <string name="about_version_label">版本</string>
+  <string name="about_libraries_label">库</string>
+  <string name="about_source_label">源代码</string>
+  <string name="about_cn_source_label">汉化版源代码</string>
+  <string name="about_reset_label">重置应用</string>
+  <string name="about_reset_label_desc">清除除用户主目录外的所有文件</string>
+  <string name="new_color_scheme">新建配色方案</string>
+  <string name="faq">常见问题</string>
+  <string name="new_source">新建</string>
+  <string name="process_exit_info">进程已完成</string>
+  <string name="process_exit_code">退出码 %d</string>
+  <string name="process_exit_signal">信号 %d</string>
+  <string name="process_exit_prompt">按 Enter</string>
+  <string name="process_exit_prompt_press_back">按返回键</string>
+  <string name="save_color_info">输入新的配色方案名称</string>
+  <string name="save_color_scheme_name_template">新配色方案</string>
+  <string name="save_color">保存配色方案</string>
+  <string name="discard_changes">放弃所有更改？</string>
+  <string name="save">保存</string>
+  <string name="select_new_value">选择</string>
+  <string name="input_new_value">输入新颜色</string>
+  <string name="new_session_with_profile">使用配置文件新建会话</string>
+  <string name="no_profile_available">无可用配置文件</string>
+  <string name="no_file_picker">未找到文件选择器</string>
+  <string name="input_new_source_url">输入新 URL</string>
+  <string name="input_new_source_repo">输入新仓库</string>
+  <string name="error_new_source_url">URL 不能为空</string>
+  <string name="error_new_source_repo">仓库不能为空</string>
+  <string name="dangerous_zone">危险区域</string>
+  <string name="reset_app_warning">将删除并重新复制启动 kali chroot 所需的文件，是否确认？</string>
 
-  <string name="default_source_url" translatable="false">http://http.kali.org/kali</string>
+  <string name="default_source_url" translatable="false"><url id="d2kkuqf60ra4et68a5m0" type="url" status="parsed" title="Index of /" wc="508">http://http.kali.org/kali</url></string>
 
   <string-array name="pref_general_shell_entries" translatable="false">
     <item>sh</item>
@@ -201,25 +162,25 @@
   </string-array>
 
   <string-array name="color_item_names">
-    <item>Background color</item>
-    <item>Foreground color</item>
-    <item>Cursor color</item>
-    <item>Dim black</item>
-    <item>Dim red</item>
-    <item>Dim green</item>
-    <item>Dim yellow</item>
-    <item>Dim blue</item>
-    <item>Dim magenta</item>
-    <item>Dim cyan</item>
-    <item>Dim white</item>
-    <item>Bright black</item>
-    <item>Bright red</item>
-    <item>Bright green</item>
-    <item>Bright yellow</item>
-    <item>Bright blue</item>
-    <item>Bright magenta</item>
-    <item>Bright cyan</item>
-    <item>Bright white</item>
+    <item>背景色</item>
+    <item>前景色</item>
+    <item>光标颜色</item>
+    <item>暗黑色</item>
+    <item>暗红色</item>
+    <item>暗绿色</item>
+    <item>暗黄色</item>
+    <item>暗蓝色</item>
+    <item>暗洋红色</item>
+    <item>暗青色</item>
+    <item>暗白色</item>
+    <item>亮黑色</item>
+    <item>亮红色</item>
+    <item>亮绿色</item>
+    <item>亮黄色</item>
+    <item>亮蓝色</item>
+    <item>亮洋红色</item>
+    <item>亮青色</item>
+    <item>亮白色</item>
   </string-array>
 
   <string-array name="custom_preview_script_colors">

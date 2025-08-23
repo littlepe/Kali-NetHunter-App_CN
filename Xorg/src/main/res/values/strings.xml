@@ -2,211 +2,205 @@
 <resources
   xmlns:tools="http://schemas.android.com/tools"
   tools:ignore="MissingTranslation">
-  <string name="init">Initializing</string>
-  <string name="please_wait">Please wait while data is being downloaded</string>
+  <string name="init">初始化中</string>
+  <string name="please_wait">正在下载数据，请稍候</string>
 
-  <string name="device_config">Device configuration</string>
-  <string name="device_change_cfg">Change device configuration</string>
+  <string name="device_config">设备配置</string>
+  <string name="device_change_cfg">更改设备配置</string>
 
-  <string name="download_unneeded">No need to download</string>
-  <string name="connecting_to">Connecting to %s</string>
-  <string name="failed_connecting_to">Failed connecting to %s</string>
-  <string name="error_connecting_to">Error connecting to %s</string>
-  <string name="dl_from">Downloading data from %s</string>
-  <string name="error_dl_from">Error downloading data from %s</string>
-  <string name="error_write">Error writing to %s</string>
-  <string name="dl_progress">%1$.0f%% done: file %2$s</string>
-  <string name="dl_finished">Finished</string>
+  <string name="download_unneeded">无需下载</string>
+  <string name="connecting_to">正在连接到 %s</string>
+  <string name="failed_connecting_to">连接 %s 失败</string>
+  <string name="error_connecting_to">连接 %s 时出错</string>
+  <string name="dl_from">正在从 %s 下载数据</string>
+  <string name="error_dl_from">从 %s 下载数据时出错</string>
+  <string name="error_write">写入 %s 时出错</string>
+  <string name="dl_progress">已完成 %1$.0f%%：文件 %2$s</string>
+  <string name="dl_finished">完成</string>
 
-  <string name="storage_phone">Internal storage - %d MB free</string>
-  <string name="storage_sd">SD card storage - %d MB free</string>
-  <string name="storage_custom">Specify directory</string>
-  <string name="storage_commandline">Command line parameters, one argument per line</string>
-  <string name="storage_question">Data installation location</string>
-  <string name="optional_downloads">Downloads</string>
-  <string name="downloads">Downloads</string>
-  <string name="ok">OK</string>
-  <string name="cancel">Cancel</string>
+  <string name="storage_phone">内部存储 - 剩余 %d MB</string>
+  <string name="storage_sd">SD 卡存储 - 剩余 %d MB</string>
+  <string name="storage_custom">指定目录</string>
+  <string name="storage_commandline">命令行参数，每行一个参数</string>
+  <string name="storage_question">数据安装位置</string>
+  <string name="optional_downloads">下载选项</string>
+  <string name="downloads">下载</string>
+  <string name="ok">确定</string>
+  <string name="cancel">取消</string>
 
-  <string name="controls_arrows">Arrows / joystick / dpad</string>
-  <string name="controls_trackball">Trackball</string>
-  <string name="controls_accel">Accelerometer</string>
-  <string name="controls_touch">Touchscreen only</string>
-  <string name="controls_question">What kind of navigation keys does your device have?</string>
+  <string name="controls_arrows">方向键 / 操纵杆 / 方向键 (D-pad)</string>
+  <string name="controls_trackball">轨迹球</string>
+  <string name="controls_accel">加速度计</string>
+  <string name="controls_touch">仅触摸屏</string>
+  <string name="controls_question">您的设备具有哪种导航键？</string>
 
-  <string name="controls_additional">Additional controls</string>
-  <string name="controls_screenkb">On-screen screenKeyboard</string>
-  <string name="controls_accelnav">Accelerometer</string>
+  <string name="controls_additional">附加控制</string>
+  <string name="controls_screenkb">屏幕虚拟键盘</string>
+  <string name="controls_accelnav">加速度计</string>
 
-  <string name="controls_screenkb_size">On-screen screenKeyboard size</string>
-  <string name="controls_screenkb_drawsize">Size of button images</string>
-  <string name="controls_screenkb_large">Large</string>
-  <string name="controls_screenkb_medium">Medium</string>
-  <string name="controls_screenkb_small">Small</string>
-  <string name="controls_screenkb_tiny">Tiny</string>
-  <string name="controls_screenkb_custom">Custom</string>
-  <string name="controls_screenkb_theme">On-screen screenKeyboard theme</string>
-  <string name="controls_screenkb_by">%1$s by %2$s</string>
-  <string name="controls_screenkb_transparency">On-screen screenKeyboard transparency</string>
-  <string name="controls_screenkb_trans_0">Invisible</string>
-  <string name="controls_screenkb_trans_1">Almost invisible</string>
-  <string name="controls_screenkb_trans_2">Transparent</string>
-  <string name="controls_screenkb_trans_3">Semi-transparent</string>
-  <string name="controls_screenkb_trans_4">Non-transparent</string>
+  <string name="controls_screenkb_size">屏幕虚拟键盘大小</string>
+  <string name="controls_screenkb_drawsize">按钮图像大小</string>
+  <string name="controls_screenkb_large">大</string>
+  <string name="controls_screenkb_medium">中</string>
+  <string name="controls_screenkb_small">小</string>
+  <string name="controls_screenkb_tiny">微小</string>
+  <string name="controls_screenkb_custom">自定义</string>
+  <string name="controls_screenkb_theme">屏幕虚拟键盘主题</string>
+  <string name="controls_screenkb_by">%1$s，作者：%2$s</string>
+  <string name="controls_screenkb_transparency">屏幕虚拟键盘透明度</string>
+  <string name="controls_screenkb_trans_0">不可见</string>
+  <string name="controls_screenkb_trans_1">几乎不可见</string>
+  <string name="controls_screenkb_trans_2">透明</string>
+  <string name="controls_screenkb_trans_3">半透明</string>
+  <string name="controls_screenkb_trans_4">不透明</string>
 
-  <string name="trackball_no_dampening">No dampening</string>
-  <string name="trackball_fast">Fast</string>
-  <string name="trackball_medium">Medium</string>
-  <string name="trackball_slow">Slow</string>
-  <string name="trackball_question">Trackball dampening</string>
+  <string name="trackball_no_dampening">无阻尼</string>
+  <string name="trackball_fast">快</string>
+  <string name="trackball_medium">中</string>
+  <string name="trackball_slow">慢</string>
+  <string name="trackball_question">轨迹球阻尼</string>
 
-  <string name="accel_veryfast">Very fast</string>
-  <string name="accel_fast">Fast</string>
-  <string name="accel_medium">Medium</string>
-  <string name="accel_slow">Slow</string>
-  <string name="accel_veryslow">Very slow</string>
-  <string name="accel_question">Accelerometer sensitivity</string>
+  <string name="accel_veryfast">非常快</string>
+  <string name="accel_fast">快</string>
+  <string name="accel_medium">中</string>
+  <string name="accel_slow">慢</string>
+  <string name="accel_veryslow">非常慢</string>
+  <string name="accel_question">加速度计灵敏度</string>
 
-  <string name="accel_floating">Floating</string>
-  <string name="accel_fixed_start">Fixed when application starts</string>
-  <string name="accel_fixed_horiz">Fixed to table desk orientation</string>
-  <string name="accel_question_center">Accelerometer center position</string>
+  <string name="accel_floating">浮动</string>
+  <string name="accel_fixed_start">应用启动时固定</string>
+  <string name="accel_fixed_horiz">固定为桌面水平方向</string>
+  <string name="accel_question_center">加速度计中心位置</string>
 
-  <string name="mouse_emulation">Mouse emulation</string>
-  <string name="rightclick_question">Right mouse click</string>
-  <string name="rightclick_menu">Menu key</string>
-  <string name="rightclick_key">Physical key</string>
-  <string name="rightclick_multitouch">Touch screen with second finger</string>
-  <string name="rightclick_pressure">Touch screen with force</string>
-  <string name="rightclick_none">Disable right mouse click</string>
+  <string name="mouse_emulation">鼠标模拟</string>
+  <string name="rightclick_question">鼠标右键单击</string>
+  <string name="rightclick_menu">菜单键</string>
+  <string name="rightclick_key">物理按键</string>
+  <string name="rightclick_multitouch">用第二根手指触摸屏幕</string>
+  <string name="rightclick_pressure">用力触摸屏幕</string>
+  <string name="rightclick_none">禁用鼠标右键单击</string>
 
-  <string name="leftclick_question">Left mouse click</string>
-  <string name="leftclick_normal">Normal</string>
-  <string name="leftclick_near_cursor">Touch near mouse cursor</string>
-  <string name="leftclick_multitouch">Touch screen with second finger</string>
-  <string name="leftclick_pressure">Touch screen with force</string>
-  <string name="leftclick_dpadcenter">Trackball click / joystick center</string>
-  <string name="leftclick_timeout">Hold at the same spot</string>
-  <string name="leftclick_tap">Tap</string>
-  <string name="leftclick_tap_or_timeout">Tap or hold</string>
-  <string name="leftclick_timeout_time">Holding timeout</string>
-  <string name="leftclick_timeout_time_0">0.3 sec</string>
-  <string name="leftclick_timeout_time_1">0.5 sec</string>
-  <string name="leftclick_timeout_time_2">0.7 sec</string>
-  <string name="leftclick_timeout_time_3">1 sec</string>
-  <string name="leftclick_timeout_time_4">1.5 sec</string>
-  <string name="click_with_dpadcenter">Left mouse click with trackball / joystick center</string>
+  <string name="leftclick_question">鼠标左键单击</string>
+  <string name="leftclick_normal">普通</string>
+  <string name="leftclick_near_cursor">在鼠标光标附近触摸</string>
+  <string name="leftclick_multitouch">用第二根手指触摸屏幕</string>
+  <string name="leftclick_pressure">用力触摸屏幕</string>
+  <string name="leftclick_dpadcenter">轨迹球点击 / 操纵杆中心键</string>
+  <string name="leftclick_timeout">在同一位置按住</string>
+  <string name="leftclick_tap">轻点</string>
+  <string name="leftclick_tap_or_timeout">轻点或按住</string>
+  <string name="leftclick_timeout_time">按住超时时间</string>
+  <string name="leftclick_timeout_time_0">0.3 秒</string>
+  <string name="leftclick_timeout_time_1">0.5 秒</string>
+  <string name="leftclick_timeout_time_2">0.7 秒</string>
+  <string name="leftclick_timeout_time_3">1 秒</string>
+  <string name="leftclick_timeout_time_4">1.5 秒</string>
+  <string name="click_with_dpadcenter">使用轨迹球/操纵杆中心键进行左键单击</string>
 
-  <string name="advanced">Advanced features</string>
-  <string name="mouse_keepaspectratio">Keep 4:3 screen aspect ratio</string>
-  <string name="mouse_showcreenunderfinger">Show screen under finger in separate window</string>
-  <string name="mouse_showcreenunderfinger2">On-screen magnifying glass</string>
-  <string name="mouse_joystickmouse">Move mouse with joystick or trackball</string>
-  <string name="mouse_joystickmousespeed">Move mouse with joystick speed</string>
-  <string name="mouse_joystickmouseaccel">Move mouse with joystick acceleration</string>
-  <string name="mouse_relative">Relative mouse movement (laptop mode)</string>
-  <string name="mouse_relative_speed">Relative mouse movement speed</string>
-  <string name="mouse_relative_accel">Relative mouse movement acceleration</string>
-  <string name="mouse_hover_jitter_filter">Filter jitter for stylus/finger hover</string>
-  <string name="mouse_gyroscope_mouse">Control mouse with gyroscope</string>
-  <string name="mouse_gyroscope_mouse_sensitivity">Gyroscope sensitivity</string>
-  <string name="mouse_finger_hover">Finger hover</string>
-  <string name="mouse_subframe_touch_events">Multiple touch events per video frame</string>
+  <string name="advanced">高级功能</string>
+  <string name="mouse_keepaspectratio">保持 4:3 屏幕宽高比</string>
+  <string name="mouse_showcreenunderfinger">在单独窗口中显示手指下方的屏幕内容</string>
+  <string name="mouse_showcreenunderfinger2">屏幕放大镜</string>
+  <string name="mouse_joystickmouse">使用操纵杆或轨迹球移动鼠标</string>
+  <string name="mouse_joystickmousespeed">使用操纵杆移动鼠标的速度</string>
+  <string name="mouse_joystickmouseaccel">使用操纵杆移动鼠标的加速度</string>
+  <string name="mouse_relative">相对鼠标移动（笔记本电脑模式）</string>
+  <string name="mouse_relative_speed">相对鼠标移动速度</string>
+  <string name="mouse_relative_accel">相对鼠标移动加速度</string>
+  <string name="mouse_hover_jitter_filter">过滤触控笔/手指悬停时的抖动</string>
+  <string name="mouse_gyroscope_mouse">使用陀螺仪控制鼠标</string>
+  <string name="mouse_gyroscope_mouse_sensitivity">陀螺仪灵敏度</string>
+  <string name="mouse_finger_hover">手指悬停</string>
+  <string name="mouse_subframe_touch_events">每视频帧多次触摸事件</string>
 
-  <string name="none">None</string>
+  <string name="none">无</string>
 
-  <string name="measurepressure">Calibrate touchscreen pressure</string>
-  <string name="measurepressure_touchplease">Please slide finger across the screen for two seconds</string>
-  <string name="measurepressure_response">Pressure %1$03d radius %2$03d</string>
+  <string name="measurepressure">校准触摸屏压力</string>
+  <string name="measurepressure_touchplease">请在屏幕上滑动手指约两秒钟</string>
+  <string name="measurepressure_response">压力 %1$03d 半径 %2$03d</string>
 
-  <string name="audiobuf_verysmall">Very small (fast devices, less lag)</string>
-  <string name="audiobuf_small">Small</string>
-  <string name="audiobuf_medium">Medium</string>
-  <string name="audiobuf_large">Large (older devices, if sound is choppy)</string>
-  <string name="audiobuf_question">Size of audio buffer</string>
+  <string name="audiobuf_verysmall">非常小（设备速度快，延迟更低）</string>
+  <string name="audiobuf_small">小</string>
+  <string name="audiobuf_medium">中</string>
+  <string name="audiobuf_large">大（旧设备，如果声音不连贯）</string>
+  <string name="audiobuf_question">音频缓冲区大小</string>
 
-  <string name="remap_hwkeys">Remap physical keys</string>
-  <string name="remap_hwkeys_press">Press any key except HOME and POWER, you may use volume keys</string>
-  <string name="remap_hwkeys_select">Select SDL keycode</string>
-  <string name="remap_hwkeys_select_simple">Select action</string>
-  <string name="remap_hwkeys_select_more_keys">Show all keycodes</string>
+  <string name="remap_hwkeys">重映射物理按键</string>
+  <string name="remap_hwkeys_press">请按除 HOME 和 POWER 键外的任意键，您可以使用音量键</string>
+  <string name="remap_hwkeys_select">选择 SDL 键码</string>
+  <string name="remap_hwkeys_select_simple">选择操作</string>
+  <string name="remap_hwkeys_select_more_keys">显示所有键码</string>
 
-  <string name="remap_screenkb">Remap on-screen controls</string>
-  <string name="remap_screenkb_joystick">Joystick</string>
-  <string name="remap_screenkb_button">Button</string>
-  <string name="remap_screenkb_button_text">Text input button</string>
-  <string name="remap_screenkb_button_gestures">Two-finger screen gestures</string>
-  <string name="remap_screenkb_button_gestures_sensitivity">Two-finger screen gestures sensitivity</string>
-  <string name="remap_screenkb_button_zoomin">Zoom in two-finger gesture</string>
-  <string name="remap_screenkb_button_zoomout">Zoom out two-finger gesture</string>
-  <string name="remap_screenkb_button_rotateleft">Rotate left two-finger gesture</string>
-  <string name="remap_screenkb_button_rotateright">Rotate right two-finger gesture</string>
+  <string name="remap_screenkb">重映射屏幕控件</string>
+  <string name="remap_screenkb_joystick">操纵杆</string>
+  <string name="remap_screenkb_button">按钮</string>
+  <string name="remap_screenkb_button_text">文本输入按钮</string>
+  <string name="remap_screenkb_button_gestures">双指屏幕手势</string>
+  <string name="remap_screenkb_button_gestures_sensitivity">双指屏幕手势灵敏度</string>
+  <string name="remap_screenkb_button_zoomin">放大双指手势</string>
+  <string name="remap_screenkb_button_zoomout">缩小双指手势</string>
+  <string name="remap_screenkb_button_rotateleft">左旋转双指手势</string>
+  <string name="remap_screenkb_button_rotateright">右旋转双指手势</string>
 
-  <string name="screenkb_custom_layout">Customize on-screen screenKeyboard layout</string>
-  <string name="screenkb_custom_layout_help">Press BACK when done. Resize buttons by sliding on empty space.</string>
-  <string name="screenkb_floating_joystick">Floating joystick</string>
+  <string name="screenkb_custom_layout">自定义屏幕键盘布局</string>
+  <string name="screenkb_custom_layout_help">完成后按返回键。在空白处滑动以调整按钮大小。</string>
+  <string name="screenkb_floating_joystick">浮动操纵杆</string>
 
-  <string name="calibrate_touchscreen">Calibrate touchscreen</string>
-  <string name="calibrate_touchscreen_touch">Touch all edges of the screen, press BACK when done</string>
+  <string name="calibrate_touchscreen">校准触摸屏</string>
+  <string name="calibrate_touchscreen_touch">触摸屏幕的所有边缘，完成后按返回键</string>
 
-  <string name="video">Video settings</string>
-  <string name="video_smooth">Linear video filtering</string>
-  <string name="video_separatethread">Separate thread for video, it can increase FPS, it also can crash the app
-  </string>
-  <string name="video_orientation_vertical">Portrait/vertical screen orientation</string>
-  <string name="video_orientation_autodetect">Auto-detect screen orientation</string>
-  <string name="video_bpp_24">24 bpp screen color depth</string>
-  <string name="video_immersive">Hide system navigation buttons / immersive mode</string>
-  <string name="tv_borders">TV borders</string>
+  <string name="video">视频设置</string>
+  <string name="video_smooth">线性视频过滤</string>
+  <string name="video_separatethread">视频分离线程，可能提高 FPS，也可能导致应用崩溃</string>
+  <string name="video_orientation_vertical">竖屏/垂直屏幕方向</string>
+  <string name="video_orientation_autodetect">自动检测屏幕方向</string>
+  <string name="video_bpp_24">24 bpp 屏幕颜色深度</string>
+  <string name="video_immersive">隐藏系统导航按钮 / 沉浸模式</string>
+  <string name="tv_borders">电视边框</string>
 
-  <string name="text_edit_click_here">Tap to start typing, press Back when done</string>
+  <string name="text_edit_click_here">点击开始输入，完成后按返回键</string>
 
-  <string name="display_size_mouse">Mouse emulation mode</string>
-  <string name="display_size">Display size for mouse emulation</string>
-  <string name="display_size_desktop">Desktop, no emulation</string>
-  <string name="display_size_large">Large (tablets)</string>
-  <string name="display_size_small">Small, magnifying glass</string>
-  <string name="display_size_small_touchpad">Small, touchpad mode</string>
-  <string name="display_size_tiny">Tiny</string>
-  <string name="display_size_tiny_touchpad">Tiny, touchpad mode</string>
+  <string name="display_size_mouse">鼠标模拟模式</string>
+  <string name="display_size">鼠标模拟的显示大小</string>
+  <string name="display_size_desktop">桌面，无模拟</string>
+  <string name="display_size_large">大（平板电脑）</string>
+  <string name="display_size_small">小，放大镜模式</string>
+  <string name="display_size_small_touchpad">小，触摸板模式</string>
+  <string name="display_size_tiny">极小</string>
+  <string name="display_size_tiny_touchpad">极小，触摸板模式</string>
 
-  <string name="show_more_options">Show more options</string>
+  <string name="show_more_options">显示更多选项</string>
 
-  <string name="hardware_mouse_detected">Hardware mouse detected, disabling mouse emulation</string>
+  <string name="hardware_mouse_detected">检测到硬件鼠标，禁用鼠标模拟</string>
 
-  <string name="not_enough_ram">Not enough RAM</string>
-  <string name="not_enough_ram_size">This app needs %1$d Mb RAM, your device has %2$d Mb</string>
-  <string name="ignore">Ignore</string>
+  <string name="not_enough_ram">内存不足</string>
+  <string name="not_enough_ram_size">此应用需要 %1$d MB 内存，您的设备具有 %2$d MB</string>
+  <string name="ignore">忽略</string>
 
-  <string name="calibrate_gyroscope">Calibrate gyroscope</string>
-  <string name="calibrate_gyroscope_text">Put your device on a flat surface</string>
-  <string name="calibrate_gyroscope_not_supported">Your device does not have gyroscope</string>
+  <string name="calibrate_gyroscope">校准陀螺仪</string>
+  <string name="calibrate_gyroscope_text">请将您的设备放在平坦的表面上</string>
+  <string name="calibrate_gyroscope_not_supported">您的设备没有陀螺仪</string>
 
-  <string name="reset_config">Reset config to defaults</string>
-  <string name="reset_config_ask">Reset all options to default values?</string>
+  <string name="reset_config">重置配置为默认值</string>
+  <string name="reset_config_ask">将所有选项重置为默认值？</string>
 
-  <string name="cancel_download">Cancel data downloading?</string>
-  <string name="cancel_download_resume">You can resume it later, the data will not be downloaded twice.</string>
-  <string name="yes">Yes</string>
-  <string name="no">No</string>
+  <string name="cancel_download">取消数据下载？</string>
+  <string name="cancel_download_resume">您可以稍后恢复下载，数据不会重复下载。</string>
+  <string name="yes">是</string>
+  <string name="no">否</string>
 
   <!-- Play Game Services strings -->
-  <string name="gamehelper_sign_in_failed">Failed to sign in. Please check your network connection and try again.
-  </string>
-  <string name="gamehelper_app_misconfigured">The application is incorrectly configured. Check that the package name
-    and signing certificate match the client ID created in Developer Console. Also, if the application is not yet
-    published, check that the account you are trying to sign in with is listed as a tester account. See logs for
-    more information.
-  </string>
-  <string name="gamehelper_license_failed">License check failed.</string>
-  <string name="gamehelper_unknown_error">Unknown error.</string>
-  <string name="accessing_network">Accessing network, please wait</string>
+  <string name="gamehelper_sign_in_failed">登录失败。请检查您的网络连接并重试。</string>
+  <string name="gamehelper_app_misconfigured">应用程序配置不正确。请检查包名称和签名证书是否与在开发者控制台中创建的客户端 ID 匹配。此外，如果应用程序尚未发布，请检查您尝试登录的帐户是否被列为测试者帐户。有关更多信息，请参阅日志。</string>
+  <string name="gamehelper_license_failed">许可证检查失败。</string>
+  <string name="gamehelper_unknown_error">未知错误。</string>
+  <string name="accessing_network">正在访问网络，请稍候</string>
 
   <string name="google_play_game_services_app_id" translatable="false">==GOOGLEPLAYGAMESERVICES_APP_ID==</string>
 
-  <string name="restarting_please_wait">Restarting, please wait.</string>
+  <string name="restarting_please_wait">正在重新启动，请稍候。</string>
 
-  <string name="notification_app_is_running">%s is running</string>
-  <string name="notification_stop">Stop</string>
+  <string name="notification_app_is_running">%s 正在运行</string>
+  <string name="notification_stop">停止</string>
 
 </resources>

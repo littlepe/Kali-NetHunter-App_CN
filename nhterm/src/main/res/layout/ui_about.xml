@@ -175,8 +175,74 @@
 
           </LinearLayout>
 
+          <LinearLayout
+            android:id="@+id/about_cn_source_code_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <ImageView
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              app:srcCompat="@drawable/ic_github"/>
+
+            <LinearLayout
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="32dp"
+              android:layout_marginStart="32dp"
+              android:orientation="vertical"
+              android:paddingBottom="8dp"
+              android:paddingTop="8dp">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_cn_source_label"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+            </LinearLayout>
+
+          </LinearLayout>
+
         </LinearLayout>
 
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/list_download_item_color_dark"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="16dp">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="汉化·校对·开发·测试人员: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="酷安@寒水Official\nGitHub@littlepe\nBilibili@寒水Official\n(没错，又是我一个人)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        </LinearLayout>
       </androidx.cardview.widget.CardView>
 
       <androidx.cardview.widget.CardView
