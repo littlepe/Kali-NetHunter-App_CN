@@ -1,5 +1,11 @@
 #!/data/data/com.offsec.nhterm/files/usr/bin/bash
-# Version: 1.0.3
+# Version: 1.0.4
+
+if [ -f /system/bin/su ]; then
+    ROOT_SU=/system/bin/su
+else
+    ROOT_SU=/debug_ramdisk/su
+fi
 
 # export path for android bins/tools
 export PATH="/data/data/com.offsec.nethunter/files/scripts:/data/data/com.offsec.nethunter/files/scripts/bin:/data/data/com.offsec.nhterm/files/home/.nhterm/script:/data/data/com.offsec.nhterm/files/usr/bin:/data/data/com.offsec.nhterm/files/usr/sbin:/sbin:/system/bin:/system/xbin:/apex/com.android.runtime/bin:/apex/com.android.art/bin:/odm/bin:/vendor/bin:."
@@ -14,4 +20,5 @@ SU2="$SU1 -mm -s $@"
 # clear out old view
 clear
 
-$SU2 /data/data/com.offsec.nhterm/files/usr/bin/bash
+# run su to get root and then bash shell
+"${ROOT_SU}" -mm -s "/data/data/com.offsec.nhterm/files/usr/bin/bash"
