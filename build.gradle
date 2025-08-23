@@ -7,9 +7,9 @@ buildscript {
     MIN_SDK_VERSION    : 21,
     COMPILE_SDK_VERSION: 31,
     TARGET_SDK_VERSION : 28,
-    JUNIT_VERSION      : "4.12"
+    JUNIT_VERSION      : "4.12",
+    ANDROID_SUPPORT_VERSION: "28.0.0"  // Added missing variable definition
   ]
-
 
   ext {
     //version=YYYYMMVVRR (Either "VV" for stable version OR "RR" for pre-release candidate (e.g. 0001 for rc1))
@@ -21,39 +21,68 @@ buildscript {
   ext.deps = [
     "annotations"         : "androidx.annotation:annotation:1.0.0",
     "appcompat-v7"        : "androidx.appcompat:appcompat:1.0.0",
-    "design"              : "com.android.support:design:${ext.android.ANDROID_SUPPORT_VERSION}",
-    "cardview-v7"         : "com.android.support:cardview-v7:${ext.android.ANDROID_SUPPORT_VERSION}",
-    "kotlin-stdlib"       : "org.jetbrains.kotlin:kotlin-stdlib:${ext.android.KOTLIN_VERSION}",
-    "kotlin-gradle-plugin": "org.jetbrains.kotlin:kotlin-gradle-plugin:${ext.android.KOTLIN_VERSION}",
-    "junit"               : "junit:junit:${ext.android.JUNIT_VERSION}"
+    "design"              : "com.android.support:design:${android.ANDROID_SUPPORT_VERSION}",
+    "cardview-v7"         : "com.android.support:cardview-v7:${android.ANDROID_SUPPORT_VERSION}",
+    "kotlin-stdlib"       : "org.jetbrains.kotlin:kotlin-stdlib:${android.KOTLIN_VERSION}",
+    "kotlin-gradle-plugin": "org.jetbrains.kotlin:kotlin-gradle-plugin:${android.KOTLIN_VERSION}",
+    "junit"               : "junit:junit:${android.JUNIT_VERSION}"
   ]
 
   repositories {
-    maven { url 'https://dl.google.com/dl/android/maven2/' }
-    jcenter()
     google()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://plugins.gradle.org/m2/' }
+    // Added Grails official repository
+    maven { url "https://repo.grails.org/grails/core/" }
+    // Added Codehaus repository
+    maven { url "https://repository.codehaus.org/" }
   }
 
   dependencies {
     classpath 'com.android.tools.build:gradle:8.1.0'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    classpath rootProject.ext.deps["kotlin-gradle-plugin"]
 
-    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    // Updated bintray plugin version from 1.2 to 1.8.4
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+
+    // Updated maven plugin version from 1.5 to 2.1
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 
     // NOTE: Do not place your application dependencies here; they belong
     // in the individual module build.gradle files
+  }
+
+  // Added dependency resolution strategy to force http-builder to version 0.7.1
+  configurations.all {
+    resolutionStrategy.eachDependency { details ->
+      if (details.requested.group == 'org.codehaus.groovy.modules.http-builder'
+        && details.requested.name == 'http-builder') {
+        details.useVersion '0.7.1'
+      }
+    }
   }
 }
 
 allprojects {
   repositories {
-    jcenter()
-    maven { url 'https://dl.google.com/dl/android/maven2/' }
+    google()
     mavenCentral()
     maven { url "https://jitpack.io" }
-    google()
+    maven { url 'https://plugins.gradle.org/m2/' }
+    // Added Grails and Codehaus repositories
+    maven { url "https://repo.grails.org/grails/core/" }
+    maven { url "https://repository.codehaus.org/" }
+  }
+
+  // Added dependency resolution strategy for all projects
+  configurations.all {
+    resolutionStrategy.eachDependency { details ->
+      if (details.requested.group == 'org.codehaus.groovy.modules.http-builder'
+        && details.requested.name == 'http-builder') {
+        details.useVersion '0.7.1'
+      }
+    }
   }
 }
 
